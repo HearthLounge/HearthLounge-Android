@@ -48,7 +48,7 @@ public class CardsJSON extends AppCompatActivity{
     private ListView listViewCards;
     private Button button;
     private TextView textCards;
-    private String obelga = "Zapomniałeś dodać, że ona pójdzie na policje :/ ";
+    private String obelga = "Ale policja nie przywróci jej rozumu :( ";
     RequestQueue requestQueue;
 
     @Override
