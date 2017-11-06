@@ -278,6 +278,7 @@ public class CardsJSON extends AppCompatActivity{
             inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         }
 
+        
         @Override
         public View getView(int position, View convertView, ViewGroup parent){
 
