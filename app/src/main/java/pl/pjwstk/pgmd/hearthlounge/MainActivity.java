@@ -1,6 +1,8 @@
 package pl.pjwstk.pgmd.hearthlounge;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -16,11 +18,18 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -35,14 +44,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle toggle;
     Toolbar toolbar;
 
-    private ImageButton buttonCards;
+    private ImageButton buttonCards, buttonDecks;
     private ListView listViewCards;
     private TextView textCards;
 
+    private CardView cardDecks;
+    private boolean isRunning;
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar); //PASEK U GÓRY Z NAZWĄ APLIKACJI
         setSupportActionBar(toolbar);
@@ -63,14 +78,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //OLD ONCLICK
+//        buttonCards = (ImageButton)findViewById(R.id.button_cards);
+//        buttonCards.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent startIntent = new Intent(getApplicationContext(),CardsJSON.class); //Do którego ma iść
+//                startActivity(startIntent);
+//                //new CardsJSON().execute("https://omgvamp-hearthstone-v1.p.mashape.com/cards");
+//            }
+//        });
+
+        buttonDecks = (ImageButton) findViewById(R.id.button_decks);
+        buttonDecks.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent motionEvent) {
+                int action = motionEvent.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    v.animate().scaleXBy(0.2f).setDuration(5000).start();
+                    v.animate().scaleYBy(0.2f).setDuration(5000).start();
+                    v.setBackgroundResource(R.drawable.pressed);
+                    //v.startAnimation(animationScale); // druga metoda
+                    return true;
+                } else if (action == MotionEvent.ACTION_UP) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+//                    Intent startIntent = new Intent(getApplicationContext(),CardsJSON.class); //Do którego ma iść
+//                    startActivity(startIntent);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         buttonCards = (ImageButton)findViewById(R.id.button_cards);
-        buttonCards.setOnClickListener(new View.OnClickListener() {
+        buttonCards.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                Intent startIntent = new Intent(getApplicationContext(),CardsJSON.class); //Do którego ma iść
-                startActivity(startIntent);
-                //new CardsJSON().execute("https://omgvamp-hearthstone-v1.p.mashape.com/cards");
+            public boolean onTouch(View v, MotionEvent motionEvent) {
+                int action = motionEvent.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    v.animate().scaleXBy(0.2f).setDuration(5000).start();
+                    v.animate().scaleYBy(0.2f).setDuration(5000).start();
+                    v.setBackgroundResource(R.drawable.pressed);
+                    return true;
+                } else if (action == MotionEvent.ACTION_UP) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    Intent startIntent = new Intent(getApplicationContext(),CardsJSON.class); //Do którego ma iść
+                    startActivity(startIntent);
+                    return true;
+                }
+                return false;
             }
         });
     }

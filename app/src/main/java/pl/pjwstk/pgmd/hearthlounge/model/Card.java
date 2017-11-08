@@ -1,5 +1,7 @@
 package pl.pjwstk.pgmd.hearthlounge.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -27,6 +29,7 @@ public class Card {
     private String img;
     private String imgGold;
     private String locale;
+    @SerializedName("mechanics")
     private List<Mechanics> mechanicsList;
 
     public Card(){}

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_grey"
     android:id="@+id/main_menu">
@@ -14,11 +16,9 @@
                 android:orientation="vertical">
 
                 <android.support.v7.widget.CardView
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:id="@+id/frame_decks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="5dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
                     android:layout_column="0"
                     android:layout_row="0">
@@ -43,21 +43,21 @@
 
                 </android.support.v7.widget.CardView>
 
-                <FrameLayout
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:clickable="true"
+                <android.support.v7.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="5dp"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:background="@color/dark_grey"
                     android:layout_column="0"
                     android:layout_row="1">
 
                     <ImageButton
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/button_expansions"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:padding="@dimen/activity_horizontal_margin"
                         android:background="@color/dark_grey"
                         android:scaleType="fitCenter"
                         android:src="@drawable/expansions" />
@@ -71,23 +71,23 @@
                         android:textColor="@color/primary_font_color"
                         android:textSize="20dp" />
 
-                </FrameLayout>
+                </android.support.v7.widget.CardView>
 
-                <FrameLayout
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:clickable="true"
+                <android.support.v7.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="5dp"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:background="@color/dark_grey"
                     android:layout_column="0"
                     android:layout_row="2">
 
                     <ImageButton
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/button_reddit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:padding="@dimen/activity_horizontal_margin"
                         android:background="@color/dark_grey"
                         android:scaleType="fitCenter"
                         android:src="@drawable/reddit" />
@@ -101,25 +101,24 @@
                         android:textColor="@color/primary_font_color"
                         android:textSize="20dp" />
 
-                </FrameLayout>
+                </android.support.v7.widget.CardView>
 
-                <FrameLayout
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:clickable="true"
+                <android.support.v7.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="5dp"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
-
-                    android:background="@color/dark_grey"
                     android:layout_column="1"
                     android:layout_row="0">
 
                     <ImageButton
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/button_cards"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/activity_horizontal_margin"
                         android:background="@color/dark_grey"
                         android:scaleType="fitCenter"
                         android:src="@drawable/card" />
@@ -133,23 +132,23 @@
                         android:textColor="@color/primary_font_color"
                         android:textSize="20dp" />
 
-                </FrameLayout>
+                </android.support.v7.widget.CardView>
 
-                <FrameLayout
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:clickable="true"
+                <android.support.v7.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="5dp"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:background="@color/dark_grey"
                     android:layout_column="1"
                     android:layout_row="1">
 
                     <ImageButton
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/button_adventures"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:padding="@dimen/activity_horizontal_margin"
                         android:background="@color/dark_grey"
                         android:scaleType="fitCenter"
                         android:src="@drawable/adventures" />
@@ -163,24 +162,24 @@
                         android:textColor="@color/primary_font_color"
                         android:textSize="20dp" />
 
-                </FrameLayout>
+                </android.support.v7.widget.CardView>
 
-                <FrameLayout
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:clickable="true"
+                <android.support.v7.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:cardCornerRadius="5dp"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:background="@color/dark_grey"
                     android:layout_column="1"
                     android:layout_row="2">
 
                     <ImageButton
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/button_position"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:padding="@dimen/activity_horizontal_margin"
                         android:background="@color/dark_grey"
                         android:scaleType="fitCenter"
                         android:src="@drawable/position" />
@@ -194,9 +193,9 @@
                         android:textColor="@color/primary_font_color"
                         android:textSize="20dp" />
 
-                </FrameLayout>
+                </android.support.v7.widget.CardView>
 
-                <!--DO WYJEBANI TO TYLKO NA TESTY-->
+                <!--DO USUNIĘCIA, TO TYLKO NA TESTY CZY SCROLL DZIAŁA-->
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

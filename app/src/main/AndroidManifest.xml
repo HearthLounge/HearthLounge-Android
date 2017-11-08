@@ -28,9 +28,14 @@
         </intent-filter>
     </activity>
 
-        <activity android:name=".CardsJSON"></activity>
         <activity android:name=".log_in"></activity>
         <activity android:name=".sign_up"></activity>
+
+        <activity android:name=".CardsJSON"></activity>
+        <activity
+            android:name=".SelectedCard"
+        android:label="@string/title_card_selected"></activity>
+
 
     </application>
 
