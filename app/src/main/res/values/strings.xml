@@ -14,8 +14,11 @@
         completions."
     </string>
 
-    <string name="action_refresh">Refresh</string>
+    <string name="title_log_in">Log In</string>
+    <string name="title_sign_up">Sign Up</string>
+    <string name="title_cards">Cards</string>
     <string name="title_card_selected">Selected Card</string>
+    <string name="action_refresh">Refresh</string>
 
     <string name="open">Open</string>
     <string name="close">Close</string>

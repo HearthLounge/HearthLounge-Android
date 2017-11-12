@@ -1,19 +1,28 @@
 package pl.pjwstk.pgmd.hearthlounge;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.gif.GifDrawableLoadProvider;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
+import pl.droidsonroids.gif.GifDecoder;
+import pl.droidsonroids.gif.GifImageView;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 
 /**
@@ -23,6 +32,7 @@ import pl.pjwstk.pgmd.hearthlounge.model.Card;
 public class SelectedCard extends AppCompatActivity {
 
     private ImageView image_view_card;
+    private ImageView image_view_cardGold; //GifImageView
     private TextView text_view_cardId;
     private TextView text_view_dbfId;
     private TextView text_view_name;
@@ -43,6 +53,8 @@ public class SelectedCard extends AppCompatActivity {
     private TextView text_view_mechanics;
 
     private ProgressBar progressBar;
+
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,36 +99,83 @@ public class SelectedCard extends AppCompatActivity {
                 }
             });
 
-            text_view_cardId.setText(cardModel.getCardId());
-            text_view_dbfId.setText(cardModel.getDbfId());
-            text_view_name.setText(cardModel.getName());
-            text_view_cardSet.setText(cardModel.getCardSet());
-            text_view_type.setText(cardModel.getType());
-            text_view_faction.setText(cardModel.getFaction());
-            text_view_rarity.setText(cardModel.getRarity());
-            text_view_cost.setText(cardModel.getCost());
-            text_view_attack.setText(cardModel.getAttack());
-            text_view_health.setText(cardModel.getHealth());
-            text_view_text.setText(cardModel.getText());
-            text_view_flavor.setText(cardModel.getFlavor());
-            text_view_artist.setText(cardModel.getArtist());
-            text_view_collectible.setEnabled(cardModel.getCollectible());
-            text_view_elite.setEnabled(cardModel.getElite());
-            text_view_playerClass.setText(cardModel.getPlayerClass());
-            text_view_locale.setText(cardModel.getLocale());
+//            GifImageView gifImageView = (GifImageView)findViewById(R.id.image_viewCardGold);
+//
+//            Bitmap thisGif = cardModel.getImgGold(position);
+//
+//            gifImageView.setImageBitmap(thisGif);
+
+            //Glide.with(SelectedCard.this).load(cardModel).asGif().crossFade().into(image_view_cardGold);
+
+            ImageLoader.getInstance().displayImage(cardModel.getImgGold(), image_view_cardGold, new ImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String imageUri, View view) {
+                    progressBar.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                    progressBar.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    progressBar.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onLoadingCancelled(String imageUri, View view) {
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
+
+            text_view_cardId.setText("CARD ID: " + cardModel.getCardId());
+            text_view_dbfId.setText("DBF ID: " + cardModel.getDbfId());
+            text_view_name.setText("NAME: " + cardModel.getName());
+            text_view_cardSet.setText("CARD SET: " + cardModel.getCardSet());
+            text_view_type.setText("TYPE: " + cardModel.getType());
+            text_view_faction.setText("FACTION: " + cardModel.getFaction());
+            text_view_rarity.setText("RARITY: " + cardModel.getRarity());
+            text_view_cost.setText("COST: " + cardModel.getCost()); //tu
+            text_view_attack.setText("ATTACK: " + cardModel.getAttack()); //tu
+            text_view_health.setText("HEALTH: " + cardModel.getHealth()); //tu
+
+            if (cardModel.getText() != null) {
+                text_view_text.setText("TEXT: " + Html.fromHtml(cardModel.getText()));
+            } else text_view_text.setText("pusto :( ");
+
+            if (cardModel.getFlavor() != null) {
+                text_view_flavor.setText("FLAVOR: " + Html.fromHtml(cardModel.getFlavor()));
+            } else if (cardModel.getFlavor() == null) {
+                text_view_flavor.setText("pusto :( ");// ustawi puste pole
+            }
+
+            // INNY SPOSOB :D
+//            String flavor = "<body>" + cardModel.getFlavor() + "</body>" + "<style type=\"text/css\">body{color: #00a99c; margin: -5dp;}</style>";
+//            text_view_flavor.setBackgroundColor(Color.TRANSPARENT);
+//            text_view_flavor.loadData("FLAVOR: " + flavor, "text/html", "UTF-8");
+
+            text_view_artist.setText("ARTIST: " + cardModel.getArtist());
+            text_view_collectible.setText("COLLECTIBLE: " + cardModel.getCollectible());
+            text_view_elite.setText("ELITE: " + cardModel.getElite()); //tu setEnabled
+            text_view_playerClass.setText("PLAYER CLASS: " + cardModel.getPlayerClass());
+            text_view_locale.setText("LOCALE: " + cardModel.getLocale());
 
             StringBuffer stringBuffer = new StringBuffer();
-            for(Card.Mechanics mechanics : cardModel.getMechanicsList()) {
-                stringBuffer.append(mechanics.getMechanics() + ", ");
-            }
-            text_view_mechanics.setText("Mechanics: " + stringBuffer);
+////            if(cardModel.getMechanicsList() == null) {
+//                for (Card.Mechanics mechanics : cardModel.getMechanicsList()) {
+//                    stringBuffer.append(mechanics.getMechanics() + ", ");
+//                }
+//                text_view_mechanics.setText("MECHANICS: " + stringBuffer);
+////            }
 
         }
 
     }
 
     private void setUpUIViews() {
-        image_view_card = (ImageView)findViewById(R.id.image_view_card);
+        image_view_card = (ImageView)findViewById(R.id.image_viewCard);
+        image_view_cardGold = (ImageView) findViewById(R.id.image_viewCardGold);
         text_view_cardId = (TextView)findViewById(R.id.text_view_cardId);
         text_view_dbfId = (TextView)findViewById(R.id.text_view_dbfId);
         text_view_name = (TextView)findViewById(R.id.text_view_name);
@@ -127,8 +186,8 @@ public class SelectedCard extends AppCompatActivity {
         text_view_cost = (TextView)findViewById(R.id.text_view_cost);
         text_view_attack = (TextView)findViewById(R.id.text_view_attack);
         text_view_health = (TextView)findViewById(R.id.text_view_health);
-        text_view_text = (TextView)findViewById(R.id.text_view_text);
-        text_view_flavor = (TextView)findViewById(R.id.text_view_flavor);
+        text_view_text = (TextView) findViewById(R.id.text_view_text);
+        text_view_flavor = (TextView) findViewById(R.id.text_view_flavor);
         text_view_artist = (TextView)findViewById(R.id.text_view_artist);
         text_view_collectible = (TextView)findViewById(R.id.text_view_collectible);
         text_view_elite = (TextView)findViewById(R.id.text_view_elite);
@@ -151,5 +210,13 @@ public class SelectedCard extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }

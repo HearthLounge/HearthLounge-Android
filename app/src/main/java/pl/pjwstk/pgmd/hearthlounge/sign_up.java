@@ -105,9 +105,9 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
         text_to_login.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent goto_sign_in = new Intent(getApplicationContext(), log_in.class);
+                Intent goto_log_in = new Intent(getApplicationContext(), log_in.class);
                 //Toast.makeText(getApplicationContext(), "Hello, new user!", Toast.LENGTH_SHORT).show();
-                startActivity(goto_sign_in);
+                startActivity(goto_log_in);
             }
         });
 

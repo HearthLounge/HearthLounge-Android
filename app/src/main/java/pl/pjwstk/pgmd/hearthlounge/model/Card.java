@@ -11,20 +11,20 @@ import java.util.List;
 public class Card {
 
     private String cardId;
-    private String dbfId; // LUB INT
+    private String dbfId;
     private String name;
     private String cardSet;
     private String type;
     private String faction;
     private String rarity;
-    private int cost;
-    private int attack;
-    private int health;
+    private int cost; // int
+    private int attack; // int
+    private int health; // int
     private String text;
     private String flavor;
     private String artist;
-    private Boolean collectible;
-    private Boolean elite;
+    private Boolean collectible; // Boolean
+    private Boolean elite; // Boolean
     private String playerClass;
     private String img;
     private String imgGold;
@@ -32,30 +32,30 @@ public class Card {
     @SerializedName("mechanics")
     private List<Mechanics> mechanicsList;
 
-    public Card(){}
-
-    public Card(String cardId, String dbfId, String name, String cardSet, String type, String faction, String rarity, int cost, int attack, int health, String text, String flavor, String artist, Boolean collectible, Boolean elite, String playerClass, String img, String imgGold, String locale, List<Mechanics> mechanicsList) {
-        this.cardId = cardId;
-        this.dbfId = dbfId;
-        this.name = name;
-        this.cardSet = cardSet;
-        this.type = type;
-        this.faction = faction;
-        this.rarity = rarity;
-        this.cost = cost;
-        this.attack = attack;
-        this.health = health;
-        this.text = text;
-        this.flavor = flavor;
-        this.artist = artist;
-        this.collectible = collectible;
-        this.elite = elite;
-        this.playerClass = playerClass;
-        this.img = img;
-        this.imgGold = imgGold;
-        this.locale = locale;
-        this.mechanicsList = mechanicsList;
-    }
+//    public Card(){}
+//
+//    public Card(String cardId, String dbfId, String name, String cardSet, String type, String faction, String rarity, String cost, String attack, String health, String text, String flavor, String artist, Boolean collectible, String elite, String playerClass, String img, String imgGold, String locale, List<Mechanics> mechanicsList) {
+//        this.cardId = cardId;
+//        this.dbfId = dbfId;
+//        this.name = name;
+//        this.cardSet = cardSet;
+//        this.type = type;
+//        this.faction = faction;
+//        this.rarity = rarity;
+//        this.cost = cost;
+//        this.attack = attack;
+//        this.health = health;
+//        this.text = text;
+//        this.flavor = flavor;
+//        this.artist = artist;
+//        this.collectible = collectible;
+//        this.elite = elite;
+//        this.playerClass = playerClass;
+//        this.img = img;
+//        this.imgGold = imgGold;
+//        this.locale = locale;
+//        this.mechanicsList = mechanicsList;
+//    }
 
     public String getCardId() {
         return cardId;
@@ -113,11 +113,18 @@ public class Card {
         this.rarity = rarity;
     }
 
-    public int getCost() {
+    public int  getCost() {
+//        return (cost != null)
+//                ? cost
+//                : null;
         return cost;
     }
 
     public void setCost(int cost) {
+//        this.cost = (cost != null)
+//                ? cost
+//                : null;
+
         this.cost = cost;
     }
 
@@ -210,7 +217,7 @@ public class Card {
     }
 
     public List<Mechanics> getMechanicsList() {
-        return mechanicsList;
+        return mechanicsList = null;
     }
 
     public void setMechanicsList(List<Mechanics> mechanicsList) {
@@ -218,7 +225,7 @@ public class Card {
     }
 
     public static class Mechanics {
-        private String name;
+        private String name = "";
 
         public String getMechanics() {
             return name;

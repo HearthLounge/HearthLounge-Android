@@ -4,29 +4,24 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -56,36 +51,19 @@ import pl.pjwstk.pgmd.hearthlounge.model.Card;
 
 public class CardsJSON extends AppCompatActivity{
 
-    private final String URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards";
+    private final String URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1";
     private final String HEADER = "X-Mashape-Key";
     private final String KEY = "T15rGIqg2lmshwDGMsX3mZeWM7vBp1ZmfvVjsnFba6SXP2WK5Q";
 
     private ListView listViewCards;
     private ProgressDialog dialog;
 
-    private ImageButton buttonCards;
-    private Button button;
-    private TextView textCards;
-    RequestQueue requestQueue;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cards);
-
 //        new DownloadImageTask((ImageButton)findViewById(R.id.image_button_cards))
 //                .execute("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_116.png");
-
-        // TUTAJ WSZYSTKO SPRAWDZIC
-//        buttonCards = (ImageButton)findViewById(R.id.image_button_cards);
-//        buttonCards.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent startIntent = new Intent(getApplicationContext(),CardsAdapter.class); //Do którego ma iść
-//                startActivity(startIntent);
-//                new JSONTask().execute(URL);
-//            }
-//        });
 
         dialog = new ProgressDialog(this);
         dialog.setIndeterminate(true);
@@ -103,8 +81,6 @@ public class CardsJSON extends AppCompatActivity{
         ImageLoader.getInstance().init(config); // Do it on Application start
 
         listViewCards = (ListView)findViewById(R.id.list_view_cards);
-
-
         // To start fetching the data when app start, uncomment below line to start the async task.
         new JSONTask().execute(URL + HEADER + KEY);
 
@@ -125,8 +101,10 @@ public class CardsJSON extends AppCompatActivity{
 
             try {
                 //URL url = new URL(params[0] + params[1] + params[2]);
-                URL url = new URL(URL + HEADER + KEY);
+                //URL url = new URL(URL + HEADER + KEY);
+                URL url = new URL("https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1");
                 connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestProperty("X-Mashape-Key", "T15rGIqg2lmshwDGMsX3mZeWM7vBp1ZmfvVjsnFba6SXP2WK5Q");
                 connection.connect();
 
                 InputStream stream = connection.getInputStream();
@@ -142,7 +120,8 @@ public class CardsJSON extends AppCompatActivity{
                 String finalJson = buffer.toString();
 
                 JSONObject parentObject = new JSONObject(finalJson);
-                JSONArray parentArray = parentObject.getJSONArray("cards");
+                //JSONArray parentArray = parentObject.getJSONArray("cards");
+                JSONArray parentArray = parentObject.getJSONArray("Basic"); //Kobolds & Catacombs
 
                 List<Card> cardList = new ArrayList<>();
 
@@ -151,38 +130,7 @@ public class CardsJSON extends AppCompatActivity{
                     JSONObject finalObject = parentArray.getJSONObject(i);
 
                     Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
-
-//                    Card card = new Card();
-//
-//                    card.setCardId(finalObject.getString("cardId"));
-//                    card.setDbfId(finalObject.getString("dbfId"));
-//                    card.setName(finalObject.getString("name"));
-//                    card.setCardSet(finalObject.getString("cardSet"));
-//                    card.setType(finalObject.getString("type"));
-//                    card.setFaction(finalObject.getString("faction"));
-//                    card.setRarity(finalObject.getString("rarity"));
-//                    card.setCost(finalObject.getInt("cost"));
-//                    card.setAttack(finalObject.getInt("attack"));
-//                    card.setHealth(finalObject.getInt("health"));
-//                    card.setText(finalObject.getString("text"));
-//                    card.setFlavor(finalObject.getString("flavor"));
-//                    card.setArtist(finalObject.getString("artist"));
-//                    card.setCollectible(finalObject.getBoolean("collectible"));
-//                    card.setElite(finalObject.getBoolean("elite"));
-//                    card.setPlayerClass(finalObject.getString("playerClass"));
-//                    card.setImg(finalObject.getString("img"));
-//                    card.setImgGold(finalObject.getString("imgGold"));
-//                    card.setLocale(finalObject.getString("locale"));
-//
-//                    List<Card.Mechanics> mechanicsList = new ArrayList<>();
-//                    for (int j = 0; j < finalObject.getJSONArray("mechanics").length(); j++) {
-//                        Card.Mechanics mechanics = new Card.Mechanics();
-//                        mechanics.setMechanics(finalObject.getJSONArray("mechanics").getJSONObject(j).getString("name"));
-//                        mechanicsList.add(mechanics);
-//                    }
-//                    card.setMechanicsList(mechanicsList);
                     cardList.add(cardModel);
-
                 }
                 return cardList;
 
@@ -207,16 +155,48 @@ public class CardsJSON extends AppCompatActivity{
             return null;
         }
 
+////        buttonDecks = (ImageButton) findViewById(R.id.button_decks);
+////        buttonDecks.setOnTouchListener(new View.OnTouchListener() {
+//
+//            public boolean onTouch(View v, MotionEvent motionEvent) {
+//
+//                int action = motionEvent.getAction();
+//                if (action == MotionEvent.ACTION_DOWN) {
+//                    v.animate().scaleXBy(0.2f).setDuration(5000).start();
+//                    v.animate().scaleYBy(0.2f).setDuration(5000).start();
+//                    v.setBackgroundResource(R.drawable.pressed);
+//                    //v.startAnimation(animationScale); // druga metoda
+//                    return true;
+//                } else if (action == MotionEvent.ACTION_UP) {
+//                    v.animate().cancel();
+//                    v.animate().scaleX(1f).setDuration(1000).start();
+//                    v.animate().scaleY(1f).setDuration(1000).start();
+//                    v.setBackgroundResource(R.drawable.normal);
+////                    Intent startIntent = new Intent(getApplicationContext(),CardsJSON.class); //Do którego ma iść
+////                    startActivity(startIntent);
+//                    return true;
+//                }
+//                return false;
+//            }
+////        });
+
+        final Animation animationScale = AnimationUtils.loadAnimation(CardsJSON.this, R.anim.anim_scale);
         @Override
         protected void onPostExecute(final List<Card> result) {
             super.onPostExecute(result);
             dialog.dismiss();
             if(result != null) {
-                CardsAdapter adapter = new CardsAdapter(getApplicationContext(), R.layout.row, result);
+                final CardsAdapter adapter = new CardsAdapter(getApplicationContext(), R.layout.row, result);
                 listViewCards.setAdapter(adapter);
                 listViewCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {  // list item click opens a new detailed activity
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+//                        view.animate().scaleXBy(0.2f).setDuration(5000).start();
+//                        view.animate().scaleYBy(0.2f).setDuration(5000).start();
+//                        view.setBackgroundResource(R.drawable.pressed);
+                        view.startAnimation(animationScale); // druga metoda
+
                         Card cardModel = result.get(position); // getting the model
                         Intent intent = new Intent(CardsJSON.this, SelectedCard.class);
                         intent.putExtra("cardModel", new Gson().toJson(cardModel)); // converting model json into string type and sending it via intent
@@ -251,31 +231,32 @@ public class CardsJSON extends AppCompatActivity{
                 holder = new ViewHolder();
                 convertView = inflater.inflate(resource, null);
 
-                holder.image_view_card = (ImageView) convertView.findViewById(R.id.image_view_card);
-                holder.text_view_cardId = (TextView) convertView.findViewById(R.id.text_view_cardId);
-                holder.text_view_dbfId = (TextView) convertView.findViewById(R.id.text_view_dbfId);
-                holder.text_view_name = (TextView) convertView.findViewById(R.id.text_view_name);
-                holder.text_view_cardSet = (TextView) convertView.findViewById(R.id.text_view_cardSet);
-                holder.text_view_type = (TextView) convertView.findViewById(R.id.text_view_type);
-                holder.text_view_faction = (TextView) convertView.findViewById(R.id.text_view_faction);
-                holder.text_view_rarity = (TextView) convertView.findViewById(R.id.text_view_rarity);
-                holder.text_view_cost = (TextView) convertView.findViewById(R.id.text_view_cost);
-                holder.text_view_attack = (TextView) convertView.findViewById(R.id.text_view_attack);
-                holder.text_view_health = (TextView) convertView.findViewById(R.id.text_view_health);
-                holder.text_view_text = (TextView) convertView.findViewById(R.id.text_view_text);
-                holder.text_view_flavor = (TextView) convertView.findViewById(R.id.text_view_flavor);
-                holder.text_view_artist = (TextView) convertView.findViewById(R.id.text_view_artist);
-                holder.text_view_collectible = (TextView) convertView.findViewById(R.id.text_view_collectible);
-                holder.text_view_elite = (TextView) convertView.findViewById(R.id.text_view_elite);
-                holder.text_view_playerClass = (TextView) convertView.findViewById(R.id.text_view_playerClass);
-                holder.text_view_locale = (TextView) convertView.findViewById(R.id.text_view_locale);
-                holder.text_view_mechanics = (TextView) convertView.findViewById(R.id.text_view_mechanics);
+                holder.image_view_card = (ImageView)convertView.findViewById(R.id.image_viewCard);
+                //holder.image_view_cardGold = (ImageView)convertView.findViewById(R.id.image_viewCardGold);
+//                holder.text_view_cardId = (TextView)convertView.findViewById(R.id.text_view_cardId);
+//                holder.text_view_dbfId = (TextView)convertView.findViewById(R.id.text_view_dbfId);
+//                holder.text_view_name = (TextView)convertView.findViewById(R.id.text_view_name);
+//                holder.text_view_cardSet = (TextView)convertView.findViewById(R.id.text_view_cardSet);
+//                holder.text_view_type = (TextView)convertView.findViewById(R.id.text_view_type);
+//                holder.text_view_faction = (TextView)convertView.findViewById(R.id.text_view_faction);
+//                holder.text_view_rarity = (TextView)convertView.findViewById(R.id.text_view_rarity);
+//                holder.text_view_cost = (TextView)convertView.findViewById(R.id.text_view_cost);
+//                holder.text_view_attack = (TextView)convertView.findViewById(R.id.text_view_attack);
+//                holder.text_view_health = (TextView)convertView.findViewById(R.id.text_view_health);
+//                holder.text_view_text = (TextView)convertView.findViewById(R.id.text_view_text);
+//                holder.text_view_flavor = (TextView)convertView.findViewById(R.id.text_view_flavor);
+//                holder.text_view_artist = (TextView)convertView.findViewById(R.id.text_view_artist);
+//                holder.text_view_collectible = (TextView)convertView.findViewById(R.id.text_view_collectible);
+//                holder.text_view_elite = (TextView)convertView.findViewById(R.id.text_view_elite);
+//                holder.text_view_playerClass = (TextView)convertView.findViewById(R.id.text_view_playerClass);
+//                holder.text_view_locale = (TextView)convertView.findViewById(R.id.text_view_locale);
+//                holder.text_view_mechanics = (TextView)convertView.findViewById(R.id.text_view_mechanics);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            final ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
+            final ProgressBar progressBar = (ProgressBar)convertView.findViewById(R.id.progressBar);
 
             final ViewHolder finalHolder = holder;
             ImageLoader.getInstance().displayImage(cardList.get(position).getImg(), holder.image_view_card, new ImageLoadingListener() {
@@ -304,125 +285,54 @@ public class CardsJSON extends AppCompatActivity{
                 }
             });
 
-            holder.text_view_cardId.setText(cardList.get(position).getCardId());
-            holder.text_view_dbfId.setText(cardList.get(position).getDbfId());
-            holder.text_view_name.setText(cardList.get(position).getName());
-            holder.text_view_cardSet.setText(cardList.get(position).getCardSet());
-            holder.text_view_type.setText(cardList.get(position).getType());
-            holder.text_view_faction.setText(cardList.get(position).getFaction());
-            holder.text_view_rarity.setText(cardList.get(position).getRarity());
-            holder.text_view_cost.setText(cardList.get(position).getCost());
-            holder.text_view_attack.setText(cardList.get(position).getAttack());
-            holder.text_view_health.setText(cardList.get(position).getHealth());
-            holder.text_view_text.setText(cardList.get(position).getText());
-            holder.text_view_flavor.setText(cardList.get(position).getFlavor());
-            holder.text_view_artist.setText(cardList.get(position).getArtist());
-            holder.text_view_collectible.setEnabled(cardList.get(position).getCollectible());
-            holder.text_view_elite.setEnabled(cardList.get(position).getElite());
-            holder.text_view_playerClass.setText(cardList.get(position).getPlayerClass());
-            holder.text_view_locale.setText(cardList.get(position).getLocale());
+//                    holder.text_view_cardId.setText(cardList.get(position).getCardId());
+//                    holder.text_view_dbfId.setText(cardList.get(position).getDbfId());
+//                    holder.text_view_name.setText(cardList.get(position).getName());
+//                    holder.text_view_cardSet.setText(cardList.get(position).getCardSet());
+//                    holder.text_view_type.setText(cardList.get(position).getType());
+//                    holder.text_view_faction.setText(cardList.get(position).getFaction());
+//                    holder.text_view_rarity.setText(cardList.get(position).getRarity());
+////                    holder.text_view_cost.setText(cardList.get(position).getCost()); // z tymi jest problem
+//                    //holder.text_view_attack.setText(cardList.get(position).getAttack()); // z tymi jest problem
+//                    //holder.text_view_health.setText(cardList.get(position).getHealth()); // z tymi jest problem
+//                    holder.text_view_text.setText(cardList.get(position).getText());
+//                    holder.text_view_flavor.setText(cardList.get(position).getFlavor());
+//                    holder.text_view_artist.setText(cardList.get(position).getArtist());
+//                    //holder.text_view_collectible.setEnabled(cardList.get(position).getCollectible()); // z tymi jest problem
+//                    //holder.text_view_elite.setEnabled(cardList.get(position).getElite()); // z tymi jest problem
+//                    holder.text_view_playerClass.setText(cardList.get(position).getPlayerClass());
+//                    holder.text_view_locale.setText(cardList.get(position).getLocale());
 
-            StringBuffer stringBuffer = new StringBuffer();
-            for(Card.Mechanics mechanics : cardList.get(position).getMechanicsList()) {
-                stringBuffer.append(mechanics.getMechanics() + ", ");
-            }
-            holder.text_view_mechanics.setText("Mechanics: " + stringBuffer);
-
+//            StringBuffer stringBuffer = new StringBuffer();
+//            for(Card.Mechanics mechanics : cardList.get(position).getMechanicsList()) {
+//                stringBuffer.append(mechanics.getMechanics() + ", ");
+//            }
+//           holder.text_view_mechanics.setText("Mechanics: " + stringBuffer);
 
             return convertView;
         }
 
         class ViewHolder{
-            ImageView image_view_card;
-            TextView text_view_cardId;
-            TextView text_view_dbfId;
-            TextView text_view_name;
-            TextView text_view_cardSet;
-            TextView text_view_type;
-            TextView text_view_faction;
-            TextView text_view_rarity;
-            TextView text_view_cost;
-            TextView text_view_attack;
-            TextView text_view_health;
-            TextView text_view_text;
-            TextView text_view_flavor;
-            TextView text_view_artist;
-            TextView text_view_collectible;
-            TextView text_view_elite;
-            TextView text_view_playerClass;
-            TextView text_view_locale;
-            TextView text_view_mechanics;
+            private ImageView image_view_card;
+//            private TextView text_view_cardId;
+//            private TextView text_view_dbfId;
+//            private TextView text_view_name;
+//            private TextView text_view_cardSet;
+//            private TextView text_view_type;
+//            private TextView text_view_faction;
+//            private TextView text_view_rarity;
+//            private TextView text_view_cost;
+//            private TextView text_view_attack;
+//            private TextView text_view_health;
+//            private TextView text_view_text;
+//            private TextView text_view_flavor;
+//            private TextView text_view_artist;
+//            private TextView text_view_collectible;
+//            private TextView text_view_elite;
+//            private TextView text_view_playerClass;
+//            private TextView text_view_locale;
+//            private TextView text_view_mechanics;
         }
-//            ImageView image_view_card;
-//            TextView text_view_cardId;
-//            TextView text_view_dbfId;
-//            TextView text_view_name;
-//            TextView text_view_cardSet;
-//            TextView text_view_type;
-//            TextView text_view_faction;
-//            TextView text_view_rarity;
-//            TextView text_view_cost;
-//            TextView text_view_attack;
-//            TextView text_view_health;
-//            TextView text_view_text;
-//            TextView text_view_flavor;
-//            TextView text_view_artist;
-//            TextView text_view_collectible;
-//            TextView text_view_elite;
-//            TextView text_view_playerClass;
-//            TextView text_view_locale;
-//            TextView text_view_mechanics;
-//
-//
-//            image_view_card = (ImageView)convertView.findViewById(R.id.image_view_card);
-//            text_view_cardId = (TextView)convertView.findViewById(R.id.text_view_cardId);
-//            text_view_dbfId = (TextView)convertView.findViewById(R.id.text_view_dbfId);
-//            text_view_name = (TextView)convertView.findViewById(R.id.text_view_name);
-//            text_view_cardSet = (TextView)convertView.findViewById(R.id.text_view_cardSet);
-//            text_view_type = (TextView)convertView.findViewById(R.id.text_view_type);
-//            text_view_faction = (TextView)convertView.findViewById(R.id.text_view_faction);
-//            text_view_rarity = (TextView)convertView.findViewById(R.id.text_view_rarity);
-//            text_view_cost = (TextView)convertView.findViewById(R.id.text_view_cost);
-//            text_view_attack = (TextView)convertView.findViewById(R.id.text_view_attack);
-//            text_view_health = (TextView)convertView.findViewById(R.id.text_view_health);
-//            text_view_text = (TextView)convertView.findViewById(R.id.text_view_text);
-//            text_view_flavor = (TextView)convertView.findViewById(R.id.text_view_flavor);
-//            text_view_artist = (TextView)convertView.findViewById(R.id.text_view_artist);
-//            text_view_collectible = (TextView)convertView.findViewById(R.id.text_view_collectible);
-//            text_view_elite = (TextView)convertView.findViewById(R.id.text_view_elite);
-//            text_view_playerClass = (TextView)convertView.findViewById(R.id.text_view_playerClass);
-//            text_view_locale = (TextView)convertView.findViewById(R.id.text_view_locale);
-//            text_view_mechanics = (TextView)convertView.findViewById(R.id.text_view_mechanics);
-//
-//
-//            text_view_cardId.setText(cardList.get(position).getCardId());
-//            text_view_dbfId.setText(cardList.get(position).getDbfId());
-//            text_view_name.setText(cardList.get(position).getName());
-//            text_view_cardSet.setText(cardList.get(position).getCardSet());
-//            text_view_type.setText(cardList.get(position).getType());
-//            text_view_faction.setText(cardList.get(position).getFaction());
-//            text_view_rarity.setText(cardList.get(position).getRarity());
-//            text_view_cost.setText(cardList.get(position).getCost());
-//            text_view_attack.setText(cardList.get(position).getAttack());
-//            text_view_health.setText(cardList.get(position).getHealth());
-//            text_view_text.setText(cardList.get(position).getText());
-//            text_view_flavor.setText(cardList.get(position).getFlavor());
-//            text_view_artist.setText(cardList.get(position).getArtist());
-//            text_view_collectible.setEnabled(cardList.get(position).getCollectible());
-//            text_view_elite.setEnabled(cardList.get(position).getElite());
-//            text_view_playerClass.setText(cardList.get(position).getPlayerClass());
-//            text_view_locale.setText(cardList.get(position).getLocale());
-//
-//            StringBuffer stringBuffer = new StringBuffer();
-//            for(Card.Mechanics mechanics : cardList.get(position).getMechanicsList()) {
-//                stringBuffer.append(mechanics.getMechanics() + ", ");
-//            }
-//            text_view_mechanics.setText("Mechanics: " + stringBuffer);
-//
-//
-//            return convertView;
-            //super.getView(position, convertView, parent);
-        //}
     }
 
     // MENU U GÓRY NA PASKU TE TRZY KROPKI :D
@@ -443,107 +353,28 @@ public class CardsJSON extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageButton bmImage;
-
-        public DownloadImageTask(ImageButton bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
-}
-
-
-//    HttpResponse<JsonNode> response = Unirest.get("https://omgvamp-hearthstone-v1.p.mashape.com/cards")
-//            .header("X-Mashape-Key", "T15rGIqg2lmshwDGMsX3mZeWM7vBp1ZmfvVjsnFba6SXP2WK5Q")
-//            .asJson();
-
-// DO onCreate VOLLEY
-// listViewCards = (ListView)findViewById(R.id.list_view_cards);
-//new JSONTask().execute("https://omgvamp-hearthstone-v1.p.mashape.com/cards","T15rGIqg2lmshwDGMsX3mZeWM7vBp1ZmfvVjsnFba6SXP2WK5Q");
-
-//button = (Button)findViewById(R.id.button_cards);
-//textCards = (TextView)findViewById(R.id.text_view_cards);
-//listViewCards = (ListView)findViewById(R.id.list_view_cards);
-
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://omgvamp-hearthstone-v1.p.mashape.com/cards",
-//                        new Response.Listener<JSONObject>() {
-//                            @Override
-//                            public void onResponse(JSONObject response) {
-//                                try {
-//                                    JSONArray jsonArray = response.getJSONArray("T15rGIqg2lmshwDGMsX3mZeWM7vBp1ZmfvVjsnFba6SXP2WK5Q");
+//    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+//        ImageButton bmImage;
 //
-//                                    List<Card> cardList = new ArrayList<>();
-//                                    for (int i = 0; i<jsonArray.length(); i++) {
-//                                        JSONObject finalObject = jsonArray.getJSONObject(i);
+//        public DownloadImageTask(ImageButton bmImage) {
+//            this.bmImage = bmImage;
+//        }
 //
-//                                        Card cardModel = new Card();
-//
-//                                        cardModel.setCardId(finalObject.getString("cardId"));
-//                                        cardModel.setDbfId(finalObject.getString("dbfId"));
-//                                        cardModel.setName(finalObject.getString("name"));
-//                                        cardModel.setCardSet(finalObject.getString("cardSet"));
-//                                        cardModel.setType(finalObject.getString("type"));
-//                                        cardModel.setFaction(finalObject.getString("faction"));
-//                                        cardModel.setRarity(finalObject.getString("rarity"));
-//                                        cardModel.setCost(finalObject.getInt("cost"));
-//                                        cardModel.setAttack(finalObject.getInt("attack"));
-//                                        cardModel.setHealth(finalObject.getInt("health"));
-//                                        cardModel.setText(finalObject.getString("text"));
-//                                        cardModel.setFlavor(finalObject.getString("flavor"));
-//                                        cardModel.setArtist(finalObject.getString("artist"));
-//                                        cardModel.setCollectible(finalObject.getBoolean("collectible"));
-//                                        cardModel.setElite(finalObject.getBoolean("elite"));
-//                                        cardModel.setPlayerClass(finalObject.getString("playerClass"));
-//                                        cardModel.setImg(finalObject.getString("img"));
-//                                        cardModel.setImgGold(finalObject.getString("imgGold"));
-//                                        cardModel.setLocale(finalObject.getString("locale"));
-//                                        //ArrayList<String> mechanisc = new ArrayList<String>();
-//                                        //cardModel.setMechanics(finalObject.getJSONArray("mechanics"));
-//
-//                                        List<Card.Mechanics> mechanicsList = new ArrayList<>();
-//                                        for (int j = 0; j < finalObject.getJSONArray("mechanics").length(); j++) {
-//                                            Card.Mechanics mechanics = new Card.Mechanics();
-//                                            mechanics.setMechanics(finalObject.getJSONArray("mechanics").getJSONObject(j).getString("name"));
-//                                            mechanicsList.add(mechanics);
-//                                        }
-//                                        cardModel.setMechanics(mechanicsList);
-//                                        cardList.add(cardModel);
-//                                    }
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        },
-//
-//                        new Response.ErrorListener() {
-//                            @Override
-//                            public void onErrorResponse(VolleyError error) {
-//                                Log.e("VOLLEY", "ERROR");
-//                            }
-//                        }
-//
-//
-//                        );
-//                requestQueue.add(jsonObjectRequest);
+//        protected Bitmap doInBackground(String... urls) {
+//            String urldisplay = urls[0];
+//            Bitmap mIcon11 = null;
+//            try {
+//                InputStream in = new java.net.URL(urldisplay).openStream();
+//                mIcon11 = BitmapFactory.decodeStream(in);
+//            } catch (Exception e) {
+//                Log.e("Error", e.getMessage());
+//                e.printStackTrace();
 //            }
-//        });
+//            return mIcon11;
+//        }
+//
+//        protected void onPostExecute(Bitmap result) {
+//            bmImage.setImageBitmap(result);
+//        }
+//    }
+}

@@ -14,6 +14,13 @@
         android:repeatCount="1"
         android:repeatMode="reverse"/>
 
+    <!--<rotate-->
+        <!--android:fromDegrees="0"-->
+        <!--android:toDegrees="180"-->
+        <!--android:pivotX="50%"-->
+        <!--android:pivotY="50%"-->
+        <!--android:duration="5000"-->
+        <!--android:repeatCount="1"/>-->
     <!--<alpha-->
         <!--android:duration="500"-->
         <!--android:fromAlpha="0.0"-->
