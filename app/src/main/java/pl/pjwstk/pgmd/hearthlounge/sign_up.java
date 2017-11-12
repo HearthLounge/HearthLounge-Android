@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,10 +36,11 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
     private static final String TAG = "Sign_up";
 
     private FirebaseAuth fb_auth;
+    private FirebaseDatabase fb_database = FirebaseDatabase.getInstance();
+    private DatabaseReference fb_data_ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://hearthlounge-32197.firebaseio.com");
     private static FirebaseAuth.AuthStateListener fb_auth_listener;
-    private FirebaseDatabase fb_database;
     private DatabaseReference users;
-    private DatabaseReference users_uid;
+    //private DatabaseReference users2 = fb_database.getReference();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +62,14 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
 //        };
 
         //Firebase configurate
+        //FirebaseDatabase fb_database = FirebaseDatabase.getInstance();
         fb_database = FirebaseDatabase.getInstance();
+        //if(fb_database == null){ Toast.makeText(getApplicationContext(), "Coś się zesrało :|", Toast.LENGTH_SHORT).show();}
+        //https://hearthlounge-32197.firebaseio.com/users
+
+        //DatabaseReference fb_data_ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://hearthlounge-32197.firebaseio.com/users");
         fb_auth = FirebaseAuth.getInstance();
-        users = fb_database.getReference("users");
+        users = fb_database.getReference();
 
         edit_name = (EditText) findViewById(R.id.edit_name);
         edit_password = (EditText) findViewById(R.id.edit_password);
@@ -87,6 +92,7 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
 //                    Toast.makeText(sign_up.this, "Please enter password", Toast.LENGTH_SHORT).show();
 //                }
 //                else{
+                Toast.makeText(sign_up.this,"Nanana", Toast.LENGTH_SHORT).show();
                 create_user(edit_name.getText().toString(), edit_email.getText().toString(), edit_password.getText().toString());
             }
         });
@@ -105,9 +111,10 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
         text_to_login.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent goto_log_in = new Intent(getApplicationContext(), log_in.class);
+                Intent goto_sign_in = new Intent(getApplicationContext(), log_in.class);
                 //Toast.makeText(getApplicationContext(), "Hello, new user!", Toast.LENGTH_SHORT).show();
-                startActivity(goto_log_in);
+
+                startActivity(goto_sign_in);
             }
         });
 
@@ -117,6 +124,7 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
 
     public void onStart() {
         super.onStart();
+
         //fb_auth.addAuthStateListener(fb_auth_listener);
         // Check if user is signed in (non-null) and update UI accordingly.
         //FirebaseUser currentUser = fb_auth.getCurrentUser();
@@ -128,33 +136,36 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
         fb_auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
-                    @Override
+                    public void user_to_db(DatabaseReference dR,User new_user){
+
+                        dR.child("users").setValue(new_user);
+                    }
+
                     public void onComplete(@NonNull Task<AuthResult> task){
+                        FirebaseUser user = fb_auth.getCurrentUser();
                         Toast.makeText(sign_up.this,"createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+
                         if(task.isSuccessful()){
-                            FirebaseUser user = fb_auth.getCurrentUser();
-                            User user0 = new User(nickname, email, password, user.getUid());
+
+                            Toast.makeText(sign_up.this,"task is successful!", Toast.LENGTH_SHORT).show();
+                            User user_db = new User(nickname, email, password, user.getUid());
+                            fb_data_ref.child("/users").child(user_db.getUid()).setValue(user_db);
+                            //user_to_db(users,user_db);
+                            go_to_log_in();
+                        }
+                        else {
+                            User user_db = new User(nickname, email, password, user.getUid());
 
 
-                            //users_uid = users.child(user0.getUid());
-
-                            //users.child(user0.getUid()).setValue(user0.getUsername());
-                            //alternative
-                            //users.child("users/"+user.getUid()).child("username").setValue(user0.getUsername());
-
-                            //Firebase userRef = rootRef.child("users/" + rootRef.getAuth().getUid());
-                            //userRef.child("message1").setValue("Hello World");
-
-                            //users_uid = users.child("users/" + user0.getUid());
-                            //add_user_db(users_uid, user0);
-
-                            //users.child(user0.getUid()).setValue(user0.getUsername());
-
-                            users.push().child(user.getUid()).setValue(user0);
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "That's too bad :/", task.getException());
+                            Toast.makeText(sign_up.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                            go_to_log_in();
                         }
                     }
+
                 });
-        go_to_log_in();
     }
 
     public void onStop() {
@@ -217,4 +228,33 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
 //        button_register.setOnClickListener(this);
 //        //button_register.setOnClickListener(findViewById(R.layout.class_activity));
 //        text_to_login.setOnClickListener(this);
+
+
+//users_uid = users.child(user0.getUid());
+
+//users.child(user0.getUid()).setValue(user0.getUsername());
+//alternative
+//users.child("users/"+user.getUid()).child("username").setValue(user0.getUsername());
+
+//Firebase userRef = rootRef.child("users/" + rootRef.getAuth().getUid());
+//userRef.child("message1").setValue("Hello World");
+
+//users_uid = users.child("users/" + user0.getUid());
+//add_user_db(users_uid, user0);
+
+//users.child(user0.getUid()).setValue(user0.getUsername());
+
+
+//fb_data_ref.setValue(user.getUid());
+
+//                            fb_data_ref.child(user0.getUid()).setValue("email");
+//                            fb_data_ref.child(user0.getUid()).child("username").setValue("TwojaStara13");
+
+//users.setValue("test02");
+//users.child("test02").setValue("Twoja stara");
+
+//                            users.child("users").setValue(user0.getUid());
+//                            users = users.child("users").child(user0.getUid());
+//                            users.setValue("email");
+//                            users.child("email").setValue("firebase.ssie@pomelo.elo");
 
