@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,8 +40,6 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
     private FirebaseDatabase fb_database = FirebaseDatabase.getInstance();
     private DatabaseReference fb_data_ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://hearthlounge-32197.firebaseio.com");
     private static FirebaseAuth.AuthStateListener fb_auth_listener;
-    private DatabaseReference users;
-    //private DatabaseReference users2 = fb_database.getReference();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,44 +81,29 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
             //Todo Still not working register
             public void onClick(View view) {
 
-//                if(TextUtils.isEmpty(edit_name)){
-//                    Toast.makeText(sign_up.this, "Please enter nickname", Toast.LENGTH_SHORT).show();
-//                }
-//                if(TextUtils.isEmpty(edit_email)){
-//                    Toast.makeText(sign_up.this, "Please enter email", Toast.LENGTH_SHORT).show();
-//                }
-//                if(TextUtils.isEmpty(edit_password)){
-//                    Toast.makeText(sign_up.this, "Please enter password", Toast.LENGTH_SHORT).show();
-//                }
-//                else{
-                Toast.makeText(sign_up.this,"Nanana", Toast.LENGTH_SHORT).show();
-                create_user(edit_name.getText().toString(), edit_email.getText().toString(), edit_password.getText().toString());
+                if(TextUtils.isEmpty(edit_name.toString())){
+                    Toast.makeText(sign_up.this, "Please enter nickname", Toast.LENGTH_SHORT).show();
+                }
+                else if(TextUtils.isEmpty(edit_email.toString())){
+                    Toast.makeText(sign_up.this, "Please enter email", Toast.LENGTH_SHORT).show();
+                }
+                else if(TextUtils.isEmpty(edit_password.toString())){
+                    Toast.makeText(sign_up.this, "Please enter password", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(sign_up.this, "Test Toast 01", Toast.LENGTH_SHORT).show();
+                    create_user(edit_name.getText().toString(), edit_email.getText().toString(), edit_password.getText().toString());
+                }
             }
         });
-//                fb_auth.createUserWithEmailAndPassword(edit_email.getText().toString(), edit_password.getText().toString())
-//                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//
-//                                    public void onComplete(@NonNull Task<AuthResult> task) {
-////                                        if (task.isSuccessful()) {
-////                                            // Sign in success, update UI with the signed-in user's information
-////                                            FirebaseUser user = fb_auth.getCurrentUser();
-////                                            updateUI(user);
-////                                        }
-//                                    }
-//                                };
 
         text_to_login.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 Intent goto_sign_in = new Intent(getApplicationContext(), log_in.class);
-                //Toast.makeText(getApplicationContext(), "Hello, new user!", Toast.LENGTH_SHORT).show();
-
                 startActivity(goto_sign_in);
             }
         });
-
-
-//
     }
 
     public void onStart() {
@@ -131,15 +115,17 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
         //updateUI(currentUser);
     }
 
+    public void onStop() {
+        super.onStop();
+//        if (fb_auth_listener != null) {
+//            fb_auth.removeAuthStateListener(fb_auth_listener);
+//        }
+    }
+
     public void create_user(final String nickname, final String email, final String password){
 
         fb_auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-
-                    public void user_to_db(DatabaseReference dR,User new_user){
-
-                        dR.child("users").setValue(new_user);
-                    }
 
                     public void onComplete(@NonNull Task<AuthResult> task){
                         FirebaseUser user = fb_auth.getCurrentUser();
@@ -150,46 +136,23 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
                             Toast.makeText(sign_up.this,"task is successful!", Toast.LENGTH_SHORT).show();
                             User user_db = new User(nickname, email, password, user.getUid());
                             fb_data_ref.child("/users").child(user_db.getUid()).setValue(user_db);
-                            //user_to_db(users,user_db);
                             go_to_log_in();
                         }
                         else {
-                            User user_db = new User(nickname, email, password, user.getUid());
-
-
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "That's too bad :/", task.getException());
-                            Toast.makeText(sign_up.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(sign_up.this, "Something went wrong :|", Toast.LENGTH_SHORT).show();
                             //updateUI(null);
-                            go_to_log_in();
                         }
                     }
 
                 });
     }
 
-    public void onStop() {
-        super.onStop();
-//        if (fb_auth_listener != null) {
-//            fb_auth.removeAuthStateListener(fb_auth_listener);
-//        }
-    }
-
-
     public void go_to_log_in(){
         Intent goto_sign_in = new Intent(getApplicationContext(), log_in.class);
         startActivity(goto_sign_in);
     }
-
-      public void add_user_db(DatabaseReference dr,User user){
-          dr.child("uid").setValue(user.getUid());
-          dr.child("username").setValue(user.getUsername());
-          dr.child("email").setValue(user.getEmail());
-          dr.child("role").setValue(user.getRole());
-          dr.child("rank").setValue(user.getRank());
-          dr.child("updatedProfile").setValue(user.getUpdatedProfile());
-    }
-
 
 }
 
@@ -209,52 +172,3 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
         }
     } */
-
-//    protected void onCreate(Bundle savedInstanceState){
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.sign_up);
-//
-//        fb_database = FirebaseDatabase.getInstance();
-//        users = fb_database.getReference("Users");
-//        fb_auth = FirebaseAuth.getInstance();
-//
-//        edit_name = (EditText) findViewById(R.id.edit_name);
-//        edit_email = (EditText) findViewById(R.id.edit_email);
-//        edit_password = (EditText) findViewById(R.id.edit_name);
-//
-//        button_register = (Button) findViewById(R.id.button_signup);
-//        text_to_login = (TextView) findViewById(R.id.text_login);
-//
-//        button_register.setOnClickListener(this);
-//        //button_register.setOnClickListener(findViewById(R.layout.class_activity));
-//        text_to_login.setOnClickListener(this);
-
-
-//users_uid = users.child(user0.getUid());
-
-//users.child(user0.getUid()).setValue(user0.getUsername());
-//alternative
-//users.child("users/"+user.getUid()).child("username").setValue(user0.getUsername());
-
-//Firebase userRef = rootRef.child("users/" + rootRef.getAuth().getUid());
-//userRef.child("message1").setValue("Hello World");
-
-//users_uid = users.child("users/" + user0.getUid());
-//add_user_db(users_uid, user0);
-
-//users.child(user0.getUid()).setValue(user0.getUsername());
-
-
-//fb_data_ref.setValue(user.getUid());
-
-//                            fb_data_ref.child(user0.getUid()).setValue("email");
-//                            fb_data_ref.child(user0.getUid()).child("username").setValue("TwojaStara13");
-
-//users.setValue("test02");
-//users.child("test02").setValue("Twoja stara");
-
-//                            users.child("users").setValue(user0.getUid());
-//                            users = users.child("users").child(user0.getUid());
-//                            users.setValue("email");
-//                            users.child("email").setValue("firebase.ssie@pomelo.elo");
-
