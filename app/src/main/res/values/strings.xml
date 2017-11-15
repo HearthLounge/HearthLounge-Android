@@ -17,8 +17,9 @@
     <string name="title_log_in">Log In</string>
     <string name="title_sign_up">Sign Up</string>
     <string name="title_cards">Cards</string>
+    <string name="title_cards_filter_menu">Cards Menu</string>
     <string name="title_card_selected">Selected Card</string>
-    <string name="title_decks">Expansions</string>
+    <string name="title_decks">Decks</string>
     <string name="action_refresh">Refresh</string>
 
     <string name="open">Open</string>

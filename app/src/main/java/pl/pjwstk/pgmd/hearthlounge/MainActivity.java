@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
-                    Intent startIntent = new Intent(getApplicationContext(),CardsJSON.class); //Do którego ma iść
+                    Intent startIntent = new Intent(getApplicationContext(),CardsFilterMenu.class); //Do którego ma iść
                     startActivity(startIntent);
                     return true;
                 }

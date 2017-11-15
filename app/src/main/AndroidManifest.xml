@@ -28,6 +28,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".CardsFilterMenu"
+            android:label="@string/title_cards_filter_menu" />
+        <activity
             android:name=".CardsJSON"
             android:label="@string/title_cards" />
         <activity
