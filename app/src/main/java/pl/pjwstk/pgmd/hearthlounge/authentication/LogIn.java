@@ -30,6 +30,7 @@ public class LogIn extends AppCompatActivity {
     private EditText edit_email_login;
     private EditText edit_password_login;
     private TextView text_to_sign_up;
+    private String email,password;
 
     private FirebaseAuth fb_auth;
     FirebaseDatabase fb_database;
@@ -43,18 +44,23 @@ public class LogIn extends AppCompatActivity {
         fb_database = FirebaseDatabase.getInstance();
         fb_auth = FirebaseAuth.getInstance();
 
-        edit_password_login = (EditText) findViewById(R.id.edit_password);
         edit_email_login = (EditText) findViewById(R.id.edit_email);
+        edit_password_login = (EditText) findViewById(R.id.edit_password);
+
 
         button_login = (Button) findViewById(R.id.button_login);
         text_to_sign_up = (TextView) findViewById(R.id.text_to_sign_up);
 
-
-        //Log in mechanic
+        //Log in mechanics
         button_login.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View view) {
-                log_user(edit_email_login.getText().toString(),edit_password_login.getText().toString());
+                //log_user(edit_email_login.getText().toString(),edit_password_login.getText().toString());
+                email = edit_email_login.getText().toString();
+                password = edit_password_login.getText().toString();
+                Toast.makeText(getApplicationContext(),"E:"+email+" H:"+password, Toast.LENGTH_SHORT).show();
+                log_user(email,password);
+                //log_user("admin@ad.min","Roottoor1");
             }
         });
 
@@ -69,10 +75,10 @@ public class LogIn extends AppCompatActivity {
         });
     }
 
+//TODO take user data from firebase
 
 
-
-        public void log_user(String email,String password){
+    public void log_user(String email,String password){
 
         fb_auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -80,10 +86,8 @@ public class LogIn extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-
-                            Intent go_after_log_in = new Intent(getApplicationContext(), MainActivity.class);
-                            Toast.makeText(getApplicationContext(), "Hello, new user!", Toast.LENGTH_SHORT).show();
-                            startActivity(go_after_log_in);
+                            Toast.makeText(getApplicationContext(), "Hello user!", Toast.LENGTH_SHORT).show();
+                            go_to_main_menu();
                             //go_after_log_in
 
                             //updateUI(user);
@@ -96,6 +100,11 @@ public class LogIn extends AppCompatActivity {
 
                     }
                 });
-        }
+    }
+
+    public void go_to_main_menu(){
+        Intent menu_intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(menu_intent);
+    }
 
 }

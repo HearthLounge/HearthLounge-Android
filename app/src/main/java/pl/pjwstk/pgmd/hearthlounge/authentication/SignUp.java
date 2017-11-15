@@ -50,7 +50,7 @@ public class SignUp extends AppCompatActivity /*implements View.OnClickListener 
         fb_auth = FirebaseAuth.getInstance();
 
         //Temporary solve
-        Toast.makeText(SignUp.this, "Create your account!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SignUp.this, "--->Loging out", Toast.LENGTH_SHORT).show();
         fb_auth.signOut();
 
         edit_name = (EditText) findViewById(R.id.edit_name);
@@ -62,7 +62,7 @@ public class SignUp extends AppCompatActivity /*implements View.OnClickListener 
         text_to_login = (TextView) findViewById(R.id.text_login);
 
         button_register.setOnClickListener(new View.OnClickListener() {
-            //Todo Still not working register
+
             public void onClick(View view) {
 
                 if(TextUtils.isEmpty(edit_name.getEditableText().toString())){
@@ -92,7 +92,7 @@ public class SignUp extends AppCompatActivity /*implements View.OnClickListener 
 
     public void onStart() {
         super.onStart();
-        Toast.makeText(SignUp.this, "Toast 02 "+fb_auth.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(SignUp.this, "Sprawdzę czy jesteś zalogowany", Toast.LENGTH_SHORT).show();
         check_logged_in(fb_auth);
 
     }
@@ -121,7 +121,7 @@ public class SignUp extends AppCompatActivity /*implements View.OnClickListener 
                             go_to_log_in();
                         }
                         else {
-                            Toast.makeText(SignUp.this, "Something went wrong :|", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this, "Something went wrong :(", Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
                     }
@@ -138,7 +138,7 @@ public class SignUp extends AppCompatActivity /*implements View.OnClickListener 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            Toast.makeText(SignUp.this, "Calm down! You shouldn't be there... " + user.getEmail(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUp.this, "You're already logged!" + user.getEmail(), Toast.LENGTH_SHORT).show();
             updateUI();
         }
     }
