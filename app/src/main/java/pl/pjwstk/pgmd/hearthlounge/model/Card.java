@@ -10,8 +10,8 @@ import java.util.List;
 
 public class Card {
 
-    private String cardId;
-    private String dbfId;
+    private String cardId; // wywalić
+    private String dbfId; // wywalić
     private String name;
     private String cardSet;
     private String type;
@@ -20,15 +20,15 @@ public class Card {
     private int cost; // int
     private int attack; // int
     private int health; // int
-    private String text;
+    private String text; // wywalić
     private String flavor;
     private String artist;
-    private Boolean collectible; // Boolean
-    private Boolean elite; // Boolean
+    private Boolean collectible; // Boolean // wywalić
+    private Boolean elite; // Boolean // wywalić
     private String playerClass;
     private String img;
     private String imgGold;
-    private String locale;
+    private String locale; // wywalić
     @SerializedName("mechanics")
     private List<Mechanics> mechanicsList;
 

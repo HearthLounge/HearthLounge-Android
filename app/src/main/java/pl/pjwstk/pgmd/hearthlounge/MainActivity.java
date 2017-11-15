@@ -2,38 +2,23 @@ package pl.pjwstk.pgmd.hearthlounge;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.util.Pair;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle toggle;
     Toolbar toolbar;
 
-    private ImageButton buttonCards, buttonDecks;
+    private ImageButton buttonCards, buttonDecks, buttonExpansions;
     private ListView listViewCards;
     private TextView textCards;
 
@@ -105,8 +90,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
-//                    Intent startIntent = new Intent(getApplicationContext(),CardsJSON.class); //Do którego ma iść
-//                    startActivity(startIntent);
+                    Intent startIntent = new Intent(getApplicationContext(),Decks.class); //Do którego ma iść
+                    startActivity(startIntent);
                     return true;
                 }
                 return false;
@@ -129,6 +114,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(),CardsJSON.class); //Do którego ma iść
+                    startActivity(startIntent);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        buttonExpansions = (ImageButton)findViewById(R.id.button_expansions);
+        buttonExpansions.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent motionEvent) {
+                int action = motionEvent.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    v.animate().scaleXBy(0.2f).setDuration(5000).start();
+                    v.animate().scaleYBy(0.2f).setDuration(5000).start();
+                    v.setBackgroundResource(R.drawable.pressed);
+                    return true;
+                } else if (action == MotionEvent.ACTION_UP) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    Intent startIntent = new Intent(getApplicationContext(),Main2Activity.class); //Do którego ma iść
                     startActivity(startIntent);
                     return true;
                 }
@@ -185,14 +193,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_log_in) {
             Toast.makeText(this, "Log In", Toast.LENGTH_SHORT).show();
 
-            Intent logIn = new Intent(getApplicationContext(), log_in.class);
+            Intent logIn = new Intent(getApplicationContext(), LogIn.class);
             startActivity(logIn);
 
         } else if (id == R.id.nav_sign_up) {
             Toast.makeText(this, "Sign Up", Toast.LENGTH_SHORT).show();
 
-            Intent signUp = new Intent(getApplicationContext(), sign_up.class);
+            Intent signUp = new Intent(getApplicationContext(), SignUp.class);
             startActivity(signUp);
+
+        } else if (id == R.id.nav_log_out) {
+            Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
+
+            Intent logOut = new Intent(getApplicationContext(), LogOut.class);
+            startActivity(logOut);
 
         } else if (id == R.id.nav_settings) {
             Toast.makeText(this, "Menu", Toast.LENGTH_SHORT).show();

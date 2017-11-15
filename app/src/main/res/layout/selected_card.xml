@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_grey"
+    android:background="@color/light_grey"
     android:fitsSystemWindows="true"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".SelectedCard">
@@ -17,7 +17,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/pearl">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -48,8 +49,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/sea_color"/>
+            android:layout_height="5dp"
+            android:background="@color/black"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Card Id: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
@@ -73,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dbf Id: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -81,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -89,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Card Set: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -97,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Type: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -105,7 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Faction: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -113,7 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rarity: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -121,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cost: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -129,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Attack: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -137,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Health: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -145,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Text: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -153,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Flavor: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -161,7 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Artist: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -169,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Collectible: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -177,7 +178,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Elite: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -185,7 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Player Class: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -193,7 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Locale: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
             <TextView
@@ -201,7 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mechanics: "
-                android:textColor="@color/sea_color"
+                android:textColor="@color/dark_grey"
                 android:textAppearance="?android:attr/textAppearanceSmall"  />
 
         </LinearLayout>

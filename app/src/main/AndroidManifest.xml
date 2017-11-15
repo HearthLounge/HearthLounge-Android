@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/hl_launcher"
@@ -18,32 +17,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-
-    <activity
-        android:name=".MainActivity"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-
         <activity
-            android:name=".log_in"
-            android:label="@string/title_log_in"></activity>
-        <activity
-            android:name=".sign_up"
-            android:label="@string/title_sign_up"></activity>
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LogIn"
+            android:label="@string/title_log_in" />
+        <activity
+            android:name=".SignUp"
+            android:label="@string/title_sign_up" />
         <activity
             android:name=".CardsJSON"
-            android:label="@string/title_cards"></activity>
+            android:label="@string/title_cards" />
         <activity
             android:name=".SelectedCard"
-            android:label="@string/title_card_selected"></activity>
-
+            android:label="@string/title_card_selected" />
+        <activity
+            android:name=".Decks"
+            android:label="@string/title_decks" />
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

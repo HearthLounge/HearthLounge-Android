@@ -141,14 +141,12 @@ public class SelectedCard extends AppCompatActivity {
             text_view_health.setText("HEALTH: " + cardModel.getHealth()); //tu
 
             if (cardModel.getText() != null) {
-                text_view_text.setText("TEXT: " + Html.fromHtml(cardModel.getText()));
+                text_view_text.setText(Html.fromHtml("TEXT: " + cardModel.getText()));
             } else text_view_text.setText("pusto :( ");
 
             if (cardModel.getFlavor() != null) {
-                text_view_flavor.setText("FLAVOR: " + Html.fromHtml(cardModel.getFlavor()));
-            } else if (cardModel.getFlavor() == null) {
-                text_view_flavor.setText("pusto :( ");// ustawi puste pole
-            }
+                text_view_flavor.setText(Html.fromHtml("FLAVOR: " + cardModel.getFlavor()));
+            } else text_view_flavor.setText("pusto x2 :( ");// ustawi puste pole
 
             // INNY SPOSOB :D
 //            String flavor = "<body>" + cardModel.getFlavor() + "</body>" + "<style type=\"text/css\">body{color: #00a99c; margin: -5dp;}</style>";
@@ -161,13 +159,19 @@ public class SelectedCard extends AppCompatActivity {
             text_view_playerClass.setText("PLAYER CLASS: " + cardModel.getPlayerClass());
             text_view_locale.setText("LOCALE: " + cardModel.getLocale());
 
-            StringBuffer stringBuffer = new StringBuffer();
-////            if(cardModel.getMechanicsList() == null) {
-//                for (Card.Mechanics mechanics : cardModel.getMechanicsList()) {
+//            StringBuffer stringBuffer = new StringBuffer();
+
+            if(cardModel.getMechanicsList() != null) {
+                text_view_mechanics.setText("WESZŁO");
+                for (Card.Mechanics mechanics : cardModel.getMechanicsList()) {
+                    if (mechanics.getMechanics() != null) {
 //                    stringBuffer.append(mechanics.getMechanics() + ", ");
-//                }
-//                text_view_mechanics.setText("MECHANICS: " + stringBuffer);
-////            }
+//                    text_view_mechanics.setText("MECHANICS: " + stringBuffer);
+                        text_view_mechanics.setText("MECHANICS:: " + mechanics.getMechanics());
+                    }
+                }
+            }else text_view_mechanics.setText("NIC");
+
 
         }
 

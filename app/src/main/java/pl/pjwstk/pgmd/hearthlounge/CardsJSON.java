@@ -120,18 +120,156 @@ public class CardsJSON extends AppCompatActivity{
                 String finalJson = buffer.toString();
 
                 JSONObject parentObject = new JSONObject(finalJson);
-                //JSONArray parentArray = parentObject.getJSONArray("cards");
-                JSONArray parentArray = parentObject.getJSONArray("Basic"); //Kobolds & Catacombs
+
+                JSONArray basic = parentObject.getJSONArray("Basic");
+                JSONArray classic = parentObject.getJSONArray("Classic");
+                JSONArray hall_of_fame = parentObject.getJSONArray("Hall of Fame");
+                JSONArray naxxramas = parentObject.getJSONArray("Naxxramas");
+                JSONArray goblins_vs_gnomes = parentObject.getJSONArray("Goblins vs Gnomes");
+                JSONArray blackrock_mountain = parentObject.getJSONArray("Blackrock Mountain");
+                JSONArray the_grand_tournament = parentObject.getJSONArray("The Grand Tournament");
+                JSONArray the_league_of_explorers = parentObject.getJSONArray("The League of Explorers");
+                JSONArray whispers_of_the_old_gods = parentObject.getJSONArray("Whispers of the Old Gods");
+                JSONArray one_night_in_karazhan = parentObject.getJSONArray("One Night in Karazhan");
+                JSONArray mean_streets_of_gadgetzan = parentObject.getJSONArray("Mean Streets of Gadgetzan");
+                JSONArray journey_to_unGoro = parentObject.getJSONArray("Journey to Un'Goro");
+                JSONArray knights_of_the_frozen_throne = parentObject.getJSONArray("Knights of the Frozen Throne");
+                JSONArray kobolds_and_catacombs = parentObject.getJSONArray("Kobolds & Catacombs");
+//                JSONArray tavern_brawl = parentObject.getJSONArray("Tavern Brawl");
+                JSONArray hero_skins = parentObject.getJSONArray("Hero Skins");
+//                JSONArray missions = parentObject.getJSONArray("Missions");
+//                JSONArray credits = parentObject.getJSONArray("Credits");
 
                 List<Card> cardList = new ArrayList<>();
-
                 Gson gson = new Gson();
-                for (int i = 0; i < parentArray.length(); i++) {
-                    JSONObject finalObject = parentArray.getJSONObject(i);
+
+                // BASIC
+                for (int i = 0; i < basic.length(); i++) {
+                    JSONObject finalObject = basic.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+                // CLASSIC
+                for (int i = 0; i < classic.length(); i++) {
+                    JSONObject finalObject = classic.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+                // HALL OF FAME
+                for (int i = 0; i < hall_of_fame.length(); i++) {
+                    JSONObject finalObject = hall_of_fame.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+                // NAXXRAMAS
+                for (int i = 0; i < naxxramas.length(); i++) {
+                    JSONObject finalObject = naxxramas.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+                // GOBLINS VS GNOMES
+                for (int i = 0; i < goblins_vs_gnomes.length(); i++) {
+                    JSONObject finalObject = goblins_vs_gnomes.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+                // BLACKROCK MOUNTAIN
+                for (int i = 0; i < blackrock_mountain.length(); i++) {
+                    JSONObject finalObject = blackrock_mountain.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+                // THE GRAND TOURNAMENT
+                for (int i = 0; i < the_grand_tournament.length(); i++) {
+                    JSONObject finalObject = the_grand_tournament.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+                // THE LEAGUE OF EXPLORERS
+                for (int i = 0; i < the_league_of_explorers.length(); i++) {
+                    JSONObject finalObject = the_league_of_explorers.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+                // WHISPERS OF THE OLD GODS
+                for (int i = 0; i < whispers_of_the_old_gods.length(); i++) {
+                    JSONObject finalObject = whispers_of_the_old_gods.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+                // ONE NIGHT IN KARAZHAN
+                for (int i = 0; i < one_night_in_karazhan.length(); i++) {
+                    JSONObject finalObject = one_night_in_karazhan.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+                // MEAN STREETS OF GADGETZAN
+                for (int i = 0; i < mean_streets_of_gadgetzan.length(); i++) {
+                    JSONObject finalObject = mean_streets_of_gadgetzan.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+                // JOURNEY TO UN'GORO
+                for (int i = 0; i < journey_to_unGoro.length(); i++) {
+                    JSONObject finalObject = journey_to_unGoro.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+                // KNIGHTS OF THE FROZEN THRONE
+                for (int i = 0; i < knights_of_the_frozen_throne.length(); i++) {
+                    JSONObject finalObject = knights_of_the_frozen_throne.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+                // KOBOLDS & CATACOMBS
+                for (int i = 0; i < kobolds_and_catacombs.length(); i++) {
+                    JSONObject finalObject = kobolds_and_catacombs.getJSONObject(i);
 
                     Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
                     cardList.add(cardModel);
                 }
+
+//                // TAVERN BRAWL
+//                for (int i = 0; i < tavern_brawl.length(); i++) {
+//                    JSONObject finalObject = tavern_brawl.getJSONObject(i);
+//                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+//                    cardList.add(cardModel);
+//                }
+
+                // HERO SKINS
+                for (int i = 0; i < hero_skins.length(); i++) {
+                    JSONObject finalObject = hero_skins.getJSONObject(i);
+                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+                    cardList.add(cardModel);
+                }
+
+//                // MISSIONS
+//                for (int i = 0; i < missions.length(); i++) {
+//                    JSONObject finalObject = missions.getJSONObject(i);
+//                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+//                    cardList.add(cardModel);
+//                }
+//
+//                // CREDITS
+//                for (int i = 0; i < credits.length(); i++) {
+//                    JSONObject finalObject = credits.getJSONObject(i);
+//                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
+//                    cardList.add(cardModel);
+//                }
+
                 return cardList;
 
             } catch (MalformedURLException e) {
@@ -191,7 +329,6 @@ public class CardsJSON extends AppCompatActivity{
                 listViewCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {  // list item click opens a new detailed activity
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
 //                        view.animate().scaleXBy(0.2f).setDuration(5000).start();
 //                        view.animate().scaleYBy(0.2f).setDuration(5000).start();
 //                        view.setBackgroundResource(R.drawable.pressed);

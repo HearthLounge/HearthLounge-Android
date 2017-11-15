@@ -2,10 +2,10 @@
 
     <!-- Base application theme. -->
     <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
-        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-        <!--<item name="colorPrimary">@color/dark_grey</item>-->
-        <!--<item name="colorPrimaryDark">@color/light_grey</item>-->
-        <!--<item name="colorAccent">@color/sea_color</item>-->
+    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+    <!--<item name="colorPrimary">@color/dark_grey</item>-->
+    <!--<item name="colorPrimaryDark">@color/light_grey</item>-->
+    <!--<item name="colorAccent">@color/sea_color</item>-->
     <!--</style>-->
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -25,7 +25,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@color/sea_color</item> <!--@android:color/transparent-->
+        <item name="android:statusBarColor">@color/sea_color
+        </item> <!--@android:color/transparent-->
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -38,7 +39,6 @@
         <!--<item name="android:colorBackground">@color/druid</item>-->
         <!--<item name="android:textColor">@color/death_knight</item>-->
     </style>
-
 
 
 </resources>
