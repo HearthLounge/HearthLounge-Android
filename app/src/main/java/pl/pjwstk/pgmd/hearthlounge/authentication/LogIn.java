@@ -1,10 +1,9 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,15 +14,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import pl.pjwstk.pgmd.hearthlounge.MainActivity;
+import pl.pjwstk.pgmd.hearthlounge.R;
 
 /**
  * Created by Froozy on 25.10.2017.
  */
 
-public class log_in extends AppCompatActivity {
+public class LogIn extends AppCompatActivity {
 
     private Button button_login;
     private EditText edit_email_login;
@@ -61,7 +62,7 @@ public class log_in extends AppCompatActivity {
         text_to_sign_up.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent goto_sign_up = new Intent(getApplicationContext(), sign_up.class);
+                Intent goto_sign_up = new Intent(getApplicationContext(), SignUp.class);
                 //Toast.makeText(getApplicationContext(), "Hello, new user!", Toast.LENGTH_SHORT).show();
                 startActivity(goto_sign_up);
             }
@@ -88,7 +89,7 @@ public class log_in extends AppCompatActivity {
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(log_in.this, "Something went wrong with log in", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LogIn.this, "Something went wrong with log in", Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
 

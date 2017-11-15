@@ -22,6 +22,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import pl.pjwstk.pgmd.hearthlounge.authentication.LogIn;
+import pl.pjwstk.pgmd.hearthlounge.authentication.LogOut;
+import pl.pjwstk.pgmd.hearthlounge.authentication.SignUp;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

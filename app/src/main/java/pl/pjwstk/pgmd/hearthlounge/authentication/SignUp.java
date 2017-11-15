@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,13 +19,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 
 /**
  * Created by Froozy on 03.10.2017.
  */
 
-public class sign_up extends AppCompatActivity /*implements View.OnClickListener */ {
+public class SignUp extends AppCompatActivity /*implements View.OnClickListener */ {
 
     private Button button_register;
     private EditText edit_name;
@@ -49,7 +50,7 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
         fb_auth = FirebaseAuth.getInstance();
 
         //Temporary solve
-        Toast.makeText(sign_up.this, "Create your account!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SignUp.this, "Create your account!", Toast.LENGTH_SHORT).show();
         fb_auth.signOut();
 
         edit_name = (EditText) findViewById(R.id.edit_name);
@@ -65,16 +66,16 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
             public void onClick(View view) {
 
                 if(TextUtils.isEmpty(edit_name.getEditableText().toString())){
-                    Toast.makeText(sign_up.this, "Please enter nickname", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "Please enter nickname", Toast.LENGTH_SHORT).show();
                 }
                 else if(TextUtils.isEmpty(edit_email.getEditableText().toString())){
-                    Toast.makeText(sign_up.this, "Please enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "Please enter email", Toast.LENGTH_SHORT).show();
                 }
                 else if(TextUtils.isEmpty(edit_password.getEditableText().toString())){
-                    Toast.makeText(sign_up.this, "Please enter password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "Please enter password", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(sign_up.this, "Test Toast 01", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "Test Toast 01", Toast.LENGTH_SHORT).show();
                     create_user(edit_name.getText().toString(), edit_email.getText().toString(), edit_password.getText().toString());
                 }
             }
@@ -83,7 +84,7 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
         text_to_login.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent goto_sign_in = new Intent(getApplicationContext(), log_in.class);
+                Intent goto_sign_in = new Intent(getApplicationContext(), LogIn.class);
                 startActivity(goto_sign_in);
             }
         });
@@ -91,7 +92,7 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
 
     public void onStart() {
         super.onStart();
-        Toast.makeText(sign_up.this, "Toast 02 "+fb_auth.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(SignUp.this, "Toast 02 "+fb_auth.toString(), Toast.LENGTH_SHORT).show();
         check_logged_in(fb_auth);
 
     }
@@ -110,17 +111,17 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
 
                     public void onComplete(@NonNull Task<AuthResult> task){
                         FirebaseUser user = fb_auth.getCurrentUser();
-                        Toast.makeText(sign_up.this,"createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUp.this,"createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
 
                         if(task.isSuccessful()){
 
-                            Toast.makeText(sign_up.this,"task is successful!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this,"task is successful!", Toast.LENGTH_SHORT).show();
                             User user_db = new User(nickname, email, password, user.getUid());
                             fb_data_ref.child("/users").child(user_db.getUid()).setValue(user_db);
                             go_to_log_in();
                         }
                         else {
-                            Toast.makeText(sign_up.this, "Something went wrong :|", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this, "Something went wrong :|", Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
                     }
@@ -129,7 +130,7 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
     }
 
     public void go_to_log_in(){
-        Intent goto_sign_in = new Intent(getApplicationContext(), log_in.class);
+        Intent goto_sign_in = new Intent(getApplicationContext(), LogIn.class);
         startActivity(goto_sign_in);
     }
 
@@ -137,7 +138,7 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            Toast.makeText(sign_up.this, "Calm down! You shouldn't be there... " + user.getEmail(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUp.this, "Calm down! You shouldn't be there... " + user.getEmail(), Toast.LENGTH_SHORT).show();
             updateUI();
         }
     }

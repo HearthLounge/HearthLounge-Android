@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.authentication;
 
 import android.support.v7.app.AppCompatActivity;
 

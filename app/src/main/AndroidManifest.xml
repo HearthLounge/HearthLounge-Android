@@ -28,12 +28,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LogIn"
-            android:label="@string/title_log_in" />
-        <activity
-            android:name=".SignUp"
-            android:label="@string/title_sign_up" />
-        <activity
             android:name=".CardsJSON"
             android:label="@string/title_cards" />
         <activity
