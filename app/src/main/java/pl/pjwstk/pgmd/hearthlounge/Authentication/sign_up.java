@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,34 +44,18 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
-//        fb_auth_listener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                FirebaseUser user = firebaseAuth.getCurrentUser();
-//                if (user != null) {
-//                    // User is signed in
-//                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-//                } else {
-//                    // User is signed out
-//                    Log.d(TAG, "onAuthStateChanged:signed_out");
-//                }
-//                // ...
-//            }
-//        };
-
         //Firebase configurate
-        //FirebaseDatabase fb_database = FirebaseDatabase.getInstance();
         fb_database = FirebaseDatabase.getInstance();
-        //if(fb_database == null){ Toast.makeText(getApplicationContext(), "Coś się zesrało :|", Toast.LENGTH_SHORT).show();}
-        //https://hearthlounge-32197.firebaseio.com/users
-
-        //DatabaseReference fb_data_ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://hearthlounge-32197.firebaseio.com/users");
         fb_auth = FirebaseAuth.getInstance();
-        users = fb_database.getReference();
+
+        //Temporary solve
+        Toast.makeText(sign_up.this, "Create your account!", Toast.LENGTH_SHORT).show();
+        fb_auth.signOut();
 
         edit_name = (EditText) findViewById(R.id.edit_name);
         edit_password = (EditText) findViewById(R.id.edit_password);
         edit_email = (EditText) findViewById(R.id.edit_email);
+
 
         button_register = (Button) findViewById(R.id.button_signup);
         text_to_login = (TextView) findViewById(R.id.text_login);
@@ -81,13 +64,13 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
             //Todo Still not working register
             public void onClick(View view) {
 
-                if(TextUtils.isEmpty(edit_name.toString())){
+                if(TextUtils.isEmpty(edit_name.getEditableText().toString())){
                     Toast.makeText(sign_up.this, "Please enter nickname", Toast.LENGTH_SHORT).show();
                 }
-                else if(TextUtils.isEmpty(edit_email.toString())){
+                else if(TextUtils.isEmpty(edit_email.getEditableText().toString())){
                     Toast.makeText(sign_up.this, "Please enter email", Toast.LENGTH_SHORT).show();
                 }
-                else if(TextUtils.isEmpty(edit_password.toString())){
+                else if(TextUtils.isEmpty(edit_password.getEditableText().toString())){
                     Toast.makeText(sign_up.this, "Please enter password", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -108,11 +91,9 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
 
     public void onStart() {
         super.onStart();
+        Toast.makeText(sign_up.this, "Toast 02 "+fb_auth.toString(), Toast.LENGTH_SHORT).show();
+        check_logged_in(fb_auth);
 
-        //fb_auth.addAuthStateListener(fb_auth_listener);
-        // Check if user is signed in (non-null) and update UI accordingly.
-        //FirebaseUser currentUser = fb_auth.getCurrentUser();
-        //updateUI(currentUser);
     }
 
     public void onStop() {
@@ -139,8 +120,6 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
                             go_to_log_in();
                         }
                         else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "That's too bad :/", task.getException());
                             Toast.makeText(sign_up.this, "Something went wrong :|", Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
@@ -154,7 +133,26 @@ public class sign_up extends AppCompatActivity /*implements View.OnClickListener
         startActivity(goto_sign_in);
     }
 
+    public void check_logged_in(FirebaseAuth fb_auth){
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            Toast.makeText(sign_up.this, "Calm down! You shouldn't be there... " + user.getEmail(), Toast.LENGTH_SHORT).show();
+            updateUI();
+        }
+    }
+
+    //TODO
+    public void updateUI(){
+        findViewById(R.id.edit_name).setVisibility(View.GONE);
+        findViewById(R.id.edit_email).setVisibility(View.GONE);
+        findViewById(R.id.edit_password).setVisibility(View.GONE);
+        findViewById(R.id.button_signup).setVisibility(View.GONE);
+        findViewById(R.id.text_to_sign_up).setVisibility(View.GONE);
+    }
+
 }
+
 
 /* private void updateUI(FirebaseUser user) {
         hideProgressDialog();
