@@ -3,11 +3,13 @@ package pl.pjwstk.pgmd.hearthlounge.authentication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import pl.pjwstk.pgmd.hearthlounge.DrawerMenu;
 import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 
@@ -26,7 +29,7 @@ import pl.pjwstk.pgmd.hearthlounge.model.User;
  * Created by Froozy on 03.10.2017.
  */
 
-public class SignUp extends AppCompatActivity /*implements View.OnClickListener */ {
+public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
 
     private Button button_register;
     private EditText edit_name;
@@ -43,7 +46,11 @@ public class SignUp extends AppCompatActivity /*implements View.OnClickListener 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_up);
+
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+        getLayoutInflater().inflate(R.layout.sign_up, contentFrameLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(0).setChecked(true);
 
         //Firebase configurate
         fb_database = FirebaseDatabase.getInstance();

@@ -1,35 +1,29 @@
 package pl.pjwstk.pgmd.hearthlounge;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.gif.GifDrawableLoadProvider;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
-import pl.droidsonroids.gif.GifDecoder;
-import pl.droidsonroids.gif.GifImageView;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 
 /**
  * Created by Maciek Dembowski on 08.11.2017.
  */
 
-public class SelectedCard extends AppCompatActivity {
+public class SelectedCard extends DrawerMenu {
 
     private ImageView image_view_card;
     private ImageView image_view_cardGold; //GifImageView
@@ -59,7 +53,11 @@ public class SelectedCard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.selected_card);
+
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+        getLayoutInflater().inflate(R.layout.selected_card, contentFrameLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(0).setChecked(true);
 
         // Showing and Enabling clicks on the Home/Up button
         if(getSupportActionBar() != null) {

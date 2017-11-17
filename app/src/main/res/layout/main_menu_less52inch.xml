@@ -11,10 +11,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/navigation_action"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">

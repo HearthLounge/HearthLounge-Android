@@ -28,21 +28,42 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CardsFilterMenu"
-            android:label="@string/title_cards_filter_menu" />
+            android:name=".authentication.LogIn"
+            android:label="@string/title_log_in"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".CardsJSON"
-            android:label="@string/title_cards" />
+            android:name=".authentication.SignUp"
+            android:label="@string/title_sign_up"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SelectedCard"
-            android:label="@string/title_card_selected" />
+            android:name=".authentication.LogOut"
+            android:label="@string/title_log_out"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".Decks"
             android:label="@string/title_decks" />
+
+        <activity
+            android:name=".CardsFilterMenu"
+            android:label="@string/title_cards_filter_menu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CardsJSON"
+            android:label="@string/title_cards"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SelectedCard"
+            android:label="@string/title_card_selected"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+
         <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

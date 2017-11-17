@@ -16,6 +16,7 @@
 
     <string name="title_log_in">Log In</string>
     <string name="title_sign_up">Sign Up</string>
+    <string name="title_log_out">Log Out</string>
     <string name="title_cards">Cards</string>
     <string name="title_cards_filter_menu">Cards Menu</string>
     <string name="title_card_selected">Selected Card</string>

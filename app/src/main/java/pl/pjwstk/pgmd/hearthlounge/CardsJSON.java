@@ -6,17 +6,18 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -49,7 +50,7 @@ import pl.pjwstk.pgmd.hearthlounge.model.Card;
  * Created by Maciek Dembowski on 16.10.2017.
  */
 
-public class CardsJSON extends AppCompatActivity{
+public class CardsJSON extends DrawerMenu{
 
     private final String URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1";
     private final String HEADER = "X-Mashape-Key";
@@ -61,7 +62,12 @@ public class CardsJSON extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cards);
+
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+        getLayoutInflater().inflate(R.layout.cards, contentFrameLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(0).setChecked(true);
+
 //        new DownloadImageTask((ImageButton)findViewById(R.id.image_button_cards))
 //                .execute("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_116.png");
 
@@ -292,31 +298,6 @@ public class CardsJSON extends AppCompatActivity{
             }
             return null;
         }
-
-////        buttonDecks = (ImageButton) findViewById(R.id.button_decks);
-////        buttonDecks.setOnTouchListener(new View.OnTouchListener() {
-//
-//            public boolean onTouch(View v, MotionEvent motionEvent) {
-//
-//                int action = motionEvent.getAction();
-//                if (action == MotionEvent.ACTION_DOWN) {
-//                    v.animate().scaleXBy(0.2f).setDuration(5000).start();
-//                    v.animate().scaleYBy(0.2f).setDuration(5000).start();
-//                    v.setBackgroundResource(R.drawable.pressed);
-//                    //v.startAnimation(animationScale); // druga metoda
-//                    return true;
-//                } else if (action == MotionEvent.ACTION_UP) {
-//                    v.animate().cancel();
-//                    v.animate().scaleX(1f).setDuration(1000).start();
-//                    v.animate().scaleY(1f).setDuration(1000).start();
-//                    v.setBackgroundResource(R.drawable.normal);
-////                    Intent startIntent = new Intent(getApplicationContext(),CardsJSON.class); //Do którego ma iść
-////                    startActivity(startIntent);
-//                    return true;
-//                }
-//                return false;
-//            }
-////        });
 
         final Animation animationScale = AnimationUtils.loadAnimation(CardsJSON.this, R.anim.anim_scale);
         @Override

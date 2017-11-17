@@ -25,13 +25,13 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@color/sea_color
-        </item> <!--@android:color/transparent-->
+        <item name="android:statusBarColor">@color/sea_color</item> <!--@android:color/transparent-->
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textStyle">bold</item>
         <item name="android:textColorPrimary">@color/sea_color</item>
+        <item name="elevation">0dp</item>
         <!--<item name="android:textColorSecondary">@color/dark_green</item>-->
     </style>
 
