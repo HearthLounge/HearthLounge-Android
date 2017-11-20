@@ -61,12 +61,15 @@ public class LogIn extends DrawerMenu {
         button_login.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View view) {
-                //log_user(edit_email_login.getText().toString(),edit_password_login.getText().toString());
-                email = edit_email_login.getText().toString();
-                password = edit_password_login.getText().toString();
-                Toast.makeText(getApplicationContext(),"E:"+email+" H:"+password, Toast.LENGTH_SHORT).show();
-                log_user(email,password);
-                //log_user("admin@ad.min","Roottoor1");
+                if(fb_auth.getCurrentUser() == null) {
+                    //log_user(edit_email_login.getText().toString(),edit_password_login.getText().toString());
+                    email = edit_email_login.getText().toString();
+                    password = edit_password_login.getText().toString();
+                    Toast.makeText(getApplicationContext(), "E:" + email + " H:" + password, Toast.LENGTH_SHORT).show();
+                    log_user(email, password);
+                    //log_user("admin@ad.min","Roottoor1");
+                }
+                else{ Toast.makeText(getApplicationContext(),"Something went wrong :|", Toast.LENGTH_SHORT).show();}
             }
         });
 

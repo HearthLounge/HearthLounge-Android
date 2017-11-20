@@ -1,3 +1,5 @@
+package pl.pjwstk.pgmd.hearthlounge.model;
+
 import android.app.Application;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +23,7 @@ public class User extends Application {
 
     }
 
-    public User(String username, String email, String password, String uid){   //Uzupełnić o dodanie reszty ze zmiennych bo auth idzie oddzielnie
+    public User(String username, String email, String uid){   //Uzupełnić o dodanie reszty ze zmiennych bo auth idzie oddzielnie
 
         this.username = username;
         this.email = email;

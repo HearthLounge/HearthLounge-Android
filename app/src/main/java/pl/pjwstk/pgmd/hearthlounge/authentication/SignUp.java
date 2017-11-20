@@ -122,8 +122,9 @@ public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
                         if(task.isSuccessful()){
 
                             Toast.makeText(SignUp.this,"task is successful!", Toast.LENGTH_SHORT).show();
-                            User user_db = new User(nickname, email, password, user.getUid());
-                            fb_data_ref.child("/users").child(user_db.getUid()).setValue(user_db);
+                            //User user_db = new User(nickname, email, user.getUid());
+                            //fb_data_ref.child("/users").child(user_db.getUid()).setValue(user_db);
+                            fb_auth.signOut();
                             go_to_log_in();
                         }
                         else {
@@ -148,6 +149,13 @@ public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
             updateUI();
         }
     }
+
+    public void add_new_user(DatabaseReference data_ref, String nickname, String email, String uid){
+
+        User user_db = new User(nickname, email, uid);
+        fb_data_ref.child("/users").child(user_db.getUid()).setValue(user_db);
+    }
+
 
     //TODO
     public void updateUI(){
