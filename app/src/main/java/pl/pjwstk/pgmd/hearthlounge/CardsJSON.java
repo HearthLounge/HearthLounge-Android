@@ -79,35 +79,6 @@ public class CardsJSON extends DrawerMenu{
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
 
-
-
-
-
-
-
-//        pop_up_mana_menu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                PopupMenu popup = new PopupMenu(CardsJSON.this, pop_up_mana_menu);
-//                popup.getMenuInflater().inflate(R.menu.mana_value, popup.getMenu());
-//
-//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                    public boolean onMenuItemClick(MenuItem item) {
-//                        Toast.makeText(CardsJSON.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
-//                        return true;
-//                    }
-//
-//                });
-//                popup.show();//showing popup menu
-//            }
-//        });//closing the setOnClickListener method
-
-
-
-
-
-
 //        new DownloadImageTask((ImageButton)findViewById(R.id.image_button_cards))
 //                .execute("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_116.png");
 

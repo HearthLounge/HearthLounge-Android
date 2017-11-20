@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_grey"
+    android:background="?attr/colorPrimary"
     android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
@@ -25,7 +25,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
+                android:background="?attr/colorPrimaryDark"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </android.support.design.widget.AppBarLayout>
@@ -45,8 +45,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:itemIconTint="@color/sea_color"
-        android:background="@color/light_grey"
+        android:background="?attr/colorPrimary"
+        app:itemTextColor="?attr/colorAccent"
+        app:itemIconTint="?attr/colorAccent"
         app:menu="@menu/navigation_bar"
         app:headerLayout="@layout/navigation_header" />
 

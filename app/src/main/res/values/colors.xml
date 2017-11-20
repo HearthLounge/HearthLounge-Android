@@ -3,10 +3,10 @@
 
     //Font colors
     <color name="primary_font_color"> #fff</color>
+    <color name="black"> #000</color>
 
     //Background colors
-    <color name="black"> #000</color>
-    <color name="dark_grey"> #474143</color>        //dark-grey
+    <color name="dark_grey"> #474143</color>
     <color name="light_grey"> #A69E9D</color>
     <color name="pearl"> #E7E2DA</color>
     <color name="sea_color"> #00a99c</color>
@@ -72,6 +72,6 @@
     //Mode colors
     <color name="standard"> #318e2f</color>
     <color name="wild"> #695840</color>
-    <!--<color name="extensions"> #fff</color>-->
+    <color name="extensions"> #fff</color>
 
 </resources>
