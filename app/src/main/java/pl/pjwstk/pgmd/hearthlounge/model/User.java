@@ -1,10 +1,12 @@
-package pl.pjwstk.pgmd.hearthlounge.model;
+import android.app.Application;
 
-/**
- * Created by Froozy on 25.10.2017.
- */
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class User {
+public class User extends Application {
+
+    FirebaseDatabase fbDb = FirebaseDatabase.getInstance();
+    FirebaseAuth fbAuth = FirebaseAuth.getInstance();
 
     private String username;
     private String email;
@@ -12,6 +14,12 @@ public class User {
     private String role;
     private String uid;
     private Boolean updatedProfile;
+
+    public User(){
+
+
+
+    }
 
     public User(String username, String email, String password, String uid){   //Uzupełnić o dodanie reszty ze zmiennych bo auth idzie oddzielnie
 
@@ -22,6 +30,18 @@ public class User {
         this.uid = uid;
         this.updatedProfile = false;
         this.rank = 1;
+    }
+
+    public User(String username, String email, String role, String uid, int rank, Boolean updatedProfile){
+
+        this.username = username;
+        this.email = email;
+        this.username = username;
+        this.role = role;
+        this.uid = uid;
+        this.updatedProfile = updatedProfile;
+        this.rank = rank;
+
     }
 
 

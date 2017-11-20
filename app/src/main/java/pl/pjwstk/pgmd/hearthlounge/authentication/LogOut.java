@@ -7,6 +7,8 @@ import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import pl.pjwstk.pgmd.hearthlounge.DrawerMenu;
 import pl.pjwstk.pgmd.hearthlounge.R;
 
@@ -16,9 +18,13 @@ import pl.pjwstk.pgmd.hearthlounge.R;
 
 public class LogOut extends DrawerMenu {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    private FirebaseAuth fb_auth;
+
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // TODO setContentView(R.layout.logout);      Dodać layout
+        fb_auth = FirebaseAuth.getInstance();
+        fb_auth.signOut();
 
 //        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
 //        getLayoutInflater().inflate(R.layout.sign_up, contentFrameLayout);
