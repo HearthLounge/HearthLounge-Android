@@ -2,6 +2,7 @@ package pl.pjwstk.pgmd.hearthlounge;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -10,6 +11,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.MenuItem;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
@@ -34,7 +37,13 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // ZMIANA CZCIONKI DLA PASKA "TOOLBAR"
+        SpannableString s = new SpannableString(getTitle());
+        s.setSpan(new TypefaceSpan(this, "belwe_medium.otf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar); //PASEK U GÓRY Z NAZWĄ APLIKACJI
+        toolbar.setTitle(s);
         setSupportActionBar(toolbar);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

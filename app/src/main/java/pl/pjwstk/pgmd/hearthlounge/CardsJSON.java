@@ -1,17 +1,26 @@
 package pl.pjwstk.pgmd.hearthlounge;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuBuilder;
+import android.support.v7.view.menu.MenuPopupHelper;
+import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.ThemedSpinnerAdapter;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -19,8 +28,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -68,12 +79,42 @@ public class CardsJSON extends DrawerMenu{
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
 
+
+
+
+
+
+
+//        pop_up_mana_menu.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                PopupMenu popup = new PopupMenu(CardsJSON.this, pop_up_mana_menu);
+//                popup.getMenuInflater().inflate(R.menu.mana_value, popup.getMenu());
+//
+//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    public boolean onMenuItemClick(MenuItem item) {
+//                        Toast.makeText(CardsJSON.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
+//                        return true;
+//                    }
+//
+//                });
+//                popup.show();//showing popup menu
+//            }
+//        });//closing the setOnClickListener method
+
+
+
+
+
+
 //        new DownloadImageTask((ImageButton)findViewById(R.id.image_button_cards))
 //                .execute("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_116.png");
 
         dialog = new ProgressDialog(this);
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
+//        dialog.setProgressStyle(R.drawable.card);
         dialog.setMessage("Loading. Please wait..."); // showing a dialog for loading the data
         // Create default options which will be used for every
         //  displayImage(...) call if no options will be passed to this method
@@ -340,10 +381,115 @@ public class CardsJSON extends DrawerMenu{
             inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         }
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
             ViewHolder holder = null;
+
+            TextView text_view_count_cards = null;
+            LinearLayout pop_up_mana_menu = null;
+
+            text_view_count_cards = (TextView)findViewById(R.id.text_view_count_cards);
+            String countCrads = String.valueOf(cardList.size());
+            text_view_count_cards.setText(countCrads + " results");
+
+            pop_up_mana_menu = (LinearLayout) findViewById(R.id.mana_value);
+            final LinearLayout finalPop_up_mana_menu = pop_up_mana_menu;
+            pop_up_mana_menu.setOnTouchListener(new OnTouchListener() {
+                @SuppressLint("RestrictedApi")
+                @Override
+                public boolean onTouch(View v, MotionEvent motionEvent) {
+                    int action = motionEvent.getAction();
+                    if (action == MotionEvent.ACTION_DOWN) {
+                        v.setBackgroundResource(R.drawable.pressed);
+                        return true;
+                    } else if (action == MotionEvent.ACTION_UP) {
+                        v.animate().cancel();
+                        v.setBackgroundResource(R.drawable.normal);
+
+                        PopupMenu popup = new PopupMenu(CardsJSON.this, finalPop_up_mana_menu);
+                        popup.getMenuInflater().inflate(R.menu.mana_value, popup.getMenu());
+
+                        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            public boolean onMenuItemClick(MenuItem item) {
+
+                                switch (item.getItemId())
+                                {
+                                    case R.id.zero:
+                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+
+                                        return true;
+
+                                    case R.id.one:
+                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_1, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                                        return true;
+
+                                    case R.id.two:
+                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_2, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                                        return true;
+
+                                    case R.id.three:
+                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_3, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                                        return true;
+
+                                    case R.id.four:
+                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_4, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                                        return true;
+
+                                    case R.id.five:
+                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_5, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                                        return true;
+
+                                    case R.id.six:
+                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_6, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                                        return true;
+
+                                    case R.id.seven:
+                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                                        return true;
+
+                                    case R.id.seven_plus:
+                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                                        return true;
+
+                                    case R.id.eight:
+                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_8, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                                        return true;
+
+                                    case R.id.nine:
+                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                                        return true;
+
+                                    case R.id.nine_plus:
+                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                                        return true;
+
+                                    default:
+                                    return false;
+                                }
+                                //return true;
+                            }
+                        });
+                        MenuPopupHelper menuHelper = new MenuPopupHelper(CardsJSON.this, (MenuBuilder) popup.getMenu(), finalPop_up_mana_menu);
+                        menuHelper.setForceShowIcon(true);
+                        menuHelper.show(); //showing popup menu
+                    }
+                    return false;
+                }
+            });
 
             if (convertView == null) {
                 holder = new ViewHolder();
@@ -452,6 +598,61 @@ public class CardsJSON extends DrawerMenu{
 //            private TextView text_view_mechanics;
         }
     }
+
+    @SuppressLint("ResourceAsColor")
+    public static Toast makeImageToast(Context context, CharSequence text, int imageResId, int length) {
+        Toast toast = Toast.makeText(context, text, length);
+
+        View rootView = toast.getView();
+        LinearLayout linearLayout = null;
+        View messageTextView = null;
+
+
+
+        // check (expected) toast layout
+        if (rootView instanceof LinearLayout) {
+            linearLayout = (LinearLayout) rootView;
+
+            if (linearLayout.getChildCount() == 1) {
+                View child = linearLayout.getChildAt(0);
+
+                if (child instanceof TextView) {
+                    messageTextView = (TextView) child;
+                }
+            }
+        }
+
+        // cancel modification because toast layout is not what we expected
+        if (linearLayout == null || messageTextView == null) {
+            return toast;
+        }
+
+        ViewGroup.LayoutParams textParams = messageTextView.getLayoutParams();
+        ((LinearLayout.LayoutParams) textParams).gravity = Gravity.CENTER_VERTICAL;
+
+        // convert dip dimension
+        float density = context.getResources().getDisplayMetrics().density;
+        int imageSize = (int) (density * 25 + 1f);
+        int imageMargin = (int) (density * 15 + 0.5f);
+
+        // setup image view layout parameters
+        LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(imageSize, imageSize);
+        imageParams.setMargins(0, 0, imageMargin, 0);
+        imageParams.gravity = Gravity.CENTER_VERTICAL;
+
+        // setup image view
+        ImageView imageView = new ImageView(context);
+        imageView.setImageResource(imageResId);
+        imageView.setLayoutParams(imageParams);
+        imageView.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+
+        // modify root layout ZMIANA LOKOALIZACJI IKONY 0 - PRZED NAPISEM
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        linearLayout.addView(imageView, 1);
+
+        return toast;
+    }
+
 
     // MENU U GÓRY NA PASKU TE TRZY KROPKI :D
     @Override
