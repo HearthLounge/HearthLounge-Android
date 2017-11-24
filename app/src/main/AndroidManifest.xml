@@ -48,14 +48,18 @@
             android:name=".CardsFilterMenu"
             android:label="@string/title_cards_filter_menu"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".CardsJSON"
-            android:label="@string/title_cards"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".SelectedCard"
-            android:label="@string/title_card_selected"
-            android:theme="@style/AppTheme.NoActionBar" />
+            <activity
+                android:name=".PlayerClass"
+                android:label="@string/title_player_class_cards"
+                android:theme="@style/AppTheme.NoActionBar" />
+            <activity
+                android:name=".CardsJSON"
+                android:label="@string/title_cards"
+                android:theme="@style/AppTheme.NoActionBar" />
+                <activity
+                    android:name=".SelectedCard"
+                    android:label="@string/title_card_selected"
+                    android:theme="@style/AppTheme.NoActionBar" />
 
 
 

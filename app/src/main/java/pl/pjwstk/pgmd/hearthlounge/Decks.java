@@ -3,23 +3,13 @@ package pl.pjwstk.pgmd.hearthlounge;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewParent;
-import android.support.v4.app.Fragment;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Maciek Dembowski on 13.11.2017.
@@ -36,7 +26,7 @@ public class Decks extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.class_activity);
+        setContentView(R.layout.cards_filter_menu);
 
 //        toolbar = (Toolbar)findViewById(R.id.toolbar);
 //        //viewPager = (ViewPager)findViewById(R.id.view_pager);

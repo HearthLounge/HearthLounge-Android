@@ -42,10 +42,10 @@
             android:gravity="center">
 
             <ImageView
+                android:id="@+id/image_view_mana_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/hs_logo" />
+                android:layout_margin="10dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,9 +57,22 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!--<GridLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+
+        <!--android:columnCount="0"-->
+        <!--android:orientation="vertical">-->
+
+            <!--<Recycle-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:id="@+id/list_view_cards"/>-->
+    <!--</GridLayout>-->
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/list_view_cards" />
+        android:id="@+id/list_view_cards"/>
 
 </LinearLayout>

@@ -19,6 +19,8 @@
     <string name="title_log_out">Log Out</string>
     <string name="title_cards">Cards</string>
     <string name="title_cards_filter_menu">Cards Menu</string>
+    <string name="title_player_class_cards">Player Cards</string>
+
     <string name="title_card_selected">Selected Card</string>
     <string name="title_decks">Decks</string>
     <string name="action_refresh">Refresh</string>

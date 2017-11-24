@@ -1,9 +1,6 @@
 package pl.pjwstk.pgmd.hearthlounge;
 
-import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -17,8 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.widget.TextView;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -109,7 +104,7 @@ public class Main2Activity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.cards, container, false);
+            View rootView = inflater.inflate(R.layout.all_cards, container, false);
 
             return rootView;
         }

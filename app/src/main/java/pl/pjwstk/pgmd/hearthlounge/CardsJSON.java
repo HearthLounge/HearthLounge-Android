@@ -7,13 +7,16 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.view.menu.MenuPopupHelper;
 import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.ThemedSpinnerAdapter;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,10 +29,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,24 +69,51 @@ import pl.pjwstk.pgmd.hearthlounge.model.Card;
 
 public class CardsJSON extends DrawerMenu{
 
-    private final String URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1";
+    private final String URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards" + getSuffixLink();
     private final String HEADER = "X-Mashape-Key";
     private final String KEY = "T15rGIqg2lmshwDGMsX3mZeWM7vBp1ZmfvVjsnFba6SXP2WK5Q";
+    private String suffixLink;
+    private String iconId;
 
     private ListView listViewCards;
     private ProgressDialog dialog;
+
+    public CardsJSON(){}
+
+    public String getSuffixLink() {
+        return suffixLink;
+    }
+
+    public void setSuffixLink(String suffixLink){
+        this.suffixLink = suffixLink;
+    }
+
+    public String getIconId() {
+        return iconId;
+    }
+
+    public void setIconId(String iconId) {
+        this.iconId = iconId;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-        getLayoutInflater().inflate(R.layout.cards, contentFrameLayout);
+        getLayoutInflater().inflate(R.layout.all_cards, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
 
 //        new DownloadImageTask((ImageButton)findViewById(R.id.image_button_cards))
 //                .execute("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_116.png");
+
+        Intent intent = getIntent();
+        String message = intent.getStringExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE");
+        setSuffixLink(message);
+
+        String iconId = intent.getStringExtra("pl.pjwstk.pgmd.hearthlounge.IconID");
+        setIconId(iconId);
 
         dialog = new ProgressDialog(this);
         dialog.setIndeterminate(true);
@@ -101,7 +134,6 @@ public class CardsJSON extends DrawerMenu{
         listViewCards = (ListView)findViewById(R.id.list_view_cards);
         // To start fetching the data when app start, uncomment below line to start the async task.
         new JSONTask().execute(URL + HEADER + KEY);
-
     }
 
     public class JSONTask extends AsyncTask<String, String, List<Card> > {
@@ -120,7 +152,8 @@ public class CardsJSON extends DrawerMenu{
             try {
                 //URL url = new URL(params[0] + params[1] + params[2]);
                 //URL url = new URL(URL + HEADER + KEY);
-                URL url = new URL("https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1");
+
+                URL url = new URL("https://omgvamp-hearthstone-v1.p.mashape.com/cards" + getSuffixLink());
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestProperty("X-Mashape-Key", "T15rGIqg2lmshwDGMsX3mZeWM7vBp1ZmfvVjsnFba6SXP2WK5Q");
                 connection.connect();
@@ -255,7 +288,6 @@ public class CardsJSON extends DrawerMenu{
                 // KOBOLDS & CATACOMBS
                 for (int i = 0; i < kobolds_and_catacombs.length(); i++) {
                     JSONObject finalObject = kobolds_and_catacombs.getJSONObject(i);
-
                     Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
                     cardList.add(cardModel);
                 }
@@ -322,10 +354,8 @@ public class CardsJSON extends DrawerMenu{
                 listViewCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {  // list item click opens a new detailed activity
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        view.animate().scaleXBy(0.2f).setDuration(5000).start();
-//                        view.animate().scaleYBy(0.2f).setDuration(5000).start();
-//                        view.setBackgroundResource(R.drawable.pressed);
-                        view.startAnimation(animationScale); // druga metoda
+
+                        view.startAnimation(animationScale);
 
                         Card cardModel = result.get(position); // getting the model
                         Intent intent = new Intent(CardsJSON.this, SelectedCard.class);
@@ -352,6 +382,349 @@ public class CardsJSON extends DrawerMenu{
             inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         }
 
+        private PopupWindow initiatePopupWindow() {
+            PopupWindow mDropdown = null;
+            LayoutInflater mInflater;
+            LinearLayout pop_up_mana_menu=null;
+            try {
+
+                mInflater = (LayoutInflater) getApplicationContext()
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View layout = mInflater.inflate(R.layout.popup_mana_menu, null);
+
+                //If you want to add any listeners to your textviews, these are two //textviews.
+                pop_up_mana_menu = (LinearLayout) findViewById(R.id.mana_value);
+
+                layout.measure(View.MeasureSpec.UNSPECIFIED,
+                        View.MeasureSpec.UNSPECIFIED);
+                mDropdown = new PopupWindow(layout,FrameLayout.LayoutParams.WRAP_CONTENT,
+                        FrameLayout.LayoutParams.WRAP_CONTENT,true);
+//                Drawable background = getResources().getDrawable(android.R.drawable.editbox_dropdown_dark_frame);
+//                mDropdown.setBackgroundDrawable(background);
+//                layout.setBackgroundResource(R.drawable.toast_opacity);
+                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.RIGHT|Gravity.BOTTOM, 10,10);
+
+                final ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
+                ImageView mana_0 = (ImageView)layout.findViewById(R.id.zero);
+                mana_0.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+
+                        int action = event.getAction();
+                        if (action == MotionEvent.ACTION_DOWN) {
+                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP) {
+                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=0");
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "0");
+                            startActivity(startIntent);
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                ImageView mana_1 = (ImageView)layout.findViewById(R.id.one);
+                mana_1.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = event.getAction();
+                        if (action == MotionEvent.ACTION_DOWN) {
+                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP) {
+                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_1, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=1");
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "1");
+                            startActivity(startIntent);
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                ImageView mana_2 = (ImageView)layout.findViewById(R.id.two);
+                mana_2.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = event.getAction();
+                        if (action == MotionEvent.ACTION_DOWN) {
+                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP) {
+                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_2, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=2");
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "2");
+                            startActivity(startIntent);
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                ImageView mana_3 = (ImageView)layout.findViewById(R.id.three);
+                mana_3.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = event.getAction();
+                        if (action == MotionEvent.ACTION_DOWN) {
+                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP) {
+                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_3, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=3");
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "3");
+                            startActivity(startIntent);
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                ImageView mana_4 = (ImageView)layout.findViewById(R.id.four);
+                mana_4.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = event.getAction();
+                        if (action == MotionEvent.ACTION_DOWN) {
+                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP) {
+                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_4, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=4");
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "4");
+                            startActivity(startIntent);
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                ImageView mana_5 = (ImageView)layout.findViewById(R.id.five);
+                mana_5.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = event.getAction();
+                        if (action == MotionEvent.ACTION_DOWN) {
+                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP) {
+                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_5, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=5");
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "5");
+                            startActivity(startIntent);
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                ImageView mana_6 = (ImageView)layout.findViewById(R.id.six);
+                mana_6.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = event.getAction();
+                        if (action == MotionEvent.ACTION_DOWN) {
+                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP) {
+                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_6, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=6");
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "6");
+                            startActivity(startIntent);
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                ImageView mana_7 = (ImageView)layout.findViewById(R.id.seven);
+                mana_7.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = event.getAction();
+                        if (action == MotionEvent.ACTION_DOWN) {
+                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP) {
+                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=7");
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "7");
+                            startActivity(startIntent);
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                ImageView mana_7_plus = (ImageView)layout.findViewById(R.id.seven_plus);
+                mana_7_plus.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = event.getAction();
+                        if (action == MotionEvent.ACTION_DOWN) {
+                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP) {
+                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=7-9");
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "7+");
+                            startActivity(startIntent);
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                ImageView mana_8 = (ImageView)layout.findViewById(R.id.eight);
+                mana_8.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = event.getAction();
+                        if (action == MotionEvent.ACTION_DOWN) {
+                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP) {
+                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_8, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=8");
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "8");
+                            startActivity(startIntent);
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                ImageView mana_9 = (ImageView)layout.findViewById(R.id.nine);
+                mana_9.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = event.getAction();
+                        if (action == MotionEvent.ACTION_DOWN) {
+                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP) {
+                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=9");
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "9");
+                            startActivity(startIntent);
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                ImageView mana_9_plus = (ImageView) layout.findViewById(R.id.nine_plus);
+                mana_9_plus.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = event.getAction();
+                        if (action == MotionEvent.ACTION_DOWN) {
+                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP) {
+                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost>=9");
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "9+");
+                            startActivity(startIntent);
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+//                ImageView all = (ImageView) layout.findViewById(R.id.cos);
+//                all.setOnTouchListener(new OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View v, MotionEvent event) {
+//                        ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
+//                        manaIcon.setColorFilter(Color.rgb(0,0,128), PorterDuff.Mode.SRC_IN);
+//
+//                        int action = event.getAction();
+//                        if (action == MotionEvent.ACTION_DOWN) {
+//                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+//
+//                            return true;
+//                        } else if (action == MotionEvent.ACTION_UP) {
+//                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+//
+//                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+//                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?collectible=1");
+//                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "ALL");
+//                            startActivity(startIntent);
+//
+//                            return true;
+//                        }
+//                        return false;
+//                    }
+//                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return mDropdown;
+        }
+
         @SuppressLint("ClickableViewAccessibility")
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -362,15 +735,45 @@ public class CardsJSON extends DrawerMenu{
             LinearLayout pop_up_mana_menu = null;
 
             text_view_count_cards = (TextView)findViewById(R.id.text_view_count_cards);
-            String countCrads = String.valueOf(cardList.size());
-            text_view_count_cards.setText(countCrads + " results");
+            String countCards = String.valueOf(cardList.size());
+            text_view_count_cards.setText(countCards + " results");
+
+            ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
+            if(getIconId().equals("0")) {
+                manaIcon.setImageResource(R.drawable.mana_0);
+            } else if (getIconId().equals("1")) {
+                manaIcon.setImageResource(R.drawable.mana_1);
+            } else if (getIconId().equals("2")) {
+                manaIcon.setImageResource(R.drawable.mana_2);
+            } else if (getIconId().equals("3")) {
+                manaIcon.setImageResource(R.drawable.mana_3);
+            } else if (getIconId().equals("4")) {
+                manaIcon.setImageResource(R.drawable.mana_4);
+            } else if (getIconId().equals("5")) {
+                manaIcon.setImageResource(R.drawable.mana_5);
+            } else if (getIconId().equals("6")) {
+                manaIcon.setImageResource(R.drawable.mana_6);
+            } else if (getIconId().equals("7")) {
+                manaIcon.setImageResource(R.drawable.mana_7);
+            } else if (getIconId().equals("7+")) {
+                manaIcon.setImageResource(R.drawable.mana_7_plus);
+            } else if (getIconId().equals("8")) {
+                manaIcon.setImageResource(R.drawable.mana_8);
+            } else if (getIconId().equals("9")) {
+                manaIcon.setImageResource(R.drawable.mana_9);
+            } else if (getIconId().equals("9+")) {
+                manaIcon.setImageResource(R.drawable.mana_9_plus);
+            } else if (getIconId().equals("ALL")) {
+                    manaIcon.setImageResource(R.drawable.hs_logo);
+            }
+            manaIcon.setColorFilter(Color.rgb(0, 0, 128), PorterDuff.Mode.SRC_IN);
 
             pop_up_mana_menu = (LinearLayout) findViewById(R.id.mana_value);
-            final LinearLayout finalPop_up_mana_menu = pop_up_mana_menu;
             pop_up_mana_menu.setOnTouchListener(new OnTouchListener() {
                 @SuppressLint("RestrictedApi")
                 @Override
                 public boolean onTouch(View v, MotionEvent motionEvent) {
+
                     int action = motionEvent.getAction();
                     if (action == MotionEvent.ACTION_DOWN) {
                         v.setBackgroundResource(R.drawable.pressed);
@@ -379,84 +782,108 @@ public class CardsJSON extends DrawerMenu{
                         v.animate().cancel();
                         v.setBackgroundResource(R.drawable.normal);
 
-                        PopupMenu popup = new PopupMenu(CardsJSON.this, finalPop_up_mana_menu);
-                        popup.getMenuInflater().inflate(R.menu.mana_value, popup.getMenu());
+                        initiatePopupWindow();
 
-                        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                            public boolean onMenuItemClick(MenuItem item) {
-
-                                switch (item.getItemId())
-                                {
-                                    case R.id.zero:
-                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-
-                                        return true;
-
-                                    case R.id.one:
-                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_1, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                                        return true;
-
-                                    case R.id.two:
-                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_2, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                                        return true;
-
-                                    case R.id.three:
-                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_3, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                                        return true;
-
-                                    case R.id.four:
-                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_4, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                                        return true;
-
-                                    case R.id.five:
-                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_5, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                                        return true;
-
-                                    case R.id.six:
-                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_6, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                                        return true;
-
-                                    case R.id.seven:
-                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                                        return true;
-
-                                    case R.id.seven_plus:
-                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                                        return true;
-
-                                    case R.id.eight:
-                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_8, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                                        return true;
-
-                                    case R.id.nine:
-                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                                        return true;
-
-                                    case R.id.nine_plus:
-                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                                        return true;
-
-                                    default:
-                                    return false;
-                                }
-                                //return true;
-                            }
-                        });
-                        MenuPopupHelper menuHelper = new MenuPopupHelper(CardsJSON.this, (MenuBuilder) popup.getMenu(), finalPop_up_mana_menu);
-                        menuHelper.setForceShowIcon(true);
-                        menuHelper.show(); //showing popup menu
+//                        Context wrapper = new ContextThemeWrapper(CardsJSON.this, R.style.PopupMenu);
+//                        PopupWindow popupWindow = new PopupWindow();
+//                        popupWindow.setWidth(350);
+//
+//                        PopupMenu popup = new PopupMenu(CardsJSON.this, v);
+//                        popup.getMenuInflater().inflate(R.menu.mana_value, popup.getMenu());
+//
+//                        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                            public boolean onMenuItemClick(MenuItem item) {
+//                                ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
+//                                manaIcon.setColorFilter(Color.rgb(0,0,128), PorterDuff.Mode.SRC_IN);
+//
+//                                switch (item.getItemId())
+//                                {
+//                                    case R.id.zero:
+//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+//                                        manaIcon.setImageResource(R.drawable.mana_0);
+//
+//                                        return true;
+//
+//                                    case R.id.one:
+//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_1, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+//                                        manaIcon.setImageResource(R.drawable.mana_1);
+//
+//                                        return true;
+//
+//                                    case R.id.two:
+//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_2, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+//                                        manaIcon.setImageResource(R.drawable.mana_2);
+//
+//                                        return true;
+//
+//                                    case R.id.three:
+//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_3, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+//                                        manaIcon.setImageResource(R.drawable.mana_3);
+//
+//                                        return true;
+//
+//                                    case R.id.four:
+//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_4, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+//                                        manaIcon.setImageResource(R.drawable.mana_4);
+//
+//                                        return true;
+//
+//                                    case R.id.five:
+//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_5, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+//                                        manaIcon.setImageResource(R.drawable.mana_5);
+//
+//                                        return true;
+//
+//                                    case R.id.six:
+//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_6, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+//                                        manaIcon.setImageResource(R.drawable.mana_6);
+//
+//                                        return true;
+//
+//                                    case R.id.seven:
+//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+//                                        manaIcon.setImageResource(R.drawable.mana_7);
+//
+//                                        return true;
+//
+//                                    case R.id.seven_plus:
+//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+//                                        manaIcon.setImageResource(R.drawable.mana_7_plus);
+//
+//                                        return true;
+//
+//                                    case R.id.eight:
+//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_8, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+//                                        manaIcon.setImageResource(R.drawable.mana_8);
+//
+//                                        return true;
+//
+//                                    case R.id.nine:
+//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+//                                        manaIcon.setImageResource(R.drawable.mana_9);
+//
+//                                        return true;
+//
+//                                    case R.id.nine_plus:
+//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+//                                        manaIcon.setImageResource(R.drawable.mana_9_plus);
+//
+//                                        return true;
+//
+//                                    default:
+//                                    return false;
+//                                }
+//                            }
+//                        });
+//                        //Drawable yourdrawable = item.getItem(0).getIcon(); // change 0 with 1,2 ...
+//                        MenuPopupHelper menuHelper = new MenuPopupHelper(wrapper, (MenuBuilder) popup.getMenu(), v);
+//
+//                        //yourdrawable.mutate();
+//                        //yourdrawable.setColorFilter(getResources().getColor(R.color.mana_navy), PorterDuff.Mode.SRC_IN);
+//
+//
+//                        menuHelper.setForceShowIcon(true);
+//                        menuHelper.show(); //showing popup menu
                     }
                     return false;
                 }
@@ -615,11 +1042,12 @@ public class CardsJSON extends DrawerMenu{
         ImageView imageView = new ImageView(context);
         imageView.setImageResource(imageResId);
         imageView.setLayoutParams(imageParams);
-        imageView.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        imageView.setColorFilter(Color.rgb(0,0,128), PorterDuff.Mode.SRC_IN);
 
         // modify root layout ZMIANA LOKOALIZACJI IKONY 0 - PRZED NAPISEM
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
         linearLayout.addView(imageView, 1);
+        linearLayout.setBackgroundResource(R.drawable.toast_opacity);
 
         return toast;
     }

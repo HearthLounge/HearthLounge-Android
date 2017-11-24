@@ -1,6 +1,7 @@
 package pl.pjwstk.pgmd.hearthlounge;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +13,16 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
+import pl.droidsonroids.gif.GifImageView;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
+
+import static pl.pjwstk.pgmd.hearthlounge.R.id.image_viewCardGold;
 
 /**
  * Created by Maciek Dembowski on 08.11.2017.
@@ -97,14 +102,7 @@ public class SelectedCard extends DrawerMenu {
                 }
             });
 
-//            GifImageView gifImageView = (GifImageView)findViewById(R.id.image_viewCardGold);
-//
-//            Bitmap thisGif = cardModel.getImgGold(position);
-//
-//            gifImageView.setImageBitmap(thisGif);
-
-            //Glide.with(SelectedCard.this).load(cardModel).asGif().crossFade().into(image_view_cardGold);
-
+            Glide.with(SelectedCard.this).load(cardModel.getImgGold()).asGif().into(image_view_cardGold);
             ImageLoader.getInstance().displayImage(cardModel.getImgGold(), image_view_cardGold, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String imageUri, View view) {
