@@ -10,6 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
+
 /**
  * Created by Maciek Dembowski on 15.11.2017.
  */

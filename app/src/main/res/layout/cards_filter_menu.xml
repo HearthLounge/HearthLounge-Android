@@ -71,7 +71,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_margin="10dp"
-                    android:src="@drawable/card" />
+                    android:src="@drawable/all_cards" />
 
                 <TextView
                     android:layout_width="wrap_content"

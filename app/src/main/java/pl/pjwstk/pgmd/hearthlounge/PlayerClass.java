@@ -48,6 +48,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
+import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
+import pl.pjwstk.pgmd.hearthlounge.view.TypefaceSpan;
 
 /**
  * Created by Maciek Dembowski on 20.11.2017.

@@ -1,8 +1,7 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.view;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,6 +16,8 @@ import android.view.MenuItem;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
+import pl.pjwstk.pgmd.hearthlounge.MainActivity;
+import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.authentication.LogIn;
 import pl.pjwstk.pgmd.hearthlounge.authentication.LogOut;
 import pl.pjwstk.pgmd.hearthlounge.authentication.SignUp;

@@ -11,6 +11,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
+import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
+
 public class MainActivity extends DrawerMenu {
 
     private ImageButton buttonCards, buttonDecks, buttonExpansions;

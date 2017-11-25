@@ -7,16 +7,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.view.menu.MenuBuilder;
-import android.support.v7.view.menu.MenuPopupHelper;
-import android.support.v7.widget.PopupMenu;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,9 +22,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -62,12 +53,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
+import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
 /**
  * Created by Maciek Dembowski on 16.10.2017.
  */
 
-public class CardsJSON extends DrawerMenu{
+public class CardsJSON extends DrawerMenu {
 
     private final String URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards" + getSuffixLink();
     private final String HEADER = "X-Mashape-Key";
@@ -386,11 +378,12 @@ public class CardsJSON extends DrawerMenu{
             PopupWindow mDropdown = null;
             LayoutInflater mInflater;
             LinearLayout pop_up_mana_menu=null;
+
             try {
 
                 mInflater = (LayoutInflater) getApplicationContext()
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View layout = mInflater.inflate(R.layout.popup_mana_menu, null);
+                final View layout = mInflater.inflate(R.layout.popup_mana_menu, null);
 
                 //If you want to add any listeners to your textviews, these are two //textviews.
                 pop_up_mana_menu = (LinearLayout) findViewById(R.id.mana_value);
@@ -402,18 +395,20 @@ public class CardsJSON extends DrawerMenu{
 //                Drawable background = getResources().getDrawable(android.R.drawable.editbox_dropdown_dark_frame);
 //                mDropdown.setBackgroundDrawable(background);
 //                layout.setBackgroundResource(R.drawable.toast_opacity);
-                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.RIGHT|Gravity.BOTTOM, 10,10);
+                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.RIGHT|Gravity.BOTTOM, 10,5);
+//                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.CENTER, 0,0);
 
                 final ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
-                ImageView mana_0 = (ImageView)layout.findViewById(R.id.zero);
+                final ImageView mana_0 = (ImageView)layout.findViewById(R.id.zero);
                 mana_0.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
-
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_0));
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
+                            mana_0.setColorFilter(Color.rgb(0,169,156));
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
@@ -430,14 +425,16 @@ public class CardsJSON extends DrawerMenu{
                     }
                 });
 
-                ImageView mana_1 = (ImageView)layout.findViewById(R.id.one);
+                final ImageView mana_1 = (ImageView)layout.findViewById(R.id.one);
                 mana_1.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_1));
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
+                            mana_1.setColorFilter(Color.rgb(0,169,156));
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
@@ -454,14 +451,16 @@ public class CardsJSON extends DrawerMenu{
                     }
                 });
 
-                ImageView mana_2 = (ImageView)layout.findViewById(R.id.two);
+                final ImageView mana_2 = (ImageView)layout.findViewById(R.id.two);
                 mana_2.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_2));
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
+                            mana_2.setColorFilter(Color.rgb(0,169,156));
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
@@ -478,14 +477,16 @@ public class CardsJSON extends DrawerMenu{
                     }
                 });
 
-                ImageView mana_3 = (ImageView)layout.findViewById(R.id.three);
+                final ImageView mana_3 = (ImageView)layout.findViewById(R.id.three);
                 mana_3.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_3));
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
+                            mana_3.setColorFilter(Color.rgb(0,169,156));
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
@@ -502,14 +503,16 @@ public class CardsJSON extends DrawerMenu{
                     }
                 });
 
-                ImageView mana_4 = (ImageView)layout.findViewById(R.id.four);
+                final ImageView mana_4 = (ImageView)layout.findViewById(R.id.four);
                 mana_4.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_4));
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
+                            mana_4.setColorFilter(Color.rgb(0,169,156));
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
@@ -526,14 +529,16 @@ public class CardsJSON extends DrawerMenu{
                     }
                 });
 
-                ImageView mana_5 = (ImageView)layout.findViewById(R.id.five);
+                final ImageView mana_5 = (ImageView)layout.findViewById(R.id.five);
                 mana_5.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_5));
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
+                            mana_5.setColorFilter(Color.rgb(0,169,156));
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
@@ -550,14 +555,16 @@ public class CardsJSON extends DrawerMenu{
                     }
                 });
 
-                ImageView mana_6 = (ImageView)layout.findViewById(R.id.six);
+                final ImageView mana_6 = (ImageView)layout.findViewById(R.id.six);
                 mana_6.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_6));
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
+                            mana_6.setColorFilter(Color.rgb(0,169,156));
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
@@ -574,14 +581,16 @@ public class CardsJSON extends DrawerMenu{
                     }
                 });
 
-                ImageView mana_7 = (ImageView)layout.findViewById(R.id.seven);
+                final ImageView mana_7 = (ImageView)layout.findViewById(R.id.seven);
                 mana_7.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_7));
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
+                            mana_7.setColorFilter(Color.rgb(0,169,156));
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
@@ -598,14 +607,16 @@ public class CardsJSON extends DrawerMenu{
                     }
                 });
 
-                ImageView mana_7_plus = (ImageView)layout.findViewById(R.id.seven_plus);
+                final ImageView mana_7_plus = (ImageView)layout.findViewById(R.id.seven_plus);
                 mana_7_plus.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_7_plus));
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
+                            mana_7_plus.setColorFilter(Color.rgb(0,169,156));
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
@@ -622,14 +633,16 @@ public class CardsJSON extends DrawerMenu{
                     }
                 });
 
-                ImageView mana_8 = (ImageView)layout.findViewById(R.id.eight);
+                final ImageView mana_8 = (ImageView)layout.findViewById(R.id.eight);
                 mana_8.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_8));
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
+                            mana_8.setColorFilter(Color.rgb(0,169,156));
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
@@ -646,14 +659,16 @@ public class CardsJSON extends DrawerMenu{
                     }
                 });
 
-                ImageView mana_9 = (ImageView)layout.findViewById(R.id.nine);
+                final ImageView mana_9 = (ImageView)layout.findViewById(R.id.nine);
                 mana_9.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_9));
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
+                            mana_9.setColorFilter(Color.rgb(0,169,156));
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
@@ -670,14 +685,16 @@ public class CardsJSON extends DrawerMenu{
                     }
                 });
 
-                ImageView mana_9_plus = (ImageView) layout.findViewById(R.id.nine_plus);
+                final ImageView mana_9_plus = (ImageView) layout.findViewById(R.id.nine_plus);
                 mana_9_plus.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
 
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_9_plus));
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
+                            mana_9_plus.setColorFilter(Color.rgb(0,169,156));
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
@@ -694,31 +711,31 @@ public class CardsJSON extends DrawerMenu{
                     }
                 });
 
-//                ImageView all = (ImageView) layout.findViewById(R.id.cos);
-//                all.setOnTouchListener(new OnTouchListener() {
-//                    @Override
-//                    public boolean onTouch(View v, MotionEvent event) {
-//                        ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
-//                        manaIcon.setColorFilter(Color.rgb(0,0,128), PorterDuff.Mode.SRC_IN);
-//
-//                        int action = event.getAction();
-//                        if (action == MotionEvent.ACTION_DOWN) {
-//                            manaIcon.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
-//
-//                            return true;
-//                        } else if (action == MotionEvent.ACTION_UP) {
-//                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-//
-//                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
-//                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?collectible=1");
-//                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "ALL");
-//                            startActivity(startIntent);
-//
-//                            return true;
-//                        }
-//                        return false;
-//                    }
-//                });
+                final ImageView all = (ImageView) layout.findViewById(R.id.all);
+                all.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = event.getAction();
+                        if (action == MotionEvent.ACTION_DOWN) {
+                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.all_cards));
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
+                            all.setColorFilter(Color.rgb(0,169,156));
+
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP) {
+                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.all_cards, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+
+                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?collectible=1");
+                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "ALL");
+                            startActivity(startIntent);
+
+                            return true;
+                        }
+                        return false;
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -764,9 +781,9 @@ public class CardsJSON extends DrawerMenu{
             } else if (getIconId().equals("9+")) {
                 manaIcon.setImageResource(R.drawable.mana_9_plus);
             } else if (getIconId().equals("ALL")) {
-                    manaIcon.setImageResource(R.drawable.hs_logo);
+                    manaIcon.setImageResource(R.drawable.all_cards);
             }
-            manaIcon.setColorFilter(Color.rgb(0, 0, 128), PorterDuff.Mode.SRC_IN);
+            //manaIcon.setColorFilter(Color.rgb(0, 0, 128), PorterDuff.Mode.SRC_IN);
 
             pop_up_mana_menu = (LinearLayout) findViewById(R.id.mana_value);
             pop_up_mana_menu.setOnTouchListener(new OnTouchListener() {
@@ -784,106 +801,6 @@ public class CardsJSON extends DrawerMenu{
 
                         initiatePopupWindow();
 
-//                        Context wrapper = new ContextThemeWrapper(CardsJSON.this, R.style.PopupMenu);
-//                        PopupWindow popupWindow = new PopupWindow();
-//                        popupWindow.setWidth(350);
-//
-//                        PopupMenu popup = new PopupMenu(CardsJSON.this, v);
-//                        popup.getMenuInflater().inflate(R.menu.mana_value, popup.getMenu());
-//
-//                        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                            public boolean onMenuItemClick(MenuItem item) {
-//                                ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
-//                                manaIcon.setColorFilter(Color.rgb(0,0,128), PorterDuff.Mode.SRC_IN);
-//
-//                                switch (item.getItemId())
-//                                {
-//                                    case R.id.zero:
-//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-//                                        manaIcon.setImageResource(R.drawable.mana_0);
-//
-//                                        return true;
-//
-//                                    case R.id.one:
-//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_1, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-//                                        manaIcon.setImageResource(R.drawable.mana_1);
-//
-//                                        return true;
-//
-//                                    case R.id.two:
-//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_2, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-//                                        manaIcon.setImageResource(R.drawable.mana_2);
-//
-//                                        return true;
-//
-//                                    case R.id.three:
-//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_3, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-//                                        manaIcon.setImageResource(R.drawable.mana_3);
-//
-//                                        return true;
-//
-//                                    case R.id.four:
-//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_4, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-//                                        manaIcon.setImageResource(R.drawable.mana_4);
-//
-//                                        return true;
-//
-//                                    case R.id.five:
-//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_5, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-//                                        manaIcon.setImageResource(R.drawable.mana_5);
-//
-//                                        return true;
-//
-//                                    case R.id.six:
-//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_6, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-//                                        manaIcon.setImageResource(R.drawable.mana_6);
-//
-//                                        return true;
-//
-//                                    case R.id.seven:
-//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-//                                        manaIcon.setImageResource(R.drawable.mana_7);
-//
-//                                        return true;
-//
-//                                    case R.id.seven_plus:
-//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-//                                        manaIcon.setImageResource(R.drawable.mana_7_plus);
-//
-//                                        return true;
-//
-//                                    case R.id.eight:
-//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_8, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-//                                        manaIcon.setImageResource(R.drawable.mana_8);
-//
-//                                        return true;
-//
-//                                    case R.id.nine:
-//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-//                                        manaIcon.setImageResource(R.drawable.mana_9);
-//
-//                                        return true;
-//
-//                                    case R.id.nine_plus:
-//                                        makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-//                                        manaIcon.setImageResource(R.drawable.mana_9_plus);
-//
-//                                        return true;
-//
-//                                    default:
-//                                    return false;
-//                                }
-//                            }
-//                        });
-//                        //Drawable yourdrawable = item.getItem(0).getIcon(); // change 0 with 1,2 ...
-//                        MenuPopupHelper menuHelper = new MenuPopupHelper(wrapper, (MenuBuilder) popup.getMenu(), v);
-//
-//                        //yourdrawable.mutate();
-//                        //yourdrawable.setColorFilter(getResources().getColor(R.color.mana_navy), PorterDuff.Mode.SRC_IN);
-//
-//
-//                        menuHelper.setForceShowIcon(true);
-//                        menuHelper.show(); //showing popup menu
                     }
                     return false;
                 }
@@ -894,25 +811,7 @@ public class CardsJSON extends DrawerMenu{
                 convertView = inflater.inflate(resource, null);
 
                 holder.image_view_card = (ImageView)convertView.findViewById(R.id.image_viewCard);
-                //holder.image_view_cardGold = (ImageView)convertView.findViewById(R.id.image_viewCardGold);
-//                holder.text_view_cardId = (TextView)convertView.findViewById(R.id.text_view_cardId);
-//                holder.text_view_dbfId = (TextView)convertView.findViewById(R.id.text_view_dbfId);
-//                holder.text_view_name = (TextView)convertView.findViewById(R.id.text_view_name);
-//                holder.text_view_cardSet = (TextView)convertView.findViewById(R.id.text_view_cardSet);
-//                holder.text_view_type = (TextView)convertView.findViewById(R.id.text_view_type);
-//                holder.text_view_faction = (TextView)convertView.findViewById(R.id.text_view_faction);
-//                holder.text_view_rarity = (TextView)convertView.findViewById(R.id.text_view_rarity);
-//                holder.text_view_cost = (TextView)convertView.findViewById(R.id.text_view_cost);
-//                holder.text_view_attack = (TextView)convertView.findViewById(R.id.text_view_attack);
-//                holder.text_view_health = (TextView)convertView.findViewById(R.id.text_view_health);
-//                holder.text_view_text = (TextView)convertView.findViewById(R.id.text_view_text);
-//                holder.text_view_flavor = (TextView)convertView.findViewById(R.id.text_view_flavor);
-//                holder.text_view_artist = (TextView)convertView.findViewById(R.id.text_view_artist);
-//                holder.text_view_collectible = (TextView)convertView.findViewById(R.id.text_view_collectible);
-//                holder.text_view_elite = (TextView)convertView.findViewById(R.id.text_view_elite);
-//                holder.text_view_playerClass = (TextView)convertView.findViewById(R.id.text_view_playerClass);
-//                holder.text_view_locale = (TextView)convertView.findViewById(R.id.text_view_locale);
-//                holder.text_view_mechanics = (TextView)convertView.findViewById(R.id.text_view_mechanics);
+
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -947,53 +846,12 @@ public class CardsJSON extends DrawerMenu{
                 }
             });
 
-//                    holder.text_view_cardId.setText(cardList.get(position).getCardId());
-//                    holder.text_view_dbfId.setText(cardList.get(position).getDbfId());
-//                    holder.text_view_name.setText(cardList.get(position).getName());
-//                    holder.text_view_cardSet.setText(cardList.get(position).getCardSet());
-//                    holder.text_view_type.setText(cardList.get(position).getType());
-//                    holder.text_view_faction.setText(cardList.get(position).getFaction());
-//                    holder.text_view_rarity.setText(cardList.get(position).getRarity());
-////                    holder.text_view_cost.setText(cardList.get(position).getCost()); // z tymi jest problem
-//                    //holder.text_view_attack.setText(cardList.get(position).getAttack()); // z tymi jest problem
-//                    //holder.text_view_health.setText(cardList.get(position).getHealth()); // z tymi jest problem
-//                    holder.text_view_text.setText(cardList.get(position).getText());
-//                    holder.text_view_flavor.setText(cardList.get(position).getFlavor());
-//                    holder.text_view_artist.setText(cardList.get(position).getArtist());
-//                    //holder.text_view_collectible.setEnabled(cardList.get(position).getCollectible()); // z tymi jest problem
-//                    //holder.text_view_elite.setEnabled(cardList.get(position).getElite()); // z tymi jest problem
-//                    holder.text_view_playerClass.setText(cardList.get(position).getPlayerClass());
-//                    holder.text_view_locale.setText(cardList.get(position).getLocale());
-
-//            StringBuffer stringBuffer = new StringBuffer();
-//            for(Card.Mechanics mechanics : cardList.get(position).getMechanicsList()) {
-//                stringBuffer.append(mechanics.getMechanics() + ", ");
-//            }
-//           holder.text_view_mechanics.setText("Mechanics: " + stringBuffer);
-
             return convertView;
         }
 
         class ViewHolder{
             private ImageView image_view_card;
-//            private TextView text_view_cardId;
-//            private TextView text_view_dbfId;
-//            private TextView text_view_name;
-//            private TextView text_view_cardSet;
-//            private TextView text_view_type;
-//            private TextView text_view_faction;
-//            private TextView text_view_rarity;
-//            private TextView text_view_cost;
-//            private TextView text_view_attack;
-//            private TextView text_view_health;
-//            private TextView text_view_text;
-//            private TextView text_view_flavor;
-//            private TextView text_view_artist;
-//            private TextView text_view_collectible;
-//            private TextView text_view_elite;
-//            private TextView text_view_playerClass;
-//            private TextView text_view_locale;
-//            private TextView text_view_mechanics;
+
         }
     }
 

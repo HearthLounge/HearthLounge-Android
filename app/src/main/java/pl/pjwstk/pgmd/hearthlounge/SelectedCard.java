@@ -1,10 +1,8 @@
 package pl.pjwstk.pgmd.hearthlounge;
 
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,8 +19,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import pl.droidsonroids.gif.GifImageView;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
-
-import static pl.pjwstk.pgmd.hearthlounge.R.id.image_viewCardGold;
+import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
 /**
  * Created by Maciek Dembowski on 08.11.2017.

@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.view;
 
 import android.content.Context;
 import android.graphics.Paint;
