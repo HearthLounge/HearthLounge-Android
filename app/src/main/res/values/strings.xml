@@ -14,10 +14,38 @@
         completions."
     </string>
 
+    <string name="title_account">Account</string>
     <string name="title_log_in">Log In</string>
     <string name="title_sign_up">Sign Up</string>
     <string name="title_log_out">Log Out</string>
     <string name="title_cards">Cards</string>
+
+    <!-- Navigation Drawer menu labels -->
+    <string name="nav_account">Account</string>
+    <string name="nav_log_in">Log In</string>
+    <string name="nav_sign_up">Sign Up</string>
+    <string name="nav_log_out">Log Out</string>
+    <string name="nav_notifications">Notifications</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_about_us">About Us</string>
+
+    <!-- Toolbar titles when navigation menu item is selected -->
+    <string-array name="nav_item_activity_titles">
+        <item>Account</item>
+        <item>Log In</item>
+        <item>Sign Up</item>
+        <item>Log Out</item>
+        <item>Notifications</item>
+        <item>Settings</item>
+    </string-array>
+
+    <string name="activity_title_about_us">About Us</string>
+    <string name="action_clear_all">Clear All</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_mark_all_read">Mark All as Read</string>
+
+
+    <!--// Nasze-->
     <string name="title_cards_filter_menu">Cards Menu</string>
     <string name="title_player_class_cards">Player Cards</string>
 

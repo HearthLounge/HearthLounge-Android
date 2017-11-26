@@ -12,11 +12,12 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/light_grey</item>
         <item name="colorPrimaryDark">@color/dark_grey</item>
-        <item name="colorAccent">@color/black</item>
+        <item name="colorAccent">@color/sea_color</item>
 
         <item name="android:fontFamily">@font/belwe_medium</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColor">@color/primary_font_color</item>
         <!--<item name="android:textStyle">bold</item>-->
-        <!--<item name="android:textColorPrimary">@color/primary_font_color</item>-->
     </style>
 
     <!--ŚCIĄGANY PASEK Z GÓRY -->
@@ -24,7 +25,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@color/sea_color</item> <!--@android:color/transparent-->
+        <item name="android:statusBarColor">@android:color/transparent</item> <!--@android:color/transparent-->
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">

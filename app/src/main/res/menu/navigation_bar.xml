@@ -2,24 +2,44 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/nav_log_in"
-        android:icon="@mipmap/ic_person_black_24dp"
-        android:title="Log In" />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@mipmap/ic_account_circle_black_24dp"
+            android:title="Your account" />
 
-    <item
-        android:id="@+id/nav_sign_up"
-        android:icon="@mipmap/ic_person_add_black_24dp"
-        android:title="Sign Up" />
+        <item
+            android:id="@+id/nav_log_in"
+            android:icon="@mipmap/ic_person_black_24dp"
+            android:title="Log In" />
 
-    <item
-        android:id="@+id/nav_log_out"
-        android:icon="@mipmap/ic_person_outline_black_24dp"
-        android:title="Log Out" />
+        <item
+            android:id="@+id/nav_sign_up"
+            android:icon="@mipmap/ic_person_add_black_24dp"
+            android:title="Sign Up" />
 
-    <item
-        android:id="@+id/nav_settings"
-        android:icon="@mipmap/ic_settings_black_24dp"
-        android:title="Menu" />
+        <item
+            android:id="@+id/nav_log_out"
+            android:icon="@mipmap/ic_person_outline_black_24dp"
+            android:title="Log Out" />
+
+        <item
+            android:id="@+id/nav_notifications"
+            android:icon="@mipmap/ic_notifications_black_24dp"
+            android:title="Notifications" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@mipmap/ic_settings_black_24dp"
+            android:title="Settings" />
+    </group>
+
+    <item android:title="Other">
+        <menu>
+            <item
+                android:id="@+id/nav_about_us"
+                android:title="@string/nav_about_us" />
+        </menu>
+    </item>
 
 </menu>

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/pearl">
+    android:background="?attr/colorPrimaryDark">
 
     <LinearLayout
         android:orientation="vertical"
@@ -29,7 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
-                android:hint="Name" />
+                android:hint="Name"
+                android:textColor="?attr/colorAccent"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Email Label -->
@@ -42,7 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Email" />
+                android:hint="Email"
+                android:textColor="?attr/colorAccent"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -55,7 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="Password"/>
+                android:hint="Password"
+                android:textColor="?attr/colorAccent"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Signup Button -->
@@ -66,6 +69,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
+            android:textColor="?attr/android:textColorPrimary"
             android:background="?attr/colorPrimary"
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
@@ -76,6 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="Already a member? Login"
+            android:textColor="?attr/colorAccent"
             android:gravity="center"
             android:clickable="true"
             android:textSize="16dip"/>
