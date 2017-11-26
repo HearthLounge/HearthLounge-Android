@@ -3,6 +3,7 @@ package pl.pjwstk.pgmd.hearthlounge.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.view.Gravity;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import pl.pjwstk.pgmd.hearthlounge.CardsJSON;
 import pl.pjwstk.pgmd.hearthlounge.R;
 
 /**
@@ -20,15 +22,15 @@ import pl.pjwstk.pgmd.hearthlounge.R;
 
 public class MakeImageToast {
 
+
+
     @SuppressLint("ResourceAsColor")
-    public static Toast makeImageToast(Context context, CharSequence text, int imageResId, int length) {
+    public static Toast makeImageToast(Context context, CharSequence text, int imageResId, int imageColor, int length) {
         Toast toast = Toast.makeText(context, text, length);
 
         View rootView = toast.getView();
         LinearLayout linearLayout = null;
         View messageTextView = null;
-
-
 
         // check (expected) toast layout
         if (rootView instanceof LinearLayout) {
@@ -63,14 +65,14 @@ public class MakeImageToast {
 
         // setup image view
         ImageView imageView = new ImageView(context);
-        imageView.setImageResource(imageResId);
+        imageView.setImageResource(imageResId); // przekazujemy wyglad ikonki
+        imageView.setColorFilter(imageColor); // przekazujemy kolor ikonki
         imageView.setLayoutParams(imageParams);
-        imageView.setColorFilter(Color.rgb(0,0,128), PorterDuff.Mode.SRC_IN);
 
         // modify root layout ZMIANA LOKOALIZACJI IKONY 0 - PRZED NAPISEM
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
         linearLayout.addView(imageView, 1);
-        linearLayout.setBackgroundResource(R.drawable.toast_opacity);
+        linearLayout.setBackgroundResource(R.drawable.toast_opacity); // usuwamy szary background toast
 
         return toast;
     }

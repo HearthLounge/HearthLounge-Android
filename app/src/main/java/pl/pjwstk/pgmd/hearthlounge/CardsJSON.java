@@ -401,6 +401,7 @@ public class CardsJSON extends DrawerMenu {
 //                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.CENTER, 0,0);
 
                 final ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
+                final int toastManaIconColor = Color.rgb(0,0,128);
                 final ImageView mana_0 = (ImageView)layout.findViewById(R.id.zero);
                 mana_0.setOnTouchListener(new OnTouchListener() {
                     @Override
@@ -414,7 +415,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=0");
@@ -440,7 +441,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_1, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_1, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=1");
@@ -466,7 +467,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_2, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_2, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=2");
@@ -492,7 +493,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_3, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_3, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=3");
@@ -518,7 +519,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_4, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_4, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=4");
@@ -544,7 +545,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_5, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_5, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=5");
@@ -570,7 +571,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_6, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_6, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=6");
@@ -596,7 +597,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=7");
@@ -622,7 +623,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7_plus, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=7-9");
@@ -648,7 +649,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_8, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_8, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=8");
@@ -674,7 +675,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=9");
@@ -700,7 +701,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9_plus, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost>=9");
@@ -726,7 +727,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.all_cards, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.all_cards, Color.WHITE, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?collectible=1");

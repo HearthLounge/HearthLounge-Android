@@ -2,6 +2,7 @@ package pl.pjwstk.pgmd.hearthlounge.authentication;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import pl.pjwstk.pgmd.hearthlounge.CardsJSON;
 import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 import pl.pjwstk.pgmd.hearthlounge.view.CircleTransform;
@@ -34,7 +36,7 @@ import pl.pjwstk.pgmd.hearthlounge.view.MakeImageToast;
 public class UserAccount extends DrawerMenu{
 
     public MakeImageToast toast;
-
+    private static final String urlProfileImg = "https://cdn.pixabay.com/photo/2016/12/13/16/17/dancer-1904467_1280.png";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +51,8 @@ public class UserAccount extends DrawerMenu{
         // NAZEWNICTWO JAK userAvatar I INNE ZMIEN JAK CHCESZ :D
 
         ImageView userAvatar = (ImageView)findViewById(R.id.user_avatar);
-        // Loading profile image
-        Glide.with(this).load("user.getAvatar czy cos")
+        // Loading profile image /*"user.getAvatar czy cos"*/
+        Glide.with(this).load(urlProfileImg)
                 .crossFade()
                 .thumbnail(0.5f)
                 .bitmapTransform(new CircleTransform(this))
@@ -148,6 +150,7 @@ public class UserAccount extends DrawerMenu{
                     FrameLayout.LayoutParams.WRAP_CONTENT,true);
             mDropdown.showAtLocation(favouriteClass, Gravity.CENTER, 0,0);
 
+            final PopupWindow finalMDropdown = mDropdown; // Potrzebne, żeby popup menu się zamknęło po wybraniu opcji
             final ImageView favouriteClassIcon = (ImageView) findViewById(R.id.image_view_playerclass);
             final ImageView mage = (ImageView)layout.findViewById(R.id.mage);
             mage.setOnTouchListener(new View.OnTouchListener() {
@@ -159,7 +162,8 @@ public class UserAccount extends DrawerMenu{
                         favouriteClassIcon.setColorFilter(Color.rgb(105, 204, 240));
                         return true;
                     } else if (action == MotionEvent.ACTION_UP) {
-                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.mage, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.mage, Color.rgb(105, 204, 240), Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        finalMDropdown.dismiss();
                         return true;
                     }
                     return false;
@@ -175,7 +179,8 @@ public class UserAccount extends DrawerMenu{
                         favouriteClassIcon.setColorFilter(Color.rgb(255, 245, 105));
                         return true;
                     } else if (action == MotionEvent.ACTION_UP) {
-                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.rogue, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.rogue, Color.rgb(255, 245, 105), Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        finalMDropdown.dismiss();
                         return true;
                     }
                     return false;
@@ -191,7 +196,8 @@ public class UserAccount extends DrawerMenu{
                         favouriteClassIcon.setColorFilter(Color.rgb(245, 140, 186));
                         return true;
                     } else if (action == MotionEvent.ACTION_UP) {
-                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.paladin, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.paladin, Color.rgb(245, 140, 186), Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        finalMDropdown.dismiss();
                         return true;
                     }
                     return false;
@@ -207,7 +213,8 @@ public class UserAccount extends DrawerMenu{
                         favouriteClassIcon.setColorFilter(Color.rgb(255, 125, 10));
                         return true;
                     } else if (action == MotionEvent.ACTION_UP) {
-                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.druid, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.druid, Color.rgb(255, 125, 10), Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        finalMDropdown.dismiss();
                         return true;
                     }
                     return false;
@@ -223,7 +230,8 @@ public class UserAccount extends DrawerMenu{
                         favouriteClassIcon.setColorFilter(Color.rgb(0, 112, 222));
                         return true;
                     } else if (action == MotionEvent.ACTION_UP) {
-                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.shaman, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.shaman, Color.rgb(0, 112, 222), Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        finalMDropdown.dismiss();
                         return true;
                     }
                     return false;
@@ -239,7 +247,8 @@ public class UserAccount extends DrawerMenu{
                         favouriteClassIcon.setColorFilter(Color.rgb(148, 130, 201));
                         return true;
                     } else if (action == MotionEvent.ACTION_UP) {
-                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.warlock, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.warlock, Color.rgb(148, 130, 201), Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        finalMDropdown.dismiss();
                         return true;
                     }
                     return false;
@@ -255,7 +264,8 @@ public class UserAccount extends DrawerMenu{
                         favouriteClassIcon.setColorFilter(Color.WHITE);
                         return true;
                     } else if (action == MotionEvent.ACTION_UP) {
-                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.priest, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.priest, Color.WHITE, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        finalMDropdown.dismiss();
                         return true;
                     }
                     return false;
@@ -271,7 +281,8 @@ public class UserAccount extends DrawerMenu{
                         favouriteClassIcon.setColorFilter(Color.rgb(199, 156, 110));
                         return true;
                     } else if (action == MotionEvent.ACTION_UP) {
-                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.warrior, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.warrior, Color.rgb(199, 156, 110),  Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        finalMDropdown.dismiss();
                         return true;
                     }
                     return false;
@@ -287,7 +298,8 @@ public class UserAccount extends DrawerMenu{
                         favouriteClassIcon.setColorFilter(Color.rgb(171, 212, 115));
                         return true;
                     } else if (action == MotionEvent.ACTION_UP) {
-                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.hunter, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.hunter, Color.rgb(171, 212, 115), Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                        finalMDropdown.dismiss();
                         return true;
                     }
                     return false;
