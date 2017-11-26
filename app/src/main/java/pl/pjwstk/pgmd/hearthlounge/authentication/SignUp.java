@@ -60,8 +60,8 @@ public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
         fb_auth.signOut();
 
         edit_name = (EditText) findViewById(R.id.edit_name);
-        edit_password = (EditText) findViewById(R.id.edit_password);
         edit_email = (EditText) findViewById(R.id.edit_email);
+        edit_password = (EditText) findViewById(R.id.edit_password);
 
 
         button_register = (Button) findViewById(R.id.button_signup);

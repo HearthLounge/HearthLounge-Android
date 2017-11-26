@@ -22,7 +22,7 @@
         <!--Jak usuniemy ustawią się domyślne kolory-->
         <item name="colorControlNormal">@color/sea_color</item> <!-- Zmiana koloru scrollbar -->
         <item name="colorControlActivated">@color/sea_color</item> <!-- Zmiana koloru edit text -->
-        <item name="colorControlHighlight">@color/pearl</item> <!-- Zmiana koloru drawer menu wybrane zakładki -->
+        <!--<item name="colorControlHighlight">@color/pearl</item> &lt;!&ndash; Zmiana koloru drawer menu wybrane zakładki i okna Loading z CradsJson&ndash;&gt;-->
     </style>
 
     <style name="SocialMediaEditTextTheme">

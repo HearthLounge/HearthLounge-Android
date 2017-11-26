@@ -54,6 +54,7 @@ import java.util.List;
 
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
+import pl.pjwstk.pgmd.hearthlounge.view.MakeImageToast;
 
 /**
  * Created by Maciek Dembowski on 16.10.2017.
@@ -66,6 +67,8 @@ public class CardsJSON extends DrawerMenu {
     private final String KEY = "T15rGIqg2lmshwDGMsX3mZeWM7vBp1ZmfvVjsnFba6SXP2WK5Q";
     private String suffixLink;
     private String iconId;
+
+    public MakeImageToast toast;
 
     private ListView listViewCards;
     private ProgressDialog dialog;
@@ -110,7 +113,6 @@ public class CardsJSON extends DrawerMenu {
         dialog = new ProgressDialog(this);
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
-//        dialog.setProgressStyle(R.drawable.card);
         dialog.setMessage("Loading. Please wait..."); // showing a dialog for loading the data
         // Create default options which will be used for every
         //  displayImage(...) call if no options will be passed to this method
@@ -412,7 +414,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=0");
@@ -438,7 +440,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_1, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_1, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=1");
@@ -464,7 +466,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_2, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_2, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=2");
@@ -490,7 +492,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_3, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_3, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=3");
@@ -516,7 +518,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_4, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_4, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=4");
@@ -542,7 +544,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_5, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_5, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=5");
@@ -568,7 +570,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_6, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_6, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=6");
@@ -594,7 +596,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=7");
@@ -620,7 +622,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=7-9");
@@ -646,7 +648,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_8, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_8, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=8");
@@ -672,7 +674,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=9");
@@ -698,7 +700,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9_plus, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost>=9");
@@ -724,7 +726,7 @@ public class CardsJSON extends DrawerMenu {
 
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.all_cards, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.all_cards, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?collectible=1");
@@ -854,62 +856,6 @@ public class CardsJSON extends DrawerMenu {
 
         }
     }
-
-    @SuppressLint("ResourceAsColor")
-    public static Toast makeImageToast(Context context, CharSequence text, int imageResId, int length) {
-        Toast toast = Toast.makeText(context, text, length);
-
-        View rootView = toast.getView();
-        LinearLayout linearLayout = null;
-        View messageTextView = null;
-
-
-
-        // check (expected) toast layout
-        if (rootView instanceof LinearLayout) {
-            linearLayout = (LinearLayout) rootView;
-
-            if (linearLayout.getChildCount() == 1) {
-                View child = linearLayout.getChildAt(0);
-
-                if (child instanceof TextView) {
-                    messageTextView = (TextView) child;
-                }
-            }
-        }
-
-        // cancel modification because toast layout is not what we expected
-        if (linearLayout == null || messageTextView == null) {
-            return toast;
-        }
-
-        ViewGroup.LayoutParams textParams = messageTextView.getLayoutParams();
-        ((LinearLayout.LayoutParams) textParams).gravity = Gravity.CENTER_VERTICAL;
-
-        // convert dip dimension
-        float density = context.getResources().getDisplayMetrics().density;
-        int imageSize = (int) (density * 25 + 1f);
-        int imageMargin = (int) (density * 15 + 0.5f);
-
-        // setup image view layout parameters
-        LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(imageSize, imageSize);
-        imageParams.setMargins(0, 0, imageMargin, 0);
-        imageParams.gravity = Gravity.CENTER_VERTICAL;
-
-        // setup image view
-        ImageView imageView = new ImageView(context);
-        imageView.setImageResource(imageResId);
-        imageView.setLayoutParams(imageParams);
-        imageView.setColorFilter(Color.rgb(0,0,128), PorterDuff.Mode.SRC_IN);
-
-        // modify root layout ZMIANA LOKOALIZACJI IKONY 0 - PRZED NAPISEM
-        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-        linearLayout.addView(imageView, 1);
-        linearLayout.setBackgroundResource(R.drawable.toast_opacity);
-
-        return toast;
-    }
-
 
     // MENU U GÓRY NA PASKU TE TRZY KROPKI :D
     @Override

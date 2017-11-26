@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/mage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:padding="15dp"
+                android:src="@drawable/mage"
+                android:background="@drawable/favourite_class_shape"/>
+
+            <ImageView
+                android:id="@+id/rogue"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:padding="15dp"
+                android:src="@drawable/rogue"
+                android:background="@drawable/favourite_class_shape"/>
+
+            <ImageView
+                android:id="@+id/paladin"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:padding="15dp"
+                android:src="@drawable/paladin"
+                android:background="@drawable/favourite_class_shape"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/druid"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:padding="15dp"
+                android:src="@drawable/druid"
+                android:background="@drawable/favourite_class_shape"/>
+
+            <ImageView
+                android:id="@+id/shaman"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:padding="15dp"
+                android:src="@drawable/shaman"
+                android:background="@drawable/favourite_class_shape"/>
+
+            <ImageView
+                android:id="@+id/warlock"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:padding="15dp"
+                android:src="@drawable/warlock"
+                android:background="@drawable/favourite_class_shape"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/priest"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:padding="15dp"
+                android:src="@drawable/priest"
+                android:background="@drawable/favourite_class_shape"/>
+
+            <ImageView
+                android:id="@+id/warrior"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:padding="15dp"
+                android:src="@drawable/warrior"
+                android:background="@drawable/favourite_class_shape"/>
+
+            <ImageView
+                android:id="@+id/hunter"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:padding="15dp"
+                android:src="@drawable/hunter"
+                android:background="@drawable/favourite_class_shape"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
