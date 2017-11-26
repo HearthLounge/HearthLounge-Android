@@ -18,6 +18,19 @@
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:textColor">@color/primary_font_color</item>
         <!--<item name="android:textStyle">bold</item>-->
+
+        <!--Jak usuniemy ustawią się domyślne kolory-->
+        <item name="colorControlNormal">@color/sea_color</item> <!-- Zmiana koloru scrollbar -->
+        <item name="colorControlActivated">@color/sea_color</item> <!-- Zmiana koloru edit text -->
+        <item name="colorControlHighlight">@color/pearl</item> <!-- Zmiana koloru drawer menu wybrane zakładki -->
+    </style>
+
+    <style name="SocialMediaEditTextTheme">
+        <!-- Used for the bottom line when not selected / focused -->
+        <item name="colorControlNormal">@color/black</item>
+        <item name="colorControlActivated">@color/black</item>
+        <item name="colorControlHighlight">@color/black</item>
+        <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
     </style>
 
     <!--ŚCIĄGANY PASEK Z GÓRY -->
