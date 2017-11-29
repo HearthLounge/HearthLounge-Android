@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
+    android:background="?attr/colorPrimaryDark"
     android:fitsSystemWindows="true"
     android:clipToPadding="false"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,23 +13,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="4dp">
+        android:padding="15dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:orientation="vertical"
-            android:background="@color/pearl">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/frame">
 
                 <ImageView
                     android:id="@+id/image_viewCard"
-                    android:layout_width="200dp"
-                    android:layout_height="match_parent" />
+                    android:layout_width="350dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="-20dp"
+                    android:layout_weight="1.0"/>
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -39,175 +36,234 @@
 
                 <ImageView
                     android:id="@+id/image_viewCardGold"
-                    android:layout_width="200dp"
+                    android:layout_width="350dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="right" />
-
-            </FrameLayout>
+                    android:layout_marginTop="-20dp"
+                    android:layout_weight="1.0"/>
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="?attr/colorAccent"
-            android:elevation="10dp"/>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            tools:ignore="WebViewLayout">
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/frame">
 
-            <TextView
-                android:id="@+id/text_view_cardId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Card Id: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1.0">
 
-            <TextView
-                android:id="@+id/text_view_dbfId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dbf Id: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    <TextView
+                        android:id="@+id/text_view_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <TextView
-                android:id="@+id/text_view_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    <TextView
+                        android:id="@+id/text_view_cardSet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Card Set: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
 
-            <TextView
-                android:id="@+id/text_view_cardSet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Card Set: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    <TextView
+                        android:id="@+id/text_view_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Type: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
 
-            <TextView
-                android:id="@+id/text_view_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Type: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    <TextView
+                        android:id="@+id/text_view_faction"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Faction: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
 
-            <TextView
-                android:id="@+id/text_view_faction"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Faction: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    <TextView
+                        android:id="@+id/text_view_rarity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rarity: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
 
-            <TextView
-                android:id="@+id/text_view_rarity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rarity: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    <TextView
+                        android:id="@+id/text_view_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cost: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
 
-            <TextView
-                android:id="@+id/text_view_cost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cost: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/text_view_attack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Attack: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:background="?attr/colorAccent"/>
 
-            <TextView
-                android:id="@+id/text_view_health"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Health: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
 
-            <TextView
-                android:id="@+id/text_view_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1.0">
 
-            <TextView
-                android:id="@+id/text_view_flavor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Flavor: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    <TextView
+                        android:id="@+id/text_view_attack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Attack: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
 
-            <TextView
-                android:id="@+id/text_view_artist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Artist: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    <TextView
+                        android:id="@+id/text_view_health"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Health: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
 
-            <TextView
-                android:id="@+id/text_view_collectible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Collectible: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    <TextView
+                        android:id="@+id/text_view_artist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Artist: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
 
-            <TextView
-                android:id="@+id/text_view_elite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Elite: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
 
-            <TextView
-                android:id="@+id/text_view_playerClass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Player Class: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    <TextView
+                        android:id="@+id/text_view_race"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Race: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
 
-            <TextView
-                android:id="@+id/text_view_locale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Locale: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                    <TextView
+                        android:id="@+id/text_view_playerClass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Player Class: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
 
-            <TextView
-                android:id="@+id/text_view_mechanics"
+                    <TextView
+                        android:id="@+id/text_view_mechanics"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mechanics: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mechanics: "
-                android:textColor="?attr/colorPrimaryDark"
-                android:textAppearance="?android:attr/textAppearanceSmall"  />
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="?attr/colorAccent"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_view_flavor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Flavor: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
+
+                    <TextView
+                        android:id="@+id/text_view_howToGet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="How To Get: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
+
+                    <TextView
+                        android:id="@+id/text_view_howToGetGold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="How To Get Gold: "
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"  />
+
+                </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
 </ScrollView>
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_cardId"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Card Id: "-->
+    <!--android:textColor="?attr/colorPrimaryDark"-->
+    <!--android:textAppearance="?android:attr/textAppearanceSmall" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_dbfId"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Dbf Id: "-->
+    <!--android:textColor="?attr/colorPrimaryDark"-->
+    <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_text"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Text: "-->
+    <!--android:textColor="?attr/colorPrimaryDark"-->
+    <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_collectible"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Collectible: "-->
+    <!--android:textColor="?attr/colorPrimaryDark"-->
+    <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_elite"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Elite: "-->
+    <!--android:textColor="?attr/colorPrimaryDark"-->
+    <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_locale"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Locale: "-->
+    <!--android:textColor="?attr/colorPrimaryDark"-->
+    <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->

@@ -10,6 +10,8 @@ import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -163,6 +165,7 @@ public class CardsJSON extends DrawerMenu {
                     buffer.append(line);//.append("\n");
                 }
                 String finalJson = buffer.toString();
+
 
                 JSONObject parentObject = new JSONObject(finalJson);
 
@@ -402,6 +405,8 @@ public class CardsJSON extends DrawerMenu {
 
                 final ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
                 final int toastManaIconColor = Color.rgb(0,0,128);
+                final PopupWindow finalMDropdown = mDropdown;
+                final CardsJSON cards = new CardsJSON();
                 final ImageView mana_0 = (ImageView)layout.findViewById(R.id.zero);
                 mana_0.setOnTouchListener(new OnTouchListener() {
                     @Override
@@ -414,14 +419,21 @@ public class CardsJSON extends DrawerMenu {
                             mana_0.setColorFilter(Color.rgb(0,169,156));
 
                             return true;
-                        } else if (action == MotionEvent.ACTION_UP) {
+                        } else if (action == MotionEvent.ACTION_UP && cards.getSuffixLink() != null) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
                             Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=0");
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "0");
                             startActivity(startIntent);
+                            finalMDropdown.dismiss();
+                            changeIcon();
+                            return true;
+                        } else if (action == MotionEvent.ACTION_UP && cards.getSuffixLink() == null) {
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
 
+                            finalMDropdown.dismiss();
+                            changeIcon();
                             return true;
                         }
                         return false;
@@ -447,7 +459,8 @@ public class CardsJSON extends DrawerMenu {
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=1");
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "1");
                             startActivity(startIntent);
-
+                            finalMDropdown.dismiss();
+                            changeIcon();
                             return true;
                         }
                         return false;
@@ -473,7 +486,8 @@ public class CardsJSON extends DrawerMenu {
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=2");
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "2");
                             startActivity(startIntent);
-
+                            finalMDropdown.dismiss();
+                            changeIcon();
                             return true;
                         }
                         return false;
@@ -499,7 +513,8 @@ public class CardsJSON extends DrawerMenu {
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=3");
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "3");
                             startActivity(startIntent);
-
+                            finalMDropdown.dismiss();
+                            changeIcon();
                             return true;
                         }
                         return false;
@@ -525,7 +540,8 @@ public class CardsJSON extends DrawerMenu {
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=4");
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "4");
                             startActivity(startIntent);
-
+                            finalMDropdown.dismiss();
+                            changeIcon();
                             return true;
                         }
                         return false;
@@ -551,7 +567,8 @@ public class CardsJSON extends DrawerMenu {
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=5");
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "5");
                             startActivity(startIntent);
-
+                            finalMDropdown.dismiss();
+                            changeIcon();
                             return true;
                         }
                         return false;
@@ -577,7 +594,8 @@ public class CardsJSON extends DrawerMenu {
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=6");
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "6");
                             startActivity(startIntent);
-
+                            finalMDropdown.dismiss();
+                            changeIcon();
                             return true;
                         }
                         return false;
@@ -603,7 +621,8 @@ public class CardsJSON extends DrawerMenu {
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=7");
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "7");
                             startActivity(startIntent);
-
+                            finalMDropdown.dismiss();
+                            changeIcon();
                             return true;
                         }
                         return false;
@@ -629,7 +648,8 @@ public class CardsJSON extends DrawerMenu {
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=7-9");
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "7+");
                             startActivity(startIntent);
-
+                            finalMDropdown.dismiss();
+                            changeIcon();
                             return true;
                         }
                         return false;
@@ -655,7 +675,8 @@ public class CardsJSON extends DrawerMenu {
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=8");
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "8");
                             startActivity(startIntent);
-
+                            finalMDropdown.dismiss();
+                            changeIcon();
                             return true;
                         }
                         return false;
@@ -681,7 +702,8 @@ public class CardsJSON extends DrawerMenu {
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=9");
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "9");
                             startActivity(startIntent);
-
+                            finalMDropdown.dismiss();
+                            changeIcon();
                             return true;
                         }
                         return false;
@@ -707,7 +729,8 @@ public class CardsJSON extends DrawerMenu {
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost>=9");
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "9+");
                             startActivity(startIntent);
-
+                            finalMDropdown.dismiss();
+                            changeIcon();
                             return true;
                         }
                         return false;
@@ -733,7 +756,8 @@ public class CardsJSON extends DrawerMenu {
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?collectible=1");
                             startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "ALL");
                             startActivity(startIntent);
-
+                            finalMDropdown.dismiss();
+                            changeIcon();
                             return true;
                         }
                         return false;
@@ -745,19 +769,7 @@ public class CardsJSON extends DrawerMenu {
             return mDropdown;
         }
 
-        @SuppressLint("ClickableViewAccessibility")
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            ViewHolder holder = null;
-
-            TextView text_view_count_cards = null;
-            LinearLayout pop_up_mana_menu = null;
-
-            text_view_count_cards = (TextView)findViewById(R.id.text_view_count_cards);
-            String countCards = String.valueOf(cardList.size());
-            text_view_count_cards.setText(countCards + " results");
-
+        public void changeIcon(){
             ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
             if(getIconId().equals("0")) {
                 manaIcon.setImageResource(R.drawable.mana_0);
@@ -784,9 +796,25 @@ public class CardsJSON extends DrawerMenu {
             } else if (getIconId().equals("9+")) {
                 manaIcon.setImageResource(R.drawable.mana_9_plus);
             } else if (getIconId().equals("ALL")) {
-                    manaIcon.setImageResource(R.drawable.all_cards);
+                manaIcon.setImageResource(R.drawable.all_cards);
             }
             //manaIcon.setColorFilter(Color.rgb(0, 0, 128), PorterDuff.Mode.SRC_IN);
+        }
+
+        @SuppressLint("ClickableViewAccessibility")
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            ViewHolder holder = null;
+
+            TextView text_view_count_cards = null;
+            LinearLayout pop_up_mana_menu = null;
+
+            text_view_count_cards = (TextView)findViewById(R.id.text_view_count_cards);
+            String countCards = String.valueOf(cardList.size());
+            text_view_count_cards.setText(countCards + " results");
+
+            changeIcon();
 
             pop_up_mana_menu = (LinearLayout) findViewById(R.id.mana_value);
             pop_up_mana_menu.setOnTouchListener(new OnTouchListener() {
@@ -803,7 +831,6 @@ public class CardsJSON extends DrawerMenu {
                         v.setBackgroundResource(R.drawable.normal);
 
                         initiatePopupWindow();
-
                     }
                     return false;
                 }

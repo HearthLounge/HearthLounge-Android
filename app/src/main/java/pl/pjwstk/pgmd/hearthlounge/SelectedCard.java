@@ -28,8 +28,8 @@ public class SelectedCard extends DrawerMenu {
 
     private ImageView image_view_card;
     private ImageView image_view_cardGold; //GifImageView
-    private TextView text_view_cardId;
-    private TextView text_view_dbfId;
+    //private TextView text_view_cardId;
+    //private TextView text_view_dbfId;
     private TextView text_view_name;
     private TextView text_view_cardSet;
     private TextView text_view_type;
@@ -38,13 +38,16 @@ public class SelectedCard extends DrawerMenu {
     private TextView text_view_cost;
     private TextView text_view_attack;
     private TextView text_view_health;
-    private TextView text_view_text;
+    //private TextView text_view_text;
     private TextView text_view_flavor;
     private TextView text_view_artist;
-    private TextView text_view_collectible;
-    private TextView text_view_elite;
+    //private TextView text_view_collectible;
+    //private TextView text_view_elite;
+    private TextView text_view_race;
     private TextView text_view_playerClass;
-    private TextView text_view_locale;
+    private TextView text_view_howToGet;
+    private TextView text_view_howToGetGold;
+    //private TextView text_view_locale;
     private TextView text_view_mechanics;
 
     private ProgressBar progressBar;
@@ -121,59 +124,69 @@ public class SelectedCard extends DrawerMenu {
                 }
             });
 
-            text_view_cardId.setText("CARD ID: " + cardModel.getCardId());
-            text_view_dbfId.setText("DBF ID: " + cardModel.getDbfId());
+            //text_view_cardId.setText("CARD ID: " + cardModel.getCardId());
+            //text_view_dbfId.setText("DBF ID: " + cardModel.getDbfId());
             text_view_name.setText("NAME: " + cardModel.getName());
             text_view_cardSet.setText("CARD SET: " + cardModel.getCardSet());
             text_view_type.setText("TYPE: " + cardModel.getType());
-            text_view_faction.setText("FACTION: " + cardModel.getFaction());
+
+            if (cardModel.getFaction() != null) {
+                text_view_faction.setText("FACTION: " + cardModel.getFaction());
+            } else text_view_faction.setVisibility(View.GONE);  // ustawi puste pole
+
             text_view_rarity.setText("RARITY: " + cardModel.getRarity());
             text_view_cost.setText("COST: " + cardModel.getCost()); //tu
             text_view_attack.setText("ATTACK: " + cardModel.getAttack()); //tu
             text_view_health.setText("HEALTH: " + cardModel.getHealth()); //tu
 
-            if (cardModel.getText() != null) {
-                text_view_text.setText(Html.fromHtml("TEXT: " + cardModel.getText()));
-            } else text_view_text.setText("pusto :( ");
+//            if (cardModel.getText() != null) {
+//                text_view_text.setText(Html.fromHtml("TEXT: " + cardModel.getText()));
+//            } else text_view_text.setText("pusto :( ");
 
             if (cardModel.getFlavor() != null) {
                 text_view_flavor.setText(Html.fromHtml("FLAVOR: " + cardModel.getFlavor()));
-            } else text_view_flavor.setText("pusto x2 :( ");// ustawi puste pole
-
+            } else text_view_flavor.setVisibility(View.GONE);
             // INNY SPOSOB :D
 //            String flavor = "<body>" + cardModel.getFlavor() + "</body>" + "<style type=\"text/css\">body{color: #00a99c; margin: -5dp;}</style>";
 //            text_view_flavor.setBackgroundColor(Color.TRANSPARENT);
 //            text_view_flavor.loadData("FLAVOR: " + flavor, "text/html", "UTF-8");
 
+            if (cardModel.getArtist() != null) {
             text_view_artist.setText("ARTIST: " + cardModel.getArtist());
-            text_view_collectible.setText("COLLECTIBLE: " + cardModel.getCollectible());
-            text_view_elite.setText("ELITE: " + cardModel.getElite()); //tu setEnabled
-            text_view_playerClass.setText("PLAYER CLASS: " + cardModel.getPlayerClass());
-            text_view_locale.setText("LOCALE: " + cardModel.getLocale());
+            } else text_view_artist.setVisibility(View.GONE);
 
-//            StringBuffer stringBuffer = new StringBuffer();
+            //text_view_collectible.setText("COLLECTIBLE: " + cardModel.getCollectible());
+            //text_view_elite.setText("ELITE: " + cardModel.getElite()); //tu setEnabled
+
+            if (cardModel.getRace() != null) {
+            text_view_race.setText("RACE: " + cardModel.getRace());
+            } else text_view_race.setVisibility(View.GONE);
+
+            text_view_playerClass.setText("PLAYER CLASS: " + cardModel.getPlayerClass());
+
+            if (cardModel.getHowToGet() != null) {
+                text_view_howToGet.setText("HOW TO GET: " + cardModel.getHowToGet());
+            } else text_view_howToGet.setVisibility(View.GONE);
+
+            if (cardModel.getHowToGetGold() != null) {
+                text_view_howToGetGold.setText("HOT TO GET GOLD: " + cardModel.getHowToGetGold());
+            } else text_view_howToGetGold.setVisibility(View.GONE);
+
+            //text_view_locale.setText("LOCALE: " + cardModel.getLocale());
 
             if(cardModel.getMechanicsList() != null) {
-                text_view_mechanics.setText("WESZŁO");
                 for (Card.Mechanics mechanics : cardModel.getMechanicsList()) {
-                    if (mechanics.getMechanics() != null) {
-//                    stringBuffer.append(mechanics.getMechanics() + ", ");
-//                    text_view_mechanics.setText("MECHANICS: " + stringBuffer);
-                        text_view_mechanics.setText("MECHANICS:: " + mechanics.getMechanics());
-                    }
+                        text_view_mechanics.setText("MECHANICS: " + mechanics.getMechanics());
                 }
-            }else text_view_mechanics.setText("NIC");
-
-
+            } else text_view_mechanics.setVisibility(View.GONE);
         }
-
     }
 
     private void setUpUIViews() {
         image_view_card = (ImageView)findViewById(R.id.image_viewCard);
         image_view_cardGold = (ImageView) findViewById(R.id.image_viewCardGold);
-        text_view_cardId = (TextView)findViewById(R.id.text_view_cardId);
-        text_view_dbfId = (TextView)findViewById(R.id.text_view_dbfId);
+        //text_view_cardId = (TextView)findViewById(R.id.text_view_cardId);
+        //text_view_dbfId = (TextView)findViewById(R.id.text_view_dbfId);
         text_view_name = (TextView)findViewById(R.id.text_view_name);
         text_view_cardSet = (TextView)findViewById(R.id.text_view_cardSet);
         text_view_type = (TextView)findViewById(R.id.text_view_type);
@@ -182,13 +195,16 @@ public class SelectedCard extends DrawerMenu {
         text_view_cost = (TextView)findViewById(R.id.text_view_cost);
         text_view_attack = (TextView)findViewById(R.id.text_view_attack);
         text_view_health = (TextView)findViewById(R.id.text_view_health);
-        text_view_text = (TextView) findViewById(R.id.text_view_text);
+        //text_view_text = (TextView) findViewById(R.id.text_view_text);
         text_view_flavor = (TextView) findViewById(R.id.text_view_flavor);
         text_view_artist = (TextView)findViewById(R.id.text_view_artist);
-        text_view_collectible = (TextView)findViewById(R.id.text_view_collectible);
-        text_view_elite = (TextView)findViewById(R.id.text_view_elite);
+        //text_view_collectible = (TextView)findViewById(R.id.text_view_collectible);
+        //text_view_elite = (TextView)findViewById(R.id.text_view_elite);
+        text_view_race= (TextView)findViewById(R.id.text_view_race);
         text_view_playerClass = (TextView)findViewById(R.id.text_view_playerClass);
-        text_view_locale = (TextView)findViewById(R.id.text_view_locale);
+        text_view_howToGet = (TextView)findViewById(R.id.text_view_howToGet);
+        text_view_howToGetGold = (TextView)findViewById(R.id.text_view_howToGetGold);
+        //text_view_locale = (TextView)findViewById(R.id.text_view_locale);
         text_view_mechanics = (TextView)findViewById(R.id.text_view_mechanics);
 
         progressBar = (ProgressBar)findViewById(R.id.progressBar);

@@ -25,7 +25,10 @@ public class Card {
     private String artist;
     private Boolean collectible; // Boolean // wywalić
     private Boolean elite; // Boolean // wywalić
+    private String race;
     private String playerClass;
+    private String howToGet;
+    private String howToGetGold;
     private String img;
     private String imgGold;
     private String locale; // wywalić
@@ -56,6 +59,7 @@ public class Card {
 //        this.locale = locale;
 //        this.mechanicsList = mechanicsList;
 //    }
+
 
     public String getCardId() {
         return cardId;
@@ -113,18 +117,14 @@ public class Card {
         this.rarity = rarity;
     }
 
-    public int  getCost() {
-//        return (cost != null)
+    public int getCost() {
+        //        return (cost != null)
 //                ? cost
 //                : null;
         return cost;
     }
 
     public void setCost(int cost) {
-//        this.cost = (cost != null)
-//                ? cost
-//                : null;
-
         this.cost = cost;
     }
 
@@ -184,12 +184,36 @@ public class Card {
         this.elite = elite;
     }
 
+    public String getRace() {
+        return race;
+    }
+
+    public void setRace(String race) {
+        this.race = race;
+    }
+
     public String getPlayerClass() {
         return playerClass;
     }
 
     public void setPlayerClass(String playerClass) {
         this.playerClass = playerClass;
+    }
+
+    public String getHowToGet() {
+        return howToGet;
+    }
+
+    public void setHowToGet(String howToGet) {
+        this.howToGet = howToGet;
+    }
+
+    public String getHowToGetGold() {
+        return howToGetGold;
+    }
+
+    public void setHowToGetGold(String howToGetGold) {
+        this.howToGetGold = howToGetGold;
     }
 
     public String getImg() {
@@ -217,7 +241,7 @@ public class Card {
     }
 
     public List<Mechanics> getMechanicsList() {
-        return mechanicsList = null;
+        return mechanicsList;
     }
 
     public void setMechanicsList(List<Mechanics> mechanicsList) {
@@ -225,7 +249,7 @@ public class Card {
     }
 
     public static class Mechanics {
-        private String name = "";
+        private String name;
 
         public String getMechanics() {
             return name;
