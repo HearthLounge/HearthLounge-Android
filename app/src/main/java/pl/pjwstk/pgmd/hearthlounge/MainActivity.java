@@ -10,22 +10,35 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
+import pl.pjwstk.pgmd.hearthlounge.authentication.UserService;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
 public class MainActivity extends DrawerMenu {
 
     private ImageButton buttonCards, buttonDecks, buttonExpansions;
+    //private FirebaseDatabase fbDb;
+    private FirebaseAuth fbAuth;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //fbDb = FirebaseDatabase.getInstance();
+        fbAuth = FirebaseAuth.getInstance();
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.main_menu, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
+
+
+        checkUserLog();
 
         final Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
 
@@ -110,4 +123,13 @@ public class MainActivity extends DrawerMenu {
             }
         });
     }
+
+    public void checkUserLog(){
+
+        Intent i = new Intent(getApplicationContext(), UserService.class);
+        // potentially add data to the intent
+        if(fbAuth.getUid() == null){ Toast.makeText(getApplicationContext(),"Hello, stranger...", Toast.LENGTH_SHORT).show(); }
+        else{String uid = fbAuth.getUid(); i.putExtra("uid", uid); startService(i); }
+    }
+
 }

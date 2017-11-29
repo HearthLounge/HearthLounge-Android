@@ -72,6 +72,10 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+        <service android:name=".authentication.UserService"
+            android:label="UserService"
+            android:stopWithTask="true"/>
+
     </application>
 
 </manifest>

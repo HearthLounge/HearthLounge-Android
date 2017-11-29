@@ -3,6 +3,7 @@ package pl.pjwstk.pgmd.hearthlounge.model;
 import android.app.Application;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class User extends Application {
@@ -46,6 +47,21 @@ public class User extends Application {
 
     }
 
+    public User(String username, String email, String role, String uid, String rank, String updatedProfile){
+
+        this.username = username;
+        this.email = email;
+        this.username = username;
+        this.role = role;
+        this.uid = uid;
+        if(updatedProfile == "false"){
+            this.updatedProfile = false;
+        }
+        else if(updatedProfile == "true"){
+            this.updatedProfile = true;
+        }
+        this.rank = Integer.parseInt(rank);
+    }
 
     public String getUsername() {
         return username;
@@ -67,6 +83,10 @@ public class User extends Application {
         return rank;
     }
 
+    public void setRank(String rank){
+        this.rank = Integer.parseInt(rank);
+    }
+    @Exclude
     public void setRank(int rank) {
         this.rank = rank;
     }
@@ -90,8 +110,17 @@ public class User extends Application {
     public Boolean getUpdatedProfile() {
         return updatedProfile;
     }
-
+    @Exclude
     public void setUpdatedProfile(Boolean updatedProfile) {
         this.updatedProfile = updatedProfile;
+    }
+
+    public  void setUpdatedProfile(String updatedProfile){
+        if(updatedProfile == "false"){
+            this.updatedProfile = false;
+        }
+        else if(updatedProfile == "true"){
+            this.updatedProfile = true;
+        }
     }
 }

@@ -34,7 +34,7 @@ public class LogIn extends DrawerMenu {
     private TextView text_to_sign_up;
     private String email,password;
 
-    private FirebaseAuth fb_auth;
+    private FirebaseAuth fbAuth;
     FirebaseDatabase fb_database;
     private DatabaseReference fb_data_ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://hearthlounge-32197.firebaseio.com");
 
@@ -48,7 +48,7 @@ public class LogIn extends DrawerMenu {
 
         //Firebase configurate
         fb_database = FirebaseDatabase.getInstance();
-        fb_auth = FirebaseAuth.getInstance();
+        fbAuth = FirebaseAuth.getInstance();
 
         edit_email_login = (EditText) findViewById(R.id.edit_email);
         edit_password_login = (EditText) findViewById(R.id.edit_password);
@@ -61,7 +61,7 @@ public class LogIn extends DrawerMenu {
         button_login.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View view) {
-                if(fb_auth.getCurrentUser() == null) {
+                if(fbAuth.getCurrentUser() == null) {
                     //log_user(edit_email_login.getText().toString(),edit_password_login.getText().toString());
                     email = edit_email_login.getText().toString();
                     password = edit_password_login.getText().toString();
@@ -78,7 +78,6 @@ public class LogIn extends DrawerMenu {
 
             public void onClick(View view) {
                 Intent goto_sign_up = new Intent(getApplicationContext(), SignUp.class);
-                //Toast.makeText(getApplicationContext(), "Hello, new user!", Toast.LENGTH_SHORT).show();
                 startActivity(goto_sign_up);
             }
         });
@@ -89,13 +88,16 @@ public class LogIn extends DrawerMenu {
 
     public void log_user(String email,String password){
 
-        fb_auth.signInWithEmailAndPassword(email, password)
+        fbAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(getApplicationContext(), "Hello user!", Toast.LENGTH_SHORT).show();
+
+                            //TODO reading from database and add it to Shared Preferences
+                            UDS(fbAuth.getCurrentUser().getUid());
                             go_to_main_menu();
                             //go_after_log_in
 
@@ -114,6 +116,13 @@ public class LogIn extends DrawerMenu {
     public void go_to_main_menu(){
         Intent menu_intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(menu_intent);
+    }
+
+    public void UDS(String uid){
+        Intent i = new Intent(getApplicationContext(), UserService.class);
+        // potentially add data to the intent
+        i.putExtra("uid", uid);
+        startService(i);
     }
 
 }
