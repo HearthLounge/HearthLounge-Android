@@ -86,13 +86,16 @@ public class UserService extends Service {
         //sUserUid = intent.getStringExtra("uid");
         sUserUid = intent.getStringExtra("uid");
         sUserEmail = fbUser.getEmail(); //Niby null
+
+        Toast.makeText(getApplicationContext(),"service w toku!", Toast.LENGTH_SHORT).show();
+
         if(sUserUid != null){
             //Pobieranie danych z bazy?
             Toast.makeText(getApplicationContext(),"Pobieranie danych...(LIE!!!)", Toast.LENGTH_SHORT).show();
             getUserData(sUserUid,sUserEmail);
         }
 
-        Toast.makeText(getApplicationContext(),"service w toku!", Toast.LENGTH_SHORT).show();
+
 
 
         Thread thread = new Thread(new MyThreadUserService(startId));

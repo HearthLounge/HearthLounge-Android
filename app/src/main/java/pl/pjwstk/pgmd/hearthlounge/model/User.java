@@ -1,19 +1,21 @@
 package pl.pjwstk.pgmd.hearthlounge.model;
 
-import android.app.Application;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
+import static java.lang.Math.toIntExact;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class User extends Application {
+public class User {
 
     FirebaseDatabase fbDb = FirebaseDatabase.getInstance();
     FirebaseAuth fbAuth = FirebaseAuth.getInstance();
 
     private String username;
     private String email;
-    private int rank;
+    private long rank;
     private String role;
     private String uid;
     private Boolean updatedProfile;
@@ -35,7 +37,7 @@ public class User extends Application {
         this.rank = 1;
     }
 
-    public User(String username, String email, String role, String uid, int rank, Boolean updatedProfile){
+    public User(String username, String email, String role, String uid, long rank, Boolean updatedProfile){
 
         this.username = username;
         this.email = email;
@@ -60,7 +62,7 @@ public class User extends Application {
         else if(updatedProfile == "true"){
             this.updatedProfile = true;
         }
-        this.rank = Integer.parseInt(rank);
+        this.rank = Long.parseLong(rank);
     }
 
     public String getUsername() {
@@ -79,13 +81,19 @@ public class User extends Application {
         this.email = email;
     }
 
-    public int getRank() {
+    public long getRank() {
         return rank;
     }
 
+    @Exclude
     public void setRank(String rank){
-        this.rank = Integer.parseInt(rank);
+        this.rank = Long.parseLong(rank);
     }
+
+    public void setRank(Long rank){
+        this.rank = rank;
+    }
+
     @Exclude
     public void setRank(int rank) {
         this.rank = rank;
@@ -110,11 +118,11 @@ public class User extends Application {
     public Boolean getUpdatedProfile() {
         return updatedProfile;
     }
-    @Exclude
+
     public void setUpdatedProfile(Boolean updatedProfile) {
         this.updatedProfile = updatedProfile;
     }
-
+    @Exclude
     public  void setUpdatedProfile(String updatedProfile){
         if(updatedProfile == "false"){
             this.updatedProfile = false;
