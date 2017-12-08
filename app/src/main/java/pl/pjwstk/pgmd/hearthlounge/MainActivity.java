@@ -24,6 +24,7 @@ public class MainActivity extends DrawerMenu {
     private ImageButton buttonCards, buttonDecks, buttonExpansions;
     //private FirebaseDatabase fbDb;
     private FirebaseAuth fbAuth;
+    private FirebaseDatabase fbDb = FirebaseDatabase.getInstance();
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -32,6 +33,8 @@ public class MainActivity extends DrawerMenu {
 
         //fbDb = FirebaseDatabase.getInstance();
         fbAuth = FirebaseAuth.getInstance();
+        //checkUserLog();
+
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.main_menu, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -127,9 +130,9 @@ public class MainActivity extends DrawerMenu {
     public void checkUserLog(){
 
         Intent i = new Intent(getApplicationContext(), UserService.class);
-        // potentially add data to the intent
-        if(fbAuth.getUid() == null){ Toast.makeText(getApplicationContext(),"Hello, stranger...", Toast.LENGTH_SHORT).show(); }
-        else{String uid = fbAuth.getUid(); i.putExtra("uid", uid); startService(i); }
+        if(fbAuth.getUid() == null){i.putExtra("action", "start_0"); startService(i); }
+        else{String uid = fbAuth.getUid();i.putExtra("action", "login"); i.putExtra("uid", uid); startService(i); }
+        //Toast.makeText(getApplicationContext(),"Hello, stranger...", Toast.LENGTH_SHORT).show();
     }
 
 }

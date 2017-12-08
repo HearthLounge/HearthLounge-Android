@@ -117,24 +117,29 @@ public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
 
                     public void onComplete(@NonNull Task<AuthResult> task){
                         FirebaseUser user = fb_auth.getCurrentUser();
-                        Toast.makeText(SignUp.this,"createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
 
                         if(task.isSuccessful()){
 
-                            Toast.makeText(SignUp.this,"task is successful!", Toast.LENGTH_SHORT).show();
-                            //User user_db = new User(nickname, email, user.getUid());
-                            //fb_data_ref.child("/users").child(user_db.getUid()).setValue(user_db);
+                            Toast.makeText(SignUp.this,"registration is successful!", Toast.LENGTH_SHORT).show();
+                            add_new_user(nickname,email,fb_auth.getCurrentUser().getUid());
                             fb_auth.signOut();
                             go_to_log_in();
                         }
                         else {
-                            Toast.makeText(SignUp.this, "Something went wrong :(", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this, "Something goes wrong :(", Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
                     }
 
                 });
     }
+
+    public void add_new_user(String nickname, String email, String uid){
+
+        User user_db = new User(nickname, email, uid);
+        fb_data_ref.child("/users").child(user_db.getUid()).setValue(user_db);
+    }
+
 
     public void go_to_log_in(){
         Intent goto_sign_in = new Intent(getApplicationContext(), LogIn.class);
@@ -148,12 +153,6 @@ public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
             Toast.makeText(SignUp.this, "You're already logged!" + user.getEmail(), Toast.LENGTH_SHORT).show();
             updateUI();
         }
-    }
-
-    public void add_new_user(DatabaseReference data_ref, String nickname, String email, String uid){
-
-        User user_db = new User(nickname, email, uid);
-        fb_data_ref.child("/users").child(user_db.getUid()).setValue(user_db);
     }
 
 

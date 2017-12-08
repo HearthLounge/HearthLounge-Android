@@ -18,7 +18,8 @@ import pl.pjwstk.pgmd.hearthlounge.R;
 
 public class LogOut extends DrawerMenu {
 
-    private FirebaseAuth fb_auth;
+    private FirebaseAuth fbAuth;
+    private UserService userService;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,17 +29,17 @@ public class LogOut extends DrawerMenu {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
 
-        fb_auth = FirebaseAuth.getInstance();
-        log_me_out(fb_auth);
+        fbAuth = FirebaseAuth.getInstance();
+        fbAuth.signOut();
+
+        Intent i = new Intent(getApplicationContext(), UserService.class);
+        i.putExtra("action","logout");
+        startService(i);
+
 
 
         Toast.makeText(LogOut.this," Wylogowany ", Toast.LENGTH_SHORT).show();
         Intent goto_sign_in = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(goto_sign_in);
-    }
-
-    void log_me_out(FirebaseAuth fbAh){
-
-        fbAh.signOut();
     }
 }
