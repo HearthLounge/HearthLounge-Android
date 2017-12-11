@@ -2,6 +2,7 @@ package pl.pjwstk.pgmd.hearthlounge.authentication;
 
 import android.app.Application;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -36,6 +37,7 @@ public class UserService extends Service {
 
         int service_id;
 
+
         MyThreadUserService(int id){
 
             this.service_id = id;
@@ -53,6 +55,8 @@ public class UserService extends Service {
 
     }
 
+
+
     private String sUserUid;
     private String sUserEmail;
     private User user;
@@ -69,7 +73,7 @@ public class UserService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        userPref = new UserPreferences(this.getApplicationContext());
         //Sprawdzanie czy jest użytkowanik
         //if true
         //if false
@@ -85,6 +89,8 @@ public class UserService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        Toast.makeText(getApplicationContext(),"action: " + intent.getStringExtra("action"), Toast.LENGTH_SHORT).show();
+
         switch (intent.getStringExtra("action")){
 
             case "login":
@@ -93,27 +99,29 @@ public class UserService extends Service {
                 sUserUid = intent.getStringExtra("uid");
                 sUserEmail = fbUser.getEmail();
                 getUserData(sUserEmail);
+                break;
             }
             case "logout":
             {
                 Toast.makeText(getApplicationContext(),"service logout", Toast.LENGTH_SHORT).show();
-                sUserUid = intent.getStringExtra("uid");
-                sUserEmail = fbUser.getEmail();
                 userPref.clearUserPref();
+                break;
             }
             case "start_0":
             {
                 Toast.makeText(getApplicationContext(),"service start 0", Toast.LENGTH_SHORT).show();
+//                stopSelf();
                 //userPref.clearUserPref();
+                break;
+            }
+            case "start_1":
+            {
+                Toast.makeText(getApplicationContext(),"service start 1", Toast.LENGTH_SHORT).show();
+
+                break;
             }
 
         }
-
-//        if(sUserUid != null){
-//            //Pobieranie danych z bazy?
-//            Toast.makeText(getApplicationContext(),"start data read", Toast.LENGTH_SHORT).show();
-//            getUserData(sUserEmail);
-//        }
 
         Thread thread = new Thread(new MyThreadUserService(startId));
         thread.start();
@@ -137,9 +145,11 @@ public class UserService extends Service {
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
                     user = singleSnapshot.getValue(User.class);
                     if(user != null) {
-                        userPref.setUserPref(user);
-                        Toast.makeText(getApplicationContext(), user.getUsername(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(), user.getBattletag(), Toast.LENGTH_SHORT).show();
+                        //TODO userPref.setUserPref(user);
+                        Toast.makeText(getApplicationContext(),"Success download " + user.getUsername() + " data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Your battletag is " + user.getBattletag(), Toast.LENGTH_SHORT).show();
+                        userPref.setValuePref("username",user.getUsername());
+                        Toast.makeText(getApplicationContext(),"Your userPref username is " + userPref.getUsernamePref(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }

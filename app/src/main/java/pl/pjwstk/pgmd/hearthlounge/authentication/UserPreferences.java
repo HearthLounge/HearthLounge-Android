@@ -3,6 +3,7 @@ package pl.pjwstk.pgmd.hearthlounge.authentication;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -40,12 +41,17 @@ public class UserPreferences {
     private SharedPreferences sharedPrefs;
     private SharedPreferences.Editor prefsEditor;
 
+//    public UserPreferences(){
+//
+//    }
+
     public UserPreferences(Context context) {
-        this.sharedPrefs = context.getSharedPreferences(APP_SHARED_PREFS, Activity.MODE_PRIVATE);
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         this.prefsEditor = sharedPrefs.edit();
     }
 
     public void setUserPref(User user){
+
 
         prefsEditor.putString(keyUsername, user.getUsername());
         prefsEditor.putString(keyEmail, user.getEmail());
@@ -83,6 +89,7 @@ public class UserPreferences {
 
     public void clearUserPref(){
         prefsEditor.clear();
+        prefsEditor.commit();
     }
 
     public void updateUserPref(){
@@ -99,21 +106,30 @@ public class UserPreferences {
 
     }
 
-    public void setAllPref(Map<String,String> map){
-
-
-
-    }
-
-
     public String getUsernamePref() {
-        return sharedPrefs.getString(keyUsername,"");
+        return sharedPrefs.getString(keyUsername,"username null");
     }
 
-    public void setUsernamePref(String text) {
-        prefsEditor.putString(keyUsername, text);
+    public String getSingleStringPref(String key){
+
+        return sharedPrefs.getString(key,"error");
+
+    }
+
+    public Boolean getUpdatedProfilePref(){
+
+        return sharedPrefs.getBoolean("updatedProfile", false);
+    }
+
+    public Long getRankPref(){
+        return sharedPrefs.getLong("rank",0);
+    }
+
+    public void setValuePref(String key,String text) {
+        prefsEditor.putString(key, text);
         prefsEditor.commit();
     }
+
 
 
 

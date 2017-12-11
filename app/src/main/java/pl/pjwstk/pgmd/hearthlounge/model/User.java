@@ -9,6 +9,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 //TODO Make one per time!!!
 //TODO MAKE EMPTY battletag, favClass itp :|
 public class User {
@@ -28,15 +32,28 @@ public class User {
     private String battletag;
     private String favClass;
 
-    private String facebook;
+    private String facebook;// = "Nie podano"; Wyświetla nie podano!!!
     private String twitter;
     private String twitch;
     private String youtube;
 
+//    Map<String, Boolean> checkerMap;
+
     public User(){
 
-
-
+//        checkerMap = new HashMap<>();
+//        checkerMap.put("username",false);
+//        checkerMap.put("email",false);
+//        checkerMap.put("rank",false);
+//        checkerMap.put("role",false);
+//        checkerMap.put("uid",false);
+//        checkerMap.put("updatedProfile",false);
+//        checkerMap.put("battletag",false);
+//        checkerMap.put("favClass",false);
+//        checkerMap.put("facebook",false);
+//        checkerMap.put("twitter",false);
+//        checkerMap.put("twitch",false);
+//        checkerMap.put("youtube",false);
     }
 
     public User(String username, String email, String uid){   //Uzupełnić o dodanie reszty ze zmiennych bo auth idzie oddzielnie
@@ -79,6 +96,7 @@ public class User {
     }
 
     public String getUsername() {
+        if(username == null){ username = "";}
         return username;
     }
 
@@ -87,6 +105,7 @@ public class User {
     }
 
     public String getEmail() {
+        //if(email == null){ email = "";}
         return email;
     }
 
@@ -147,6 +166,7 @@ public class User {
     }
 
     public String getBattletag() {
+        if(battletag == null){ battletag = "";}
         return battletag;
     }
 
@@ -155,6 +175,7 @@ public class User {
     }
 
     public String getFavClass() {
+        if(favClass == null){ favClass = "";}
         return favClass;
     }
 
@@ -163,6 +184,7 @@ public class User {
     }
 
     public String getFacebook() {
+        if(facebook == null){ facebook = "";}
         return facebook;
     }
 
@@ -171,6 +193,7 @@ public class User {
     }
 
     public String getTwitter() {
+        if(twitter == null){ twitter = "";}
         return twitter;
     }
 
@@ -179,6 +202,7 @@ public class User {
     }
 
     public String getTwitch() {
+        if(twitch == null){ twitch = "";}
         return twitch;
     }
 
@@ -187,6 +211,7 @@ public class User {
     }
 
     public String getYoutube() {
+        if(youtube == null){ youtube = "";}
         return youtube;
     }
 

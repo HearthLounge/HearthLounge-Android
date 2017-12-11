@@ -41,7 +41,7 @@ public class MainActivity extends DrawerMenu {
         navigationView.getMenu().getItem(0).setChecked(true);
 
 
-        checkUserLog();
+        //checkUserLog();
 
         final Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
 
@@ -127,12 +127,12 @@ public class MainActivity extends DrawerMenu {
         });
     }
 
-    public void checkUserLog(){
-
-        Intent i = new Intent(getApplicationContext(), UserService.class);
-        if(fbAuth.getUid() == null){i.putExtra("action", "start_0"); startService(i); }
-        else{String uid = fbAuth.getUid();i.putExtra("action", "login"); i.putExtra("uid", uid); startService(i); }
-        //Toast.makeText(getApplicationContext(),"Hello, stranger...", Toast.LENGTH_SHORT).show();
-    }
+//    public void checkUserLog(){
+//
+//        Intent i = new Intent(getApplicationContext(), UserService.class);
+//        if(fbAuth.getUid() == null){i.putExtra("action", "start_0"); startService(i); }
+//        else{String uid = fbAuth.getUid(); i.putExtra("action", "start_1"); i.putExtra("uid", uid); startService(i); }
+//        //Toast.makeText(getApplicationContext(),"Hello, stranger...", Toast.LENGTH_SHORT).show();
+//    }
 
 }

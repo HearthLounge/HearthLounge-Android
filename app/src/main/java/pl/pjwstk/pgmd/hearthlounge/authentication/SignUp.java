@@ -1,6 +1,7 @@
 package pl.pjwstk.pgmd.hearthlounge.authentication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -41,7 +42,6 @@ public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
     private FirebaseAuth fb_auth;
     private FirebaseDatabase fb_database = FirebaseDatabase.getInstance();
     private DatabaseReference fb_data_ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://hearthlounge-32197.firebaseio.com");
-    private static FirebaseAuth.AuthStateListener fb_auth_listener;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

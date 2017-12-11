@@ -117,6 +117,7 @@ public class LogIn extends DrawerMenu {
     public void UDS(String uid){    //User Data Service
         Intent i = new Intent(getApplicationContext(), UserService.class);
         // potentially add data to the intent
+        i.putExtra("action", "login");
         i.putExtra("uid", uid);
         startService(i);
     }
