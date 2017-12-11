@@ -52,7 +52,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
@@ -316,6 +320,19 @@ public class CardsJSON extends DrawerMenu {
 //                    Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
 //                    cardList.add(cardModel);
 //                }
+
+//                JSONObject mainObject = new JSONObject(finalJson);
+//
+//                JSONObject posts = mainObject.getJSONObject("cost");
+//
+//                Map<String, Card> map = new HashMap<String,Card>();
+//                map.put(posts, mainObject);
+//
+//                ArrayList<String> list = new ArrayList<String>(map.keySet());
+//
+//                System.out.println(list);
+
+
 
                 return cardList;
 

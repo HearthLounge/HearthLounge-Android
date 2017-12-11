@@ -65,7 +65,7 @@ public class LogIn extends DrawerMenu {
                     //log_user(edit_email_login.getText().toString(),edit_password_login.getText().toString());
                     email = edit_email_login.getText().toString();
                     password = edit_password_login.getText().toString();
-                    Toast.makeText(getApplicationContext(), "E:" + email + " H:" + password, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LogIn.this, "E:" + email + " H:" + password, Toast.LENGTH_SHORT).show();
                     log_user(email, password);
                     //log_user("admin@ad.min","Roottoor1");
                 }

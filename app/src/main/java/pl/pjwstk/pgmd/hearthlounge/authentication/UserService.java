@@ -29,7 +29,6 @@ import static android.content.ContentValues.TAG;
  * Created by Froozy on 22.11.2017.
  */
 
-
 public class UserService extends Service {
 
     final class MyThreadUserService implements Runnable{
@@ -88,7 +87,7 @@ public class UserService extends Service {
         sUserEmail = fbUser.getEmail(); //Niby null
         if(sUserUid != null){
             //Pobieranie danych z bazy?
-            Toast.makeText(getApplicationContext(),"Pobieranie danych...(LIE!!!)", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserService.this,"Pobieranie danych...(LIE!!!)", Toast.LENGTH_SHORT).show();
             getUserData(sUserUid,sUserEmail);
         }
 

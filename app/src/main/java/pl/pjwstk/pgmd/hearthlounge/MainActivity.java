@@ -2,6 +2,7 @@ package pl.pjwstk.pgmd.hearthlounge;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.view.MotionEvent;
@@ -24,6 +25,9 @@ public class MainActivity extends DrawerMenu {
     private ImageButton buttonCards, buttonDecks, buttonExpansions;
     //private FirebaseDatabase fbDb;
     private FirebaseAuth fbAuth;
+
+    private Rect rect;
+    private boolean ignore = false;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -81,22 +85,45 @@ public class MainActivity extends DrawerMenu {
         buttonCards.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent motionEvent) {
-                int action = motionEvent.getAction();
-                if (action == MotionEvent.ACTION_DOWN) {
-                    v.animate().scaleXBy(0.2f).setDuration(5000).start();
-                    v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.drawable.pressed);
+                if(ignore && motionEvent.getAction()!=MotionEvent.ACTION_UP)
                     return true;
-                } else if (action == MotionEvent.ACTION_UP) {
-                    v.animate().cancel();
-                    v.animate().scaleX(1f).setDuration(1000).start();
-                    v.animate().scaleY(1f).setDuration(1000).start();
-                    v.setBackgroundResource(R.drawable.normal);
-                    Intent startIntent = new Intent(getApplicationContext(),CardsFilterMenu.class); //Do którego ma iść
-                    startActivity(startIntent);
-                    return true;
+                switch(motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
+                        v.animate().scaleXBy(0.2f).setDuration(5000).start();
+                        v.animate().scaleYBy(0.2f).setDuration(5000).start();
+                        v.setBackgroundResource(R.drawable.pressed);
+                        return true;
+
+                    case MotionEvent.ACTION_CANCEL:
+                    case MotionEvent.ACTION_UP:
+                        v.animate().cancel();
+                        v.animate().scaleX(1f).setDuration(1000).start();
+                        v.animate().scaleY(1f).setDuration(1000).start();
+                        v.setBackgroundResource(R.drawable.normal);
+                        ignore = false;
+                        Intent startIntent = new Intent(getApplicationContext(),CardsFilterMenu.class); //Do którego ma iść
+                        startActivity(startIntent);
+                        return true;
+
+                    case MotionEvent.ACTION_MOVE:
+                        if(rect.contains(v.getLeft() + (int) motionEvent.getX(), v.getTop() + (int) motionEvent.getY())){
+                            v.animate().scaleXBy(0.2f).setDuration(5000).start();
+                            v.animate().scaleYBy(0.2f).setDuration(5000).start();
+                            v.setBackgroundResource(R.drawable.pressed);
+                            v.animate().cancel();
+
+                        } else {
+                            v.animate().scaleX(1f).setDuration(1000).start();
+                            v.animate().scaleY(1f).setDuration(1000).start();
+                            v.setBackgroundResource(R.drawable.normal);
+                            v.animate().cancel();
+                            ignore = true;
+                        }
+                        return true;
+                    default:
+                        return false;
                 }
-                return false;
             }
         });
 
