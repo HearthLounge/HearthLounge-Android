@@ -41,12 +41,12 @@ public class LogIn extends DrawerMenu {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.login, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
 
-        //Firebase configurate
+
         fb_database = FirebaseDatabase.getInstance();
         fbAuth = FirebaseAuth.getInstance();
 
@@ -93,18 +93,14 @@ public class LogIn extends DrawerMenu {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(getApplicationContext(), "Hello user!", Toast.LENGTH_SHORT).show();
-
-                            //TODO reading from database and add it to Shared Preferences
                             UDS(fbAuth.getCurrentUser().getUid());
                             go_to_main_menu();
-                            //go_after_log_in
 
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(LogIn.this, "Something went wrong with log in", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LogIn.this, "Something goes wrong with log in", Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
 
@@ -118,9 +114,10 @@ public class LogIn extends DrawerMenu {
         startActivity(menu_intent);
     }
 
-    public void UDS(String uid){
+    public void UDS(String uid){    //User Data Service
         Intent i = new Intent(getApplicationContext(), UserService.class);
         // potentially add data to the intent
+        i.putExtra("action", "login");
         i.putExtra("uid", uid);
         startService(i);
     }

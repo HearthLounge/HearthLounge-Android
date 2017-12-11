@@ -89,6 +89,11 @@
             android:label="UserService"
             android:stopWithTask="true"/>
 
+        <activity
+            android:name=".InitiateApp"
+            android:label="InitiateApp"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

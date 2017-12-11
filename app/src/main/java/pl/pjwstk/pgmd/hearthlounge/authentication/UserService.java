@@ -2,6 +2,7 @@ package pl.pjwstk.pgmd.hearthlounge.authentication;
 
 import android.app.Application;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -29,11 +30,13 @@ import static android.content.ContentValues.TAG;
  * Created by Froozy on 22.11.2017.
  */
 
+
 public class UserService extends Service {
 
     final class MyThreadUserService implements Runnable{
 
         int service_id;
+
 
         MyThreadUserService(int id){
 
@@ -52,6 +55,8 @@ public class UserService extends Service {
 
     }
 
+
+
     private String sUserUid;
     private String sUserEmail;
     private User user;
@@ -61,10 +66,14 @@ public class UserService extends Service {
     private DatabaseReference fbRef = fbDb.getReferenceFromUrl("https://hearthlounge-32197.firebaseio.com/users");
     private FirebaseAuth fbAuth = FirebaseAuth.getInstance();
     private FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
+    public static final String USER_DATA_SP = "pl.pjwstk.pgmd.hearthlounge";
+
+    UserPreferences userPref;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        userPref = new UserPreferences(this.getApplicationContext());
         //Sprawdzanie czy jest użytkowanik
         //if true
         //if false
@@ -74,43 +83,86 @@ public class UserService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
 
-
-
         return null;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        //sUserUid = intent.getStringExtra("uid");
-        sUserUid = intent.getStringExtra("uid");
-        sUserEmail = fbUser.getEmail(); //Niby null
-        if(sUserUid != null){
-            //Pobieranie danych z bazy?
-            Toast.makeText(UserService.this,"Pobieranie danych...(LIE!!!)", Toast.LENGTH_SHORT).show();
-            getUserData(sUserUid,sUserEmail);
+        Toast.makeText(getApplicationContext(),"action: " + intent.getStringExtra("action"), Toast.LENGTH_SHORT).show();
+
+        switch (intent.getStringExtra("action")){
+
+            case "login":
+            {
+                Toast.makeText(getApplicationContext(),"service login", Toast.LENGTH_SHORT).show();
+                sUserUid = intent.getStringExtra("uid");
+                sUserEmail = fbUser.getEmail();
+                getUserData(sUserEmail);
+                break;
+            }
+            case "logout":
+            {
+                Toast.makeText(getApplicationContext(),"service logout", Toast.LENGTH_SHORT).show();
+                userPref.clearUserPref();
+                break;
+            }
+            case "start_0":
+            {
+                Toast.makeText(getApplicationContext(),"service start 0", Toast.LENGTH_SHORT).show();
+//                stopSelf();
+                //userPref.clearUserPref();
+                break;
+            }
+            case "start_1":
+            {
+                Toast.makeText(getApplicationContext(),"service start 1", Toast.LENGTH_SHORT).show();
+
+                break;
+            }
+
         }
-
-        Toast.makeText(getApplicationContext(),"service w toku!", Toast.LENGTH_SHORT).show();
-
 
         Thread thread = new Thread(new MyThreadUserService(startId));
         thread.start();
 
-        //Hmmmm
-
-
-        return START_STICKY;
+        return START_NOT_STICKY;
+        //return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        //Czy ten service kiedyś niszczyć?
-        Toast.makeText(getApplicationContext(),"zamykam service!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"closing service!", Toast.LENGTH_SHORT).show();
         super.onDestroy();
     }
 
-    public void getUserData(String uid,String email){
+    public void getUserData(String email){
+
+        Query userQuery = fbRef.orderByChild("email").equalTo(email);
+        userQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+                    user = singleSnapshot.getValue(User.class);
+                    if(user != null) {
+                        //TODO userPref.setUserPref(user);
+                        Toast.makeText(getApplicationContext(),"Success download " + user.getUsername() + " data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Your battletag is " + user.getBattletag(), Toast.LENGTH_SHORT).show();
+                        userPref.setValuePref("username",user.getUsername());
+                        Toast.makeText(getApplicationContext(),"Your userPref username is " + userPref.getUsernamePref(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled", databaseError.toException());
+            }
+        });
+
+
+    }
+}
+
 
 //        fbRef = fbRef.child(uid);
 //        ValueEventListener postListener = new ValueEventListener() {
@@ -164,25 +216,6 @@ public class UserService extends Service {
 //        }
 //    });
 
-        Query phoneQuery = fbRef.orderByChild("email").equalTo(email);
-        phoneQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
-                    user = singleSnapshot.getValue(User.class);
-                    Toast.makeText(getApplicationContext(),user.getUsername(),Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "onCancelled", databaseError.toException());
-            }
-        });
-
-
-
-    }
-}
 
 
 
