@@ -82,30 +82,6 @@
             android:background="@drawable/shape"/>
 
         <ImageView
-            android:id="@+id/eight"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="3dp"
-            android:src="@drawable/mana_8"
-            android:background="@drawable/shape"/>
-
-        <ImageView
-            android:id="@+id/nine"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="3dp"
-            android:src="@drawable/mana_9"
-            android:background="@drawable/shape"/>
-
-        <ImageView
-            android:id="@+id/nine_plus"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="3dp"
-            android:src="@drawable/mana_9_plus"
-            android:background="@drawable/shape"/>
-
-        <ImageView
             android:id="@+id/all"
             android:layout_width="40dp"
             android:layout_height="40dp"

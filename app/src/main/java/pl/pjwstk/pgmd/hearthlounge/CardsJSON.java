@@ -6,12 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -52,11 +49,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
@@ -169,7 +162,6 @@ public class CardsJSON extends DrawerMenu {
                     buffer.append(line);//.append("\n");
                 }
                 String finalJson = buffer.toString();
-
 
                 JSONObject parentObject = new JSONObject(finalJson);
 
@@ -396,6 +388,43 @@ public class CardsJSON extends DrawerMenu {
             inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         }
 
+        public void manaFilter(int manaValue)
+        //public List<Card> manaFilter(int manaValue) return temp i uruchamiać to po za manaFilter(chosenMana)
+        {
+            List<Card> temp = new ArrayList<>();
+            JSONTask chosenMana = new JSONTask();
+
+            if (manaValue == 411){
+                chosenMana.onPostExecute(cardList);
+            } else if (manaValue == 8){
+                for(Card cards : cardList){
+                    if (cards.getCost() >= manaValue-1) {
+                        temp.add(cards);
+                    }
+                }
+            } else {
+                for(Card cards : cardList){
+                    if (cards.getCost() == manaValue) {
+                        temp.add(cards);
+                    }
+                }
+            }
+            chosenMana.onPostExecute(temp);
+
+
+//            for(Card cards : cardList){
+//                if (manaValue == 411) {
+//                    chosenMana.onPostExecute(cardList);
+//                } else if (cards.getCost() == manaValue) {
+//                    temp.add(cards);
+//                } else if (cards.getCost() >= manaValue-1) {
+//                    cards.getCost();
+//                }
+//            }
+//            chosenMana.onPostExecute(temp);
+
+        }
+
         private PopupWindow initiatePopupWindow() {
             PopupWindow mDropdown = null;
             LayoutInflater mInflater;
@@ -417,7 +446,7 @@ public class CardsJSON extends DrawerMenu {
 //                Drawable background = getResources().getDrawable(android.R.drawable.editbox_dropdown_dark_frame);
 //                mDropdown.setBackgroundDrawable(background);
 //                layout.setBackgroundResource(R.drawable.toast_opacity);
-                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.RIGHT|Gravity.BOTTOM, 10,5);
+                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.RIGHT|Gravity.BOTTOM, 10,10);
 //                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.CENTER, 0,0);
 
                 final ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
@@ -425,30 +454,19 @@ public class CardsJSON extends DrawerMenu {
                 final PopupWindow finalMDropdown = mDropdown;
                 final CardsJSON cards = new CardsJSON();
                 final ImageView mana_0 = (ImageView)layout.findViewById(R.id.zero);
+
                 mana_0.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
                             manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_0));
                             manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
                             mana_0.setColorFilter(Color.rgb(0,169,156));
-
                             return true;
-                        } else if (action == MotionEvent.ACTION_UP && cards.getSuffixLink() != null) {
+                        } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=0");
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "0");
-                            startActivity(startIntent);
-                            finalMDropdown.dismiss();
-                            changeIcon();
-                            return true;
-                        } else if (action == MotionEvent.ACTION_UP && cards.getSuffixLink() == null) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
+                            manaFilter(0);
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -461,21 +479,15 @@ public class CardsJSON extends DrawerMenu {
                 mana_1.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
                             manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_1));
                             manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
                             mana_1.setColorFilter(Color.rgb(0,169,156));
-
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_1, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=1");
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "1");
-                            startActivity(startIntent);
+                            manaFilter(1);
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -488,21 +500,15 @@ public class CardsJSON extends DrawerMenu {
                 mana_2.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
                             manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_2));
                             manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
                             mana_2.setColorFilter(Color.rgb(0,169,156));
-
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_2, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=2");
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "2");
-                            startActivity(startIntent);
+                            manaFilter(2);
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -515,21 +521,15 @@ public class CardsJSON extends DrawerMenu {
                 mana_3.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
                             manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_3));
                             manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
                             mana_3.setColorFilter(Color.rgb(0,169,156));
-
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_3, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=3");
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "3");
-                            startActivity(startIntent);
+                            manaFilter(3);
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -542,21 +542,15 @@ public class CardsJSON extends DrawerMenu {
                 mana_4.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
                             manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_4));
                             manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
                             mana_4.setColorFilter(Color.rgb(0,169,156));
-
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_4, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=4");
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "4");
-                            startActivity(startIntent);
+                            manaFilter(4);
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -569,21 +563,15 @@ public class CardsJSON extends DrawerMenu {
                 mana_5.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
                             manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_5));
                             manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
                             mana_5.setColorFilter(Color.rgb(0,169,156));
-
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_5, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=5");
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "5");
-                            startActivity(startIntent);
+                            manaFilter(5);
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -596,21 +584,15 @@ public class CardsJSON extends DrawerMenu {
                 mana_6.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
                             manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_6));
                             manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
                             mana_6.setColorFilter(Color.rgb(0,169,156));
-
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_6, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=6");
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "6");
-                            startActivity(startIntent);
+                            manaFilter(6);
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -623,21 +605,15 @@ public class CardsJSON extends DrawerMenu {
                 mana_7.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
                             manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_7));
                             manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
                             mana_7.setColorFilter(Color.rgb(0,169,156));
-
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=7");
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "7");
-                            startActivity(startIntent);
+                            manaFilter(7);
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -650,7 +626,6 @@ public class CardsJSON extends DrawerMenu {
                 mana_7_plus.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
                             manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_7_plus));
@@ -660,92 +635,7 @@ public class CardsJSON extends DrawerMenu {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7_plus, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=7-9");
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "7+");
-                            startActivity(startIntent);
-                            finalMDropdown.dismiss();
-                            changeIcon();
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-
-                final ImageView mana_8 = (ImageView)layout.findViewById(R.id.eight);
-                mana_8.setOnTouchListener(new OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-
-                        int action = event.getAction();
-                        if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_8));
-                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
-                            mana_8.setColorFilter(Color.rgb(0,169,156));
-
-                            return true;
-                        } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_8, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=8");
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "8");
-                            startActivity(startIntent);
-                            finalMDropdown.dismiss();
-                            changeIcon();
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-
-                final ImageView mana_9 = (ImageView)layout.findViewById(R.id.nine);
-                mana_9.setOnTouchListener(new OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-
-                        int action = event.getAction();
-                        if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_9));
-                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
-                            mana_9.setColorFilter(Color.rgb(0,169,156));
-
-                            return true;
-                        } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost=9");
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "9");
-                            startActivity(startIntent);
-                            finalMDropdown.dismiss();
-                            changeIcon();
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-
-                final ImageView mana_9_plus = (ImageView) layout.findViewById(R.id.nine_plus);
-                mana_9_plus.setOnTouchListener(new OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-
-                        int action = event.getAction();
-                        if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.mana_9_plus));
-                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
-                            mana_9_plus.setColorFilter(Color.rgb(0,169,156));
-
-                            return true;
-                        } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_9_plus, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?cost>=9");
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "9+");
-                            startActivity(startIntent);
+                            manaFilter(8);
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -758,21 +648,15 @@ public class CardsJSON extends DrawerMenu {
                 all.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
-
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
                             manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.all_cards));
                             manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
                             all.setColorFilter(Color.rgb(0,169,156));
-
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.all_cards, Color.WHITE, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-
-                            Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "?collectible=1");
-                            startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "ALL");
-                            startActivity(startIntent);
+                            manaFilter(411);
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -806,12 +690,6 @@ public class CardsJSON extends DrawerMenu {
                 manaIcon.setImageResource(R.drawable.mana_7);
             } else if (getIconId().equals("7+")) {
                 manaIcon.setImageResource(R.drawable.mana_7_plus);
-            } else if (getIconId().equals("8")) {
-                manaIcon.setImageResource(R.drawable.mana_8);
-            } else if (getIconId().equals("9")) {
-                manaIcon.setImageResource(R.drawable.mana_9);
-            } else if (getIconId().equals("9+")) {
-                manaIcon.setImageResource(R.drawable.mana_9_plus);
             } else if (getIconId().equals("ALL")) {
                 manaIcon.setImageResource(R.drawable.all_cards);
             }

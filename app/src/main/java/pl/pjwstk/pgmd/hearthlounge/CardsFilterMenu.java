@@ -47,6 +47,9 @@ public class CardsFilterMenu extends DrawerMenu {
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "ALL");
                     startActivity(startIntent);
                     return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.setBackgroundResource(R.drawable.normal);
+                    return true;
                 }
                 return false;
             }
@@ -75,6 +78,12 @@ public class CardsFilterMenu extends DrawerMenu {
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Mage");
                     startActivity(startIntent);
                     return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    return true;
                 }
                 return false;
             }
@@ -98,6 +107,12 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Rogue");
                     startActivity(startIntent);
+                    return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
                     return true;
                 }
                 return false;
@@ -123,6 +138,12 @@ public class CardsFilterMenu extends DrawerMenu {
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Paladin");
                     startActivity(startIntent);
                     return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    return true;
                 }
                 return false;
             }
@@ -146,6 +167,12 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Druid");
                     startActivity(startIntent);
+                    return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
                     return true;
                 }
                 return false;
@@ -171,6 +198,12 @@ public class CardsFilterMenu extends DrawerMenu {
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Shaman");
                     startActivity(startIntent);
                     return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    return true;
                 }
                 return false;
             }
@@ -194,6 +227,12 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Warlock");
                     startActivity(startIntent);
+                    return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
                     return true;
                 }
                 return false;
@@ -219,6 +258,12 @@ public class CardsFilterMenu extends DrawerMenu {
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Priest");
                     startActivity(startIntent);
                     return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    return true;
                 }
                 return false;
             }
@@ -242,6 +287,12 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Warrior");
                     startActivity(startIntent);
+                    return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
                     return true;
                 }
                 return false;
@@ -267,6 +318,12 @@ public class CardsFilterMenu extends DrawerMenu {
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Hunter");
                     startActivity(startIntent);
                     return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    return true;
                 }
                 return false;
             }
@@ -291,14 +348,15 @@ public class CardsFilterMenu extends DrawerMenu {
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Neutral");
                     startActivity(startIntent);
                     return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    return true;
                 }
                 return false;
             }
         });
-
-
-
-
     }
-
 }
