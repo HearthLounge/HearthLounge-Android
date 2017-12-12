@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.firebase.auth.FirebaseAuth;
 
 import pl.pjwstk.pgmd.hearthlounge.MainActivity;
 import pl.pjwstk.pgmd.hearthlounge.R;
@@ -32,6 +33,7 @@ import pl.pjwstk.pgmd.hearthlounge.authentication.LogIn;
 import pl.pjwstk.pgmd.hearthlounge.authentication.LogOut;
 import pl.pjwstk.pgmd.hearthlounge.authentication.SignUp;
 import pl.pjwstk.pgmd.hearthlounge.authentication.UserAccount;
+import pl.pjwstk.pgmd.hearthlounge.authentication.UserService;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 
 /**
@@ -52,11 +54,17 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
     private static final String urlProfileImg = "https://cdn.pixabay.com/photo/2016/12/13/16/17/dancer-1904467_1280.png";
     public static int navItemIndex = 0;
 
+    //private FirebaseAuth fbAuth;
+
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        fbAuth = FirebaseAuth.getInstance();
+//        checkUserLog();
 
         // ZMIANA CZCIONKI DLA PASKA "TOOLBAR"
         SpannableString s = new SpannableString(getTitle());
@@ -213,4 +221,11 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
         anim.setDuration(500);
         anim.start();
     }
+
+//    public void checkUserLog(){
+//
+//        Intent i = new Intent(getApplicationContext(), UserService.class);
+//        if(fbAuth.getUid() == null){ Toast.makeText(getApplicationContext(),"Hello, stranger...", Toast.LENGTH_SHORT).show(); }
+//        else{String uid = fbAuth.getUid(); i.putExtra("uid", uid); startService(i); }
+//    }
 }
