@@ -166,7 +166,7 @@ public class User {
     }
 
     public String getBattletag() {
-        if(battletag == null){ battletag = "";}
+        if(battletag == null){ battletag = "battletag null :(";}
         return battletag;
     }
 

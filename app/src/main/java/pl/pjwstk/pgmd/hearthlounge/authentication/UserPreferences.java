@@ -37,7 +37,6 @@ public class UserPreferences {
     public static final String keyTwitch = "twitch";
     public static final String keyYoutube = "youtube";
 
-    private static final String APP_SHARED_PREFS = UserPreferences.class.getSimpleName();
     private SharedPreferences sharedPrefs;
     private SharedPreferences.Editor prefsEditor;
 
@@ -55,7 +54,7 @@ public class UserPreferences {
 
         prefsEditor.putString(keyUsername, user.getUsername());
         prefsEditor.putString(keyEmail, user.getEmail());
-        prefsEditor.putString(keyRank, String.valueOf(user.getRank()));
+        prefsEditor.putLong(keyRank, user.getRank());
         prefsEditor.putString(keyRole, user.getRole());
         prefsEditor.putString(keyUid, user.getUid());
         prefsEditor.putString(keyUpdatedProfile, user.getUpdatedProfile().toString());
