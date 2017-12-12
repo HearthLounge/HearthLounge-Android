@@ -74,9 +74,6 @@ public class UserService extends Service {
     public void onCreate() {
         super.onCreate();
         userPref = new UserPreferences(this.getApplicationContext());
-        //Sprawdzanie czy jest użytkowanik
-        //if true
-        //if false
     }
 
     @Nullable
@@ -148,8 +145,9 @@ public class UserService extends Service {
                         //TODO userPref.setUserPref(user);
                         Toast.makeText(getApplicationContext(),"Success download " + user.getUsername() + " data", Toast.LENGTH_SHORT).show();
                         Toast.makeText(getApplicationContext(),"Your battletag is " + user.getBattletag(), Toast.LENGTH_SHORT).show();
-                        userPref.setValuePref("username",user.getUsername());
+                        userPref.setUserPref(user);
                         Toast.makeText(getApplicationContext(),"Your userPref username is " + userPref.getUsernamePref(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Your userPref battletag is " + userPref.getSingleStringPref("battletag"), Toast.LENGTH_SHORT).show();
                     }
                 }
             }

@@ -3,8 +3,10 @@ package pl.pjwstk.pgmd.hearthlounge.authentication;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -30,17 +32,20 @@ import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 import pl.pjwstk.pgmd.hearthlounge.view.MakeImageToast;
 
 /**
- * Created by Maciek Dembowski on 25.11.2017.
+ * Created by Maciek Dembowski/Froozy on 25.11.2017.
  */
 
 public class UserAccount extends DrawerMenu{
 
+    UserPreferences userPref;
+    public SharedPreferences.Editor userPrefs;
     public MakeImageToast toast;
     private static final String urlProfileImg = "https://cdn.pixabay.com/photo/2016/12/13/16/17/dancer-1904467_1280.png";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        userPref = new UserPreferences(this.getApplicationContext());
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.user_account, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -60,18 +65,19 @@ public class UserAccount extends DrawerMenu{
                 .into(userAvatar);
 
         TextView userName = (TextView)findViewById(R.id.user_name);
-        userName.setText(user.getUsername());
+        userName.setText(userPref.getSingleStringPref("username"));
 
         TextView userRank = (TextView)findViewById(R.id.user_rank);
-//        userRank.setText(user.getRank());
+        userRank.setText("Rank: " + userPref.getRankPref().toString());
 
+        //TODO czy w ogóle potrzebne
         EditText editEmail = (EditText) findViewById(R.id.edit_email_account);
-//        editEmail jakoś już musisz po swojemu, bo tu ma być nadpisywany email w firebase
+        editEmail.setText(userPref.getSingleStringPref("email"));
 
         Button buttonUpload = (Button) findViewById(R.id.button_upload);
 
         EditText battletag = (EditText)findViewById(R.id.edit_battletag);
-//        create_user(battletag.getText().toString(); // FIREBASE
+        battletag.setText(userPref.getSingleStringPref("battletag"));
 
         final ImageView favouriteClassIcon = (ImageView) findViewById(R.id.image_view_playerclass);
         favouriteClassIcon.setOnTouchListener(new View.OnTouchListener() {
@@ -91,16 +97,16 @@ public class UserAccount extends DrawerMenu{
         });
 
         EditText facebook = (EditText)findViewById(R.id.edit_facebook);
-//        create_user(facebook.getText().toString(); // FIREBASE
+        facebook.setText(userPref.getSingleStringPref("facebook"));
 
         EditText twitter = (EditText)findViewById(R.id.edit_twitter);
-//        create_user(twitter.getText().toString(); // FIREBASE
+        twitter.setText(userPref.getSingleStringPref("twitter"));
 
         EditText twitch = (EditText)findViewById(R.id.edit_twitch);
-//        create_user(twitch.getText().toString(); // FIREBASE
+        twitch.setText(userPref.getSingleStringPref("twitch"));
 
         EditText youtube = (EditText)findViewById(R.id.edit_youtube);
-//        create_user(youtube.getText().toString(); // FIREBASE
+        youtube.setText(userPref.getSingleStringPref("youtube"));
 
         Button deleteAccount = (Button) findViewById(R.id.button_delete_account);
         // Usuwanie z FIREBASE
@@ -126,7 +132,7 @@ public class UserAccount extends DrawerMenu{
             }
         });
 
-        // TODO // RESZTA
+        // TODO RESZTA
 
     }
 

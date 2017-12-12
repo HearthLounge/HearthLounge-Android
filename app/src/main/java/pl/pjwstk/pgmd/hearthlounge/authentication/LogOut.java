@@ -37,7 +37,6 @@ public class LogOut extends DrawerMenu {
         startService(i);
 
 
-
         Toast.makeText(LogOut.this," Wylogowany ", Toast.LENGTH_SHORT).show();
         Intent goto_sign_in = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(goto_sign_in);
