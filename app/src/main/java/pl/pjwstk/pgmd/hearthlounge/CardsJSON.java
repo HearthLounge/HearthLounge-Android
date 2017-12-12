@@ -411,7 +411,6 @@ public class CardsJSON extends DrawerMenu {
             }
             chosenMana.onPostExecute(temp);
 
-
 //            for(Card cards : cardList){
 //                if (manaValue == 411) {
 //                    chosenMana.onPostExecute(cardList);
