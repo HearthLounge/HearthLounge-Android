@@ -24,6 +24,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import pl.pjwstk.pgmd.hearthlounge.CardsJSON;
 import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
@@ -51,8 +54,6 @@ public class UserAccount extends DrawerMenu{
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
 
-        User user = new User();
-
         // NAZEWNICTWO JAK userAvatar I INNE ZMIEN JAK CHCESZ :D
 
         ImageView userAvatar = (ImageView)findViewById(R.id.user_avatar);
@@ -75,6 +76,15 @@ public class UserAccount extends DrawerMenu{
         editEmail.setText(userPref.getSingleStringPref("email"));
 
         Button buttonUpload = (Button) findViewById(R.id.button_upload);
+        buttonUpload.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+
+                updateUserData();
+                Intent goto_sign_in = new Intent(getApplicationContext(), LogIn.class);
+                startActivity(goto_sign_in);
+            }
+        });
 
         EditText battletag = (EditText)findViewById(R.id.edit_battletag);
         battletag.setText(userPref.getSingleStringPref("battletag"));
@@ -135,6 +145,30 @@ public class UserAccount extends DrawerMenu{
         // TODO RESZTA
 
     }
+
+    private void updateUserData(){
+
+
+        // TODO add checker of changes and then save them to Shared Pref. because there's not another way to take data in service from there ;)
+
+
+        Toast.makeText(UserAccount.this,"Updating", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(getApplicationContext(), UserService.class);
+        i.putExtra("action", "update");
+        i.putExtra("uid", userPref.getSingleStringPref("uid"));
+        startService(i);
+    }
+
+    private HashMap<String,Object> checkChanges() {
+
+        HashMap<String,Object> changes = new HashMap<>();
+
+        // TODO :/ Boring thing
+
+
+        return changes;
+    }
+
 
     private PopupWindow initiatePopupWindow() {
         PopupWindow mDropdown = null;

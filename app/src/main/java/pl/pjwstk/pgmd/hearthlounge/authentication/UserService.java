@@ -16,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import pl.pjwstk.pgmd.hearthlounge.model.MyApplicationContext;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 
 import static android.content.ContentValues.TAG;
@@ -86,29 +87,29 @@ public class UserService extends Service {
 
             case "login":
             {
-                Toast.makeText(getApplicationContext(),"service login", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"ACTION LOGIN", Toast.LENGTH_SHORT).show();
                 sUserUid = intent.getStringExtra("uid");
                 sUserEmail = fbUser.getEmail();
-                getUserData(sUserEmail);
+                UserDataConnector(sUserEmail,intent.getStringExtra("action"));
                 break;
             }
             case "logout":
             {
-                Toast.makeText(getApplicationContext(),"service logout", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"ACTION LOGOUT", Toast.LENGTH_SHORT).show();
                 userPref.clearUserPref();
                 break;
             }
-            case "start_0":
+            case "start":
             {
-                Toast.makeText(getApplicationContext(),"service start 0", Toast.LENGTH_SHORT).show();
-//                stopSelf();
-                //userPref.clearUserPref();
+                Toast.makeText(getApplicationContext(),"ACTION START", Toast.LENGTH_SHORT).show();
                 break;
             }
-            case "start_1":
+            case "update":
             {
-                Toast.makeText(getApplicationContext(),"service start 1", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getApplicationContext(),"ACTION UPDATE", Toast.LENGTH_SHORT).show();
+                sUserUid = intent.getStringExtra("uid");
+                sUserEmail = fbUser.getEmail();
+                UserDataConnector(sUserEmail,intent.getStringExtra("action"));
                 break;
             }
 
@@ -117,8 +118,7 @@ public class UserService extends Service {
         Thread thread = new Thread(new MyThreadUserService(startId));
         thread.start();
 
-        return START_NOT_STICKY;
-        //return START_STICKY;
+        return START_STICKY;
     }
 
     @Override
@@ -127,7 +127,7 @@ public class UserService extends Service {
         super.onDestroy();
     }
 
-    public void getUserData(String email){
+    public void UserDataConnector(String email,final String action){
 
         Query userQuery = fbRef.orderByChild("email").equalTo(email);
         userQuery.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -136,12 +136,19 @@ public class UserService extends Service {
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
                     user = singleSnapshot.getValue(User.class);
                     if(user != null) {
-                        //TODO userPref.setUserPref(user);
-                        Toast.makeText(getApplicationContext(),"Success download " + user.getUsername() + " data", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(),"Your battletag is " + user.getBattleTag(), Toast.LENGTH_SHORT).show();
-                        userPref.setUserPref(user);
-                        Toast.makeText(getApplicationContext(),"Your userPref username is " + userPref.getUsernamePref(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(),"Your userPref battletag is " + userPref.getSingleStringPref("battletag"), Toast.LENGTH_SHORT).show();
+                        if(action == "login") {
+                            //TODO userPref.setUserPref(user);
+                            Toast.makeText(getApplicationContext(), "Success download " + user.getUsername() + " data", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Your battletag is " + user.getBattleTag(), Toast.LENGTH_SHORT).show();
+                            userPref.setUserPref(user);
+                            Toast.makeText(getApplicationContext(), "Your userPref username is " + userPref.getUsernamePref(), Toast.LENGTH_SHORT).show();
+                        }
+                        else if(action == "update"){
+
+
+
+
+                        }
                     }
                 }
             }
@@ -153,7 +160,10 @@ public class UserService extends Service {
 
 
     }
+
 }
+
+
 
 
 //        fbRef = fbRef.child(uid);

@@ -71,6 +71,27 @@ public class User {
         this.rank = Long.parseLong(rank);
     }
 
+    public User(String username, String email, String role, String uid, Long rank, Boolean updatedProfile, String battleTag, String favClass, String facebook, String twitter, String twitch, String youtube){
+
+        this.username = username;
+        this.email = email;
+        this.username = username;
+        this.role = role;
+        this.uid = uid;
+        this.rank = rank;
+        this.updatedProfile = updatedProfile;
+        this.battleTag = battleTag;
+        this.favClass = favClass;
+        this.facebook = facebook;
+        this.twitter = twitter;
+        this.twitch = twitch;
+        this.youtube = youtube;
+
+
+
+
+    }
+
     public String getUsername() {
         if(username == null){ username = "";}
         return username;

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
+import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 
 /**
@@ -57,24 +58,6 @@ public class UserPreferences {
         prefsEditor.putString(keyTwitter, user.getTwitter());
         prefsEditor.putString(keyTwitch, user.getTwitch());
         prefsEditor.putString(keyYoutube, user.getYoutube());
-
-//        Map<String,String> UserMap = new HashMap<String, String>();
-//        UserMap.put(keyUsername, user.getUsername());
-//        UserMap.put(keyEmail, user.getEmail());
-//        UserMap.put(keyRank, String.valueOf(user.getRank()));
-//        UserMap.put(keyRole, user.getRole());
-//        UserMap.put(keyUid, user.getUid());
-//        UserMap.put(keyUpdatedProfile, user.getUpdatedProfile().toString());
-//        UserMap.put(keyBattletag, user.getBattleTag());
-//        UserMap.put(keyFavClass, user.getFavClass());
-//        UserMap.put(keyFacebook, user.getFacebook());
-//        UserMap.put(keyTwitter, user.getTwitter());
-//        UserMap.put(keyTwitch, user.getTwitch());
-//        UserMap.put(keyYoutube, user.getYoutube());
-
-        //setAllPref(UserMap);
-
-
 
         prefsEditor.commit();
     }

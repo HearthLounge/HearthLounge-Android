@@ -94,7 +94,7 @@ public class LogIn extends DrawerMenu {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Hello user!", Toast.LENGTH_SHORT).show();
-                            UDS(fbAuth.getCurrentUser().getUid());
+                            toUserService(fbAuth.getCurrentUser().getUid());
                             go_to_main_menu();
 
                             //updateUI(user);
@@ -114,7 +114,7 @@ public class LogIn extends DrawerMenu {
         startActivity(menu_intent);
     }
 
-    public void UDS(String uid){    //User Data Service
+    public void toUserService(String uid){    //User Data Service
         Intent i = new Intent(getApplicationContext(), UserService.class);
         // potentially add data to the intent
         i.putExtra("action", "login");

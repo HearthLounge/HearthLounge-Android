@@ -46,6 +46,19 @@
 
 
     <!--// Nasze-->
+    <string name="keyUsername">username</string>
+    <string name="keyEmail">email</string>
+    <string name="keyRole">role</string>
+    <string name="keyRank">rank</string>
+    <string name="keyUid">yid</string>
+    <string name="keyUpdatedProfile">updatedProfile</string>
+    <string name="keyBattleTag">battleTag</string>
+    <string name="keyFavClass">favClass</string>
+    <string name="keyFacebook">facebook</string>
+    <string name="keyTwitter">twitter</string>
+    <string name="keyTwitch">twitch</string>
+    <string name="keyYoutube">youtube</string>
+
     <string name="title_cards_filter_menu">Cards Menu</string>
     <string name="title_player_class_cards">Player Cards</string>
 
