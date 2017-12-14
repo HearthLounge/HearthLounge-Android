@@ -1,26 +1,20 @@
 package pl.pjwstk.pgmd.hearthlounge.authentication;
 
-import android.app.Application;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Map;
 
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 
@@ -144,7 +138,7 @@ public class UserService extends Service {
                     if(user != null) {
                         //TODO userPref.setUserPref(user);
                         Toast.makeText(getApplicationContext(),"Success download " + user.getUsername() + " data", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(),"Your battletag is " + user.getBattletag(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Your battletag is " + user.getBattleTag(), Toast.LENGTH_SHORT).show();
                         userPref.setUserPref(user);
                         Toast.makeText(getApplicationContext(),"Your userPref username is " + userPref.getUsernamePref(), Toast.LENGTH_SHORT).show();
                         Toast.makeText(getApplicationContext(),"Your userPref battletag is " + userPref.getSingleStringPref("battletag"), Toast.LENGTH_SHORT).show();

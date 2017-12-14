@@ -1,16 +1,9 @@
 package pl.pjwstk.pgmd.hearthlounge.authentication;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import android.widget.Toast;
 
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 
@@ -58,7 +51,7 @@ public class UserPreferences {
         prefsEditor.putString(keyRole, user.getRole());
         prefsEditor.putString(keyUid, user.getUid());
         prefsEditor.putString(keyUpdatedProfile, user.getUpdatedProfile().toString());
-        prefsEditor.putString(keyBattletag, user.getBattletag());
+        prefsEditor.putString(keyBattletag, user.getBattleTag());
         prefsEditor.putString(keyFavClass, user.getFavClass());
         prefsEditor.putString(keyFacebook, user.getFacebook());
         prefsEditor.putString(keyTwitter, user.getTwitter());
@@ -72,7 +65,7 @@ public class UserPreferences {
 //        UserMap.put(keyRole, user.getRole());
 //        UserMap.put(keyUid, user.getUid());
 //        UserMap.put(keyUpdatedProfile, user.getUpdatedProfile().toString());
-//        UserMap.put(keyBattletag, user.getBattletag());
+//        UserMap.put(keyBattletag, user.getBattleTag());
 //        UserMap.put(keyFavClass, user.getFavClass());
 //        UserMap.put(keyFacebook, user.getFacebook());
 //        UserMap.put(keyTwitter, user.getTwitter());

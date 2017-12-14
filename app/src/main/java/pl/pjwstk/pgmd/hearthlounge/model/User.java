@@ -1,83 +1,59 @@
 package pl.pjwstk.pgmd.hearthlounge.model;
 
-import android.media.Image;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
-import static java.lang.Math.toIntExact;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-//TODO Make one per time!!!
-//TODO MAKE EMPTY battletag, favClass itp :|
+@IgnoreExtraProperties
 public class User {
 
-    FirebaseDatabase fbDb = FirebaseDatabase.getInstance();
-    FirebaseAuth fbAuth = FirebaseAuth.getInstance();
+    private FirebaseDatabase fbDb = FirebaseDatabase.getInstance();
+    private FirebaseAuth fbAuth = FirebaseAuth.getInstance();
 
     private String username;
     private String email;
-    private Image avatar;   //How to do it???
+    //private Image avatar;   //How to do it???
 
     private long rank;
     private String role;
     private String uid;
     private Boolean updatedProfile;
 
-    private String battletag;
+    private String battleTag;
     private String favClass;
 
-    private String facebook;// = "Nie podano"; Wyświetla nie podano!!!
+    private String facebook;
     private String twitter;
     private String twitch;
     private String youtube;
 
-//    Map<String, Boolean> checkerMap;
-
     public User(){
 
-//        checkerMap = new HashMap<>();
-//        checkerMap.put("username",false);
-//        checkerMap.put("email",false);
-//        checkerMap.put("rank",false);
-//        checkerMap.put("role",false);
-//        checkerMap.put("uid",false);
-//        checkerMap.put("updatedProfile",false);
-//        checkerMap.put("battletag",false);
-//        checkerMap.put("favClass",false);
-//        checkerMap.put("facebook",false);
-//        checkerMap.put("twitter",false);
-//        checkerMap.put("twitch",false);
-//        checkerMap.put("youtube",false);
+
     }
 
     public User(String username, String email, String uid){   //Uzupełnić o dodanie reszty ze zmiennych bo auth idzie oddzielnie
 
         this.username = username;
         this.email = email;
-        this.username = username;
         this.role = "user";
         this.uid = uid;
         this.updatedProfile = false;
         this.rank = 1;
     }
 
-    public User(String username, String email, String role, String uid, long rank, Boolean updatedProfile/*, String battletag, String favClass, String facebook, String twitter, String twitch, String youtube*/){
-
-        this.username = username;
-        this.email = email;
-        this.username = username;
-        this.role = role;
-        this.uid = uid;
-        this.updatedProfile = updatedProfile;
-        this.rank = rank;
-
-    }
+//    public User(String username, String email, String role, String uid, long rank, Boolean updatedProfile/*, String battleTag, String favClass, String facebook, String twitter, String twitch, String youtube*/){
+//
+//        this.username = username;
+//        this.email = email;
+//        this.username = username;
+//        this.role = role;
+//        this.uid = uid;
+//        this.updatedProfile = updatedProfile;
+//        this.rank = rank;
+//
+//    }
 
     public User(String username, String email, String role, String uid, String rank, String updatedProfile){
 
@@ -126,11 +102,6 @@ public class User {
         this.rank = rank;
     }
 
-    @Exclude
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
     public String getRole() {
         return role;
     }
@@ -155,23 +126,13 @@ public class User {
         this.updatedProfile = updatedProfile;
     }
 
-    @Exclude
-    public  void setUpdatedProfile(String updatedProfile){
-        if(updatedProfile == "false"){
-            this.updatedProfile = false;
-        }
-        else if(updatedProfile == "true"){
-            this.updatedProfile = true;
-        }
+    public String getBattleTag() {
+        if(battleTag == null){ battleTag = "battleTag null :(";}
+        return battleTag;
     }
 
-    public String getBattletag() {
-        if(battletag == null){ battletag = "battletag null :(";}
-        return battletag;
-    }
-
-    public void setBattletag(String battletag) {
-        this.battletag = battletag;
+    public void setBattleTag(String battleTag) {
+        this.battleTag = battleTag;
     }
 
     public String getFavClass() {
