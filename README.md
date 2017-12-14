@@ -2,23 +2,23 @@
 
 # TODO
 
-User authentication/sign up/data store
+> User authentication/sign up/data store
   - updating user data in app
   - send changes to DB
 
-- Cards
+> Cards
   - Filters
 
-- Decks
+> Decks
   - Read from database
   - Convert to useable form
   - 
 
-- Expansions
+> Expansions
   - Everything
 
-- Adventures
+> Adventures
   - Everything
   
-- Map localizator
+> Map localizator
   - Everything
