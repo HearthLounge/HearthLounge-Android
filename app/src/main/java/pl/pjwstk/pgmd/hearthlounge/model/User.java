@@ -93,7 +93,7 @@ public class User {
     }
 
     public String getUsername() {
-        if(username == null){ username = "";}
+//        if(username == null){ username = "";}
         return username;
     }
 
@@ -148,7 +148,6 @@ public class User {
     }
 
     public String getBattleTag() {
-        if(battleTag == null){ battleTag = "battleTag null :(";}
         return battleTag;
     }
 
@@ -157,7 +156,7 @@ public class User {
     }
 
     public String getFavClass() {
-        if(favClass == null){ favClass = "";}
+        //if(favClass == null){ favClass = "";}
         return favClass;
     }
 
@@ -166,7 +165,7 @@ public class User {
     }
 
     public String getFacebook() {
-        if(facebook == null){ facebook = "";}
+//        if(facebook == null){ facebook = "";}
         return facebook;
     }
 
@@ -175,7 +174,7 @@ public class User {
     }
 
     public String getTwitter() {
-        if(twitter == null){ twitter = "";}
+//        if(twitter == null){ twitter = "";}
         return twitter;
     }
 
@@ -184,7 +183,7 @@ public class User {
     }
 
     public String getTwitch() {
-        if(twitch == null){ twitch = "";}
+//        if(twitch == null){ twitch = "";}
         return twitch;
     }
 
@@ -193,7 +192,7 @@ public class User {
     }
 
     public String getYoutube() {
-        if(youtube == null){ youtube = "";}
+//        if(youtube == null){ youtube = "";}
         return youtube;
     }
 

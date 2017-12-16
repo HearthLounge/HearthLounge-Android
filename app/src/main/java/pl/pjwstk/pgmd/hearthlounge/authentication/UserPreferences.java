@@ -45,7 +45,6 @@ public class UserPreferences {
 
     public void setUserPref(User user){
 
-
         prefsEditor.putString(keyUsername, user.getUsername());
         prefsEditor.putString(keyEmail, user.getEmail());
         prefsEditor.putLong(keyRank, user.getRank());
@@ -65,6 +64,10 @@ public class UserPreferences {
     public void clearUserPref(){
         prefsEditor.clear();
         prefsEditor.commit();
+    }
+
+    public boolean contain(String key){
+        return sharedPrefs.contains("key");
     }
 
     public void updateUserPref(){
@@ -87,8 +90,9 @@ public class UserPreferences {
 
     public String getSingleStringPref(String key){
 
-        return sharedPrefs.getString(key,"error");
-
+        if(sharedPrefs.contains(key)){
+        return sharedPrefs.getString(key,"DAFUK");}
+        return null;
     }
 
     public Boolean getUpdatedProfilePref(){

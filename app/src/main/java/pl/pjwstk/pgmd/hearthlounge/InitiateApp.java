@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.google.firebase.auth.FirebaseAuth;
 
 import pl.pjwstk.pgmd.hearthlounge.authentication.LogIn;
+import pl.pjwstk.pgmd.hearthlounge.authentication.UserPreferences;
 import pl.pjwstk.pgmd.hearthlounge.authentication.UserService;
 
 /**
@@ -16,7 +17,7 @@ import pl.pjwstk.pgmd.hearthlounge.authentication.UserService;
 public class InitiateApp extends Activity {
 
     FirebaseAuth fbAuth;
-
+    UserPreferences userPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +42,14 @@ public class InitiateApp extends Activity {
     public void checkUserLog(){
 
         Intent i = new Intent(getApplicationContext(), UserService.class);
-        if(fbAuth.getUid() == null)
+        if(!userPref.contain("uid"))
         {
             i.putExtra("action", "start_0");
             startService(i);
         }
         else
         {
-            String uid = fbAuth.getUid();
             i.putExtra("action", "start_1");
-            i.putExtra("uid", uid);
             startService(i);
         }
     }
