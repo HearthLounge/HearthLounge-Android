@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -49,6 +50,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
@@ -388,40 +390,33 @@ public class CardsJSON extends DrawerMenu {
             inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         }
 
-        public void manaFilter(int manaValue)
-        //public List<Card> manaFilter(int manaValue) return temp i uruchamiać to po za manaFilter(chosenMana)
-        {
-            List<Card> temp = new ArrayList<>();
+        public void manaFilter(int manaValue) {
+
             JSONTask chosenMana = new JSONTask();
 
-            if (manaValue == 411){
-                chosenMana.onPostExecute(cardList);
+            List<Card> temp = new ArrayList<>();
+            final List<Card> unmodifiable = Collections.unmodifiableList(cardList);
+
+            if (!CardListCache.getInstance().getList().containsAll(unmodifiable)) {
+                CardListCache.getInstance().addList(unmodifiable);
+            }
+
+            if (manaValue == 411) {
+                temp = CardListCache.getInstance().getList();
             } else if (manaValue == 8){
-                for(Card cards : cardList){
+                for(Card cards : CardListCache.getInstance().getList()) {
                     if (cards.getCost() >= manaValue-1) {
                         temp.add(cards);
                     }
                 }
             } else {
-                for(Card cards : cardList){
+                for(Card cards : CardListCache.getInstance().getList()) {
                     if (cards.getCost() == manaValue) {
                         temp.add(cards);
                     }
                 }
             }
             chosenMana.onPostExecute(temp);
-
-//            for(Card cards : cardList){
-//                if (manaValue == 411) {
-//                    chosenMana.onPostExecute(cardList);
-//                } else if (cards.getCost() == manaValue) {
-//                    temp.add(cards);
-//                } else if (cards.getCost() >= manaValue-1) {
-//                    cards.getCost();
-//                }
-//            }
-//            chosenMana.onPostExecute(temp);
-
         }
 
         private PopupWindow initiatePopupWindow() {
@@ -466,6 +461,7 @@ public class CardsJSON extends DrawerMenu {
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
                             manaFilter(0);
+                            setIconId("0");
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -487,6 +483,7 @@ public class CardsJSON extends DrawerMenu {
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_1, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
                             manaFilter(1);
+                            setIconId("1");
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -508,6 +505,7 @@ public class CardsJSON extends DrawerMenu {
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_2, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
                             manaFilter(2);
+                            setIconId("2");
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -529,6 +527,7 @@ public class CardsJSON extends DrawerMenu {
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_3, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
                             manaFilter(3);
+                            setIconId("3");
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -550,6 +549,7 @@ public class CardsJSON extends DrawerMenu {
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_4, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
                             manaFilter(4);
+                            setIconId("4");
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -571,6 +571,7 @@ public class CardsJSON extends DrawerMenu {
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_5, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
                             manaFilter(5);
+                            setIconId("5");
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -592,6 +593,7 @@ public class CardsJSON extends DrawerMenu {
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_6, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
                             manaFilter(6);
+                            setIconId("6");
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -613,6 +615,7 @@ public class CardsJSON extends DrawerMenu {
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
                             manaFilter(7);
+                            setIconId("7");
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -635,6 +638,7 @@ public class CardsJSON extends DrawerMenu {
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7_plus, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
                             manaFilter(8);
+                            setIconId("7+");
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -656,6 +660,7 @@ public class CardsJSON extends DrawerMenu {
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.all_cards, Color.WHITE, Toast.LENGTH_SHORT).show(); // + item.getTitle()
                             manaFilter(411);
+                            setIconId("ALL");
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
