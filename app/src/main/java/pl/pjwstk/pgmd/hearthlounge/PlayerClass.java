@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +22,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -62,7 +65,7 @@ public class PlayerClass extends DrawerMenu {
     private final String KEY = "T15rGIqg2lmshwDGMsX3mZeWM7vBp1ZmfvVjsnFba6SXP2WK5Q";
     private String playerClass;
 
-    private ListView listViewCards;
+    private GridView listViewCards;
     private ProgressDialog dialog;
 
     public PlayerClass(){}
@@ -109,7 +112,7 @@ public class PlayerClass extends DrawerMenu {
                 .build();
         ImageLoader.getInstance().init(config); // Do it on Application start
 
-        listViewCards = (ListView) findViewById(R.id.list_view_cards);
+        listViewCards = (GridView) findViewById(R.id.list_view_cards);
         // To start fetching the data when app start, uncomment below line to start the async task.
         new PlayerClass.JSONTask().execute(URL + HEADER + KEY);
 
@@ -180,8 +183,7 @@ public class PlayerClass extends DrawerMenu {
             return null;
         }
 
-        final Animation animationScale = AnimationUtils.loadAnimation(PlayerClass.this, R.anim.anim_scale);
-
+        //final Animation animationScale = AnimationUtils.loadAnimation(PlayerClass.this, R.anim.anim_scale);
         @Override
         protected void onPostExecute(final List<Card> result) {
             super.onPostExecute(result);
@@ -192,8 +194,7 @@ public class PlayerClass extends DrawerMenu {
                 listViewCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {  // list item click opens a new detailed activity
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                        view.startAnimation(animationScale);
+                        //view.startAnimation(animationScale);
 
                         Card cardModel = result.get(position); // getting the model
                         Intent intent = new Intent(PlayerClass.this, SelectedCard.class);
@@ -245,6 +246,16 @@ public class PlayerClass extends DrawerMenu {
             final ProgressBar progressBar = (ProgressBar)convertView.findViewById(R.id.progressBar);
 
             final ViewHolder finalHolder = holder;
+
+            Display display = getWindowManager().getDefaultDisplay();
+            int width = display.getWidth()/3;
+            int height = display.getHeight()/3;
+            FrameLayout.LayoutParams parms = new FrameLayout.LayoutParams(width,height);
+            parms.gravity=Gravity.CENTER;
+            parms.topMargin = -height/8;
+            parms.bottomMargin = -height/11;
+            holder.image_view_card.setLayoutParams(parms);
+
             ImageLoader.getInstance().displayImage(cardList.get(position).getImg(), holder.image_view_card, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String imageUri, View view) {

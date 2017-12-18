@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,6 +24,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -51,7 +53,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
@@ -61,7 +65,7 @@ import pl.pjwstk.pgmd.hearthlounge.view.MakeImageToast;
  * Created by Maciek Dembowski on 16.10.2017.
  */
 
-public class CardsJSON extends DrawerMenu {
+public class CardsJSON extends JSON {
 
     private final String URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards" + getSuffixLink();
     private final String HEADER = "X-Mashape-Key";
@@ -71,7 +75,7 @@ public class CardsJSON extends DrawerMenu {
 
     public MakeImageToast toast;
 
-    private ListView listViewCards;
+    private GridView listViewCards;
     private ProgressDialog dialog;
 
     public CardsJSON(){}
@@ -126,7 +130,9 @@ public class CardsJSON extends DrawerMenu {
                 .build();
         ImageLoader.getInstance().init(config); // Do it on Application start
 
-        listViewCards = (ListView)findViewById(R.id.list_view_cards);
+//        listViewCards = (ListView)findViewById(R.id.list_view_cards);
+        listViewCards = (GridView) findViewById(R.id.list_view_cards);
+
         // To start fetching the data when app start, uncomment below line to start the async task.
         new JSONTask().execute(URL + HEADER + KEY);
     }
@@ -138,6 +144,12 @@ public class CardsJSON extends DrawerMenu {
             super.onPreExecute();
             dialog.show();
         }
+
+//        @Override
+//        protected List<Card> doInBackground(String... params) {
+//            return CardListCache.getInstance().getList();
+//        }
+
 
         @Override
         protected List<Card> doInBackground(String... params) {
@@ -351,7 +363,7 @@ public class CardsJSON extends DrawerMenu {
             return null;
         }
 
-        final Animation animationScale = AnimationUtils.loadAnimation(CardsJSON.this, R.anim.anim_scale);
+        //final Animation animationScale = AnimationUtils.loadAnimation(CardsJSON.this, R.anim.anim_scale);
         @Override
         protected void onPostExecute(final List<Card> result) {
             super.onPostExecute(result);
@@ -362,8 +374,7 @@ public class CardsJSON extends DrawerMenu {
                 listViewCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {  // list item click opens a new detailed activity
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                        view.startAnimation(animationScale);
+                        //view.startAnimation(animationScale);
 
                         Card cardModel = result.get(position); // getting the model
                         Intent intent = new Intent(CardsJSON.this, SelectedCard.class);
@@ -406,6 +417,11 @@ public class CardsJSON extends DrawerMenu {
             } else if (manaValue == 8){
                 for(Card cards : CardListCache.getInstance().getList()) {
                     if (cards.getCost() >= manaValue-1) {
+                        Collections.sort(temp, new Comparator<Card>() {
+                            public int compare(Card a, Card b) {
+                                return Integer.compare(a.getCost(), b.getCost());
+                            }
+                        });
                         temp.add(cards);
                     }
                 }
@@ -440,7 +456,7 @@ public class CardsJSON extends DrawerMenu {
 //                Drawable background = getResources().getDrawable(android.R.drawable.editbox_dropdown_dark_frame);
 //                mDropdown.setBackgroundDrawable(background);
 //                layout.setBackgroundResource(R.drawable.toast_opacity);
-                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.RIGHT|Gravity.BOTTOM, 10,10);
+                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.RIGHT|Gravity.CENTER_VERTICAL, 10,10);
 //                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.CENTER, 0,0);
 
                 final ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
@@ -730,6 +746,10 @@ public class CardsJSON extends DrawerMenu {
                         v.setBackgroundResource(R.drawable.normal);
 
                         initiatePopupWindow();
+                        return true;
+                    } else if (action == MotionEvent.ACTION_CANCEL) {
+                        v.setBackgroundResource(R.drawable.normal);
+                        return true;
                     }
                     return false;
                 }
@@ -749,6 +769,19 @@ public class CardsJSON extends DrawerMenu {
             final ProgressBar progressBar = (ProgressBar)convertView.findViewById(R.id.progressBar);
 
             final ViewHolder finalHolder = holder;
+
+            Display display = getWindowManager().getDefaultDisplay();
+            int width = display.getWidth()/3;
+            int height = display.getHeight()/3;
+            FrameLayout.LayoutParams parms = new FrameLayout.LayoutParams(width,height);
+            parms.gravity=Gravity.CENTER;
+//            if (display.getMetrics()) {
+//
+//            }
+            parms.topMargin = -height/8;
+            parms.bottomMargin = -height/11;
+            holder.image_view_card.setLayoutParams(parms);
+
             ImageLoader.getInstance().displayImage(cardList.get(position).getImg(), holder.image_view_card, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String imageUri, View view) {

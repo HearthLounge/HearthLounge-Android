@@ -174,7 +174,7 @@ public class UserAccount extends DrawerMenu{
     private PopupWindow initiatePopupWindow() {
         PopupWindow mDropdown = null;
         LayoutInflater mInflater;
-        ImageView favouriteClass=null;
+        ImageView favouriteClass;
 
         try {
 
@@ -193,6 +193,7 @@ public class UserAccount extends DrawerMenu{
 
             final PopupWindow finalMDropdown = mDropdown; // Potrzebne, żeby popup menu się zamknęło po wybraniu opcji
             final ImageView favouriteClassIcon = (ImageView) findViewById(R.id.image_view_playerclass);
+
             final ImageView mage = (ImageView)layout.findViewById(R.id.mage);
             mage.setOnTouchListener(new View.OnTouchListener() {
                 @Override

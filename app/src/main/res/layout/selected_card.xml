@@ -16,18 +16,29 @@
         android:padding="15dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             android:background="@drawable/frame">
 
-                <ImageView
-                    android:id="@+id/image_viewCard"
-                    android:layout_width="350dp"
-                    android:layout_height="400dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center">
 
-                    android:layout_weight="1.0"/>
-            <!--android:layout_marginTop="-20dp"-->
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/image_viewCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </FrameLayout>
+
+            </LinearLayout>
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -35,11 +46,25 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" />
 
-                <ImageView
-                    android:id="@+id/image_viewCardGold"
-                    android:layout_width="350dp"
-                    android:layout_height="400dp"
-                    android:layout_weight="1.0"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/image_viewCardGold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

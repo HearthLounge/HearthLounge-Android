@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/pearl"
     android:orientation="vertical"
-    tools:context=".CardsJSON"
-    android:background="@color/pearl">
+    tools:context=".CardsJSON">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/activity_horizontal_margin"
                 android:textColor="@color/primary_font_color"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
         </LinearLayout>
 
         <View
@@ -45,7 +45,7 @@
                 android:id="@+id/image_view_mana_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,22 +57,17 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!--<GridLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-
-        <!--android:columnCount="0"-->
-        <!--android:orientation="vertical">-->
-
-            <!--<Recycle-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:id="@+id/list_view_cards"/>-->
-    <!--</GridLayout>-->
-
-    <ListView
+    <GridView
+        android:id="@+id/list_view_cards"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/list_view_cards"/>
+        android:numColumns="auto_fit"
+        android:columnWidth="110dp"
+        android:stretchMode="columnWidth" />
+
+    <!--<ListView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:id="@+id/list_view_cards"/>-->
 
 </LinearLayout>

@@ -4,10 +4,13 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.text.Html;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -79,6 +82,15 @@ public class SelectedCard extends DrawerMenu {
             Card cardModel = new Gson().fromJson(json, Card.class);
 
             // Then later, when you want to display image
+            Display display = getWindowManager().getDefaultDisplay();
+            int width = display.getWidth()/2-70;
+            int height = display.getHeight()/2-70;
+
+            FrameLayout.LayoutParams parms = new FrameLayout.LayoutParams(width,height);
+            parms.topMargin = -height/8;
+//            parms.bottomMargin = -height/16;
+            image_view_card.setLayoutParams(parms);
+
             ImageLoader.getInstance().displayImage(cardModel.getImg(), image_view_card, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String imageUri, View view) {
@@ -100,6 +112,11 @@ public class SelectedCard extends DrawerMenu {
                     progressBar.setVisibility(View.GONE);
                 }
             });
+
+            FrameLayout.LayoutParams parms1 = new FrameLayout.LayoutParams(width,height);
+            parms1.topMargin = -height/8;
+//            parms1.bottomMargin = -height/16;
+            image_view_cardGold.setLayoutParams(parms1);
 
             Glide.with(SelectedCard.this).load(cardModel.getImgGold()).asGif().into(image_view_cardGold);
             ImageLoader.getInstance().displayImage(cardModel.getImgGold(), image_view_cardGold, new ImageLoadingListener() {

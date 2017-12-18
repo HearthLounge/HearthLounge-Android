@@ -1,14 +1,23 @@
 package pl.pjwstk.pgmd.hearthlounge;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
@@ -20,6 +29,7 @@ public class CardsFilterMenu extends DrawerMenu {
 
     private LinearLayout search, all_cards;
     private ImageButton buttonMage, buttonRogue, buttonPaladin, buttonDruid, buttonShaman, buttonWarlock, buttonPriest, buttonWarrior, buttonHunter, buttonNeutral;
+    private TextView textNeutral;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -30,6 +40,28 @@ public class CardsFilterMenu extends DrawerMenu {
         getLayoutInflater().inflate(R.layout.cards_filter_menu, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
+
+        search = (LinearLayout) findViewById(R.id.search);
+        search.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent motionEvent) {
+                int action = motionEvent.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    v.setBackgroundResource(R.drawable.pressed);
+                    return true;
+                } else if (action == MotionEvent.ACTION_UP) {
+                    v.animate().cancel();
+                    v.setBackgroundResource(R.drawable.normal);
+
+                    initiatePopupWindow();
+
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.setBackgroundResource(R.drawable.normal);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         all_cards = (LinearLayout) findViewById(R.id.all_cards);
         all_cards.setOnTouchListener(new View.OnTouchListener() {
@@ -56,8 +88,6 @@ public class CardsFilterMenu extends DrawerMenu {
         });
 
 
-        // TODO SEARCH BUTTON HERE
-
 
         buttonMage = (ImageButton) findViewById(R.id.button_mage);
         buttonMage.setOnTouchListener(new View.OnTouchListener() {
@@ -67,13 +97,15 @@ public class CardsFilterMenu extends DrawerMenu {
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.drawable.pressed);
+                    v.setBackgroundResource(R.color.mage);
+                    buttonMage.setColorFilter(getResources().getColor(R.color.dark_grey));
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonMage.setColorFilter(getResources().getColor(R.color.mage));
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Mage");
                     startActivity(startIntent);
@@ -83,6 +115,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonMage.setColorFilter(getResources().getColor(R.color.mage));
                     return true;
                 }
                 return false;
@@ -97,13 +130,15 @@ public class CardsFilterMenu extends DrawerMenu {
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.drawable.pressed);
+                    v.setBackgroundResource(R.color.rogue);
+                    buttonRogue.setColorFilter(getResources().getColor(R.color.dark_grey));
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonRogue.setColorFilter(getResources().getColor(R.color.rogue));
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Rogue");
                     startActivity(startIntent);
@@ -113,6 +148,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonRogue.setColorFilter(getResources().getColor(R.color.rogue));
                     return true;
                 }
                 return false;
@@ -127,13 +163,15 @@ public class CardsFilterMenu extends DrawerMenu {
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.drawable.pressed);
+                    v.setBackgroundResource(R.color.paladin);
+                    buttonPaladin.setColorFilter(getResources().getColor(R.color.dark_grey));
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonPaladin.setColorFilter(getResources().getColor(R.color.paladin));
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Paladin");
                     startActivity(startIntent);
@@ -143,6 +181,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonPaladin.setColorFilter(getResources().getColor(R.color.paladin));
                     return true;
                 }
                 return false;
@@ -157,13 +196,15 @@ public class CardsFilterMenu extends DrawerMenu {
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.drawable.pressed);
+                    v.setBackgroundResource(R.color.druid);
+                    buttonDruid.setColorFilter(getResources().getColor(R.color.dark_grey));
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonDruid.setColorFilter(getResources().getColor(R.color.druid));
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Druid");
                     startActivity(startIntent);
@@ -173,6 +214,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonDruid.setColorFilter(getResources().getColor(R.color.druid));
                     return true;
                 }
                 return false;
@@ -187,13 +229,15 @@ public class CardsFilterMenu extends DrawerMenu {
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.drawable.pressed);
+                    v.setBackgroundResource(R.color.shaman);
+                    buttonShaman.setColorFilter(getResources().getColor(R.color.dark_grey));
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonShaman.setColorFilter(getResources().getColor(R.color.shaman));
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Shaman");
                     startActivity(startIntent);
@@ -203,6 +247,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonShaman.setColorFilter(getResources().getColor(R.color.shaman));
                     return true;
                 }
                 return false;
@@ -217,13 +262,15 @@ public class CardsFilterMenu extends DrawerMenu {
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.drawable.pressed);
+                    v.setBackgroundResource(R.color.warlock);
+                    buttonWarlock.setColorFilter(getResources().getColor(R.color.dark_grey));
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonWarlock.setColorFilter(getResources().getColor(R.color.warlock));
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Warlock");
                     startActivity(startIntent);
@@ -233,6 +280,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonWarlock.setColorFilter(getResources().getColor(R.color.warlock));
                     return true;
                 }
                 return false;
@@ -247,13 +295,15 @@ public class CardsFilterMenu extends DrawerMenu {
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.drawable.pressed);
+                    v.setBackgroundResource(R.color.priest);
+                    buttonPriest.setColorFilter(getResources().getColor(R.color.dark_grey));
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonPriest.setColorFilter(getResources().getColor(R.color.priest));
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Priest");
                     startActivity(startIntent);
@@ -263,6 +313,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonPriest.setColorFilter(getResources().getColor(R.color.priest));
                     return true;
                 }
                 return false;
@@ -277,13 +328,15 @@ public class CardsFilterMenu extends DrawerMenu {
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.drawable.pressed);
+                    v.setBackgroundResource(R.color.warrior);
+                    buttonWarrior.setColorFilter(getResources().getColor(R.color.dark_grey));
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonWarrior.setColorFilter(getResources().getColor(R.color.warrior));
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Warrior");
                     startActivity(startIntent);
@@ -293,6 +346,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonWarrior.setColorFilter(getResources().getColor(R.color.warrior));
                     return true;
                 }
                 return false;
@@ -307,13 +361,15 @@ public class CardsFilterMenu extends DrawerMenu {
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.drawable.pressed);
+                    v.setBackgroundResource(R.color.hunter);
+                    buttonHunter.setColorFilter(getResources().getColor(R.color.dark_grey));
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonHunter.setColorFilter(getResources().getColor(R.color.hunter));
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Hunter");
                     startActivity(startIntent);
@@ -323,6 +379,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonHunter.setColorFilter(getResources().getColor(R.color.hunter));
                     return true;
                 }
                 return false;
@@ -330,6 +387,7 @@ public class CardsFilterMenu extends DrawerMenu {
         });
 
         buttonNeutral = (ImageButton) findViewById(R.id.button_neutral);
+        textNeutral = (TextView) findViewById(R.id.text_neutral);
         buttonNeutral.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent motionEvent) {
@@ -337,13 +395,17 @@ public class CardsFilterMenu extends DrawerMenu {
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.drawable.pressed);
+                    v.setBackgroundResource(R.color.primary_font_color);
+                    buttonNeutral.setColorFilter(getResources().getColor(R.color.dark_grey));
+                    textNeutral.setTextColor(getResources().getColor(R.color.dark_grey));
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonNeutral.setColorFilter(getResources().getColor(R.color.primary_font_color));
+                    textNeutral.setTextColor(getResources().getColor(R.color.primary_font_color));
                     Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
                     startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Neutral");
                     startActivity(startIntent);
@@ -353,10 +415,81 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
+                    buttonNeutral.setColorFilter(getResources().getColor(R.color.primary_font_color));
+                    textNeutral.setTextColor(getResources().getColor(R.color.primary_font_color));
                     return true;
                 }
                 return false;
             }
         });
     }
+
+    private PopupWindow initiatePopupWindow() {
+        PopupWindow mDropdown = null;
+        LayoutInflater mInflater;
+        LinearLayout pop_up_search = null;
+
+        try {
+            mInflater = (LayoutInflater) getApplicationContext()
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = mInflater.inflate(R.layout.popup_search_menu, null);
+
+            //If you want to add any listeners to your textviews, these are two //textviews.
+            pop_up_search = (LinearLayout) findViewById(R.id.search);
+
+            layout.measure(View.MeasureSpec.UNSPECIFIED,
+                    View.MeasureSpec.UNSPECIFIED);
+            mDropdown = new PopupWindow(layout,FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.WRAP_CONTENT,true);
+            mDropdown.showAtLocation(pop_up_search, Gravity.NO_GRAVITY, 0,pop_up_search.getHeight()*3-70);
+
+            final PopupWindow finalMDropdown = mDropdown;
+
+            final TextView edit_card_name = (EditText) findViewById(R.id.edit_card_name);
+
+            final ImageButton search = (ImageButton) layout.findViewById(R.id.button_search);
+            search.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    String card_name;
+                    int action = event.getAction();
+                    if (action == MotionEvent.ACTION_DOWN) {
+                        v.animate().scaleXBy(0.2f).setDuration(5000).start();
+                        v.animate().scaleYBy(0.2f).setDuration(5000).start();
+                        v.setBackgroundResource(R.drawable.pressed);
+                        return true;
+                    } else if (action == MotionEvent.ACTION_UP) {
+                        v.animate().cancel();
+                        v.animate().scaleX(1f).setDuration(1000).start();
+                        v.animate().scaleY(1f).setDuration(1000).start();
+                        v.setBackgroundResource(R.drawable.normal);
+
+                        card_name = edit_card_name.getText().toString();
+
+                        Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
+                        startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Neutral");
+                        startActivity(startIntent);
+
+//                        manaFilter(0);
+
+                        finalMDropdown.dismiss();
+                        return true;
+                    } else if (action == MotionEvent.ACTION_CANCEL) {
+                        v.animate().cancel();
+                        v.animate().scaleX(1f).setDuration(1000).start();
+                        v.animate().scaleY(1f).setDuration(1000).start();
+                        v.setBackgroundResource(R.drawable.normal);
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mDropdown;
+    }
+
+//    JSON.JSONTask json = new JSON.JSONTask();
+
 }

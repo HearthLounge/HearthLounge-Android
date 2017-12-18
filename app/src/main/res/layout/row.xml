@@ -18,15 +18,13 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/activity_vertical_margin">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/image_viewCard"
-                android:layout_width="400dp"
-                android:layout_height="600dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -36,142 +34,6 @@
                 android:layout_gravity="center"/>
 
         </FrameLayout>
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical"-->
-            <!--android:padding="16dp"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:layout_marginBottom="8dp">-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_cardId"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Card Id: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall" />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_dbfId"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Dbf Id: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_name"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Name: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_cardSet"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Card Set: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_type"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Type: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_faction"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Faction: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_rarity"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Rarity: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_cost"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Cost: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_attack"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Attack: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_health"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Health: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_text"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Text: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_flavor"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Flavor: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_artist"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Artist: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_collectible"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Collectible: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_elite"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Elite: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_playerClass"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Player Class: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_locale"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Locale: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/text_view_mechanics"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Mechanics: "-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"  />-->
-
-        <!--</LinearLayout>-->
 
     </LinearLayout>
 
