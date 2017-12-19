@@ -1,7 +1,6 @@
 package pl.pjwstk.pgmd.hearthlounge.authentication;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -31,17 +30,17 @@ import pl.pjwstk.pgmd.hearthlounge.model.User;
 
 public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
 
-    private Button button_register;
+    private Button buttonRegister;
     private EditText edit_name;
     private EditText edit_email;
     private EditText edit_password;
-    private TextView text_to_login;
+    private TextView textLogin;
 
     private static final String TAG = "Sign_up";
 
-    private FirebaseAuth fb_auth;
+    private FirebaseAuth fbAuth;
     private FirebaseDatabase fb_database = FirebaseDatabase.getInstance();
-    private DatabaseReference fb_data_ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://hearthlounge-32197.firebaseio.com");
+    private DatabaseReference fbDataRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://hearthlounge-32197.firebaseio.com");
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,21 +49,21 @@ public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
 
         //Firebase configurate
         fb_database = FirebaseDatabase.getInstance();
-        fb_auth = FirebaseAuth.getInstance();
+        fbAuth = FirebaseAuth.getInstance();
 
         //Temporary solve
         Toast.makeText(SignUp.this, "--->Loging out", Toast.LENGTH_SHORT).show();
-        fb_auth.signOut();
+        fbAuth.signOut();
 
         edit_name = (EditText) findViewById(R.id.edit_name);
         edit_email = (EditText) findViewById(R.id.edit_email);
         edit_password = (EditText) findViewById(R.id.edit_password);
 
 
-        button_register = (Button) findViewById(R.id.button_signup);
-        text_to_login = (TextView) findViewById(R.id.text_login);
+        buttonRegister = (Button) findViewById(R.id.button_signup);
+        textLogin = (TextView) findViewById(R.id.text_login);
 
-        button_register.setOnClickListener(new View.OnClickListener() {
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
 
@@ -84,7 +83,7 @@ public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
             }
         });
 
-        text_to_login.setOnClickListener(new View.OnClickListener() {
+        textLogin.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 Intent goto_sign_in = new Intent(getApplicationContext(), LogIn.class);
@@ -96,30 +95,30 @@ public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
     public void onStart() {
         super.onStart();
         Toast.makeText(SignUp.this, "Sprawdzę czy jesteś zalogowany", Toast.LENGTH_SHORT).show();
-        check_logged_in(fb_auth);
+        check_logged_in(fbAuth);
 
     }
 
     public void onStop() {
         super.onStop();
 //        if (fb_auth_listener != null) {
-//            fb_auth.removeAuthStateListener(fb_auth_listener);
+//            fbAuth.removeAuthStateListener(fb_auth_listener);
 //        }
     }
 
     public void create_user(final String nickname, final String email, final String password){
 
-        fb_auth.createUserWithEmailAndPassword(email, password)
+        fbAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
                     public void onComplete(@NonNull Task<AuthResult> task){
-                        FirebaseUser user = fb_auth.getCurrentUser();
+                        FirebaseUser user = fbAuth.getCurrentUser();
 
                         if(task.isSuccessful()){
 
                             Toast.makeText(SignUp.this,"registration is successful!", Toast.LENGTH_SHORT).show();
-                            add_new_user(nickname,email,fb_auth.getCurrentUser().getUid());
-                            fb_auth.signOut();
+                            add_new_user(nickname,email, fbAuth.getCurrentUser().getUid());
+                            fbAuth.signOut();
                             go_to_log_in();
                         }
                         else {
@@ -134,7 +133,7 @@ public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
     public void add_new_user(String nickname, String email, String uid){
 
         User user_db = new User(nickname, email, uid);
-        fb_data_ref.child("/users").child(user_db.getUid()).setValue(user_db);
+        fbDataRef.child("/users").child(user_db.getUid()).setValue(user_db);
     }
 
 
