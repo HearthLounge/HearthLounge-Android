@@ -105,11 +105,11 @@ public class UserService extends Service {
                 thread.start();
                 break;
             }
-            case "start":
+            case "start_1":
             {
                 Toast.makeText(getApplicationContext(),"ACTION START", Toast.LENGTH_SHORT).show();
-                Thread thread = new Thread(new MyThreadUserService(startId));
-                thread.start();
+//                Thread thread = new Thread(new MyThreadUserService(startId));
+//                thread.start();
                 break;
             }
             case "update":

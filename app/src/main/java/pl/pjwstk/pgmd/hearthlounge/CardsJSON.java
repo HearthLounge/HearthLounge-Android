@@ -147,6 +147,7 @@ public class CardsJSON extends JSON {
 
 //        @Override
 //        protected List<Card> doInBackground(String... params) {
+//            super.doInBackground()
 //            return CardListCache.getInstance().getList();
 //        }
 
@@ -449,14 +450,19 @@ public class CardsJSON extends JSON {
                 //If you want to add any listeners to your textviews, these are two //textviews.
                 pop_up_mana_menu = (LinearLayout) findViewById(R.id.mana_value);
 
-                layout.measure(View.MeasureSpec.UNSPECIFIED,
-                        View.MeasureSpec.UNSPECIFIED);
+                layout.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
                 mDropdown = new PopupWindow(layout,FrameLayout.LayoutParams.WRAP_CONTENT,
                         FrameLayout.LayoutParams.WRAP_CONTENT,true);
 //                Drawable background = getResources().getDrawable(android.R.drawable.editbox_dropdown_dark_frame);
 //                mDropdown.setBackgroundDrawable(background);
 //                layout.setBackgroundResource(R.drawable.toast_opacity);
-                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.RIGHT|Gravity.CENTER_VERTICAL, 10,10);
+
+
+                Display display = getWindowManager().getDefaultDisplay();
+                int width = display.getWidth();
+                int height = display.getHeight();
+
+                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.RIGHT|Gravity.CENTER_VERTICAL, 10,height);
 //                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.CENTER, 0,0);
 
                 final ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
