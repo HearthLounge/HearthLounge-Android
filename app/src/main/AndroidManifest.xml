@@ -17,12 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,68 +31,67 @@
         <activity
             android:name=".authentication.UserAccount"
             android:label="@string/title_account"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".authentication.LogIn"
             android:label="@string/title_log_in"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".authentication.SignUp"
             android:label="@string/title_sign_up"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".authentication.LogOut"
             android:label="@string/title_log_out"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-
-
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Decks"
             android:label="@string/title_decks"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CardsFilterMenu"
             android:label="@string/title_cards_filter_menu"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-            <activity
-                android:name=".PlayerClass"
-                android:label="@string/title_player_class_cards"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
-            <activity
-                android:name=".CardsJSON"
-                android:label="@string/title_cards"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:screenOrientation="portrait"/>
-                <activity
-                    android:name=".SelectedCard"
-                    android:label="@string/title_card_selected"
-                    android:theme="@style/AppTheme.NoActionBar"
-                    android:screenOrientation="portrait"/>
-
-
-
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PlayerClass"
+            android:label="@string/title_player_class_cards"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CardsJSON"
+            android:label="@string/title_cards"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SelectedCard"
+            android:label="@string/title_card_selected"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <service android:name=".authentication.UserService"
+        <service
+            android:name=".authentication.UserService"
             android:label="UserService"
-            android:stopWithTask="true"/>
+            android:stopWithTask="false" />
 
         <activity
             android:name=".InitiateApp"
             android:label="InitiateApp"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <service
+            android:name=".CardService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

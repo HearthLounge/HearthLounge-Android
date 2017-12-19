@@ -1,12 +1,15 @@
 package pl.pjwstk.pgmd.hearthlounge.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
-public class User {
+public class User implements Parcelable {
 
     private FirebaseDatabase fbDb = FirebaseDatabase.getInstance();
     private FirebaseAuth fbAuth = FirebaseAuth.getInstance();
@@ -16,7 +19,7 @@ public class User {
     //private Image avatar;   //How to do it???
 
     private long rank;
-    private String role;
+    private int role;
     private String uid;
     private Boolean updatedProfile;
 
@@ -37,7 +40,7 @@ public class User {
 
         this.username = username;
         this.email = email;
-        this.role = "user";
+        this.role = 3;
         this.uid = uid;
         this.updatedProfile = false;
         this.rank = 1;
@@ -55,7 +58,7 @@ public class User {
 //
 //    }
 
-    public User(String username, String email, String role, String uid, String rank, String updatedProfile){
+    public User(String username, String email, int role, String uid, String rank, String updatedProfile){
 
         this.username = username;
         this.email = email;
@@ -71,7 +74,7 @@ public class User {
         this.rank = Long.parseLong(rank);
     }
 
-    public User(String username, String email, String role, String uid, Long rank, Boolean updatedProfile, String battleTag, String favClass, String facebook, String twitter, String twitch, String youtube){
+    public User(String username, String email, int role, String uid, Long rank, Boolean updatedProfile, String battleTag, String favClass, String facebook, String twitter, String twitch, String youtube){
 
         this.username = username;
         this.email = email;
@@ -91,6 +94,49 @@ public class User {
 
 
     }
+
+    public User(User user) {
+        this.username = user.username;
+        this.email = user.email;
+        this.role = user.role;
+        this.uid = user.uid;
+        this.rank = user.rank;
+        this.updatedProfile = user.updatedProfile;
+        this.battleTag = user.battleTag;
+        this.favClass = user.favClass;
+        this.facebook = user.facebook;
+        this.twitter = user.twitter;
+        this.twitch = user.twitch;
+        this.youtube = user.youtube;
+    }
+
+    protected User(Parcel in) {
+        username = in.readString();
+        email = in.readString();
+        rank = in.readLong();
+        role = in.readInt();
+        uid = in.readString();
+        byte tmpUpdatedProfile = in.readByte();
+        updatedProfile = tmpUpdatedProfile == 0 ? null : tmpUpdatedProfile == 1;
+        battleTag = in.readString();
+        favClass = in.readString();
+        facebook = in.readString();
+        twitter = in.readString();
+        twitch = in.readString();
+        youtube = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getUsername() {
 //        if(username == null){ username = "";}
@@ -123,11 +169,11 @@ public class User {
         this.rank = rank;
     }
 
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
     }
 
@@ -138,6 +184,8 @@ public class User {
     public void setUid(String uid) {
         this.uid = uid;
     }
+
+    public String getUpdatedProfileS() { return updatedProfile.toString();}
 
     public Boolean getUpdatedProfile() {
         return updatedProfile;
@@ -198,5 +246,26 @@ public class User {
 
     public void setYoutube(String youtube) {
         this.youtube = youtube;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(username);
+        dest.writeString(email);
+        dest.writeLong(rank);
+        dest.writeInt(role);
+        dest.writeString(uid);
+        dest.writeByte((byte) (updatedProfile == null ? 0 : updatedProfile ? 1 : 2));
+        dest.writeString(battleTag);
+        dest.writeString(favClass);
+        dest.writeString(facebook);
+        dest.writeString(twitter);
+        dest.writeString(twitch);
+        dest.writeString(youtube);
     }
 }

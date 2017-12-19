@@ -27,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.auth.FirebaseAuth;
 
+import pl.pjwstk.pgmd.hearthlounge.CardListCache;
 import pl.pjwstk.pgmd.hearthlounge.MainActivity;
 import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.authentication.LogIn;
@@ -62,7 +63,8 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //cardListCache.getPrimaryCardList();
+        Toast.makeText(getApplicationContext()," Hello ", Toast.LENGTH_SHORT).show();
 //        fbAuth = FirebaseAuth.getInstance();
 //        checkUserLog();
 

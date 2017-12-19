@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,15 +42,33 @@ import pl.pjwstk.pgmd.hearthlounge.view.MakeImageToast;
 
 public class UserAccount extends DrawerMenu{
 
-    UserPreferences userPref;
+    private UserPreferences userPref;
+    private User user;
+
     public SharedPreferences.Editor userPrefs;
     public MakeImageToast toast;
     private static final String urlProfileImg = "https://cdn.pixabay.com/photo/2016/12/13/16/17/dancer-1904467_1280.png";
+
+    TextView tvUsername;
+    TextView tvRank;
+
+    EditText tvEmail; //Change it!!!
+    EditText tvBattleTag;
+
+    EditText tvFacebook;
+    EditText tvTwitter;
+    EditText tvTwitch;
+    EditText tvYoutube;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         userPref = new UserPreferences(this.getApplicationContext());
+        user = new User(userPref.getUserFromUserPref());
+
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.user_account, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -65,8 +85,8 @@ public class UserAccount extends DrawerMenu{
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(userAvatar);
 
-        TextView userName = (TextView)findViewById(R.id.user_name);
-        userName.setText(userPref.getSingleStringPref("username"));
+        tvUsername = (TextView)findViewById(R.id.user_name);
+        tvUsername.setText(user.getUsername());
 
         TextView userRank = (TextView)findViewById(R.id.user_rank);
         userRank.setText("Rank: " + userPref.getRankPref().toString());
@@ -80,7 +100,6 @@ public class UserAccount extends DrawerMenu{
 
             public void onClick(View view) {
 
-                updateUserData();
                 Intent goto_sign_in = new Intent(getApplicationContext(), LogIn.class);
                 startActivity(goto_sign_in);
             }
@@ -90,6 +109,26 @@ public class UserAccount extends DrawerMenu{
         battletag.setText(userPref.getSingleStringPref("battletag"));
 
         final ImageView favouriteClassIcon = (ImageView) findViewById(R.id.image_view_playerclass);
+        //TODO brać z FavClass
+
+//        switch (user.getFavClass()){
+//
+//            case "mage": {
+//
+//
+//                break;
+//            }
+//
+//
+//
+//            default: {
+//
+//
+//            }
+//
+//        }
+
+
         favouriteClassIcon.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -125,20 +164,9 @@ public class UserAccount extends DrawerMenu{
         saveAccount.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-//
-//                if(TextUtils.isEmpty(edit_name.getEditableText().toString())){
-//                    Toast.makeText(SignUp.this, "Please enter nickname", Toast.LENGTH_SHORT).show();
-//                }
-//                else if(TextUtils.isEmpty(edit_email.getEditableText().toString())){
-//                    Toast.makeText(SignUp.this, "Please enter email", Toast.LENGTH_SHORT).show();
-//                }
-//                else if(TextUtils.isEmpty(edit_password.getEditableText().toString())){
-//                    Toast.makeText(SignUp.this, "Please enter password", Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    Toast.makeText(SignUp.this, "Test Toast 01", Toast.LENGTH_SHORT).show();
-//                    create_user(edit_name.getText().toString(), edit_email.getText().toString(), edit_password.getText().toString());
-//                }
+
+                updateUserData(getUserFromText());
+
             }
         });
 
@@ -146,35 +174,49 @@ public class UserAccount extends DrawerMenu{
 
     }
 
-    private void updateUserData(){
-
+    private void updateUserData(User user){
 
         // TODO add checker of changes and then save them to Shared Pref. because there's not another way to take data in service from there ;)
-
 
         Toast.makeText(UserAccount.this,"Updating", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(getApplicationContext(), UserService.class);
         i.putExtra("action", "update");
         i.putExtra("uid", userPref.getSingleStringPref("uid"));
+        i.putExtra("new_user", getUserFromText());
         startService(i);
     }
 
-    private HashMap<String,Object> checkChanges() {
+    private User getUserFromText(){
+        //Add check for null
+        User tempUser = new User();
 
-        HashMap<String,Object> changes = new HashMap<>();
+        if(tvUsername.getText() != null){tempUser.setUsername(tvUsername.getText().toString()); }
+        if(tvEmail.getText() != null){tempUser.setEmail(tvEmail.getText().toString()); }
+        if(user.getFavClass().isEmpty()){tempUser.setFavClass(user.getFavClass()); }
+        if(tvBattleTag.getText() != null){tempUser.setBattleTag(tvBattleTag.getText().toString()); }
+        if(tvFacebook.getText() != null){tempUser.setFacebook(tvFacebook.getText().toString()); }
+        if(tvTwitter.getText() != null){tempUser.setTwitter(tvTwitter.getText().toString()); }
+        if(tvTwitch.getText() != null){tempUser.setTwitch(tvTwitch.getText().toString()); }
+        if(tvYoutube.getText() != null){tempUser.setYoutube(tvYoutube.getText().toString()); }
 
-        // TODO :/ Boring thing
 
+//        tempUser.setEmail(tvEmail.getText().toString());
+//        tempUser.setFavClass(user.getFavClass());
+//        tempUser.setBattleTag(tvBattleTag.getText().toString());
+//        tempUser.setFacebook(tvFacebook.getText().toString());
+//        tempUser.setTwitter(tvTwitter.getText().toString());
+//        tempUser.setTwitch(tvTwitch.getText().toString());
+//        tempUser.setYoutube(tvYoutube.getText().toString());
 
-
-        return changes;
+        return tempUser;
     }
 
 
     private PopupWindow initiatePopupWindow() {
         PopupWindow mDropdown = null;
         LayoutInflater mInflater;
-        ImageView favouriteClass;
+
+        ImageView favouriteClass=null;
 
         try {
 
@@ -192,8 +234,9 @@ public class UserAccount extends DrawerMenu{
             mDropdown.showAtLocation(favouriteClass, Gravity.CENTER, 0,0);
 
             final PopupWindow finalMDropdown = mDropdown; // Potrzebne, żeby popup menu się zamknęło po wybraniu opcji
+//            final ImageView favouriteClassIcon = (ImageView) findViewById(R.id.image_view_playerclass);
             final ImageView favouriteClassIcon = (ImageView) findViewById(R.id.image_view_playerclass);
-
+//            favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.mage));
             final ImageView mage = (ImageView)layout.findViewById(R.id.mage);
             mage.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -202,6 +245,7 @@ public class UserAccount extends DrawerMenu{
                     if (action == MotionEvent.ACTION_DOWN) {
                         favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.mage));
                         favouriteClassIcon.setColorFilter(Color.rgb(105, 204, 240));
+                        //TODO Add FavClass change
                         return true;
                     } else if (action == MotionEvent.ACTION_UP) {
                         toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.mage, Color.rgb(105, 204, 240), Toast.LENGTH_SHORT).show(); // + item.getTitle()

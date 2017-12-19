@@ -18,6 +18,7 @@ public class InitiateApp extends Activity {
 
     FirebaseAuth fbAuth;
     UserPreferences userPref;
+    UserService us;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,6 @@ public class InitiateApp extends Activity {
         fbAuth = FirebaseAuth.getInstance();
         checkUserLog();
         //TODO add card and decks downloader
-
 
         goToMainActivity();
     }

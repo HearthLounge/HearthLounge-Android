@@ -11,6 +11,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -49,7 +51,7 @@ public class JSON extends DrawerMenu {
 
     public MakeImageToast toast;
 
-    private ListView listViewCards;
+    private GridView listViewCards;
     private ProgressDialog dialog;
 
     @Override
@@ -79,7 +81,7 @@ public class JSON extends DrawerMenu {
                 .build();
         ImageLoader.getInstance().init(config); // Do it on Application start
 
-        listViewCards = (ListView)findViewById(R.id.list_view_cards);
+        listViewCards = (GridView)findViewById(R.id.list_view_cards);
         // To start fetching the data when app start, uncomment below line to start the async task.
         new JSONTask().execute(URL + HEADER + KEY);
     }

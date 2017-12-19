@@ -48,9 +48,9 @@ public class UserPreferences {
         prefsEditor.putString(keyUsername, user.getUsername());
         prefsEditor.putString(keyEmail, user.getEmail());
         prefsEditor.putLong(keyRank, user.getRank());
-        prefsEditor.putString(keyRole, user.getRole());
+        prefsEditor.putInt(keyRole, user.getRole());
         prefsEditor.putString(keyUid, user.getUid());
-        prefsEditor.putString(keyUpdatedProfile, user.getUpdatedProfile().toString());
+        prefsEditor.putBoolean(keyUpdatedProfile, user.getUpdatedProfile());
         prefsEditor.putString(keyBattletag, user.getBattleTag());
         prefsEditor.putString(keyFavClass, user.getFavClass());
         prefsEditor.putString(keyFacebook, user.getFacebook());
@@ -104,12 +104,19 @@ public class UserPreferences {
         return sharedPrefs.getLong("rank",0);
     }
 
+    public int getRolePref(){
+        return sharedPrefs.getInt("role",0);
+    }
+
     public void setValuePref(String key,String text) {
         prefsEditor.putString(key, text);
         prefsEditor.commit();
     }
 
-
-
-
+    public User getUserFromUserPref(){
+        User user = new User(this.getSingleStringPref("username"), this.getSingleStringPref("email"), this.getRolePref(), this.getSingleStringPref("uid"),
+                this.getRankPref(), this.getUpdatedProfilePref(), this.getSingleStringPref("battletag"), this.getSingleStringPref("favClass"), this.getSingleStringPref("facebook"),
+                this.getSingleStringPref("twitter"), this.getSingleStringPref("twitch"), this.getSingleStringPref("youtube"));
+        return user;
+    }
 }

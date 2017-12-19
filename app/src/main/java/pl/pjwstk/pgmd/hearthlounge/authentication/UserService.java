@@ -84,44 +84,40 @@ public class UserService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        Toast.makeText(getApplicationContext(),"action: " + intent.getStringExtra("action"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "action: " + intent.getStringExtra("action"), Toast.LENGTH_SHORT).show();
+        switch (intent.getStringExtra("action")) {
 
-        switch (intent.getStringExtra("action")){
-
-            case "login":
-            {
-                Toast.makeText(getApplicationContext(),"ACTION LOGIN", Toast.LENGTH_SHORT).show();
+            case "login": {
+                Toast.makeText(getApplicationContext(), "ACTION LOGIN", Toast.LENGTH_SHORT).show();
                 sUserUid = intent.getStringExtra("uid");
                 sUserEmail = fbUser.getEmail();
                 //fbRef.orderByChild("users").equalTo(sUserUid).addChildEventListener(UserChildListener(sUserUid));
                 fbRef.child(sUserUid).addValueEventListener(UserValueListener(sUserUid));
                 break;
             }
-            case "logout":
-            {
-                Toast.makeText(getApplicationContext(),"ACTION LOGOUT", Toast.LENGTH_SHORT).show();
+            case "logout": {
+                Toast.makeText(getApplicationContext(), "ACTION LOGOUT", Toast.LENGTH_SHORT).show();
                 userPref.clearUserPref();
                 Thread thread = new Thread(new MyThreadUserService(startId));
                 thread.start();
                 break;
             }
-            case "start":
-            {
-                Toast.makeText(getApplicationContext(),"ACTION START", Toast.LENGTH_SHORT).show();
+            case "start": {
+                Toast.makeText(getApplicationContext(), "ACTION START", Toast.LENGTH_SHORT).show();
                 Thread thread = new Thread(new MyThreadUserService(startId));
                 thread.start();
                 break;
             }
-            case "update":
-            {
-                Toast.makeText(getApplicationContext(),"ACTION UPDATE", Toast.LENGTH_SHORT).show();
+            case "update": {
+                Toast.makeText(getApplicationContext(), "ACTION UPDATE", Toast.LENGTH_SHORT).show();
                 sUserUid = intent.getStringExtra("uid");
                 sUserEmail = fbUser.getEmail();
+                User user = intent.getParcelableExtra("new_user");
+                updateUserData(user);
                 break;
             }
 
         }
-
         return START_STICKY;
     }
 
@@ -130,7 +126,6 @@ public class UserService extends Service {
         Toast.makeText(getApplicationContext(),"closing service!", Toast.LENGTH_SHORT).show();
         super.onDestroy();
     }
-
 
     public ChildEventListener UserChildListener(String uid){
 
@@ -207,6 +202,11 @@ public class UserService extends Service {
 
     }
 
+    public void updateUserData(User user){
+
+        fbRef.child("/users").child(user.getUid()).setValue(user);
+    }
+
 
     public void UserDataConnector(String email,final String action){
 
@@ -232,29 +232,6 @@ public class UserService extends Service {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //    @Override
