@@ -105,6 +105,7 @@ public class CardsJSON extends JSON {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
 
+
 //        new DownloadImageTask((ImageButton)findViewById(R.id.image_button_cards))
 //                .execute("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_116.png");
 

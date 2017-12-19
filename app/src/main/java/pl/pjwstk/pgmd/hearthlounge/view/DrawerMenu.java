@@ -2,6 +2,7 @@ package pl.pjwstk.pgmd.hearthlounge.view;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,9 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,9 +41,14 @@ import pl.pjwstk.pgmd.hearthlounge.model.User;
 
 public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    protected DrawerLayout drawer;
-    protected ActionBarDrawerToggle toggle;
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
+    protected NavigationView navigationView;
     protected Toolbar toolbar;
+
+    private Menu drawerMenu;
+
+    protected FrameLayout frameLayout;
 
     // Dodane
     private View navHeader;
@@ -53,7 +63,11 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        super.setContentView(R.layout.activity_main);
+
+        frameLayout = (FrameLayout)findViewById(R.id.content_frame);
+
+        Toast.makeText(getApplicationContext(),"HEJ JAK SIĘ MASZ ", Toast.LENGTH_SHORT).show();
 
 //        fbAuth = FirebaseAuth.getInstance();
 //        checkUserLog();
@@ -63,23 +77,25 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
         s.setSpan(new TypefaceSpan(this, "belwe_medium.otf"), 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
+
         toolbar = (Toolbar) findViewById(R.id.toolbar); //PASEK U GÓRY Z NAZWĄ APLIKACJI
         toolbar.setTitle(s);
         setSupportActionBar(toolbar);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.open, R.string.close);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
-        toggle.syncState();
+//        drawer.setDrawerListener(toggle);
+//        toggle.syncState();
         //toggle.setDrawerIndicatorEnabled(false); // wyłączenie drawer menu na guzik tylko wyciąganie w lewej krawędzi
 
         // Zmiana ikonki HAMBURGERA na naszą
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationIcon(R.mipmap.hl_launcher);
+//        getSupportActionBar().setIcon(R.mipmap.hl_launcher);
+//        toolbar.setNavigationIcon(R.mipmap.hl_launcher); // onPostCreate psuje to :(
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         //dodane
         navigationView.getMenu().getItem(navItemIndex).setChecked(true);
         navigationView.getMenu().getItem(4).setActionView(R.layout.menu_dot); // ustawia kropke koło notifications
@@ -98,6 +114,51 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
         if (savedInstanceState == null) {
             navItemIndex = 0;
         }
+
+//        drawerMenu = navigationView.getMenu();
+//        for(int i = 0; i < drawerMenu.size(); i++) {
+//            drawerMenu.getItem(i).setOnMenuItemClickListener(this);
+//        }
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        toggle.syncState();
+        toolbar.setNavigationIcon(R.mipmap.hl_launcher); // kolejność ma zanczenie
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        toggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        if (frameLayout != null) {
+            LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT);
+            View frame = inflater.inflate(layoutResID, frameLayout, false);
+            frameLayout.addView(frame, lp);
+        }
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        if (frameLayout != null) {
+            frameLayout.addView(view, params);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void loadNavHeader() {
@@ -116,7 +177,7 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
         if(drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else
@@ -131,13 +192,6 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
 //    }
 
     // DZIEKI TEMU WYSUWA SIE MENU DRAWERLAYOUT BEZ TEGO NIC SIE NIE DZIEJE
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -198,6 +252,20 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
 
         return true;
     }
+
+//    @Override
+//    public boolean onMenuItemClick(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.item1:
+//                // handle it
+//                break;
+//            case R.id.item2:
+//                // do whatever
+//                break;
+//            // and so on...
+//        }
+//        return false;
+//    }
 
     private void animateHamburgerToArrow() {
         ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);

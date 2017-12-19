@@ -35,11 +35,7 @@ public class CardsFilterMenu extends DrawerMenu {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-        getLayoutInflater().inflate(R.layout.cards_filter_menu, contentFrameLayout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.getMenu().getItem(0).setChecked(true);
+        getLayoutInflater().inflate(R.layout.cards_filter_menu, frameLayout);
 
         search = (LinearLayout) findViewById(R.id.search);
         search.setOnTouchListener(new View.OnTouchListener() {

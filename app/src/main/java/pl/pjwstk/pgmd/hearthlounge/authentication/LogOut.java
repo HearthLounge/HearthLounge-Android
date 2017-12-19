@@ -23,11 +23,8 @@ public class LogOut extends DrawerMenu {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-        getLayoutInflater().inflate(R.layout.logout, contentFrameLayout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.getMenu().getItem(0).setChecked(true);
+        getLayoutInflater().inflate(R.layout.logout, frameLayout);
+        navigationView.getMenu().getItem(3).setChecked(true);
 
         fbAuth = FirebaseAuth.getInstance();
         fbAuth.signOut();

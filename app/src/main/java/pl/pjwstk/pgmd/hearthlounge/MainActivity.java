@@ -37,15 +37,12 @@ public class MainActivity extends DrawerMenu {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getLayoutInflater().inflate(R.layout.main_menu, frameLayout);
+        navigationView.getMenu().getItem(5).setChecked(true);
 
         //fbDb = FirebaseDatabase.getInstance();
         fbAuth = FirebaseAuth.getInstance();
         //checkUserLog();
-
-        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-        getLayoutInflater().inflate(R.layout.main_menu, contentFrameLayout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.getMenu().getItem(0).setChecked(true);
 
 
         //checkUserLog();
