@@ -1,13 +1,9 @@
 package pl.pjwstk.pgmd.hearthlounge.view;
 
 import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -25,7 +20,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.firebase.auth.FirebaseAuth;
 
 import pl.pjwstk.pgmd.hearthlounge.CardListCache;
 import pl.pjwstk.pgmd.hearthlounge.MainActivity;
@@ -34,7 +28,7 @@ import pl.pjwstk.pgmd.hearthlounge.authentication.LogIn;
 import pl.pjwstk.pgmd.hearthlounge.authentication.LogOut;
 import pl.pjwstk.pgmd.hearthlounge.authentication.SignUp;
 import pl.pjwstk.pgmd.hearthlounge.authentication.UserAccount;
-import pl.pjwstk.pgmd.hearthlounge.authentication.UserService;
+
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 
 /**
@@ -57,8 +51,6 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
 
     //private FirebaseAuth fbAuth;
 
-
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
