@@ -2,7 +2,6 @@ package pl.pjwstk.pgmd.hearthlounge.authentication;
 
 import android.app.Service;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -18,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import pl.pjwstk.pgmd.hearthlounge.model.MyApplicationContext;
+import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 
 import static android.content.ContentValues.TAG;
@@ -92,7 +91,7 @@ public class UserService extends Service {
                 sUserUid = intent.getStringExtra("uid");
                 sUserEmail = fbUser.getEmail();
                 //fbRef.orderByChild("users").equalTo(sUserUid).addChildEventListener(UserChildListener(sUserUid));
-                fbRef.child(sUserUid).addValueEventListener(UserValueListener(sUserUid));
+                fbRef.child(sUserUid).addValueEventListener(UserValueListener());
                 break;
             }
             case "logout": {
@@ -112,7 +111,10 @@ public class UserService extends Service {
                 Toast.makeText(getApplicationContext(), "ACTION UPDATE", Toast.LENGTH_SHORT).show();
                 sUserUid = intent.getStringExtra("uid");
                 sUserEmail = fbUser.getEmail();
-                User user = intent.getParcelableExtra("new_user");
+                User user = new User((User) intent.getParcelableExtra("updated_user"));
+                Toast.makeText(getApplicationContext(),"battletag " + user.getBattletag(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "ACTION UPDATE", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "ACTION UPDATE", Toast.LENGTH_SHORT).show();
                 updateUserData(user);
                 break;
             }
@@ -144,9 +146,9 @@ public class UserService extends Service {
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
                 Toast.makeText(getApplicationContext(), "Changed user ChildEventListener", Toast.LENGTH_SHORT).show();
-                User userdb = dataSnapshot.getValue(User.class);
-                userPref.setUserPref(userdb);
-                Toast.makeText(getApplicationContext(), "" + userdb.getUsername() + " data", Toast.LENGTH_SHORT).show();
+                User userDb = dataSnapshot.getValue(User.class);
+                userPref.setUserPref(userDb);
+                Toast.makeText(getApplicationContext(), "" + userDb.getUsername() + " data", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -174,15 +176,16 @@ public class UserService extends Service {
         return temp_fbChildListener;
     }
 
-
-    public ValueEventListener UserValueListener(String uid){
+    public ValueEventListener UserValueListener(){
 
         ValueEventListener uValueListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 User user = dataSnapshot.getValue(User.class);
+                Toast.makeText(getApplicationContext(), "From Database " + user.getUsername() + " data", Toast.LENGTH_SHORT).show();
                 userPref.setUserPref(user);
+                Toast.makeText(getApplicationContext(), "From userPref " + userPref.getSingleStringPref(userPref.keyUsername) + " data", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -190,8 +193,6 @@ public class UserService extends Service {
 
             }
         };
-        // [END post_value_event_listener]
-
         // Keep copy of post listener so we can remove it when app stops
         fbValueListener = uValueListener;
 
@@ -204,9 +205,22 @@ public class UserService extends Service {
 
     public void updateUserData(User user){
 
-        fbRef.child("/users").child(user.getUid()).setValue(user);
-    }
 
+//        Toast.makeText(getApplicationContext(), "usero " + user.getUsername(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "facebooko " + user.getFacebook(), Toast.LENGTH_SHORT).show();
+//        if(user.getBattletag() == null){ Toast.makeText(getApplicationContext(), "battletago " + user.getBattletag(), Toast.LENGTH_SHORT).show(); }
+//        else { Toast.makeText(getApplicationContext(), "battletago retard " + user.getBattletag(), Toast.LENGTH_SHORT).show(); }
+        DataComparator(user.getEmail(),userPref.keyEmail);
+
+        DataComparator(user.getBattletag(),userPref.keyBattletag);
+        DataComparator(user.getFavouriteClass(),userPref.keyFavouriteClass);
+
+        DataComparator(user.getFacebook(),userPref.keyFacebook);
+        DataComparator(user.getTwitch(),userPref.keyTwitch);
+        DataComparator(user.getTwitter(),userPref.keyTwitter);
+        DataComparator(user.getYoutube(),userPref.keyYoutube);
+
+    }
 
     public void UserDataConnector(String email,final String action){
 
@@ -217,7 +231,7 @@ public class UserService extends Service {
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
                     user = singleSnapshot.getValue(User.class);
                     Toast.makeText(getApplicationContext(), "Success download " + user.getUsername() + " data", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), "Your battletag is " + user.getBattleTag(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Your battletag is " + user.getBattletag(), Toast.LENGTH_SHORT).show();
                     userPref.setUserPref(user);
                     Toast.makeText(getApplicationContext(), "Your userPref username is " + userPref.getUsernamePref(), Toast.LENGTH_SHORT).show();
                 }
@@ -231,7 +245,20 @@ public class UserService extends Service {
 
     }
 
+    public void DataComparator(String userValue, String key) {
+
+        if(userValue != null && userValue != ""){
+            fbRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(userValue);
+        }
+        else {
+            fbRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(null);
+        }
+        if(userPref.getSingleStringPref(key) == null){ fbRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(null); }
+    }
+
+
 }
+
 
 
 //    @Override
@@ -298,7 +325,7 @@ public class UserService extends Service {
 ////                        if(action == "login") {
 ////                            //TODO userPref.setUserPref(user);
 ////                            Toast.makeText(getApplicationContext(), "Success download " + user.getUsername() + " data", Toast.LENGTH_SHORT).show();
-////                            Toast.makeText(getApplicationContext(), "Your battletag is " + user.getBattleTag(), Toast.LENGTH_SHORT).show();
+////                            Toast.makeText(getApplicationContext(), "Your battletag is " + user.getBattletag(), Toast.LENGTH_SHORT).show();
 ////                            userPref.setUserPref(user);
 ////                            Toast.makeText(getApplicationContext(), "Your userPref username is " + userPref.getUsernamePref(), Toast.LENGTH_SHORT).show();
 ////                        }
