@@ -3,6 +3,7 @@
 # TODO
 
 > User authentication/sign up/data store
+  (Everything done except avatar and region)
   - updating user data in app
   - send changes to DB
 
