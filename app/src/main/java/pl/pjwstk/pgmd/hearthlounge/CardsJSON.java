@@ -5,10 +5,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.text.Layout;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -25,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -39,6 +42,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,10 +70,9 @@ import pl.pjwstk.pgmd.hearthlounge.view.MakeImageToast;
  * Created by Maciek Dembowski on 16.10.2017.
  */
 
-public class CardsJSON extends JSON {
+public class CardsJSON extends DrawerMenu {
 
-    public CardService cardService;
-    private final String URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards" + getSuffixLink();
+    private final String URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1";
     private final String HEADER = "X-Mashape-Key";
     private final String KEY = "T15rGIqg2lmshwDGMsX3mZeWM7vBp1ZmfvVjsnFba6SXP2WK5Q";
     private String suffixLink;
@@ -102,10 +105,9 @@ public class CardsJSON extends JSON {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-        getLayoutInflater().inflate(R.layout.all_cards, contentFrameLayout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.getMenu().getItem(0).setChecked(true);
+//        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+        getLayoutInflater().inflate(R.layout.all_cards, frameLayout);
+
 
 //        new DownloadImageTask((ImageButton)findViewById(R.id.image_button_cards))
 //                .execute("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_116.png");
@@ -114,15 +116,18 @@ public class CardsJSON extends JSON {
 //        startService(i);
 
         Intent intent = getIntent();
-        String message = intent.getStringExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE");
+        String message = intent.getStringExtra("PlayerClass");
         setSuffixLink(message);
 
         String iconId = intent.getStringExtra("pl.pjwstk.pgmd.hearthlounge.IconID");
         setIconId(iconId);
 
         dialog = new ProgressDialog(this);
+//        View customTitleView = getLayoutInflater().inflate(R.layout.popup_search_menu, null);
+//        dialog.setCustomTitle(customTitleView);
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
+//        dialog.setProgressStyle(1);
         dialog.setMessage("Loading. Please wait..."); // showing a dialog for loading the data
         // Create default options which will be used for every
         //  displayImage(...) call if no options will be passed to this method
@@ -139,7 +144,7 @@ public class CardsJSON extends JSON {
         listViewCards = (GridView) findViewById(R.id.list_view_cards);
 
         // To start fetching the data when app start, uncomment below line to start the async task.
-        new JSONTask().execute(URL + HEADER + KEY);
+        new JSONTask().execute(URL);
     }
 
     public class JSONTask extends AsyncTask<String, String, List<Card> > {
@@ -150,18 +155,15 @@ public class CardsJSON extends JSON {
             dialog.show();
         }
 
-//        @Override
-//        protected List<Card> doInBackground(String... params) {
-//            super.doInBackground()
-//            return CardListCache.getInstance().getList();
-//        }
-
-
         @Override
         protected List<Card> doInBackground(String... params) {
 
             return CardListCache.getInstance().getPrimaryCardList();
         }
+
+//        protected void onProgressUpdate(Integer... progress) {
+//            dialog.setProgress(progress[0]);
+//        }
 
         //final Animation animationScale = AnimationUtils.loadAnimation(CardsJSON.this, R.anim.anim_scale);
         @Override
@@ -201,7 +203,7 @@ public class CardsJSON extends JSON {
             inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         }
 
-        public void manaFilter(int manaValue) {
+        public void manaFilter(int manaValue, String value) {
 
             JSONTask chosenMana = new JSONTask();
 
@@ -212,26 +214,42 @@ public class CardsJSON extends JSON {
                 CardListCache.getInstance().addList(unmodifiable);
             }
 
+//            value = getSuffixLink();
+
             if (manaValue == 411) {
                 temp = CardListCache.getInstance().getList();
             } else if (manaValue == 8){
                 for(Card cards : CardListCache.getInstance().getList()) {
                     if (cards.getCost() >= manaValue-1) {
-                        Collections.sort(temp, new Comparator<Card>() {
-                            public int compare(Card a, Card b) {
-                                return Integer.compare(a.getCost(), b.getCost());
-                            }
-                        });
                         temp.add(cards);
                     }
                 }
-            } else {
+            }
+//            else if (value == "Mage"){
+//                for(Card cards : CardListCache.getInstance().getList()) {
+//                    if (cards.getPlayerClass().equals(value)) {
+//                        Collections.sort(temp, new Comparator<Card>() {
+//                            public int compare(Card a, Card b) {
+//                                return Integer.compare(a.getCost(), b.getCost()); // return a.cos - b.cos
+//                            }
+//                        });
+//                        temp.add(cards);
+//                    }
+//                }
+//            }
+            else {
                 for(Card cards : CardListCache.getInstance().getList()) {
                     if (cards.getCost() == manaValue) {
                         temp.add(cards);
                     }
                 }
             }
+
+            Collections.sort(temp, new Comparator<Card>() {
+                public int compare(Card a, Card b) {
+                    return Integer.compare(a.getCost(), b.getCost()); // return a.cos - b.cos
+                }
+            });
             chosenMana.onPostExecute(temp);
         }
 
@@ -260,9 +278,7 @@ public class CardsJSON extends JSON {
                 Display display = getWindowManager().getDefaultDisplay();
                 int width = display.getWidth();
                 int height = display.getHeight();
-
                 mDropdown.showAtLocation(pop_up_mana_menu, Gravity.RIGHT|Gravity.CENTER_VERTICAL, 10,height);
-//                mDropdown.showAtLocation(pop_up_mana_menu, Gravity.CENTER, 0,0);
 
                 final ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
                 final int toastManaIconColor = Color.rgb(0,0,128);
@@ -281,7 +297,7 @@ public class CardsJSON extends JSON {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-                            manaFilter(0);
+                            manaFilter(0, null);
                             setIconId("0");
                             finalMDropdown.dismiss();
                             changeIcon();
@@ -303,7 +319,7 @@ public class CardsJSON extends JSON {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_1, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-                            manaFilter(1);
+                            manaFilter(1, null);
                             setIconId("1");
                             finalMDropdown.dismiss();
                             changeIcon();
@@ -325,7 +341,7 @@ public class CardsJSON extends JSON {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_2, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-                            manaFilter(2);
+                            manaFilter(2, null);
                             setIconId("2");
                             finalMDropdown.dismiss();
                             changeIcon();
@@ -347,7 +363,7 @@ public class CardsJSON extends JSON {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_3, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-                            manaFilter(3);
+                            manaFilter(3, null);
                             setIconId("3");
                             finalMDropdown.dismiss();
                             changeIcon();
@@ -369,7 +385,7 @@ public class CardsJSON extends JSON {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_4, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-                            manaFilter(4);
+                            manaFilter(4, null);
                             setIconId("4");
                             finalMDropdown.dismiss();
                             changeIcon();
@@ -391,7 +407,7 @@ public class CardsJSON extends JSON {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_5, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-                            manaFilter(5);
+                            manaFilter(5, null);
                             setIconId("5");
                             finalMDropdown.dismiss();
                             changeIcon();
@@ -413,7 +429,7 @@ public class CardsJSON extends JSON {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_6, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-                            manaFilter(6);
+                            manaFilter(6, null);
                             setIconId("6");
                             finalMDropdown.dismiss();
                             changeIcon();
@@ -435,7 +451,7 @@ public class CardsJSON extends JSON {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-                            manaFilter(7);
+                            manaFilter(7, null);
                             setIconId("7");
                             finalMDropdown.dismiss();
                             changeIcon();
@@ -458,7 +474,7 @@ public class CardsJSON extends JSON {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7_plus, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-                            manaFilter(8);
+                            manaFilter(8, null);
                             setIconId("7+");
                             finalMDropdown.dismiss();
                             changeIcon();
@@ -480,7 +496,7 @@ public class CardsJSON extends JSON {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.all_cards, Color.WHITE, Toast.LENGTH_SHORT).show(); // + item.getTitle()
-                            manaFilter(411);
+                            manaFilter(411, null);
                             setIconId("ALL");
                             finalMDropdown.dismiss();
                             changeIcon();
@@ -566,6 +582,11 @@ public class CardsJSON extends JSON {
 
                 holder.image_view_card = (ImageView)convertView.findViewById(R.id.image_viewCard);
 
+//                for(Card card : CardListCache.getInstance().getPrimaryCardList()) {
+//                    new DownloadImageTask((ImageView) convertView.findViewById(R.id.image_viewCard))
+//                            .execute(card.getImg());
+//                }
+
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -587,7 +608,9 @@ public class CardsJSON extends JSON {
             parms.bottomMargin = -height/11;
             holder.image_view_card.setLayoutParams(parms);
 
-            ImageLoader.getInstance().displayImage(cardList.get(position).getImg(), holder.image_view_card, new ImageLoadingListener() {
+            ImageLoader imageLoader = ImageLoader.getInstance();
+//            imageLoader.getDiskCache();
+            imageLoader.displayImage(cardList.get(position).getImg(), holder.image_view_card, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String imageUri, View view) {
                     progressBar.setVisibility(View.VISIBLE);
@@ -613,6 +636,11 @@ public class CardsJSON extends JSON {
                 }
             });
 
+//            boolean pauseOnScroll = false; // or true
+//            boolean pauseOnFling = true; // or false
+//            PauseOnScrollListener listener = new PauseOnScrollListener(imageLoader, pauseOnScroll, pauseOnFling);
+//            listViewCards.setOnScrollListener(listener);
+
             return convertView;
         }
 
@@ -634,17 +662,20 @@ public class CardsJSON extends JSON {
         int id = item.getItemId();
 
         if (id == R.id.action_refresh) {
-            new JSONTask().execute(URL + HEADER + KEY);
+            new JSONTask().execute(URL); // JSON.
+
+//            Intent i = new Intent(getApplicationContext(),CardsJSON.class);
+//            startActivity(i);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
 //    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-//        ImageButton bmImage;
+//        ImageView imageView;
 //
-//        public DownloadImageTask(ImageButton bmImage) {
-//            this.bmImage = bmImage;
+//        public DownloadImageTask(ImageView imageView) {
+//            this.imageView = imageView;
 //        }
 //
 //        protected Bitmap doInBackground(String... urls) {
@@ -661,7 +692,7 @@ public class CardsJSON extends JSON {
 //        }
 //
 //        protected void onPostExecute(Bitmap result) {
-//            bmImage.setImageBitmap(result);
+//            imageView.setImageBitmap(result);
 //        }
 //    }
 }

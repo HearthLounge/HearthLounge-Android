@@ -11,11 +11,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,33 +49,39 @@ public class UserAccount extends DrawerMenu{
 
     EditText tvEmail; //Change it!!!
     EditText tvBattleTag;
+    TextView region;
+    Spinner regionSpinner;
+    ArrayAdapter<CharSequence> adapter;
 
     EditText tvFacebook;
     EditText tvTwitter;
     EditText tvTwitch;
     EditText tvYoutube;
 
-    ImageView userAvatar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-        getLayoutInflater().inflate(R.layout.user_account, contentFrameLayout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        getLayoutInflater().inflate(R.layout.user_account, frameLayout);
         navigationView.getMenu().getItem(0).setChecked(true);
 
         userPref = new UserPreferences(this.getApplicationContext());
         user = new User(userPref.getUserFromUserPref());
 
-        userAvatar = (ImageView) findViewById(R.id.user_avatar);
+
+        // NAZEWNICTWO JAK userAvatar I INNE ZMIEN JAK CHCESZ :D
+
+        ImageView userAvatar = (ImageView)findViewById(R.id.user_avatar);
         // Loading profile image /*"user.getAvatar czy cos"*/
-        Glide.with(this).load(urlProfileImg).crossFade().thumbnail(0.5f)
+        Glide.with(this).load(urlProfileImg)
+                .crossFade()
+                .thumbnail(0.5f)
                 .bitmapTransform(new CircleTransform(this))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(userAvatar);
 
-        tvUsername = (TextView) findViewById(R.id.user_name);
+        tvUsername = (TextView)findViewById(R.id.user_name);
         tvUsername.setText(user.getUsername());
 
         TextView userRank = (TextView)findViewById(R.id.user_rank);
@@ -94,6 +103,34 @@ public class UserAccount extends DrawerMenu{
 
         tvBattleTag = (EditText)findViewById(R.id.edit_battletag);
         tvBattleTag.setText(userPref.getSingleStringPref("battletag"));
+
+        // TextView Region to się nie zmienia, więc nie wiem czy muszę coś do tego dopisywać
+
+        regionSpinner = (Spinner)findViewById(R.id.region_spinner);
+        adapter = ArrayAdapter.createFromResource(this,
+                R.array.region_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        regionSpinner.setAdapter(adapter);
+        regionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " selected", Toast.LENGTH_LONG).show();
+
+                // chyba nawet if-y nie są potrzebne
+                if (parent.getItemIdAtPosition(position) == 0) {
+                     //user.setRegion(parent.getItemAtPosition(position).toString()); // us lub americas
+                } else if (parent.getItemIdAtPosition(position) == 1) {
+//                    user.setRegion(parent.getItemAtPosition(position).toString());
+                } else if (parent.getItemIdAtPosition(position) == 2) {
+                    // user.setRegion(parent.getItemAtPosition(position).toString());
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         final ImageView favouriteClassIcon = (ImageView) findViewById(R.id.image_view_playerclass);
         //TODO brać z FavClass
@@ -120,13 +157,16 @@ public class UserAccount extends DrawerMenu{
             @SuppressLint("RestrictedApi")
             @Override
             public boolean onTouch(View v, MotionEvent motionEvent) {
-
                 int action = motionEvent.getAction();
                 if (action == MotionEvent.ACTION_DOWN) {
                     favouriteClassIcon.setColorFilter(Color.rgb(0,169,156));
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     initiatePopupWindow(); // Mała metoda niżej
+                    return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+//                    favouriteClassIcon.setColorFilter(Color.WHITE);
+                    return true;
                 }
                 return false;
             }
