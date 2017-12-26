@@ -103,8 +103,9 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
                     buttonMage.setColorFilter(getResources().getColor(R.color.mage));
-                    Intent startIntent = new Intent(getApplicationContext(), PlayerClass.class);
-                    startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.MESSAGE", "Mage");
+                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                    startIntent.putExtra("PlayerClass", "Mage");
+                    startIntent.putExtra("pl.pjwstk.pgmd.hearthlounge.IconID", "ALL");
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
