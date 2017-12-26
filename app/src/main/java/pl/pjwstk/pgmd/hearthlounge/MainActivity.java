@@ -112,7 +112,7 @@ public class MainActivity extends DrawerMenu {
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
-                    Intent startIntent = new Intent(getApplicationContext(),CardsFilterMenu.class); //Do którego ma iść
+                    Intent startIntent = new Intent(getApplicationContext(),JSON.class); //CardsFilterMenu
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {

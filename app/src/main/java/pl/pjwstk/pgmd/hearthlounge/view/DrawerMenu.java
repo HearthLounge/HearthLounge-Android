@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.firebase.auth.FirebaseAuth;
 
 import pl.pjwstk.pgmd.hearthlounge.MainActivity;
 import pl.pjwstk.pgmd.hearthlounge.R;
@@ -33,6 +34,7 @@ import pl.pjwstk.pgmd.hearthlounge.authentication.LogOut;
 import pl.pjwstk.pgmd.hearthlounge.authentication.SignUp;
 import pl.pjwstk.pgmd.hearthlounge.authentication.UserAccount;
 
+import pl.pjwstk.pgmd.hearthlounge.authentication.UserPreferences;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 
 /**
@@ -54,6 +56,7 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
     private View navHeader;
     private ImageView imgProfile;
     private TextView userName, userEmail;
+    private UserPreferences userPref;
 
     private static final String urlProfileImg = "https://cdn.pixabay.com/photo/2016/12/13/16/17/dancer-1904467_1280.png";
     public static int navItemIndex = 0;
@@ -66,7 +69,7 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
         super.setContentView(R.layout.activity_main);
 
         frameLayout = (FrameLayout)findViewById(R.id.content_frame);
-
+        userPref = new UserPreferences(this.getApplicationContext());
         Toast.makeText(getApplicationContext(),"HEJ JAK SIĘ MASZ ", Toast.LENGTH_SHORT).show();
 
 //        fbAuth = FirebaseAuth.getInstance();
@@ -162,9 +165,8 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
     }
 
     private void loadNavHeader() {
-        User user = new User();
-        userName.setText("Name: " + user.getUsername());
-        userEmail.setText("Email: " + user.getEmail());
+        userName.setText(userPref.getSingleStringPref(userPref.keyUsername));
+        userEmail.setText(userPref.getSingleStringPref(userPref.keyEmail));
 
         // Loading profile image    // user.getAvatar czy cos
         Glide.with(this).load(urlProfileImg)

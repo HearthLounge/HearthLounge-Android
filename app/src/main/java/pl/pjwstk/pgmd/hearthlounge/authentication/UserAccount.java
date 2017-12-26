@@ -116,14 +116,17 @@ public class UserAccount extends DrawerMenu{
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " selected", Toast.LENGTH_LONG).show();
 
-                // chyba nawet if-y nie są potrzebne
-                if (parent.getItemIdAtPosition(position) == 0) {
-                     //user.setRegion(parent.getItemAtPosition(position).toString()); // us lub americas
-                } else if (parent.getItemIdAtPosition(position) == 1) {
-//                    user.setRegion(parent.getItemAtPosition(position).toString());
-                } else if (parent.getItemIdAtPosition(position) == 2) {
-                    // user.setRegion(parent.getItemAtPosition(position).toString());
-                }
+                user.setRegion(parent.getItemAtPosition(position).toString());
+
+
+//                // chyba nawet if-y nie są potrzebne
+//                if (parent.getItemIdAtPosition(position) == 0) {
+//                     //user.setRegion(parent.getItemAtPosition(position).toString()); // us lub americas
+//                } else if (parent.getItemIdAtPosition(position) == 1) {
+////                    user.setRegion(parent.getItemAtPosition(position).toString());
+//                } else if (parent.getItemIdAtPosition(position) == 2) {
+//                    // user.setRegion(parent.getItemAtPosition(position).toString());
+//                }
             }
 
             @Override

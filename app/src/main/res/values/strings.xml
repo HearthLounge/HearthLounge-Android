@@ -81,9 +81,10 @@
 
 
     <string-array name="region_array">
+        <item></item>
         <item>Americas</item>
-        <item>Asia</item>
         <item>Europe</item>
+        <item>Asia</item>
     </string-array>
 
 </resources>

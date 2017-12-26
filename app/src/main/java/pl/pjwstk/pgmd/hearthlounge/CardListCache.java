@@ -23,7 +23,6 @@ import java.net.URL;
 import java.util.*;
 
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
-import pl.pjwstk.pgmd.hearthlounge.model.CardsImages;
 
 public class CardListCache extends AsyncTask<String, String, List<Card> > {
 

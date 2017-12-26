@@ -45,6 +45,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".JSON"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".authentication.LogOut"
             android:label="@string/title_log_out"
             android:screenOrientation="portrait"

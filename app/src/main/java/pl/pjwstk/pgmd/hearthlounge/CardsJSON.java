@@ -120,7 +120,7 @@ public class CardsJSON extends DrawerMenu {
         setSuffixLink(message);
 
         String iconId = intent.getStringExtra("pl.pjwstk.pgmd.hearthlounge.IconID");
-        setIconId(iconId);
+        setIconId("0");//setIconId(iconId);
 
         dialog = new ProgressDialog(this);
 //        View customTitleView = getLayoutInflater().inflate(R.layout.popup_search_menu, null);
@@ -147,7 +147,7 @@ public class CardsJSON extends DrawerMenu {
         new JSONTask().execute(URL);
     }
 
-    public class JSONTask extends AsyncTask<String, String, List<Card> > {
+    public class JSONTask extends AsyncTask<String,String,List<Card>> {
 
         @Override
         protected void onPreExecute() {
