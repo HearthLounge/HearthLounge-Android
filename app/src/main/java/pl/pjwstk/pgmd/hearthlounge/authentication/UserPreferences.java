@@ -32,6 +32,7 @@ public class UserPreferences {
     public static String keyYoutube;
 
     public static String keyAvatar;
+    public static String keyRegion;
 
     private SharedPreferences sharedPrefs;
     private SharedPreferences.Editor prefsEditor;
@@ -56,6 +57,7 @@ public class UserPreferences {
         keyTwitch = context.getString(R.string.keyTwitch);
         keyYoutube = context.getString(R.string.keyYoutube);
         keyAvatar = context.getString(R.string.keyAvatar);
+        keyRegion = context.getString(R.string.keyRegion);
     }
 
     public void setUserPref(User user){

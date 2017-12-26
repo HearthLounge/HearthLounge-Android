@@ -48,6 +48,7 @@
     <!--// Nasze-->
     <string name="keyUsername">username</string>
     <string name="keyEmail">email</string>
+    <string name="keyPassword">password</string>
     <string name="keyRole">role</string>
     <string name="keyRank">rank</string>
     <string name="keyUid">uid</string>
@@ -59,6 +60,7 @@
     <string name="keyTwitch">twitch</string>
     <string name="keyYoutube">youtube</string>
     <string name="keyAvatar">avatar</string>
+    <string name="keyRegion">region</string>
 
     <string name="title_cards_filter_menu">Cards Menu</string>
     <string name="title_player_class_cards">Player Cards</string>

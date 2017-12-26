@@ -52,32 +52,27 @@ public class UserAccount extends DrawerMenu{
     EditText tvTwitch;
     EditText tvYoutube;
 
-
+    ImageView userAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        userPref = new UserPreferences(this.getApplicationContext());
-        user = new User(userPref.getUserFromUserPref());
-
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.user_account, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(0).setChecked(true);
 
-        // NAZEWNICTWO JAK userAvatar I INNE ZMIEN JAK CHCESZ :D
+        userPref = new UserPreferences(this.getApplicationContext());
+        user = new User(userPref.getUserFromUserPref());
 
-        ImageView userAvatar = (ImageView)findViewById(R.id.user_avatar);
+        userAvatar = (ImageView) findViewById(R.id.user_avatar);
         // Loading profile image /*"user.getAvatar czy cos"*/
-        Glide.with(this).load(urlProfileImg)
-                .crossFade()
-                .thumbnail(0.5f)
+        Glide.with(this).load(urlProfileImg).crossFade().thumbnail(0.5f)
                 .bitmapTransform(new CircleTransform(this))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(userAvatar);
 
-        tvUsername = (TextView)findViewById(R.id.user_name);
+        tvUsername = (TextView) findViewById(R.id.user_name);
         tvUsername.setText(user.getUsername());
 
         TextView userRank = (TextView)findViewById(R.id.user_rank);

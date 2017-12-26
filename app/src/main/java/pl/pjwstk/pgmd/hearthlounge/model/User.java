@@ -256,6 +256,14 @@ public class User implements Parcelable {
         this.avatar = avatar;
     }
 
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
     @Override
     public int describeContents() {
         return 0;

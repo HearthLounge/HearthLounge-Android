@@ -3,10 +3,13 @@ package pl.pjwstk.pgmd.hearthlounge.authentication;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -17,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 
 import static android.content.ContentValues.TAG;
@@ -57,9 +59,8 @@ public class UserService extends Service {
 
 
     private FirebaseDatabase fbDb = FirebaseDatabase.getInstance();
-    private DatabaseReference fbRef = fbDb.getReferenceFromUrl("https://hearthlounge-32197.firebaseio.com/users");
-    private FirebaseAuth fbAuth = FirebaseAuth.getInstance();
-    private FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
+    private DatabaseReference fbUserRef = fbDb.getReferenceFromUrl("https://hearthlounge-32197.firebaseio.com/users");
+    private FirebaseUser fbUser;
     public static final String USER_DATA_SP = "pl.pjwstk.pgmd.hearthlounge";
 
     private ChildEventListener fbChildListener;
@@ -83,6 +84,8 @@ public class UserService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        fbUser = FirebaseAuth.getInstance().getCurrentUser();
+
         Toast.makeText(getApplicationContext(), "action: " + intent.getStringExtra("action"), Toast.LENGTH_SHORT).show();
         switch (intent.getStringExtra("action")) {
 
@@ -90,8 +93,8 @@ public class UserService extends Service {
                 Toast.makeText(getApplicationContext(), "ACTION LOGIN", Toast.LENGTH_SHORT).show();
                 sUserUid = intent.getStringExtra("uid");
                 sUserEmail = fbUser.getEmail();
-                //fbRef.orderByChild("users").equalTo(sUserUid).addChildEventListener(UserChildListener(sUserUid));
-                fbRef.child(sUserUid).addValueEventListener(UserValueListener());
+                //fbUserRef.orderByChild("users").equalTo(sUserUid).addChildEventListener(UserChildListener(sUserUid));
+                fbUserRef.child(sUserUid).addValueEventListener(UserValueListener());
                 break;
             }
             case "logout": {
@@ -113,10 +116,26 @@ public class UserService extends Service {
                 sUserEmail = fbUser.getEmail();
                 User user = new User((User) intent.getParcelableExtra("updated_user"));
                 Toast.makeText(getApplicationContext(),"battletag " + user.getBattletag(), Toast.LENGTH_SHORT).show();
-//                Toast.makeText(getApplicationContext(), "ACTION UPDATE", Toast.LENGTH_SHORT).show();
-//                Toast.makeText(getApplicationContext(), "ACTION UPDATE", Toast.LENGTH_SHORT).show();
                 updateUserData(user);
                 break;
+            }
+            case "update_password":{
+
+                Toast.makeText(getApplicationContext(), "Password changing in progress!", Toast.LENGTH_SHORT).show();
+                UpdateUserPassword(intent.getStringExtra("password"));
+            }
+            case "delete":{
+
+                DeleteUser();
+
+            }
+
+            default: {
+                if(fbUser !=null){
+
+                    fbUserRef.child(userPref.getSingleStringPref("uid")).addValueEventListener(UserValueListener());
+
+                }
             }
 
         }
@@ -170,7 +189,7 @@ public class UserService extends Service {
             }
         };
 
-        //fbRef.orderByChild("users").equalTo("uid").addChildEventListener(temp_fbChildListener);
+        //fbUserRef.orderByChild("users").equalTo("uid").addChildEventListener(temp_fbChildListener);
         fbChildListener = temp_fbChildListener;
 
         return temp_fbChildListener;
@@ -203,28 +222,66 @@ public class UserService extends Service {
 
     }
 
-    public void updateUserData(User user){
+    private void updateUserData(User user){
 
 
-//        Toast.makeText(getApplicationContext(), "usero " + user.getUsername(), Toast.LENGTH_SHORT).show();
-//        Toast.makeText(getApplicationContext(), "facebooko " + user.getFacebook(), Toast.LENGTH_SHORT).show();
-//        if(user.getBattletag() == null){ Toast.makeText(getApplicationContext(), "battletago " + user.getBattletag(), Toast.LENGTH_SHORT).show(); }
-//        else { Toast.makeText(getApplicationContext(), "battletago retard " + user.getBattletag(), Toast.LENGTH_SHORT).show(); }
         DataComparator(user.getEmail(),userPref.keyEmail);
-
         DataComparator(user.getBattletag(),userPref.keyBattletag);
         DataComparator(user.getFavouriteClass(),userPref.keyFavouriteClass);
-
         DataComparator(user.getFacebook(),userPref.keyFacebook);
         DataComparator(user.getTwitch(),userPref.keyTwitch);
         DataComparator(user.getTwitter(),userPref.keyTwitter);
         DataComparator(user.getYoutube(),userPref.keyYoutube);
+        DataComparator(user.getRegion(),userPref.keyRegion);
+
+
+    }
+
+    private void UpdateUserEmail(final String newEmail){
+
+        fbUser.updateEmail(newEmail)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).child("email").setValue(newEmail);
+                            Toast.makeText(getApplicationContext(), "Changed user email with success!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    private void UpdateUserPassword(String password){
+
+        fbUser.updatePassword(password)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Changed user password with success!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
+
+    private void DeleteUser(){
+
+        fbUser.delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).setValue(null);
+                        }
+                    }
+                });
 
     }
 
     public void UserDataConnector(String email,final String action){
 
-        Query userQuery = fbRef.orderByChild("email").equalTo(email);
+        Query userQuery = fbUserRef.orderByChild("email").equalTo(email);
         userQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -245,21 +302,23 @@ public class UserService extends Service {
 
     }
 
-    public void DataComparator(String userValue, String key) {
+    private void DataComparator(String userValue, String key) {
 
         if(userValue != null && userValue != ""){
-            fbRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(userValue);
+
+            if(key == userPref.keyEmail){
+                UpdateUserEmail(userValue);
+            }
+            else { fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(userValue); }
         }
         else {
-            fbRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(null);
+            fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(null);
         }
-        if(userPref.getSingleStringPref(key) == null){ fbRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(null); }
+        if(userPref.getSingleStringPref(key) == null){ fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(null); }
     }
 
 
 }
-
-
 
 //    @Override
 //    public int onStartCommand(final Intent intent, int flags, int startId) {
@@ -282,8 +341,8 @@ public class UserService extends Service {
 //
 //
 //        };
-//        //fbRef.orderByChild("uid").equalTo(userPref.getSingleStringPref("uid")).addValueEventListener(UserListener);
-//        fbRef.child(userPref.getSingleStringPref("uid")).addValueEventListener(UserListener);
+//        //fbUserRef.orderByChild("uid").equalTo(userPref.getSingleStringPref("uid")).addValueEventListener(UserListener);
+//        fbUserRef.child(userPref.getSingleStringPref("uid")).addValueEventListener(UserListener);
 //
 ////        else {
 //////            Thread thread = new Thread(new MyThreadUserService(startId));
@@ -314,7 +373,7 @@ public class UserService extends Service {
 //        mAdapter = new CommentAdapter(this, mCommentsReference);
 //        mCommentsRecycler.setAdapter(mAdapter);
 
-//        Query userQuery = fbRef.orderByChild("email").equalTo(email);
+//        Query userQuery = fbUserRef.orderByChild("email").equalTo(email);
 //        userQuery.addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(DataSnapshot dataSnapshot) {
@@ -349,7 +408,7 @@ public class UserService extends Service {
 
 
 
-//        fbRef = fbRef.child(uid);
+//        fbUserRef = fbUserRef.child(uid);
 //        ValueEventListener postListener = new ValueEventListener() {
 //                        @Override
 //                        public void onDataChange(DataSnapshot dataSnapshot) {
@@ -368,12 +427,12 @@ public class UserService extends Service {
 //                            Toast.makeText(getApplicationContext(), "Failed to load user.", Toast.LENGTH_SHORT).show();
 //                        }
 //                    };
-//                    fbRef.addValueEventListener(postListener);
+//                    fbUserRef.addValueEventListener(postListener);
 //                    // Keep copy of post listener so we can remove it when app stops
 //                    mPostListener = postListener;
 //        Toast.makeText(getApplicationContext(),/* Hmmm */ , Toast.LENGTH_SHORT).show();
 
-//        fbRef.orderByChild(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+//        fbUserRef.orderByChild(uid).addListenerForSingleValueEvent(new ValueEventListener() {
 //        @Override
 //        public void onDataChange(DataSnapshot dataSnapshot) {
 //            // Get user information
@@ -407,14 +466,14 @@ public class UserService extends Service {
 //        this.user = user;
 ////        Query query = mFirebaseDatabaseReference.child("/user").orderByChild("title").equalTo(user.getUid());
 ////        query.addValueEventListener(valueEventListener);
-////        queryUser = fbRef.orderByChild("/users").equalTo(user.getUid());
+////        queryUser = fbUserRef.orderByChild("/users").equalTo(user.getUid());
 ////        queryUser.addListenerForSingleValueEvent(vel);
 //
 //    }
 
 //    public void elo() {
 //
-//        fbRef.child("/users").addValueEventListener(vel);
+//        fbUserRef.child("/users").addValueEventListener(vel);
 //        vel = new ValueEventListener() {
 //            @Override
 //            public void onDataChange(DataSnapshot dataSnapshot) {
@@ -432,7 +491,7 @@ public class UserService extends Service {
 
 
 // Toast.makeText(getApplicationContext(),"action: " + intent.getStringExtra("action"), Toast.LENGTH_SHORT).show();
-//fbRef = fbRef intent.getStringArrayExtra("uid");
+//fbUserRef = fbUserRef intent.getStringArrayExtra("uid");
 //        switch (intent.getStringExtra("action")){
 //
 //            case "login":
