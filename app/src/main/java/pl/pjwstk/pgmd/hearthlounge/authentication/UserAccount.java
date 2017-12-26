@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,13 +24,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import pl.pjwstk.pgmd.hearthlounge.CardsJSON;
 import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 import pl.pjwstk.pgmd.hearthlounge.view.CircleTransform;
@@ -96,8 +88,8 @@ public class UserAccount extends DrawerMenu{
         userRank.setText("Rank: " + userPref.getRankPref().toString());
 
         //TODO czy w ogóle potrzebne
-        EditText editEmail = (EditText) findViewById(R.id.edit_email_account);
-        editEmail.setText(userPref.getSingleStringPref("email"));
+        tvEmail = (EditText) findViewById(R.id.edit_email_account);
+        tvEmail.setText(userPref.getSingleStringPref("email"));
 
         Button buttonUpload = (Button) findViewById(R.id.button_upload);
         buttonUpload.setOnClickListener(new View.OnClickListener() {
@@ -109,8 +101,8 @@ public class UserAccount extends DrawerMenu{
             }
         });
 
-        EditText battletag = (EditText)findViewById(R.id.edit_battletag);
-        battletag.setText(userPref.getSingleStringPref("battletag"));
+        tvBattleTag = (EditText)findViewById(R.id.edit_battletag);
+        tvBattleTag.setText(userPref.getSingleStringPref("battletag"));
 
         // TextView Region to się nie zmienia, więc nie wiem czy muszę coś do tego dopisywać
 
@@ -143,7 +135,7 @@ public class UserAccount extends DrawerMenu{
         final ImageView favouriteClassIcon = (ImageView) findViewById(R.id.image_view_playerclass);
         //TODO brać z FavClass
 
-//        switch (user.getFavClass()){
+//        switch (user.getFavouriteClass()){
 //
 //            case "mage": {
 //
@@ -180,17 +172,17 @@ public class UserAccount extends DrawerMenu{
             }
         });
 
-        EditText facebook = (EditText)findViewById(R.id.edit_facebook);
-        facebook.setText(userPref.getSingleStringPref("facebook"));
+        tvFacebook = (EditText)findViewById(R.id.edit_facebook);
+        tvFacebook.setText(userPref.getSingleStringPref("facebook"));
 
-        EditText twitter = (EditText)findViewById(R.id.edit_twitter);
-        twitter.setText(userPref.getSingleStringPref("twitter"));
+        tvTwitter = (EditText)findViewById(R.id.edit_twitter);
+        tvTwitter.setText(userPref.getSingleStringPref("twitter"));
 
-        EditText twitch = (EditText)findViewById(R.id.edit_twitch);
-        twitch.setText(userPref.getSingleStringPref("twitch"));
+        tvTwitch = (EditText)findViewById(R.id.edit_twitch);
+        tvTwitch.setText(userPref.getSingleStringPref("twitch"));
 
-        EditText youtube = (EditText)findViewById(R.id.edit_youtube);
-        youtube.setText(userPref.getSingleStringPref("youtube"));
+        tvYoutube = (EditText)findViewById(R.id.edit_youtube);
+        tvYoutube.setText(userPref.getSingleStringPref("youtube"));
 
         Button deleteAccount = (Button) findViewById(R.id.button_delete_account);
         // Usuwanie z FIREBASE
@@ -201,13 +193,16 @@ public class UserAccount extends DrawerMenu{
             public void onClick(View view) {
 
                 updateUserData(getUserFromText());
-
             }
         });
 
         // TODO RESZTA
 
     }
+
+
+
+
 
     private void updateUserData(User user){
 
@@ -217,27 +212,27 @@ public class UserAccount extends DrawerMenu{
         Intent i = new Intent(getApplicationContext(), UserService.class);
         i.putExtra("action", "update");
         i.putExtra("uid", userPref.getSingleStringPref("uid"));
-        i.putExtra("new_user", getUserFromText());
+        i.putExtra("updated_user", user);
         startService(i);
     }
 
+    //Add avatar edit
     private User getUserFromText(){
-        //Add check for null
         User tempUser = new User();
-
         if(tvUsername.getText() != null){tempUser.setUsername(tvUsername.getText().toString()); }
         if(tvEmail.getText() != null){tempUser.setEmail(tvEmail.getText().toString()); }
-        if(user.getFavClass().isEmpty()){tempUser.setFavClass(user.getFavClass()); }
-        if(tvBattleTag.getText() != null){tempUser.setBattleTag(tvBattleTag.getText().toString()); }
+        //if(!user.getFavouriteClass().isEmpty()){tempUser.setFavouriteClass(user.getFavouriteClass()); }
+        if(tvBattleTag.getText() != null || tvBattleTag.getText().toString() != ""){tempUser.setBattletag(tvBattleTag.getText().toString()); }
         if(tvFacebook.getText() != null){tempUser.setFacebook(tvFacebook.getText().toString()); }
         if(tvTwitter.getText() != null){tempUser.setTwitter(tvTwitter.getText().toString()); }
         if(tvTwitch.getText() != null){tempUser.setTwitch(tvTwitch.getText().toString()); }
         if(tvYoutube.getText() != null){tempUser.setYoutube(tvYoutube.getText().toString()); }
 
 
+
 //        tempUser.setEmail(tvEmail.getText().toString());
-//        tempUser.setFavClass(user.getFavClass());
-//        tempUser.setBattleTag(tvBattleTag.getText().toString());
+//        tempUser.setFavouriteClass(user.getFavouriteClass());
+//        tempUser.setBattletag(tvBattleTag.getText().toString());
 //        tempUser.setFacebook(tvFacebook.getText().toString());
 //        tempUser.setTwitter(tvTwitter.getText().toString());
 //        tempUser.setTwitch(tvTwitch.getText().toString());

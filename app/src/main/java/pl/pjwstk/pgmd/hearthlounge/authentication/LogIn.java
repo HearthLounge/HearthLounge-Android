@@ -28,10 +28,10 @@ import pl.pjwstk.pgmd.hearthlounge.R;
 
 public class LogIn extends DrawerMenu {
 
-    private Button button_login;
-    private EditText edit_email_login;
-    private EditText edit_password_login;
-    private TextView text_to_sign_up;
+    private Button buttonLogin;
+    private EditText editEmailLogin;
+    private EditText editPasswordLogin;
+    private TextView textToSignUp;
     private String email,password;
 
     private FirebaseAuth fbAuth;
@@ -47,21 +47,21 @@ public class LogIn extends DrawerMenu {
         fb_database = FirebaseDatabase.getInstance();
         fbAuth = FirebaseAuth.getInstance();
 
-        edit_email_login = (EditText) findViewById(R.id.edit_email);
-        edit_password_login = (EditText) findViewById(R.id.edit_password);
+        editEmailLogin = (EditText) findViewById(R.id.edit_email);
+        editPasswordLogin = (EditText) findViewById(R.id.edit_password);
 
 
-        button_login = (Button) findViewById(R.id.button_login);
-        text_to_sign_up = (TextView) findViewById(R.id.text_to_sign_up);
+        buttonLogin = (Button) findViewById(R.id.button_login);
+        textToSignUp = (TextView) findViewById(R.id.text_to_sign_up);
 
         //Log in mechanics
-        button_login.setOnClickListener(new View.OnClickListener(){
+        buttonLogin.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View view) {
                 if(fbAuth.getCurrentUser() == null) {
-                    //log_user(edit_email_login.getText().toString(),edit_password_login.getText().toString());
-                    email = edit_email_login.getText().toString();
-                    password = edit_password_login.getText().toString();
+                    //log_user(editEmailLogin.getText().toString(),editPasswordLogin.getText().toString());
+                    email = editEmailLogin.getText().toString();
+                    password = editPasswordLogin.getText().toString();
                     Toast.makeText(LogIn.this, "E:" + email + " H:" + password, Toast.LENGTH_SHORT).show();
                     log_user(email, password);
                     //log_user("admin@ad.min","Roottoor1");
@@ -71,7 +71,7 @@ public class LogIn extends DrawerMenu {
         });
 
 
-        text_to_sign_up.setOnClickListener(new View.OnClickListener() {
+        textToSignUp.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 Intent goto_sign_up = new Intent(getApplicationContext(), SignUp.class);

@@ -3,6 +3,8 @@ package pl.pjwstk.pgmd.hearthlounge.authentication;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.content.res.Resources;
+import android.util.Log;
 import android.widget.Toast;
 
 import pl.pjwstk.pgmd.hearthlounge.R;
@@ -14,22 +16,22 @@ import pl.pjwstk.pgmd.hearthlounge.model.User;
 
 public class UserPreferences {
 
-    User userPref;
+    public static String keyUsername;
+    public static String keyEmail;
+    public static String keyRole;
+    public static String keyRank;
+    public static String keyUid;
+    public static String keyUpdatedProfile;
 
-    public static final String keyUsername = "username";
-    public static final String keyEmail = "email";
-    public static final String keyRole = "role";
-    public static final String keyRank = "rank";
-    public static final String keyUid = "uid";
-    public static final String keyUpdatedProfile = "updatedProfile";
+    public static String keyBattletag;
+    public static String keyFavouriteClass;
 
-    public static final String keyBattletag = "battletag";
-    public static final String keyFavClass = "favClass";
+    public static String keyFacebook;
+    public static String keyTwitter;
+    public static String keyTwitch;
+    public static String keyYoutube;
 
-    public static final String keyFacebook = "facebook";
-    public static final String keyTwitter = "twitter";
-    public static final String keyTwitch = "twitch";
-    public static final String keyYoutube = "youtube";
+    public static String keyAvatar;
 
     private SharedPreferences sharedPrefs;
     private SharedPreferences.Editor prefsEditor;
@@ -41,6 +43,19 @@ public class UserPreferences {
     public UserPreferences(Context context) {
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         this.prefsEditor = sharedPrefs.edit();
+        keyUsername = context.getString(R.string.keyUsername);
+        keyEmail = context.getString(R.string.keyEmail);
+        keyRole = context.getString(R.string.keyRole);
+        keyRank = context.getString(R.string.keyRank);
+        keyUid = context.getString(R.string.keyUid);
+        keyUpdatedProfile = context.getString(R.string.keyUpdatedProfile);
+        keyBattletag = context.getString(R.string.keyBattleTag);
+        keyFavouriteClass = context.getString(R.string.keyFavouriteClass);
+        keyFacebook = context.getString(R.string.keyFacebook);
+        keyTwitter = context.getString(R.string.keyTwitter);
+        keyTwitch = context.getString(R.string.keyTwitch);
+        keyYoutube = context.getString(R.string.keyYoutube);
+        keyAvatar = context.getString(R.string.keyAvatar);
     }
 
     public void setUserPref(User user){
@@ -51,12 +66,13 @@ public class UserPreferences {
         prefsEditor.putInt(keyRole, user.getRole());
         prefsEditor.putString(keyUid, user.getUid());
         prefsEditor.putBoolean(keyUpdatedProfile, user.getUpdatedProfile());
-        prefsEditor.putString(keyBattletag, user.getBattleTag());
-        prefsEditor.putString(keyFavClass, user.getFavClass());
+        prefsEditor.putString(keyBattletag, user.getBattletag());
+        prefsEditor.putString(keyFavouriteClass, user.getFavouriteClass());
         prefsEditor.putString(keyFacebook, user.getFacebook());
         prefsEditor.putString(keyTwitter, user.getTwitter());
         prefsEditor.putString(keyTwitch, user.getTwitch());
         prefsEditor.putString(keyYoutube, user.getYoutube());
+        prefsEditor.putString(keyAvatar, user.getAvatar());
 
         prefsEditor.commit();
     }
@@ -67,7 +83,7 @@ public class UserPreferences {
     }
 
     public boolean contain(String key){
-        return sharedPrefs.contains("key");
+        return sharedPrefs.contains(key);
     }
 
     public void updateUserPref(){
@@ -114,9 +130,9 @@ public class UserPreferences {
     }
 
     public User getUserFromUserPref(){
-        User user = new User(this.getSingleStringPref("username"), this.getSingleStringPref("email"), this.getRolePref(), this.getSingleStringPref("uid"),
-                this.getRankPref(), this.getUpdatedProfilePref(), this.getSingleStringPref("battletag"), this.getSingleStringPref("favClass"), this.getSingleStringPref("facebook"),
-                this.getSingleStringPref("twitter"), this.getSingleStringPref("twitch"), this.getSingleStringPref("youtube"));
+        User user = new User(this.getSingleStringPref(keyUsername), this.getSingleStringPref(keyEmail), this.getRolePref(), this.getSingleStringPref(keyUid),
+                this.getRankPref(), this.getUpdatedProfilePref(), this.getSingleStringPref(keyBattletag), this.getSingleStringPref(keyFavouriteClass), this.getSingleStringPref(keyFacebook),
+                this.getSingleStringPref(keyTwitter), this.getSingleStringPref(keyTwitch), this.getSingleStringPref(keyYoutube), this.getSingleStringPref("avatar"));
         return user;
     }
 }

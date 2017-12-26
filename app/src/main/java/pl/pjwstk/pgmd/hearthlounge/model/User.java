@@ -16,15 +16,16 @@ public class User implements Parcelable {
 
     private String username;
     private String email;
-    //private Image avatar;   //How to do it???
+    private String avatar;
 
     private long rank;
     private int role;
     private String uid;
     private Boolean updatedProfile;
 
-    private String battleTag;
-    private String favClass;
+    private String battletag;
+    private String favouriteClass;
+    private String region;
 
     private String facebook;
     private String twitter;
@@ -42,11 +43,11 @@ public class User implements Parcelable {
         this.email = email;
         this.role = 3;
         this.uid = uid;
-        this.updatedProfile = false;
+        this.updatedProfile = true;
         this.rank = 1;
     }
 
-//    public User(String username, String email, String role, String uid, long rank, Boolean updatedProfile/*, String battleTag, String favClass, String facebook, String twitter, String twitch, String youtube*/){
+//    public User(String username, String email, String role, String uid, long rank, Boolean updatedProfile/*, String battletag, String favouriteClass, String facebook, String twitter, String twitch, String youtube*/){
 //
 //        this.username = username;
 //        this.email = email;
@@ -74,25 +75,22 @@ public class User implements Parcelable {
         this.rank = Long.parseLong(rank);
     }
 
-    public User(String username, String email, int role, String uid, Long rank, Boolean updatedProfile, String battleTag, String favClass, String facebook, String twitter, String twitch, String youtube){
+    public User(String username, String email, int role, String uid, Long rank, Boolean updatedProfile,
+                String battletag, String favClass, String facebook, String twitter, String twitch, String youtube, String avatar){
 
         this.username = username;
         this.email = email;
-        this.username = username;
         this.role = role;
         this.uid = uid;
         this.rank = rank;
         this.updatedProfile = updatedProfile;
-        this.battleTag = battleTag;
-        this.favClass = favClass;
+        this.battletag = battletag;
+        this.favouriteClass = favClass;
         this.facebook = facebook;
         this.twitter = twitter;
         this.twitch = twitch;
         this.youtube = youtube;
-
-
-
-
+        this.avatar = avatar;
     }
 
     public User(User user) {
@@ -102,12 +100,13 @@ public class User implements Parcelable {
         this.uid = user.uid;
         this.rank = user.rank;
         this.updatedProfile = user.updatedProfile;
-        this.battleTag = user.battleTag;
-        this.favClass = user.favClass;
+        this.battletag = user.battletag;
+        this.favouriteClass = user.favouriteClass;
         this.facebook = user.facebook;
         this.twitter = user.twitter;
         this.twitch = user.twitch;
         this.youtube = user.youtube;
+        this.avatar = user.avatar;
     }
 
     protected User(Parcel in) {
@@ -118,12 +117,13 @@ public class User implements Parcelable {
         uid = in.readString();
         byte tmpUpdatedProfile = in.readByte();
         updatedProfile = tmpUpdatedProfile == 0 ? null : tmpUpdatedProfile == 1;
-        battleTag = in.readString();
-        favClass = in.readString();
+        battletag = in.readString();
+        favouriteClass = in.readString();
         facebook = in.readString();
         twitter = in.readString();
         twitch = in.readString();
         youtube = in.readString();
+        avatar = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -185,7 +185,7 @@ public class User implements Parcelable {
         this.uid = uid;
     }
 
-    public String getUpdatedProfileS() { return updatedProfile.toString();}
+    //public String getUpdatedProfileS() { return updatedProfile.toString();}
 
     public Boolean getUpdatedProfile() {
         return updatedProfile;
@@ -195,21 +195,21 @@ public class User implements Parcelable {
         this.updatedProfile = updatedProfile;
     }
 
-    public String getBattleTag() {
-        return battleTag;
+    public String getBattletag() {
+        return battletag;
     }
 
-    public void setBattleTag(String battleTag) {
-        this.battleTag = battleTag;
+    public void setBattletag(String battletag) {
+        this.battletag = battletag;
     }
 
-    public String getFavClass() {
-        //if(favClass == null){ favClass = "";}
-        return favClass;
+    public String getFavouriteClass() {
+        //if(favouriteClass == null){ favouriteClass = "";}
+        return favouriteClass;
     }
 
-    public void setFavClass(String favClass) {
-        this.favClass = favClass;
+    public void setFavouriteClass(String favouriteClass) {
+        this.favouriteClass = favouriteClass;
     }
 
     public String getFacebook() {
@@ -248,6 +248,14 @@ public class User implements Parcelable {
         this.youtube = youtube;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -261,11 +269,12 @@ public class User implements Parcelable {
         dest.writeInt(role);
         dest.writeString(uid);
         dest.writeByte((byte) (updatedProfile == null ? 0 : updatedProfile ? 1 : 2));
-        dest.writeString(battleTag);
-        dest.writeString(favClass);
+        dest.writeString(battletag);
+        dest.writeString(favouriteClass);
         dest.writeString(facebook);
         dest.writeString(twitter);
         dest.writeString(twitch);
         dest.writeString(youtube);
+        dest.writeString(avatar);
     }
 }
