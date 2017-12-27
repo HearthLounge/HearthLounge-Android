@@ -11,6 +11,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -65,6 +67,7 @@ import pl.pjwstk.pgmd.hearthlounge.authentication.UserService;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 import pl.pjwstk.pgmd.hearthlounge.view.MakeImageToast;
+import pl.pjwstk.pgmd.hearthlounge.view.TypefaceSpan;
 
 /**
  * Created by Maciek Dembowski on 16.10.2017.
@@ -72,25 +75,24 @@ import pl.pjwstk.pgmd.hearthlounge.view.MakeImageToast;
 
 public class CardsJSON extends DrawerMenu {
 
-    private final String URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1";
-    private final String HEADER = "X-Mashape-Key";
-    private final String KEY = "T15rGIqg2lmshwDGMsX3mZeWM7vBp1ZmfvVjsnFba6SXP2WK5Q";
-    private String suffixLink;
-    private String iconId;
-
     public MakeImageToast toast;
+
+    private final String URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1";
+
+    private String stringValue = "";
+    private String iconId;
 
     private GridView listViewCards;
     private ProgressDialog dialog;
 
     public CardsJSON(){}
 
-    public String getSuffixLink() {
-        return suffixLink;
+    public String getStringValue() {
+        return stringValue;
     }
 
-    public void setSuffixLink(String suffixLink){
-        this.suffixLink = suffixLink;
+    public void setStringValue(String stringValue) {
+        this.stringValue = stringValue;
     }
 
     public String getIconId() {
@@ -108,19 +110,20 @@ public class CardsJSON extends DrawerMenu {
 //        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.all_cards, frameLayout);
 
-
 //        new DownloadImageTask((ImageButton)findViewById(R.id.image_button_cards))
 //                .execute("http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_116.png");
 
-//        Intent i = new Intent(getApplicationContext(), CardService.class);
-//        startService(i);
-
         Intent intent = getIntent();
-        String message = intent.getStringExtra("PlayerClass");
-        setSuffixLink(message);
+        String value = intent.getStringExtra("StringValue");
+        setStringValue(value);
 
-        String iconId = intent.getStringExtra("pl.pjwstk.pgmd.hearthlounge.IconID");
-        setIconId("0");//setIconId(iconId);
+        String iconId = intent.getStringExtra("IconID");
+        setIconId(iconId);
+
+        SpannableString s = new SpannableString(iconId + " Cards");
+        s.setSpan(new TypefaceSpan(this, "belwe_medium.otf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        toolbar.setTitle(s);
 
         dialog = new ProgressDialog(this);
 //        View customTitleView = getLayoutInflater().inflate(R.layout.popup_search_menu, null);
@@ -140,7 +143,6 @@ public class CardsJSON extends DrawerMenu {
                 .build();
         ImageLoader.getInstance().init(config); // Do it on Application start
 
-//        listViewCards = (ListView)findViewById(R.id.list_view_cards);
         listViewCards = (GridView) findViewById(R.id.list_view_cards);
 
         // To start fetching the data when app start, uncomment below line to start the async task.
@@ -157,8 +159,7 @@ public class CardsJSON extends DrawerMenu {
 
         @Override
         protected List<Card> doInBackground(String... params) {
-
-            return CardListCache.getInstance().getPrimaryCardList();
+            return CardListCache.getInstance().getCardList(getStringValue());
         }
 
 //        protected void onProgressUpdate(Integer... progress) {
@@ -171,6 +172,10 @@ public class CardsJSON extends DrawerMenu {
             super.onPostExecute(result);
             dialog.dismiss();
             if(result != null) {
+                TextView text_view_count_cards = (TextView)findViewById(R.id.text_view_count_cards);
+                int countCards = result.size();
+                text_view_count_cards.setText(countCards + " results");
+
                 final CardsAdapter adapter = new CardsAdapter(getApplicationContext(), R.layout.row, result);
                 listViewCards.setAdapter(adapter);
                 listViewCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {  // list item click opens a new detailed activity
@@ -210,46 +215,25 @@ public class CardsJSON extends DrawerMenu {
             List<Card> temp = new ArrayList<>();
             final List<Card> unmodifiable = Collections.unmodifiableList(cardList);
 
-            if (!CardListCache.getInstance().getList().containsAll(unmodifiable)) {
+            if (!CardListCache.getInstance().getCardList(getStringValue()).containsAll(unmodifiable)) {
                 CardListCache.getInstance().addList(unmodifiable);
             }
 
-//            value = getSuffixLink();
-
             if (manaValue == 411) {
-                temp = CardListCache.getInstance().getList();
+                temp = CardListCache.getInstance().getCardList(getStringValue());
             } else if (manaValue == 8){
-                for(Card cards : CardListCache.getInstance().getList()) {
+                for(Card cards : CardListCache.getInstance().getCardList(getStringValue())) {
                     if (cards.getCost() >= manaValue-1) {
                         temp.add(cards);
                     }
                 }
-            }
-//            else if (value == "Mage"){
-//                for(Card cards : CardListCache.getInstance().getList()) {
-//                    if (cards.getPlayerClass().equals(value)) {
-//                        Collections.sort(temp, new Comparator<Card>() {
-//                            public int compare(Card a, Card b) {
-//                                return Integer.compare(a.getCost(), b.getCost()); // return a.cos - b.cos
-//                            }
-//                        });
-//                        temp.add(cards);
-//                    }
-//                }
-//            }
-            else {
-                for(Card cards : CardListCache.getInstance().getList()) {
+            } else {
+                for(Card cards : CardListCache.getInstance().getCardList(getStringValue())) {
                     if (cards.getCost() == manaValue) {
                         temp.add(cards);
                     }
                 }
             }
-
-            Collections.sort(temp, new Comparator<Card>() {
-                public int compare(Card a, Card b) {
-                    return Integer.compare(a.getCost(), b.getCost()); // return a.cos - b.cos
-                }
-            });
             chosenMana.onPostExecute(temp);
         }
 
@@ -497,7 +481,7 @@ public class CardsJSON extends DrawerMenu {
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.all_cards, Color.WHITE, Toast.LENGTH_SHORT).show(); // + item.getTitle()
                             manaFilter(411, null);
-                            setIconId("ALL");
+                            setIconId("All");
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -531,8 +515,28 @@ public class CardsJSON extends DrawerMenu {
                 manaIcon.setImageResource(R.drawable.mana_7);
             } else if (getIconId().equals("7+")) {
                 manaIcon.setImageResource(R.drawable.mana_7_plus);
-            } else if (getIconId().equals("ALL")) {
+            } else if (getIconId().equals("All")) {
                 manaIcon.setImageResource(R.drawable.all_cards);
+            } else if (getIconId().equals("Mage")) {
+                manaIcon.setImageResource(R.drawable.mage);
+            } else if (getIconId().equals("Rogue")) {
+                manaIcon.setImageResource(R.drawable.rogue);
+            } else if (getIconId().equals("Paladin")) {
+                manaIcon.setImageResource(R.drawable.paladin);
+            } else if (getIconId().equals("Druid")) {
+                manaIcon.setImageResource(R.drawable.druid);
+            } else if (getIconId().equals("Shaman")) {
+                manaIcon.setImageResource(R.drawable.shaman);
+            } else if (getIconId().equals("Warlock")) {
+                manaIcon.setImageResource(R.drawable.warlock);
+            } else if (getIconId().equals("Priest")) {
+                manaIcon.setImageResource(R.drawable.priest);
+            } else if (getIconId().equals("Warrior")) {
+                manaIcon.setImageResource(R.drawable.warrior);
+            } else if (getIconId().equals("Hunter")) {
+                manaIcon.setImageResource(R.drawable.hunter);
+            } else if (getIconId().equals("Neutral")) {
+                manaIcon.setImageResource(R.drawable.hs_logo);
             }
             //manaIcon.setColorFilter(Color.rgb(0, 0, 128), PorterDuff.Mode.SRC_IN);
         }
@@ -542,13 +546,7 @@ public class CardsJSON extends DrawerMenu {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             ViewHolder holder = null;
-
-            TextView text_view_count_cards = null;
             LinearLayout pop_up_mana_menu = null;
-
-            text_view_count_cards = (TextView)findViewById(R.id.text_view_count_cards);
-            String countCards = String.valueOf(cardList.size());
-            text_view_count_cards.setText(countCards + " results");
 
             changeIcon();
 

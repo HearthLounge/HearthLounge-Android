@@ -70,7 +70,6 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
 
         frameLayout = (FrameLayout)findViewById(R.id.content_frame);
         userPref = new UserPreferences(this.getApplicationContext());
-        Toast.makeText(getApplicationContext(),"HEJ JAK SIĘ MASZ ", Toast.LENGTH_SHORT).show();
 
 //        fbAuth = FirebaseAuth.getInstance();
 //        checkUserLog();

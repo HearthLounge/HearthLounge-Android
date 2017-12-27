@@ -48,6 +48,7 @@ public class UserAccount extends DrawerMenu{
     TextView tvRank;
 
     EditText tvEmail; //Change it!!!
+    EditText tvAvatar;
     EditText tvBattleTag;
     TextView region;
     Spinner regionSpinner;
@@ -91,15 +92,18 @@ public class UserAccount extends DrawerMenu{
         tvEmail = (EditText) findViewById(R.id.edit_email_account);
         tvEmail.setText(userPref.getSingleStringPref("email"));
 
-        Button buttonUpload = (Button) findViewById(R.id.button_upload);
-        buttonUpload.setOnClickListener(new View.OnClickListener() {
+        tvAvatar = (EditText) findViewById(R.id.edit_avatar);
+        tvAvatar.setText(userPref.getSingleStringPref("avatar"));
 
-            public void onClick(View view) {
-
-                Intent goto_sign_in = new Intent(getApplicationContext(), LogIn.class);
-                startActivity(goto_sign_in);
-            }
-        });
+//        Button buttonUpload = (Button) findViewById(R.id.button_upload);
+//        buttonUpload.setOnClickListener(new View.OnClickListener() {
+//
+//            public void onClick(View view) {
+//
+//                Intent goto_sign_in = new Intent(getApplicationContext(), LogIn.class);
+//                startActivity(goto_sign_in);
+//            }
+//        });
 
         tvBattleTag = (EditText)findViewById(R.id.edit_battletag);
         tvBattleTag.setText(userPref.getSingleStringPref("battletag"));
