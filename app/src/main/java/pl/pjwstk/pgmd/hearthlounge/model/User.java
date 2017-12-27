@@ -76,7 +76,7 @@ public class User implements Parcelable {
     }
 
     public User(String username, String email, int role, String uid, Long rank, Boolean updatedProfile,
-                String battletag, String favClass, String facebook, String twitter, String twitch, String youtube, String avatar){
+                String battletag, String favClass, String facebook, String twitter, String twitch, String youtube, String avatar, String region){
 
         this.username = username;
         this.email = email;
@@ -91,6 +91,7 @@ public class User implements Parcelable {
         this.twitch = twitch;
         this.youtube = youtube;
         this.avatar = avatar;
+        this.region = region;
     }
 
     public User(User user) {
@@ -107,6 +108,7 @@ public class User implements Parcelable {
         this.twitch = user.twitch;
         this.youtube = user.youtube;
         this.avatar = user.avatar;
+        this.region = user.region;
     }
 
     protected User(Parcel in) {
@@ -124,6 +126,7 @@ public class User implements Parcelable {
         twitch = in.readString();
         youtube = in.readString();
         avatar = in.readString();
+        region = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -284,5 +287,6 @@ public class User implements Parcelable {
         dest.writeString(twitch);
         dest.writeString(youtube);
         dest.writeString(avatar);
+        dest.writeString(region);
     }
 }

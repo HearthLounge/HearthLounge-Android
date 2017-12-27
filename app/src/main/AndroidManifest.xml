@@ -91,7 +91,7 @@
         <activity
             android:name=".InitiateApp"
             android:label="InitiateApp"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <service
             android:name=".CardService"

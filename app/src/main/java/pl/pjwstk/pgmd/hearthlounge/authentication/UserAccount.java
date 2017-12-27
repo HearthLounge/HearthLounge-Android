@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -75,7 +76,15 @@ public class UserAccount extends DrawerMenu{
 
         ImageView userAvatar = (ImageView)findViewById(R.id.user_avatar);
         // Loading profile image /*"user.getAvatar czy cos"*/
-        Glide.with(this).load(urlProfileImg)
+        String avatarURL;
+        if(userPref.getSingleStringPref("avatar") != null){
+            avatarURL = userPref.getSingleStringPref("avatar");
+        }
+        else{
+            avatarURL = urlProfileImg;
+        }
+
+        Glide.with(this).load(avatarURL)
                 .crossFade()
                 .thumbnail(0.5f)
                 .bitmapTransform(new CircleTransform(this))
@@ -115,13 +124,18 @@ public class UserAccount extends DrawerMenu{
                 R.array.region_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regionSpinner.setAdapter(adapter);
+        int spinnerPosition = adapter.getPosition(userPref.getSingleStringPref(userPref.keyRegion));
+        regionSpinner.setSelection(spinnerPosition);
         regionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " selected", Toast.LENGTH_LONG).show();
-
-                user.setRegion(parent.getItemAtPosition(position).toString());
-
+                String value = String.valueOf(parent.getItemAtPosition(position));
+                if(value != null){
+                //user.setRegion(parent.getItemAtPosition(position).toString());
+                userPref.setValuePref("newRegion", value);}
+                Toast.makeText(getBaseContext(), userPref.getSingleStringPref("newRegion") + " selected 2", Toast.LENGTH_LONG).show();
 
 //                // chyba nawet if-y nie są potrzebne
 //                if (parent.getItemIdAtPosition(position) == 0) {
@@ -131,7 +145,9 @@ public class UserAccount extends DrawerMenu{
 //                } else if (parent.getItemIdAtPosition(position) == 2) {
 //                    // user.setRegion(parent.getItemAtPosition(position).toString());
 //                }
+
             }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -139,26 +155,67 @@ public class UserAccount extends DrawerMenu{
             }
         });
 
+
         final ImageView favouriteClassIcon = (ImageView) findViewById(R.id.image_view_playerclass);
         //TODO brać z FavClass
 
-//        switch (user.getFavouriteClass()){
-//
-//            case "mage": {
-//
-//
-//                break;
-//            }
-//
-//
-//
-//            default: {
-//
-//
-//            }
-//
-//        }
+        if(userPref.getSingleStringPref(userPref.keyFavouriteClass) != null){
 
+            switch (userPref.getSingleStringPref(userPref.keyFavouriteClass)){
+
+                case "druid": {
+                    favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.druid));
+                    break;
+                }
+
+                case "hunter": {
+                    favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.hunter));
+                    break;
+                }
+
+                case "mage": {
+                    favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.mage));
+                    break;
+                }
+
+                case "paladin": {
+                    favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.paladin));
+                    break;
+                }
+
+                case "priest": {
+                    favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.priest));
+                    break;
+                }
+
+                case "rogue": {
+                    favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.rogue));
+                    break;
+                }
+
+
+                case "shaman": {
+                    favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.shaman));
+                    break;
+                }
+
+                case "warlock": {
+                    favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.warlock));
+                    break;
+                }
+
+                case "warrior": {
+                    favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.warrior));
+                    break;
+                }
+
+                default: {
+                    break;
+                }
+
+            }
+
+        }
 
         favouriteClassIcon.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("RestrictedApi")
@@ -192,7 +249,17 @@ public class UserAccount extends DrawerMenu{
         tvYoutube.setText(userPref.getSingleStringPref("youtube"));
 
         Button deleteAccount = (Button) findViewById(R.id.button_delete_account);
-        // Usuwanie z FIREBASE
+        deleteAccount.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+
+                Intent i = new Intent(getApplicationContext(), UserService.class);
+                i.putExtra("action", "delete");
+                i.putExtra("uid", userPref.getSingleStringPref("uid"));
+                startService(i);
+
+            }
+        });
 
         Button saveAccount = (Button) findViewById(R.id.button_save_account);
         saveAccount.setOnClickListener(new View.OnClickListener() {
@@ -213,8 +280,6 @@ public class UserAccount extends DrawerMenu{
 
     private void updateUserData(User user){
 
-        // TODO add checker of changes and then save them to Shared Pref. because there's not another way to take data in service from there ;)
-
         Toast.makeText(UserAccount.this,"Updating", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(getApplicationContext(), UserService.class);
         i.putExtra("action", "update");
@@ -226,25 +291,17 @@ public class UserAccount extends DrawerMenu{
     //Add avatar edit
     private User getUserFromText(){
         User tempUser = new User();
+
         if(tvUsername.getText() != null){tempUser.setUsername(tvUsername.getText().toString()); }
         if(tvEmail.getText() != null){tempUser.setEmail(tvEmail.getText().toString()); }
-        //if(!user.getFavouriteClass().isEmpty()){tempUser.setFavouriteClass(user.getFavouriteClass()); }
+        if(userPref.getSingleStringPref("newFavClass") != null){tempUser.setFavouriteClass(userPref.getSingleStringPref("newFavClass")); }
         if(tvBattleTag.getText() != null || tvBattleTag.getText().toString() != ""){tempUser.setBattletag(tvBattleTag.getText().toString()); }
         if(tvFacebook.getText() != null){tempUser.setFacebook(tvFacebook.getText().toString()); }
         if(tvTwitter.getText() != null){tempUser.setTwitter(tvTwitter.getText().toString()); }
         if(tvTwitch.getText() != null){tempUser.setTwitch(tvTwitch.getText().toString()); }
         if(tvYoutube.getText() != null){tempUser.setYoutube(tvYoutube.getText().toString()); }
-
-
-
-//        tempUser.setEmail(tvEmail.getText().toString());
-//        tempUser.setFavouriteClass(user.getFavouriteClass());
-//        tempUser.setBattletag(tvBattleTag.getText().toString());
-//        tempUser.setFacebook(tvFacebook.getText().toString());
-//        tempUser.setTwitter(tvTwitter.getText().toString());
-//        tempUser.setTwitch(tvTwitch.getText().toString());
-//        tempUser.setYoutube(tvYoutube.getText().toString());
-
+        tempUser.setRegion(userPref.getSingleStringPref("newRegion"));
+        if(tvAvatar.getText() != null){tempUser.setAvatar(tvAvatar.getText().toString()); }
         return tempUser;
     }
 
@@ -287,6 +344,7 @@ public class UserAccount extends DrawerMenu{
                     } else if (action == MotionEvent.ACTION_UP) {
                         toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.mage, Color.rgb(105, 204, 240), Toast.LENGTH_SHORT).show(); // + item.getTitle()
                         finalMDropdown.dismiss();
+                        userPref.setValuePref("newFavClass","mage");
                         return true;
                     }
                     return false;
@@ -304,6 +362,7 @@ public class UserAccount extends DrawerMenu{
                     } else if (action == MotionEvent.ACTION_UP) {
                         toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.rogue, Color.rgb(255, 245, 105), Toast.LENGTH_SHORT).show(); // + item.getTitle()
                         finalMDropdown.dismiss();
+                        userPref.setValuePref("newFavClass","rogue");
                         return true;
                     }
                     return false;
@@ -321,6 +380,7 @@ public class UserAccount extends DrawerMenu{
                     } else if (action == MotionEvent.ACTION_UP) {
                         toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.paladin, Color.rgb(245, 140, 186), Toast.LENGTH_SHORT).show(); // + item.getTitle()
                         finalMDropdown.dismiss();
+                        userPref.setValuePref("newFavClass","paladin");
                         return true;
                     }
                     return false;
@@ -338,6 +398,7 @@ public class UserAccount extends DrawerMenu{
                     } else if (action == MotionEvent.ACTION_UP) {
                         toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.druid, Color.rgb(255, 125, 10), Toast.LENGTH_SHORT).show(); // + item.getTitle()
                         finalMDropdown.dismiss();
+                        userPref.setValuePref("newFavClass","druid");
                         return true;
                     }
                     return false;
@@ -355,6 +416,7 @@ public class UserAccount extends DrawerMenu{
                     } else if (action == MotionEvent.ACTION_UP) {
                         toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.shaman, Color.rgb(0, 112, 222), Toast.LENGTH_SHORT).show(); // + item.getTitle()
                         finalMDropdown.dismiss();
+                        userPref.setValuePref("newFavClass","shaman");
                         return true;
                     }
                     return false;
@@ -372,6 +434,7 @@ public class UserAccount extends DrawerMenu{
                     } else if (action == MotionEvent.ACTION_UP) {
                         toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.warlock, Color.rgb(148, 130, 201), Toast.LENGTH_SHORT).show(); // + item.getTitle()
                         finalMDropdown.dismiss();
+                        userPref.setValuePref("newFavClass","warlock");
                         return true;
                     }
                     return false;
@@ -389,6 +452,7 @@ public class UserAccount extends DrawerMenu{
                     } else if (action == MotionEvent.ACTION_UP) {
                         toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.priest, Color.WHITE, Toast.LENGTH_SHORT).show(); // + item.getTitle()
                         finalMDropdown.dismiss();
+                        userPref.setValuePref("newFavClass","priest");
                         return true;
                     }
                     return false;
@@ -406,6 +470,7 @@ public class UserAccount extends DrawerMenu{
                     } else if (action == MotionEvent.ACTION_UP) {
                         toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.warrior, Color.rgb(199, 156, 110),  Toast.LENGTH_SHORT).show(); // + item.getTitle()
                         finalMDropdown.dismiss();
+                        userPref.setValuePref("newFavClass","warrior");
                         return true;
                     }
                     return false;
@@ -423,6 +488,7 @@ public class UserAccount extends DrawerMenu{
                     } else if (action == MotionEvent.ACTION_UP) {
                         toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.hunter, Color.rgb(171, 212, 115), Toast.LENGTH_SHORT).show(); // + item.getTitle()
                         finalMDropdown.dismiss();
+                        userPref.setValuePref("newFavClass","hunter");
                         return true;
                     }
                     return false;

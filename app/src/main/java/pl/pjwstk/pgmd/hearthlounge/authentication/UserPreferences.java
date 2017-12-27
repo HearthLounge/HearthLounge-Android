@@ -75,6 +75,7 @@ public class UserPreferences {
         prefsEditor.putString(keyTwitch, user.getTwitch());
         prefsEditor.putString(keyYoutube, user.getYoutube());
         prefsEditor.putString(keyAvatar, user.getAvatar());
+        prefsEditor.putString(keyRegion, user.getRegion());
 
         prefsEditor.commit();
     }
@@ -91,14 +92,6 @@ public class UserPreferences {
     public void updateUserPref(){
 
 
-
-    }
-
-    public void setSinglePref(String key,String value){
-
-        if(value != null){
-            prefsEditor.putString(key,value);
-        }
 
     }
 
@@ -134,7 +127,8 @@ public class UserPreferences {
     public User getUserFromUserPref(){
         User user = new User(this.getSingleStringPref(keyUsername), this.getSingleStringPref(keyEmail), this.getRolePref(), this.getSingleStringPref(keyUid),
                 this.getRankPref(), this.getUpdatedProfilePref(), this.getSingleStringPref(keyBattletag), this.getSingleStringPref(keyFavouriteClass), this.getSingleStringPref(keyFacebook),
-                this.getSingleStringPref(keyTwitter), this.getSingleStringPref(keyTwitch), this.getSingleStringPref(keyYoutube), this.getSingleStringPref("avatar"));
+                this.getSingleStringPref(keyTwitter), this.getSingleStringPref(keyTwitch), this.getSingleStringPref(keyYoutube), this.getSingleStringPref("avatar"), this.getSingleStringPref("region"));
         return user;
     }
+
 }

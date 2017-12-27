@@ -84,7 +84,7 @@ public class UserService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        fbUser = FirebaseAuth.getInstance().getCurrentUser();
+
 
         Toast.makeText(getApplicationContext(), "action: " + intent.getStringExtra("action"), Toast.LENGTH_SHORT).show();
         switch (intent.getStringExtra("action")) {
@@ -92,7 +92,7 @@ public class UserService extends Service {
             case "login": {
                 Toast.makeText(getApplicationContext(), "ACTION LOGIN", Toast.LENGTH_SHORT).show();
                 sUserUid = intent.getStringExtra("uid");
-                sUserEmail = fbUser.getEmail();
+                //sUserEmail = fbUser.getEmail();
                 //fbUserRef.orderByChild("users").equalTo(sUserUid).addChildEventListener(UserChildListener(sUserUid));
                 fbUserRef.child(sUserUid).addValueEventListener(UserValueListener());
                 break;
@@ -113,9 +113,10 @@ public class UserService extends Service {
             case "update": {
                 Toast.makeText(getApplicationContext(), "ACTION UPDATE", Toast.LENGTH_SHORT).show();
                 sUserUid = intent.getStringExtra("uid");
-                sUserEmail = fbUser.getEmail();
+                //sUserEmail = fbUser.getEmail();
                 User user = new User((User) intent.getParcelableExtra("updated_user"));
                 Toast.makeText(getApplicationContext(),"battletag " + user.getBattletag(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"region " + user.getRegion(), Toast.LENGTH_SHORT).show();
                 updateUserData(user);
                 break;
             }
@@ -126,7 +127,8 @@ public class UserService extends Service {
             }
             case "delete":{
 
-                DeleteUser();
+                fbUser = FirebaseAuth.getInstance().getCurrentUser();
+                DeleteUser(fbUser);
 
             }
 
@@ -224,7 +226,6 @@ public class UserService extends Service {
 
     private void updateUserData(User user){
 
-
         DataComparator(user.getEmail(),userPref.keyEmail);
         DataComparator(user.getBattletag(),userPref.keyBattletag);
         DataComparator(user.getFavouriteClass(),userPref.keyFavouriteClass);
@@ -233,6 +234,7 @@ public class UserService extends Service {
         DataComparator(user.getTwitter(),userPref.keyTwitter);
         DataComparator(user.getYoutube(),userPref.keyYoutube);
         DataComparator(user.getRegion(),userPref.keyRegion);
+        DataComparator(user.getAvatar(),userPref.keyAvatar);
 
 
     }
@@ -265,14 +267,15 @@ public class UserService extends Service {
 
     }
 
-    private void DeleteUser(){
-
-        fbUser.delete()
+    private void DeleteUser(FirebaseUser deleteUser){
+        Toast.makeText(getApplicationContext(), "Deleting in progress...", Toast.LENGTH_SHORT).show();
+        deleteUser.delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).setValue(null);
+                            Toast.makeText(getApplicationContext(), "User deleted?", Toast.LENGTH_SHORT).show();
+                            fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).removeValue();
                         }
                     }
                 });
@@ -304,19 +307,16 @@ public class UserService extends Service {
 
     private void DataComparator(String userValue, String key) {
 
-        if(userValue != null && userValue != ""){
-
-            if(key == userPref.keyEmail){
-                UpdateUserEmail(userValue);
+        if(userValue != null) {
+            fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(userValue);
+            Toast.makeText(getApplicationContext(), key + " " + userValue, Toast.LENGTH_SHORT).show();
+            if (userValue.isEmpty()) {
+                Toast.makeText(getApplicationContext(), key + " delete -> " + userValue, Toast.LENGTH_SHORT).show();
+                fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(null);
             }
-            else { fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(userValue); }
         }
-        else {
-            fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(null);
-        }
-        if(userPref.getSingleStringPref(key) == null){ fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(null); }
+        //if(userPref.getSingleStringPref(key) == "" && userValue == null){ fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(null); }
     }
-
 
 }
 
