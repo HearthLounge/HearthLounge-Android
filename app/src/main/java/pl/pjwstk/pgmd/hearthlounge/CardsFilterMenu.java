@@ -72,7 +72,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().cancel();
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
-                    startIntent.putExtra("IconID", "ALL");
+                    startIntent.putExtra("IconID", "All");
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -495,13 +495,5 @@ public class CardsFilterMenu extends DrawerMenu {
         }
         return mDropdown;
     }
-
-    @Override
-    public void onBackPressed() {
-        Intent setIntent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(setIntent);
-    }
-
 //    JSON.JSONTask json = new JSON.JSONTask();
-
 }

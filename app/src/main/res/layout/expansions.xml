@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/pearl">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp">
+
+        <LinearLayout
+            android:id="@+id/goblins_vs_gnomes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/frame_dark">
+
+            <ImageView
+                android:id="@+id/image_goblins_vs_gnomes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="40dp"
+                android:src="@drawable/goblins_vs_gnomes" />
+
+            <TextView
+                android:id="@+id/text_goblins_vs_gnomes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/gvg"
+                android:text="GOBLINS VS GNOMES"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/the_grand_tournament"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/frame_dark">
+
+            <ImageView
+                android:id="@+id/image_the_grand_tournament"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="40dp"
+                android:src="@drawable/the_grand_tournament" />
+
+            <TextView
+                android:id="@+id/text_the_grand_tournament"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/tgt"
+                android:text="THE GRAND TOURNAMENT"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/whispers_of_the_old_gods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/frame_dark">
+
+            <ImageView
+                android:id="@+id/image_whispers_of_the_old_gods"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="40dp"
+                android:src="@drawable/whispers_of_the_old_gods" />
+
+            <TextView
+                android:id="@+id/text_whispers_of_the_old_gods"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/wotog"
+                android:text="WHISPERS OF THE OLD GODS"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mean_streets_of_gadgetzan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/frame_dark">
+
+            <ImageView
+                android:id="@+id/image_mean_streets_of_gadgetzan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="40dp"
+                android:src="@drawable/mean_streets_of_gadgetzan" />
+
+            <TextView
+                android:id="@+id/text_mean_streets_of_gadgetzan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/msog"
+                android:text="MEAN STREETS OF GADGETZAN"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/journey_to_ungoro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/frame_dark">
+
+            <ImageView
+                android:id="@+id/image_journey_to_ungoro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="40dp"
+                android:src="@drawable/journey_to_ungoro" />
+
+            <TextView
+                android:id="@+id/text_journey_to_ungoro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/ungoro"
+                android:text="JOURNEY TO UN'GORO"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/knights_of_the_frozen_throne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/frame_dark">
+
+            <ImageView
+                android:id="@+id/image_knights_of_the_frozen_throne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="40dp"
+                android:src="@drawable/knights_of_the_frozen_throne" />
+
+            <TextView
+                android:id="@+id/text_knights_of_the_frozen_throne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/kotft"
+                android:text="KNIGHTS OF THE FROZEN THRONE"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/kobolds_and_catacombs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/frame_dark">
+
+            <ImageView
+                android:id="@+id/image_kobolds_and_catacombs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="40dp"
+                android:src="@drawable/kobolds_catacombs" />
+
+            <TextView
+                android:id="@+id/text_kobolds_and_catacombs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/kandc"
+                android:text="KOBOLDS &amp; CATACOMBS"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

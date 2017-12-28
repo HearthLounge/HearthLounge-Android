@@ -60,9 +60,16 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
     public List<Card> getCardList(String value) {
         synchronized (this) {
             List<Card> temp = new ArrayList<>();
-            if (value != null){
+            if ("Goblins vs Gnomes"!=value || value != null || value=="Mage" || value=="Rogue" || value=="Paladin" || value=="Druid" || value=="Shaman" || value=="Warlock" || value=="Priest" || value=="Warrior" || value=="Hunter" || value=="Neutral"){
                 for(Card cards: primaryCardList){
                     if (cards.getPlayerClass().equals(value) && !(cards.getType().equals("Hero") && cards.getCost() == 0)) {
+                        temp.add(cards);
+                    }
+                }
+                return temp;
+            } else if ("Goblins vs Gnomes"==value || value != null){ //value=="Goblins vs Gnomes" || value=="The Grand Tournament"
+                for(Card cards: primaryCardList){
+                    if (cards.getCardSet().equals(value) && !(cards.getType().equals("Hero") && cards.getCost() == 0)) {
                         temp.add(cards);
                     }
                 }

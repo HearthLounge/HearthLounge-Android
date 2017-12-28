@@ -49,7 +49,7 @@ public class JSON extends AppCompatActivity {
         protected void onPostExecute(final List<Card> result) {
             super.onPostExecute(result);
             dialog.dismiss();
-            Intent turboIntent = new Intent(getApplicationContext(), CardsFilterMenu.class);
+            Intent turboIntent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(turboIntent);
         }
     }

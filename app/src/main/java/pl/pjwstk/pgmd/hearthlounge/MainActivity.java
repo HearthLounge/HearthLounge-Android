@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 import pl.pjwstk.pgmd.hearthlounge.authentication.UserService;
+import pl.pjwstk.pgmd.hearthlounge.model.Card;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
 public class MainActivity extends DrawerMenu {
@@ -45,8 +47,6 @@ public class MainActivity extends DrawerMenu {
         if(fbAuth.getCurrentUser() != null) {
             checkUserLog();
         }
-
-
 
         //checkUserLog();
 
@@ -112,7 +112,7 @@ public class MainActivity extends DrawerMenu {
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
-                    Intent startIntent = new Intent(getApplicationContext(),JSON.class); //CardsFilterMenu
+                    Intent startIntent = new Intent(getApplicationContext(), CardsFilterMenu.class); //CardsFilterMenu
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -186,7 +186,7 @@ public class MainActivity extends DrawerMenu {
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
-                    Intent startIntent = new Intent(getApplicationContext(),Main2Activity.class); //Do którego ma iść
+                    Intent startIntent = new Intent(getApplicationContext(), Expansions.class); //Do którego ma iść
                     startActivity(startIntent);
                     return true;
                 }

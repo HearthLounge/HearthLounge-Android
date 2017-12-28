@@ -67,6 +67,7 @@
 
     <string name="title_card_selected">Selected Card</string>
     <string name="title_decks">Decks</string>
+    <string name="title_expansions">Expansions</string>
     <string name="action_refresh">Refresh</string>
 
     <string name="open">Open</string>

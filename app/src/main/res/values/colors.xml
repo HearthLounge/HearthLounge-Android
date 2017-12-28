@@ -49,12 +49,6 @@
     <color name="monk"> #00FF96</color>
     <color name="demon_hunter"> #A330C9</color>
 
-    //Adventure colors
-    <color name="loe"> #14a9a1</color>
-    <color name="bm"> #fa5210</color>
-    <color name="karazhan"> #e2b4df</color>
-    <color name="naxx"> #b5de3f</color>
-
     //Expansion colors
     <color name="tgt"> #f00</color>
     <color name="gvg"> #fae43f</color>
@@ -62,6 +56,14 @@
     <color name="msog"> #d2cac5</color>
     <color name="ungoro"> #3d9e2c</color>
     <color name="kotft"> #a5f2f3</color>
+    <color name="kandc"> #ffd989</color>
+
+    //Adventure colors
+    <color name="loe"> #14a9a1</color>
+    <color name="bm"> #fa5210</color>
+    <color name="karazhan"> #e2b4df</color>
+    <color name="naxx"> #b5de3f</color>
+
 
     <!--//Rarity colors-->
     <!--<color name="free"> inherit</color>-->
