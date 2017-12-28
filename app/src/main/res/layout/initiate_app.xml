@@ -1,12 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/nav_header_gradient">
 
     <ImageView
+        android:id="@+id/logo_hearthlounge"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/hearthlounge"/>
+        android:src="@drawable/hearthlounge"
+        android:layout_weight="1.0"/>
+
+    <TextView
+        android:id="@+id/text_hearthlounge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="HearthLounge"
+        android:textAlignment="center"
+        android:textColor="@color/primary_font_color"
+        android:textSize="30sp"
+        android:layout_weight="2.0"/>
+
+    <ProgressBar
+        android:id="@+id/startProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="false"
+        android:max="100"
+        android:minHeight="50dp"
+        android:minWidth="200dp"
+        android:progress="1" />
+
+    <TextView
+        android:id="@+id/text_progessBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:text="Loading. Please wait..."
+        android:textColor="@color/dark_grey"/>
 
 </LinearLayout>

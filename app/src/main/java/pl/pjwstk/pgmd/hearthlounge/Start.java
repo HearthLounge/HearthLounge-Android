@@ -24,7 +24,7 @@ public class Start extends AppCompatActivity {
             public void run() {
                 try {
                     super.run();
-                    sleep(5000);  //Delay of 10000 = 10 seconds
+                    sleep(1);  //Delay of 10000 = 10 seconds
                     Intent startApp = new Intent(getApplicationContext(), JSON.class);
                     startActivity(startApp);
                     finish();

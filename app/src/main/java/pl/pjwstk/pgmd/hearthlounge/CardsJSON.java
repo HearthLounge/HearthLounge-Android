@@ -126,8 +126,6 @@ public class CardsJSON extends DrawerMenu {
         toolbar.setTitle(s);
 
         dialog = new ProgressDialog(this);
-//        View customTitleView = getLayoutInflater().inflate(R.layout.popup_search_menu, null);
-//        dialog.setCustomTitle(customTitleView);
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
 //        dialog.setProgressStyle(1);
