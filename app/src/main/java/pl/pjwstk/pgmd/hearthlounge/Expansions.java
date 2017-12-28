@@ -57,6 +57,7 @@ public class Expansions extends DrawerMenu {
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "Goblins vs Gnomes");
+                    startIntent.putExtra("IconID", "Goblins vs Gnomes");
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -101,6 +102,7 @@ public class Expansions extends DrawerMenu {
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "The Grand Tournament");
+                    startIntent.putExtra("IconID", "The Grand Tournament");
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -145,6 +147,7 @@ public class Expansions extends DrawerMenu {
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "Whispers of the Old Gods");
+                    startIntent.putExtra("IconID", "Whispers of the Old Gods");
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -189,6 +192,7 @@ public class Expansions extends DrawerMenu {
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "Mean Streets of Gadgetzan");
+                    startIntent.putExtra("IconID", "Mean Streets of Gadgetzan");
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -233,6 +237,7 @@ public class Expansions extends DrawerMenu {
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "Journey to Un'Goro");
+                    startIntent.putExtra("IconID", "Journey to Un'Goro");
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -277,6 +282,7 @@ public class Expansions extends DrawerMenu {
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "Knights of the Frozen Throne");
+                    startIntent.putExtra("IconID", "Knights of the Frozen Throne");
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -321,6 +327,7 @@ public class Expansions extends DrawerMenu {
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "Kobolds & Catacombs");
+                    startIntent.putExtra("IconID", "Kobolds & Catacombs");
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {

@@ -7,6 +7,7 @@ package pl.pjwstk.pgmd.hearthlounge;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -57,17 +58,39 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
         }
     }
 
+//    public List<Card> getCardList(String value) {
+//        synchronized (this) {
+//            List<Card> temp = new ArrayList<>();
+//            if (value=="Mage" || value=="Rogue" || value=="Paladin" || value=="Druid" || value=="Shaman" || value=="Warlock" || value=="Priest" || value=="Warrior" || value=="Hunter" || value=="Neutral"){
+//                for(Card cards: primaryCardList){
+//                    if (cards.getPlayerClass().equals(value) && !(cards.getType().equals("Hero") && cards.getCost() == 0)) {
+//                        temp.add(cards);
+//                    }
+//                }
+//                return temp;
+//            } else if (value=="Goblins vs Gnomes" || value=="The Grand Tournament"){ //
+//                for(Card cards: primaryCardList){
+//                    if (cards.getCardSet().equals(value) && !(cards.getType().equals("Hero") && cards.getCost() == 0)) {
+//                        temp.add(cards);
+//                    }
+//                }
+//                return temp;
+//            } else
+//            return this.primaryCardList;
+//        }
+//    }
+
     public List<Card> getCardList(String value) {
         synchronized (this) {
             List<Card> temp = new ArrayList<>();
-            if (value != null || value=="Mage" || value=="Rogue" || value=="Paladin" || value=="Druid" || value=="Shaman" || value=="Warlock" || value=="Priest" || value=="Warrior" || value=="Hunter" || value=="Neutral"){
+            if (value != null && (value.contains("Mage") || value.contains("Rogue") || value.contains("Paladin") || value.contains("Druid") || value.contains("Shaman") || value.contains("Warlock") || value.contains("Priest") || value.contains("Warrior") || value.contains("Hunter") || value.contains("Neutral"))){
                 for(Card cards: primaryCardList){
                     if (cards.getPlayerClass().equals(value) && !(cards.getType().equals("Hero") && cards.getCost() == 0)) {
                         temp.add(cards);
                     }
                 }
                 return temp;
-            } else if (value != null){ //value=="Goblins vs Gnomes" || value=="The Grand Tournament"
+            } else if (value != null && (value.contains(""))){ //
                 for(Card cards: primaryCardList){
                     if (cards.getCardSet().equals(value) && !(cards.getType().equals("Hero") && cards.getCost() == 0)) {
                         temp.add(cards);
@@ -75,7 +98,7 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
                 }
                 return temp;
             } else
-            return this.primaryCardList;
+                return this.primaryCardList;
         }
     }
 

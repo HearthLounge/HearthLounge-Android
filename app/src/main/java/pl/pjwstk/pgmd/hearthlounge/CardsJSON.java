@@ -495,7 +495,7 @@ public class CardsJSON extends DrawerMenu {
 
         public void changeIcon(){
             ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
-            if(getIconId().equals("0")) {
+            if(getIconId().equals("0")) {                               // MANA ICON
                 manaIcon.setImageResource(R.drawable.mana_0);
             } else if (getIconId().equals("1")) {
                 manaIcon.setImageResource(R.drawable.mana_1);
@@ -515,7 +515,7 @@ public class CardsJSON extends DrawerMenu {
                 manaIcon.setImageResource(R.drawable.mana_7_plus);
             } else if (getIconId().equals("All")) {
                 manaIcon.setImageResource(R.drawable.all_cards);
-            } else if (getIconId().equals("Mage")) {
+            } else if (getIconId().equals("Mage")) {                    // CLASS ICON
                 manaIcon.setImageResource(R.drawable.mage);
             } else if (getIconId().equals("Rogue")) {
                 manaIcon.setImageResource(R.drawable.rogue);
@@ -535,7 +535,31 @@ public class CardsJSON extends DrawerMenu {
                 manaIcon.setImageResource(R.drawable.hunter);
             } else if (getIconId().equals("Neutral")) {
                 manaIcon.setImageResource(R.drawable.hs_logo);
+            } else if (getIconId().equals("Goblins vs Gnomes")) {       // EXPANSIONS ICON
+                manaIcon.setImageResource(R.drawable.goblins_vs_gnomes);
+            } else if (getIconId().equals("The Grand Tournament")) {
+                manaIcon.setImageResource(R.drawable.the_grand_tournament);
+            } else if (getIconId().equals("Whispers of the Old Gods")) {
+                manaIcon.setImageResource(R.drawable.whispers_of_the_old_gods);
+            } else if (getIconId().equals("Mean Streets of Gadgetzan")) {
+                manaIcon.setImageResource(R.drawable.mean_streets_of_gadgetzan);
+            } else if (getIconId().equals("Journey to Un'Goro")) {
+                manaIcon.setImageResource(R.drawable.journey_to_ungoro);
+            } else if (getIconId().equals("Knights of the Frozen Throne")) {
+                manaIcon.setImageResource(R.drawable.knights_of_the_frozen_throne);
+            } else if (getIconId().equals("Kobolds & Catacombs")) {
+                manaIcon.setImageResource(R.drawable.kobolds_catacombs);
             }
+
+//            else if (getIconId().equals("Warrior")) {
+//                manaIcon.setImageResource(R.drawable.warrior);
+//            } else if (getIconId().equals("Hunter")) {
+//                manaIcon.setImageResource(R.drawable.hunter);
+//            } else if (getIconId().equals("Neutral")) {
+//                manaIcon.setImageResource(R.drawable.hs_logo);
+//            } else if (getIconId().equals("Neutral")) {
+//                manaIcon.setImageResource(R.drawable.hs_logo);
+//            }
             //manaIcon.setColorFilter(Color.rgb(0, 0, 128), PorterDuff.Mode.SRC_IN);
         }
 
