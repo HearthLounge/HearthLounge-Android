@@ -3,17 +3,19 @@
 # TODO
 
 > User authentication/sign up/data store
-  (Everything done except avatar and region)
-  - updating user data in app
-  - send changes to DB
+  - Changing email + password
+  - Deleting account 
 
 > Cards
-  - Filters
+  - few filters
 
 > Decks
   - Read from database
-  - Convert to useable form
-  - 
+  - Represent as list of decks
+  - Convert to usable form chosen deck
+  - Save it to cashe
+  - Show all data of deck
+  - [BONUS] links to cards
 
 > Expansions
   - Everything
