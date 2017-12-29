@@ -52,4 +52,9 @@
         <!--<item name="android:textColor">@color/death_knight</item>-->
     </style>
 
+    <style name="Font">
+        <item name="android:fontFamily">@font/belwe_medium</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
 </resources>

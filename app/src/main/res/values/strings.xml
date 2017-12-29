@@ -80,12 +80,20 @@
     <string name="tab_text_3">Tab 3</string>
     <string name="action_settings">Settings</string>
 
-
     <string-array name="region_array">
         <item></item>
         <item>Americas</item>
         <item>Europe</item>
         <item>Asia</item>
     </string-array>
+
+    <!--EXPANSIONS DESCRIPTION-->
+    <string name="goblins_vs_gnomes">   goblins_vs_gnomes</string>
+    <string name="the_grand_tournament">    the_grand_tournament</string>
+    <string name="whispers_of_the_old_gods">    whispers_of_the_old_gods</string>
+    <string name="mean_streets_of_gadgetzan">   mean_streets_of_gadgetzan</string>
+    <string name="journey_to_ungoro">   journey_to_ungoro</string>
+    <string name="knights_of_the_frozen_throne">    knights_of_the_frozen_throne</string>
+    <string name="kobolds_catacombs">   kobolds_catacombs</string>
 
 </resources>

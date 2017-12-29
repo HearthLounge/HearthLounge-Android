@@ -84,7 +84,6 @@ public class JSON extends AppCompatActivity {
         @Override
         protected List<Card> doInBackground(String... params) {
 
-            progressBar.setProgress(0);
             for(int i = 0; i < CardListCache.getInstance().getCardList(null).size(); i++) {
                 try {
                     Thread.sleep(1);
@@ -93,7 +92,7 @@ public class JSON extends AppCompatActivity {
                 }
 //                progressBar.incrementProgressBy(i);
 //                publishProgress(progressBar.getProgress()); // te metowy pokazują progress do 100%
-                publishProgress(i); // progress do 1477 czyli tyle ile jest kart w api
+                publishProgress(i); // progress iteruje do 1477 czyli tyle ile jest kart w api
             }
 
             return CardListCache.getInstance().getCardList(null);
@@ -102,8 +101,11 @@ public class JSON extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            progressBar.setProgress(values[0]);
-            progressText.setText("Loading: " + values[0] + " / 1477");
+            int countCards = values[0] + 1;
+            int allCards = CardListCache.getInstance().getCardList(null).size();
+            progressBar.setProgress(countCards);
+            progressBar.setMax(allCards); // ustawiam max pojemność progressbar-u czyli do 1477kart
+            progressText.setText("Loading: " + countCards + " / " + allCards + " cards");
         }
 
         @Override

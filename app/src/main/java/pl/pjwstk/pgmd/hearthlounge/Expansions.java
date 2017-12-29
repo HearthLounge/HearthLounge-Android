@@ -58,6 +58,8 @@ public class Expansions extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "Goblins vs Gnomes");
                     startIntent.putExtra("IconID", "Goblins vs Gnomes");
+                    startIntent.putExtra("drawable", R.drawable.goblins_vs_gnomes);
+                    startIntent.putExtra("color", R.color.gvg);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -103,6 +105,8 @@ public class Expansions extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "The Grand Tournament");
                     startIntent.putExtra("IconID", "The Grand Tournament");
+                    startIntent.putExtra("drawable", R.drawable.the_grand_tournament);
+                    startIntent.putExtra("color", R.color.tgt);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -148,6 +152,8 @@ public class Expansions extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "Whispers of the Old Gods");
                     startIntent.putExtra("IconID", "Whispers of the Old Gods");
+                    startIntent.putExtra("drawable", R.drawable.whispers_of_the_old_gods);
+                    startIntent.putExtra("color", R.color.wotog);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -193,6 +199,8 @@ public class Expansions extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "Mean Streets of Gadgetzan");
                     startIntent.putExtra("IconID", "Mean Streets of Gadgetzan");
+                    startIntent.putExtra("drawable", R.drawable.mean_streets_of_gadgetzan);
+                    startIntent.putExtra("color", R.color.msog);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -238,6 +246,8 @@ public class Expansions extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "Journey to Un'Goro");
                     startIntent.putExtra("IconID", "Journey to Un'Goro");
+                    startIntent.putExtra("drawable", R.drawable.journey_to_ungoro);
+                    startIntent.putExtra("color", R.color.ungoro);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -283,6 +293,8 @@ public class Expansions extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "Knights of the Frozen Throne");
                     startIntent.putExtra("IconID", "Knights of the Frozen Throne");
+                    startIntent.putExtra("drawable", R.drawable.knights_of_the_frozen_throne);
+                    startIntent.putExtra("color", R.color.kotft);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -328,6 +340,8 @@ public class Expansions extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
                     startIntent.putExtra("Title", "Kobolds & Catacombs");
                     startIntent.putExtra("IconID", "Kobolds & Catacombs");
+                    startIntent.putExtra("drawable", R.drawable.kobolds_catacombs);
+                    startIntent.putExtra("color", R.color.kandc);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {

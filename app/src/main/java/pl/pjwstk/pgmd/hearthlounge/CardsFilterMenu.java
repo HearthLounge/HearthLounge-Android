@@ -105,6 +105,8 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                     startIntent.putExtra("StringValue", "Mage");
                     startIntent.putExtra("IconID", "Mage");
+                    startIntent.putExtra("drawable", R.drawable.mage);
+                    startIntent.putExtra("color", R.color.mage);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -139,6 +141,8 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                     startIntent.putExtra("StringValue", "Rogue");
                     startIntent.putExtra("IconID", "Rogue");
+                    startIntent.putExtra("drawable", R.drawable.rogue);
+                    startIntent.putExtra("color", R.color.rogue);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -173,6 +177,8 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                     startIntent.putExtra("StringValue", "Paladin");
                     startIntent.putExtra("IconID", "Paladin");
+                    startIntent.putExtra("drawable", R.drawable.paladin);
+                    startIntent.putExtra("color", R.color.paladin);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -207,6 +213,8 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                     startIntent.putExtra("StringValue", "Druid");
                     startIntent.putExtra("IconID", "Druid");
+                    startIntent.putExtra("drawable", R.drawable.druid);
+                    startIntent.putExtra("color", R.color.druid);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -241,6 +249,8 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                     startIntent.putExtra("StringValue", "Shaman");
                     startIntent.putExtra("IconID", "Shaman");
+                    startIntent.putExtra("drawable", R.drawable.shaman);
+                    startIntent.putExtra("color", R.color.shaman);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -275,6 +285,8 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                     startIntent.putExtra("StringValue", "Warlock");
                     startIntent.putExtra("IconID", "Warlock");
+                    startIntent.putExtra("drawable", R.drawable.warlock);
+                    startIntent.putExtra("color", R.color.warlock);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -309,6 +321,8 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                     startIntent.putExtra("StringValue", "Priest");
                     startIntent.putExtra("IconID", "Priest");
+                    startIntent.putExtra("drawable", R.drawable.priest);
+                    startIntent.putExtra("color", R.color.priest);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -343,6 +357,8 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                     startIntent.putExtra("StringValue", "Warrior");
                     startIntent.putExtra("IconID", "Warrior");
+                    startIntent.putExtra("drawable", R.drawable.warrior);
+                    startIntent.putExtra("color", R.color.warrior);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -377,6 +393,8 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                     startIntent.putExtra("StringValue", "Hunter");
                     startIntent.putExtra("IconID", "Hunter");
+                    startIntent.putExtra("drawable", R.drawable.hunter);
+                    startIntent.putExtra("color", R.color.hunter);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -414,6 +432,8 @@ public class CardsFilterMenu extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                     startIntent.putExtra("StringValue", "Neutral");
                     startIntent.putExtra("IconID", "Neutral");
+                    startIntent.putExtra("drawable", R.drawable.neutral);
+                    startIntent.putExtra("color", R.color.primary_font_color);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {

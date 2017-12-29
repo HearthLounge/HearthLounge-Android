@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -80,7 +81,9 @@ public class CardsJSON extends DrawerMenu {
     private final String URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1";
 
     private String stringValue = "";
-    private String iconId;
+    private String iconId = "";
+    private int drawable;
+    private int color;
 
     private GridView listViewCards;
     private ProgressDialog dialog;
@@ -103,6 +106,22 @@ public class CardsJSON extends DrawerMenu {
         this.iconId = iconId;
     }
 
+    public int getDrawable() {
+        return drawable;
+    }
+
+    public void setDrawable(int drawable) {
+        this.drawable = drawable;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,6 +139,9 @@ public class CardsJSON extends DrawerMenu {
         String iconId = intent.getStringExtra("IconID");
         setIconId(iconId);
 
+        setDrawable(getIntent().getExtras().getInt("drawable"));
+        setColor(getIntent().getExtras().getInt("color"));
+
         SpannableString s = new SpannableString(iconId + " Cards");
         s.setSpan(new TypefaceSpan(this, "belwe_medium.otf"), 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -128,7 +150,6 @@ public class CardsJSON extends DrawerMenu {
         dialog = new ProgressDialog(this);
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
-//        dialog.setProgressStyle(1);
         dialog.setMessage("Loading. Please wait..."); // showing a dialog for loading the data
         // Create default options which will be used for every
         //  displayImage(...) call if no options will be passed to this method
@@ -159,10 +180,6 @@ public class CardsJSON extends DrawerMenu {
         protected List<Card> doInBackground(String... params) {
             return CardListCache.getInstance().getCardList(getStringValue());
         }
-
-//        protected void onProgressUpdate(Integer... progress) {
-//            dialog.setProgress(progress[0]);
-//        }
 
         //final Animation animationScale = AnimationUtils.loadAnimation(CardsJSON.this, R.anim.anim_scale);
         @Override
@@ -265,9 +282,8 @@ public class CardsJSON extends DrawerMenu {
                 final ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
                 final int toastManaIconColor = Color.rgb(0,0,128);
                 final PopupWindow finalMDropdown = mDropdown;
-                final CardsJSON cards = new CardsJSON();
-                final ImageView mana_0 = (ImageView)layout.findViewById(R.id.zero);
 
+                final ImageView mana_0 = (ImageView)layout.findViewById(R.id.zero);
                 mana_0.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
@@ -279,6 +295,7 @@ public class CardsJSON extends DrawerMenu {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_0, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.mana_navy));
                             manaFilter(0, null);
                             setIconId("0");
                             finalMDropdown.dismiss();
@@ -301,6 +318,7 @@ public class CardsJSON extends DrawerMenu {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_1, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.mana_navy));
                             manaFilter(1, null);
                             setIconId("1");
                             finalMDropdown.dismiss();
@@ -323,6 +341,7 @@ public class CardsJSON extends DrawerMenu {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_2, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.mana_navy));
                             manaFilter(2, null);
                             setIconId("2");
                             finalMDropdown.dismiss();
@@ -345,6 +364,7 @@ public class CardsJSON extends DrawerMenu {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_3, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.mana_navy));
                             manaFilter(3, null);
                             setIconId("3");
                             finalMDropdown.dismiss();
@@ -367,6 +387,7 @@ public class CardsJSON extends DrawerMenu {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_4, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.mana_navy));
                             manaFilter(4, null);
                             setIconId("4");
                             finalMDropdown.dismiss();
@@ -389,6 +410,7 @@ public class CardsJSON extends DrawerMenu {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_5, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.mana_navy));
                             manaFilter(5, null);
                             setIconId("5");
                             finalMDropdown.dismiss();
@@ -411,6 +433,7 @@ public class CardsJSON extends DrawerMenu {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_6, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.mana_navy));
                             manaFilter(6, null);
                             setIconId("6");
                             finalMDropdown.dismiss();
@@ -433,6 +456,7 @@ public class CardsJSON extends DrawerMenu {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.mana_navy));
                             manaFilter(7, null);
                             setIconId("7");
                             finalMDropdown.dismiss();
@@ -456,6 +480,7 @@ public class CardsJSON extends DrawerMenu {
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
                             toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.mana_7_plus, toastManaIconColor, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            manaIcon.setColorFilter(getContext().getResources().getColor(R.color.mana_navy));
                             manaFilter(8, null);
                             setIconId("7+");
                             finalMDropdown.dismiss();
@@ -467,19 +492,21 @@ public class CardsJSON extends DrawerMenu {
                 });
 
                 final ImageView all = (ImageView) layout.findViewById(R.id.all);
+                all.setImageResource(getDrawable());
+                all.setColorFilter(getContext().getResources().getColor(getColor()));
                 all.setOnTouchListener(new OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         int action = event.getAction();
                         if (action == MotionEvent.ACTION_DOWN) {
-                            manaIcon.setImageDrawable(getResources().getDrawable(R.drawable.all_cards));
+                            manaIcon.setImageDrawable(getResources().getDrawable(getDrawable()));
                             manaIcon.setColorFilter(getContext().getResources().getColor(R.color.sea_color));
                             all.setColorFilter(Color.rgb(0,169,156));
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", R.drawable.all_cards, Color.WHITE, Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", getDrawable(), getColor(), Toast.LENGTH_SHORT).show(); // + item.getTitle()
                             manaFilter(411, null);
-                            setIconId("All");
+                            setIconId(getStringValue());
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -493,9 +520,9 @@ public class CardsJSON extends DrawerMenu {
             return mDropdown;
         }
 
-        public void changeIcon(){
+        public void changeIcon() {
             ImageView manaIcon = (ImageView) findViewById(R.id.image_view_mana_icon);
-            if(getIconId().equals("0")) {                               // MANA ICON
+            if (getIconId().equals("0")) {                               // MANA ICON
                 manaIcon.setImageResource(R.drawable.mana_0);
             } else if (getIconId().equals("1")) {
                 manaIcon.setImageResource(R.drawable.mana_1);
@@ -515,51 +542,10 @@ public class CardsJSON extends DrawerMenu {
                 manaIcon.setImageResource(R.drawable.mana_7_plus);
             } else if (getIconId().equals("All")) {
                 manaIcon.setImageResource(R.drawable.all_cards);
-            } else if (getIconId().equals("Mage")) {                    // CLASS ICON
-                manaIcon.setImageResource(R.drawable.mage);
-            } else if (getIconId().equals("Rogue")) {
-                manaIcon.setImageResource(R.drawable.rogue);
-            } else if (getIconId().equals("Paladin")) {
-                manaIcon.setImageResource(R.drawable.paladin);
-            } else if (getIconId().equals("Druid")) {
-                manaIcon.setImageResource(R.drawable.druid);
-            } else if (getIconId().equals("Shaman")) {
-                manaIcon.setImageResource(R.drawable.shaman);
-            } else if (getIconId().equals("Warlock")) {
-                manaIcon.setImageResource(R.drawable.warlock);
-            } else if (getIconId().equals("Priest")) {
-                manaIcon.setImageResource(R.drawable.priest);
-            } else if (getIconId().equals("Warrior")) {
-                manaIcon.setImageResource(R.drawable.warrior);
-            } else if (getIconId().equals("Hunter")) {
-                manaIcon.setImageResource(R.drawable.hunter);
-            } else if (getIconId().equals("Neutral")) {
-                manaIcon.setImageResource(R.drawable.hs_logo);
-            } else if (getIconId().equals("Goblins vs Gnomes")) {       // EXPANSIONS ICON
-                manaIcon.setImageResource(R.drawable.goblins_vs_gnomes);
-            } else if (getIconId().equals("The Grand Tournament")) {
-                manaIcon.setImageResource(R.drawable.the_grand_tournament);
-            } else if (getIconId().equals("Whispers of the Old Gods")) {
-                manaIcon.setImageResource(R.drawable.whispers_of_the_old_gods);
-            } else if (getIconId().equals("Mean Streets of Gadgetzan")) {
-                manaIcon.setImageResource(R.drawable.mean_streets_of_gadgetzan);
-            } else if (getIconId().equals("Journey to Un'Goro")) {
-                manaIcon.setImageResource(R.drawable.journey_to_ungoro);
-            } else if (getIconId().equals("Knights of the Frozen Throne")) {
-                manaIcon.setImageResource(R.drawable.knights_of_the_frozen_throne);
-            } else if (getIconId().equals("Kobolds & Catacombs")) {
-                manaIcon.setImageResource(R.drawable.kobolds_catacombs);
+            } else if (getIconId().equals(getStringValue())) {  // CLASS/EXPANSIONS/ADVENTURES ICON/
+                manaIcon.setImageResource(getDrawable());
+                manaIcon.setColorFilter(getContext().getResources().getColor(getColor()));
             }
-
-//            else if (getIconId().equals("Warrior")) {
-//                manaIcon.setImageResource(R.drawable.warrior);
-//            } else if (getIconId().equals("Hunter")) {
-//                manaIcon.setImageResource(R.drawable.hunter);
-//            } else if (getIconId().equals("Neutral")) {
-//                manaIcon.setImageResource(R.drawable.hs_logo);
-//            } else if (getIconId().equals("Neutral")) {
-//                manaIcon.setImageResource(R.drawable.hs_logo);
-//            }
             //manaIcon.setColorFilter(Color.rgb(0, 0, 128), PorterDuff.Mode.SRC_IN);
         }
 

@@ -364,7 +364,7 @@
                         android:scaleType="fitCenter"
                         android:padding="40dp"
                         android:background="?attr/colorPrimaryDark"
-                        android:src="@drawable/hs_logo" />
+                        android:src="@drawable/neutral" />
 
                     <TextView
                         android:id="@+id/text_neutral"
