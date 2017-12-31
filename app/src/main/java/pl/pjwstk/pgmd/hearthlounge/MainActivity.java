@@ -26,17 +26,13 @@ import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
 public class MainActivity extends DrawerMenu {
 
-    private ImageButton buttonCards, buttonDecks, buttonExpansions;
+    private ImageButton buttonCards, buttonDecks, buttonExpansions, buttonAdventures;
     //private FirebaseDatabase fbDb;
     private FirebaseAuth fbAuth;
     private FirebaseDatabase fbDb = FirebaseDatabase.getInstance();
 
-    private Rect rect;
-    private boolean ignore = false;
-
     private Point mTouchOffsetPoint = new Point();
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,19 +48,7 @@ public class MainActivity extends DrawerMenu {
 
         //checkUserLog();
 
-        final Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
-
-        //OLD ONCLICK
-//        buttonCards = (ImageButton)findViewById(R.id.button_cards);
-//        buttonCards.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent startIntent = new Intent(getApplicationContext(),CardsJSON.class); //Do którego ma iść
-//                startActivity(startIntent);
-//                //new CardsJSON().execute("https://omgvamp-hearthstone-v1.p.mashape.com/cards");
-//            }
-//        });
-
+        //final Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
         buttonDecks = (ImageButton) findViewById(R.id.button_decks);
         buttonDecks.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -73,16 +57,21 @@ public class MainActivity extends DrawerMenu {
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.drawable.pressed);
-                    //v.startAnimation(animationScale); // druga metoda
+                    v.setBackgroundResource(R.color.rogue);
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
-                    Intent startIntent = new Intent(getApplicationContext(),Decks.class); //Do którego ma iść
+                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
                     startActivity(startIntent);
+                    return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
                     return true;
                 }
                 return false;
@@ -93,22 +82,12 @@ public class MainActivity extends DrawerMenu {
         buttonCards.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent motionEvent) {
-//                mTouchOffsetPoint.x = (int)motionEvent.getX();
-//                mTouchOffsetPoint.y = (int)motionEvent.getY();
-
                 int action = motionEvent.getAction();
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
                     v.setBackgroundResource(R.drawable.pressed);
-
                     return true;
-//                } else if (action == MotionEvent.ACTION_MOVE) {
-//                    v.animate().scaleXBy(0.2f).setDuration(5000).start();
-//                    v.animate().scaleYBy(0.2f).setDuration(5000).start();
-//                    v.setBackgroundResource(R.drawable.pressed);
-//                    v.animate().cancel();
-//                    return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.animate().scaleX(1f).setDuration(1000).start();
@@ -124,8 +103,6 @@ public class MainActivity extends DrawerMenu {
                     v.setBackgroundResource(R.drawable.normal);
                     return true;
                 }
-//                motionEvent.offsetLocation(-mTouchOffsetPoint.x + v.getWidth()/2, -mTouchOffsetPoint.y + v.getHeight()/2);
-
                 return false;
             }
 ////                if(ignore && motionEvent.getAction()!=MotionEvent.ACTION_UP)
@@ -191,6 +168,42 @@ public class MainActivity extends DrawerMenu {
                     Intent startIntent = new Intent(getApplicationContext(), Expansions.class); //Do którego ma iść
                     startActivity(startIntent);
                     return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        // TODO intent to zmiany
+        buttonAdventures = (ImageButton)findViewById(R.id.button_adventures);
+        buttonAdventures.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent motionEvent) {
+                int action = motionEvent.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    v.animate().scaleXBy(0.2f).setDuration(5000).start();
+                    v.animate().scaleYBy(0.2f).setDuration(5000).start();
+                    v.setBackgroundResource(R.drawable.pressed);
+                    return true;
+                } else if (action == MotionEvent.ACTION_UP) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    Intent startIntent = new Intent(getApplicationContext(), Adventures.class); //Do którego ma iść
+                    startActivity(startIntent);
+                    return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    return true;
                 }
                 return false;
             }
@@ -213,5 +226,4 @@ public class MainActivity extends DrawerMenu {
         startActivity(startMain);
 
     }
-
 }

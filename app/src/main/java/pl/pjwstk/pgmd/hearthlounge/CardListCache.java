@@ -4,6 +4,7 @@ package pl.pjwstk.pgmd.hearthlounge;
  * Created by Maciek Dembowski on 16.12.2017.
  */
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -24,6 +25,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
+import pl.pjwstk.pgmd.hearthlounge.authentication.SignUp;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 
 public class CardListCache extends AsyncTask<String, String, List<Card> > {
@@ -106,6 +108,7 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
     protected List<Card> doInBackground(String... strings) {
         HttpURLConnection connection = null;
         BufferedReader reader = null;
+        String result = "";
 
         try {
             URL url = new URL("https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1");

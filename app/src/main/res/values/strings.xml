@@ -62,12 +62,13 @@
     <string name="keyAvatar">avatar</string>
     <string name="keyRegion">region</string>
 
-    <string name="title_cards_filter_menu">Cards Menu</string>
-    <string name="title_player_class_cards">Player Cards</string>
-
-    <string name="title_card_selected">Selected Card</string>
+    <!--NAGŁÓWKI KLAS-->
     <string name="title_decks">Decks</string>
+    <string name="title_cards_filter_menu">Cards Menu</string>
+    <string name="title_card_selected">Selected Card</string>
     <string name="title_expansions">Expansions</string>
+    <string name="title_adventures">Adventures</string>
+
     <string name="action_refresh">Refresh</string>
 
     <string name="open">Open</string>
@@ -88,12 +89,18 @@
     </string-array>
 
     <!--EXPANSIONS DESCRIPTION-->
-    <string name="goblins_vs_gnomes">   goblins_vs_gnomes</string>
-    <string name="the_grand_tournament">    the_grand_tournament</string>
-    <string name="whispers_of_the_old_gods">    whispers_of_the_old_gods</string>
-    <string name="mean_streets_of_gadgetzan">   mean_streets_of_gadgetzan</string>
-    <string name="journey_to_ungoro">   journey_to_ungoro</string>
-    <string name="knights_of_the_frozen_throne">    knights_of_the_frozen_throne</string>
-    <string name="kobolds_catacombs">   kobolds_catacombs</string>
+    <string name="goblins_vs_gnomes">   Goblins vs Gnomes is the first expansion for Hearthstone with strong mechanical theme.</string>
+    <string name="the_grand_tournament">    The Grand Tournament is the second expansion to Hearthstone, with strong Hero Power theme, with numerous ways to modify, augment and replace Hero Powers.</string>
+    <string name="whispers_of_the_old_gods">    Whispers of the Old Gods is the third expansion to Hearthstone, with strong theme about dark influence of the Old Gods, ancient and unspeakably evil creatures that have long lay hidden, imprisoned in the dark places of the world millennia ago.</string>
+    <string name="mean_streets_of_gadgetzan">   Mean Streets of Gadgetzan is the fourth expansion to Hearthstone. Features lawless port city of Gadgetzan and characters from the city\'s three ruling crime families - the brutish Grimy Goons, the shadowy assassins of the Jade Lotus, and the crazed spellcasters of the Kabal.</string>
+    <string name="journey_to_ungoro">   Journey to Un\'Goro is the fifth expansion to Hearthstone with strong focus on dinosaurs, raging elementals and unusually active plants.</string>
+    <string name="knights_of_the_frozen_throne">    Knights of the Frozen Throne is the sixth expansion to Hearthstone. Expansion sees each of Hearthstone\'s nine heroes embrace the power of the Undead Scourge, becoming death knights in the service of the mighty Lich King.</string>
+    <string name="kobolds_catacombs">   Kobolds and Catacombs is Hearthstone\'s seventh expansion featuring dark dungeons and winding catacombs in search of treasure and loot, encountering monsters, traps, rival adventurers, and — above all — slovenly, candle-obsessed kobolds along the way.</string>
+
+    <!--ADVENTURES DESCRIPTION-->
+    <string name="course_of_naxxramas">Curse of Naxxramas is Hearthstone\'s first adventure. Set in the Scourge necropolis of Naxxramas, Curse of Naxxramas is a five-wing adventure, with each wing representing one of the wings of the World of Warcraft Naxxramas raid instance.</string>
+    <string name="blackrock_mountain">Blackrock Mountain is Hearthstone\'s second adventure, with each wing representing a raid or dungeon instance from the World of Warcraft Blackrock Mountain zone, a high-level area inhabited by fire elementals, Blackrock orcs, Dark Iron dwarves and the black dragonflight.</string>
+    <string name="the_league_of_explorers">The League of Explorers is the third adventure for Hearthstone, with a strong theme of exploration.</string>
+    <string name="one_night_in_karazhan">One Night in Karazhan is the fourth adventure for Hearthstone. The adventure is set in the reimagined glory days of the mystical tower of Karazhan, when a young Medivh was not only the Guardian of Azeroth, but also its most eligible bachelor.</string>
 
 </resources>

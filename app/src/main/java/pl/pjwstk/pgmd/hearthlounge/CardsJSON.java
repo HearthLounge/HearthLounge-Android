@@ -81,6 +81,7 @@ public class CardsJSON extends DrawerMenu {
     private final String URL = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1";
 
     private String stringValue = "";
+    private String titleName = "";
     private String iconId = "";
     private int drawable;
     private int color;
@@ -96,6 +97,14 @@ public class CardsJSON extends DrawerMenu {
 
     public void setStringValue(String stringValue) {
         this.stringValue = stringValue;
+    }
+
+    public String getTitleName() {
+        return titleName;
+    }
+
+    public void setTitleName(String titleName) {
+        this.titleName = titleName;
     }
 
     public String getIconId() {
@@ -135,14 +144,13 @@ public class CardsJSON extends DrawerMenu {
         Intent intent = getIntent();
         String value = intent.getStringExtra("StringValue");
         setStringValue(value);
-
+        String title = intent.getStringExtra("Title");
+        setTitleName(title);
         String iconId = intent.getStringExtra("IconID");
         setIconId(iconId);
-
         setDrawable(getIntent().getExtras().getInt("drawable"));
         setColor(getIntent().getExtras().getInt("color"));
-
-        SpannableString s = new SpannableString(iconId + " Cards");
+        SpannableString s = new SpannableString(title + " Cards");
         s.setSpan(new TypefaceSpan(this, "belwe_medium.otf"), 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         toolbar.setTitle(s);
@@ -504,9 +512,13 @@ public class CardsJSON extends DrawerMenu {
                             all.setColorFilter(Color.rgb(0,169,156));
                             return true;
                         } else if (action == MotionEvent.ACTION_UP) {
-                            toast.makeImageToast(CardsJSON.this, "You Clicked ", getDrawable(), getColor(), Toast.LENGTH_SHORT).show(); // + item.getTitle()
+                            toast.makeImageToast(CardsJSON.this, "You Clicked ", getDrawable(), getContext().getResources().getColor(getColor()), Toast.LENGTH_SHORT).show(); // + item.getTitle()
                             manaFilter(411, null);
-                            setIconId(getStringValue());
+                            if (getStringValue() == null) {
+                                setIconId("All");
+                            } else {
+                                setIconId(getStringValue());
+                            }
                             finalMDropdown.dismiss();
                             changeIcon();
                             return true;
@@ -542,7 +554,7 @@ public class CardsJSON extends DrawerMenu {
                 manaIcon.setImageResource(R.drawable.mana_7_plus);
             } else if (getIconId().equals("All")) {
                 manaIcon.setImageResource(R.drawable.all_cards);
-            } else if (getIconId().equals(getStringValue())) {  // CLASS/EXPANSIONS/ADVENTURES ICON/
+            } else if (getIconId().equals(getIconId())) {  // CLASS/EXPANSIONS/ADVENTURES ICON/
                 manaIcon.setImageResource(getDrawable());
                 manaIcon.setColorFilter(getContext().getResources().getColor(getColor()));
             }

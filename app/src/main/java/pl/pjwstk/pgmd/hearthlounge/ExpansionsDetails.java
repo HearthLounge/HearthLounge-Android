@@ -28,11 +28,12 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ExpansionsDetails extends YouTubeBaseActivity {
 
-    String iconId;
-    String title;
     private android.support.v7.widget.Toolbar toolbar;
     private LinearLayout all_cards;
 
+    private String stringValue;
+    private String title;
+    private String iconId;
 
     YouTubePlayerView youTubePlayerView;
     public static final String KEY = "AIzaSyCvRyXnKWGLAm93ZVVYchSN2HXL3xBNisY";
@@ -44,8 +45,9 @@ public class ExpansionsDetails extends YouTubeBaseActivity {
         setContentView(R.layout.expansions_details);
 
         Intent intent = getIntent();
-        iconId = intent.getStringExtra("IconID");
+        stringValue = intent.getStringExtra("StringValue");
         title = intent.getStringExtra("Title");
+        iconId = intent.getStringExtra("IconID");
 
         SpannableString s = new SpannableString(title);
         s.setSpan(new TypefaceSpan(this, "belwe_medium.otf"), 0, s.length(),
@@ -67,7 +69,8 @@ public class ExpansionsDetails extends YouTubeBaseActivity {
                     v.animate().cancel();
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
-                    startIntent.putExtra("StringValue", title);
+                    startIntent.putExtra("StringValue", stringValue);
+                    startIntent.putExtra("Title", title);
                     startIntent.putExtra("IconID", iconId);
                     startIntent.putExtra("drawable", getIntent().getExtras().getInt("drawable"));
                     startIntent.putExtra("color", getIntent().getExtras().getInt("color"));
@@ -151,7 +154,7 @@ public class ExpansionsDetails extends YouTubeBaseActivity {
     public void getAboutText() {
         TextView aboutText = (TextView)findViewById(R.id.about_text);
         String about = "";
-        int countCrads = CardListCache.getInstance().getCardList(title).size();
+        int countCrads = CardListCache.getInstance().getCardList(stringValue).size();
         if (title.equals("Goblins vs Gnomes")) {
             about = "Announce date: 07.11.2014 \n Release date: 08.12.2014 \n Number of cards: " + countCrads;
         } else if (title.equals("The Grand Tournament")) {
@@ -204,9 +207,9 @@ public class ExpansionsDetails extends YouTubeBaseActivity {
         } else if (title.equals("Journey to Un'Goro")) {
             gameBoardUrl = "https://i.ytimg.com/vi/GedVYJR_42U/maxresdefault.jpg";
         } else if (title.equals("Knights of the Frozen Throne")) {
-            gameBoardUrl = "http://cdn.gamer-network.net/2017/usgamer/Knights-of-the-Frozen-Throne_Gameboard_(EMBARGOED).png";
+            gameBoardUrl = "https://raw.githubusercontent.com/vFujin/HearthLounge/master/src/images/expansions/knights-of-the-frozen-throne.jpg";
         } else if (title.equals("Kobolds & Catacombs")) {
-            gameBoardUrl = "http://www.startlr.com/wp-content/uploads/2017/11/the-addition-of-kobold-and-the-catacombs-will-add-a-single-mode-to-hearthstone-and-135-maps.jpg";
+            gameBoardUrl = "https://raw.githubusercontent.com/vFujin/HearthLounge/master/src/images/expansions/kobolds-and-catacombs.jpg";
         }
         Glide.with(this).load(gameBoardUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

@@ -56,6 +56,7 @@ public class Expansions extends DrawerMenu {
                     textGoblinsVsGnomes.setTextColor(getResources().getColor(R.color.gvg));
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
+                    startIntent.putExtra("StringValue", "Goblins vs Gnomes");
                     startIntent.putExtra("Title", "Goblins vs Gnomes");
                     startIntent.putExtra("IconID", "Goblins vs Gnomes");
                     startIntent.putExtra("drawable", R.drawable.goblins_vs_gnomes);
@@ -103,6 +104,7 @@ public class Expansions extends DrawerMenu {
                     textTheGrandTournament.setTextColor(getResources().getColor(R.color.tgt));
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
+                    startIntent.putExtra("StringValue", "The Grand Tournament");
                     startIntent.putExtra("Title", "The Grand Tournament");
                     startIntent.putExtra("IconID", "The Grand Tournament");
                     startIntent.putExtra("drawable", R.drawable.the_grand_tournament);
@@ -150,6 +152,7 @@ public class Expansions extends DrawerMenu {
                     textWhispersOfTheOldGods.setTextColor(getResources().getColor(R.color.wotog));
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
+                    startIntent.putExtra("StringValue", "Whispers of the Old Gods");
                     startIntent.putExtra("Title", "Whispers of the Old Gods");
                     startIntent.putExtra("IconID", "Whispers of the Old Gods");
                     startIntent.putExtra("drawable", R.drawable.whispers_of_the_old_gods);
@@ -197,6 +200,7 @@ public class Expansions extends DrawerMenu {
                     textMeanStreetsOfGadgetzan.setTextColor(getResources().getColor(R.color.msog));
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
+                    startIntent.putExtra("StringValue", "Mean Streets of Gadgetzan");
                     startIntent.putExtra("Title", "Mean Streets of Gadgetzan");
                     startIntent.putExtra("IconID", "Mean Streets of Gadgetzan");
                     startIntent.putExtra("drawable", R.drawable.mean_streets_of_gadgetzan);
@@ -244,6 +248,7 @@ public class Expansions extends DrawerMenu {
                     textJourneyToUnGoro.setTextColor(getResources().getColor(R.color.ungoro));
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
+                    startIntent.putExtra("StringValue", "Journey to Un'Goro");
                     startIntent.putExtra("Title", "Journey to Un'Goro");
                     startIntent.putExtra("IconID", "Journey to Un'Goro");
                     startIntent.putExtra("drawable", R.drawable.journey_to_ungoro);
@@ -291,6 +296,7 @@ public class Expansions extends DrawerMenu {
                     textKnightsOfTheFrozenThrone.setTextColor(getResources().getColor(R.color.kotft));
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
+                    startIntent.putExtra("StringValue", "Knights of the Frozen Throne");
                     startIntent.putExtra("Title", "Knights of the Frozen Throne");
                     startIntent.putExtra("IconID", "Knights of the Frozen Throne");
                     startIntent.putExtra("drawable", R.drawable.knights_of_the_frozen_throne);
@@ -338,6 +344,7 @@ public class Expansions extends DrawerMenu {
                     textKoboldsAndCatacombs.setTextColor(getResources().getColor(R.color.kandc));
                     v.setBackgroundResource(R.drawable.normal);
                     Intent startIntent = new Intent(getApplicationContext(), ExpansionsDetails.class);
+                    startIntent.putExtra("StringValue", "Kobolds & Catacombs");
                     startIntent.putExtra("Title", "Kobolds & Catacombs");
                     startIntent.putExtra("IconID", "Kobolds & Catacombs");
                     startIntent.putExtra("drawable", R.drawable.kobolds_catacombs);
