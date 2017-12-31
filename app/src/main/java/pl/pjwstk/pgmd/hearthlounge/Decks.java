@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import pl.pjwstk.pgmd.hearthlounge.model.DeckListCache;
+
 /**
  * Created by Maciek Dembowski on 13.11.2017.
  */

@@ -168,13 +168,17 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
         userEmail.setText(userPref.getSingleStringPref(userPref.keyEmail));
 
         // Loading profile image    // user.getAvatar czy cos
-        Glide.with(this).load(urlProfileImg)
-                .crossFade()
-                .thumbnail(0.5f)
-                .bitmapTransform(new CircleTransform(this))
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imgProfile);
-    }
+        String urlAvatar;
+        if (userPref.contain(userPref.keyAvatar)) { urlAvatar = userPref.getSingleStringPref(userPref.keyAvatar); }
+        else { urlAvatar = urlProfileImg; }
+            Glide.with(this).load(urlAvatar)
+                    .crossFade()
+                    .thumbnail(0.5f)
+                    .bitmapTransform(new CircleTransform(this))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imgProfile);
+        }
+
 
     @Override
     public void onBackPressed() {

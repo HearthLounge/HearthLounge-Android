@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import pl.pjwstk.pgmd.hearthlounge.model.DeckListCache;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 import pl.pjwstk.pgmd.hearthlounge.MainActivity;
 import pl.pjwstk.pgmd.hearthlounge.R;
@@ -49,8 +50,6 @@ public class LogIn extends DrawerMenu {
 
         editEmailLogin = (EditText) findViewById(R.id.edit_email);
         editPasswordLogin = (EditText) findViewById(R.id.edit_password);
-
-
         buttonLogin = (Button) findViewById(R.id.button_login);
         textToSignUp = (TextView) findViewById(R.id.text_to_sign_up);
 

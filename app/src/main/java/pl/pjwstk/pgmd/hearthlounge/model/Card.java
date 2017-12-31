@@ -1,8 +1,11 @@
 package pl.pjwstk.pgmd.hearthlounge.model;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Maciek Dembowski on 17.10.2017.
@@ -17,9 +20,9 @@ public class Card {
     private String type;
     private String faction;
     private String rarity;
-    private int cost; // int
-    private int attack; // int
-    private int health; // int
+    private long cost; // int
+    private long attack; // int
+    private long health; // int
     private String text; // wywalić
     private String flavor;
     private String artist;
@@ -34,6 +37,8 @@ public class Card {
     private String locale; // wywalić
     @SerializedName("mechanics")
     private List<Mechanics> mechanicsList;
+
+    private long amount;
 
 //    public Card(){}
 //
@@ -59,6 +64,20 @@ public class Card {
 //        this.locale = locale;
 //        this.mechanicsList = mechanicsList;
 //    }
+
+    public Card(Object obj){
+
+        //amount
+        Map<String, Object> tempCard = (Map<String, Object>) obj;
+        this.cardId = (String) tempCard.get("cardId");
+        this.cost = (long) tempCard.get("cost");
+        this.rarity = (String) tempCard.get("rarity");
+        this.cardSet = (String) tempCard.get("cardSet");
+        this.type = (String) tempCard.get("type");
+        this.amount = (long) tempCard.get("amount");
+        Log.d("CARD MAKER", this.getCardId());
+
+    }
 
 
     public String getCardId() {
@@ -117,30 +136,30 @@ public class Card {
         this.rarity = rarity;
     }
 
-    public int getCost() {
+    public long getCost() {
         //        return (cost != null)
 //                ? cost
 //                : null;
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(long cost) {
         this.cost = cost;
     }
 
-    public int getAttack() {
+    public long getAttack() {
         return attack;
     }
 
-    public void setAttack(int attack) {
+    public void setAttack(long attack) {
         this.attack = attack;
     }
 
-    public int getHealth() {
+    public long getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(long health) {
         this.health = health;
     }
 
@@ -248,6 +267,14 @@ public class Card {
         this.mechanicsList = mechanicsList;
     }
 
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
     public static class Mechanics {
         private String name;
 
@@ -259,4 +286,7 @@ public class Card {
             this.name = name;
         }
     }
+
+
+
 }

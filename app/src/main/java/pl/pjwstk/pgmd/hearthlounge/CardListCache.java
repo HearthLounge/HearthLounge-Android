@@ -277,7 +277,7 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
 
             Collections.sort(cardList, new Comparator<Card>() {
                 public int compare(Card a, Card b) {
-                    return Integer.compare(a.getCost(), b.getCost()); // return a.cos - b.cos
+                    return Long.compare(a.getCost(), b.getCost()); // return a.cos - b.cos
                 }
             });
 
