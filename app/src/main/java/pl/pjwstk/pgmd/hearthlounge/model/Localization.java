@@ -32,7 +32,7 @@ public class Localization {
     public Localization(Map<String, Object> map){
 
         uid = (String) map.get("uid");
-        uid = (String) map.get("username");
+        username = (String) map.get("username");
         rank = (long) map.get("rank");
 
         //long tempLat = (long) map.get("lan");

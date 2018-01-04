@@ -40,14 +40,11 @@ public class MainActivity extends DrawerMenu {
         getLayoutInflater().inflate(R.layout.main_menu, frameLayout);
         navigationView.getMenu().getItem(5).setChecked(true);
 
-        //fbDb = FirebaseDatabase.getInstance();
         DeckListCache.getInstance();
         fbAuth = FirebaseAuth.getInstance();
         if(fbAuth.getCurrentUser() != null) {
             checkUserLog();
         }
-
-        //checkUserLog();
 
         //final Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
         buttonDecks = (ImageButton) findViewById(R.id.button_decks);

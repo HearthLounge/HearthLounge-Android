@@ -24,6 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.authentication.UserPreferences;
@@ -72,13 +73,15 @@ public class MapDb {
 
     }
 
-    public void readLocalizations(final List<MarkerOptions> myMarkers){
+    public void readLocalizations(final List<MarkerOptions> myMarkers, final MapsActivity.Reminder reminder){
 
         fbCloud.collection("/localization").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            int checker = task.getResult().size();
+                            int waiter = 0;
                             Localization tempLoc;
                             for (DocumentSnapshot document : task.getResult()) {
 
@@ -89,12 +92,14 @@ public class MapDb {
 //
 //                                    tempList.add(tempLoc);
 //                                }
-                                MarkerOptions tempMarker = new MarkerOptions().position(tempLoc.getLatLng()).title(tempLoc.getUsername()).snippet("\n" + "rank: " + Double.toString(tempLoc.getRank()));
+                                MarkerOptions tempMarker = new MarkerOptions().position(tempLoc.getLatLng()).title(tempLoc.getUsername() + " rank:" + Double.toString(tempLoc.getRank()));
                                 tempMarker.icon(usersIcon);
                                 tempMarker.visible(true);
                                 myMarkers.add(tempMarker);
                                 LatLng tempLtLng = tempMarker.getPosition();
                                 Log.d("readLocalizations","lat: " + tempLtLng.latitude + " lng: " + tempLtLng.longitude);
+                                waiter++;
+                                if(waiter >= checker) reminder.setTimer(20);
                             }
                         } else {
                             Log.d("GET ALL LOCAL", "FAIL FAIL FAIL FAIL ", task.getException());

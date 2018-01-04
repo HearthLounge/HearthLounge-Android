@@ -118,12 +118,6 @@
             android:label="UserService"
             android:stopWithTask="false" />
 
-        <!-- INNE -->
-        <service
-            android:name=".CardService"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity
             android:name=".InitiateApp"
             android:label="InitiateApp"

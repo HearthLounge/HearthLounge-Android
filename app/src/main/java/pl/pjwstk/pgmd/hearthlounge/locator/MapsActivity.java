@@ -30,6 +30,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -60,13 +61,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 @Override
                 public void run()
                 {
-                    for(MarkerOptions markerOptions: MapsActivity.markerList){
+                    MapsActivity.mMap.clear();
+                    for(MarkerOptions markerOptions: tempList){
+
 
                         MapsActivity.mMap.addMarker(markerOptions);
 
                     }
+            markerList = tempList;
                 }
             });
+
+            Log.d("MyThread", ""+tempList.size());
+            //Reminder rmd  = new Reminder(20);
+            doItAll(10);
         }
     }
 
@@ -76,14 +84,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         public Reminder(int seconds) {
             timer = new Timer();
-            timer.schedule(new RemindTask(), seconds * 1000);
+            //timer.schedule(new RemindTask(), seconds * 1000);
+            Log.d("REMINDER", "reminder start waiting -> "+ seconds);
+        }
+
+        public void setTimer(int seconds){
+
+            this.timer.schedule(new RemindTask(), seconds * 1000);
         }
 
         class RemindTask extends TimerTask {
             public void run() {
-//                for(MarkerOptions markerOptions: MapsActivity.markerList){
-
-                    MyThread xThread = new MyThread(MapsActivity.this, MapsActivity.markerList);
+                    List<MarkerOptions> listReminder = MapsActivity.markerList;
+                    Log.d("REMINDER", "reminder starting!");
+                    MyThread xThread = new MyThread(MapsActivity.this, listReminder);
                     xThread.run();
 //              }
                 timer.cancel(); //Terminate the timer thread
@@ -115,7 +129,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         mapOfMarkers = new HashMap<>();
         mapDb = new MapDb(getApplicationContext());
-        markerList = new LinkedList<>();
+        markerList = new ArrayList<>();
         //mapDb.readLocalizations(markerList);
         usersIcon = BitmapDescriptorFactory.fromResource(R.drawable.position_icon);
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -129,15 +143,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-            LatLng sydney = new LatLng(54.31, 18.59675);
-            Marker marker01 = mMap.addMarker(new MarkerOptions().position(sydney).title("Marker01"));
-            marker01.setIcon(usersIcon);
+//            LatLng sydney = new LatLng(54.31, 18.59675);
+//            Marker marker01 = mMap.addMarker(new MarkerOptions().position(sydney).title("Marker01"));
+//            marker01.setIcon(usersIcon);
 //          mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-            mMap.setMinZoomPreference(10);
-            rmd = new Reminder(7);
-            currentLocation();
-            mapDb.readLocalizations(markerList);
+            mMap.setMinZoomPreference(14);
+//            rmd = new Reminder(7);
+//            currentLocation();
+//            mapDb.readLocalizations(markerList);
             //getUsersLocation(mapDb.markerOptionsList);
+            doItAll(120);
 
         } else {
             Toast.makeText(MapsActivity.this, "You have to accept to enjoy all app's services!", Toast.LENGTH_LONG).show();
@@ -180,7 +195,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    public synchronized void getUsersLocation(List<MarkerOptions> tempList){
+    public void getUsersLocation(List<MarkerOptions> tempList){
         Log.d("getUserLocations", "Starting..." + tempList.size());
 
         for(MarkerOptions markerOptions: tempList){
@@ -206,12 +221,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    public void doItAll(int seconds){
+
+        try {
+            rmd = new Reminder(seconds);
+            currentLocation();
+            mapDb.readLocalizations(markerList, rmd);
+            markerList.clear();
+        }
+        catch(ConcurrentModificationException e){
+
+            Log.d("Concurrent exception", "Error");
+        }
+
+    }
+
     public void onStop(){
         super.onStop();
 
         mapDb.deleteLocalization();
 
-    };
+    }
 
 }
 

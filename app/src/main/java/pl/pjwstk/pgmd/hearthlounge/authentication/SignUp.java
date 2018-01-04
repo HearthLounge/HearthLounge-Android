@@ -53,7 +53,6 @@ public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
 
         //Temporary solve
         Toast.makeText(SignUp.this, "--->Loging out", Toast.LENGTH_SHORT).show();
-        fbAuth.signOut();
 
         edit_name = (EditText) findViewById(R.id.edit_name);
         edit_email = (EditText) findViewById(R.id.edit_email);
@@ -62,6 +61,10 @@ public class SignUp extends DrawerMenu /*implements View.OnClickListener */ {
 
         buttonRegister = (Button) findViewById(R.id.button_signup);
         textLogin = (TextView) findViewById(R.id.text_login);
+
+        if(fbAuth.getCurrentUser() != null){
+            updateUI();
+        }
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
 
