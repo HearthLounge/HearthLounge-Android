@@ -44,6 +44,35 @@ import pl.pjwstk.pgmd.hearthlounge.model.Localization;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    public class Waiter {
+
+        Timer timer;
+
+        public Waiter(int seconds) {
+            timer = new Timer();
+            timer.schedule(new WaiterTask(), seconds * 1000);
+        }
+
+        public void setTimer(int seconds){
+
+            this.timer.schedule(new WaiterTask(), seconds * 1000);
+            Log.d("REMINDER", "reminder start waiting -> "+ seconds);
+        }
+
+        class WaiterTask extends TimerTask {
+            public void run() {
+                List<MarkerOptions> listReminder = MapsActivity.markerList;
+                Log.d("WAITER", "reminder starting!");
+                MyThread xThread = new MyThread(MapsActivity.this, listReminder);
+                xThread.run();
+//              }
+                timer.cancel(); //Terminate the timer thread
+            }
+        }
+
+    }
+
+
     class MyThread implements Runnable
     {
         Activity activity;
@@ -63,7 +92,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 {
                     MapsActivity.mMap.clear();
                     for(MarkerOptions markerOptions: tempList){
-
 
                         MapsActivity.mMap.addMarker(markerOptions);
 
@@ -85,12 +113,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         public Reminder(int seconds) {
             timer = new Timer();
             //timer.schedule(new RemindTask(), seconds * 1000);
-            Log.d("REMINDER", "reminder start waiting -> "+ seconds);
         }
 
         public void setTimer(int seconds){
 
             this.timer.schedule(new RemindTask(), seconds * 1000);
+            Log.d("REMINDER", "reminder start waiting -> "+ seconds);
         }
 
         class RemindTask extends TimerTask {
@@ -224,10 +252,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void doItAll(int seconds){
 
         try {
+
             rmd = new Reminder(seconds);
             currentLocation();
             mapDb.readLocalizations(markerList, rmd);
-            markerList.clear();
+            //markerList.clear();
+
         }
         catch(ConcurrentModificationException e){
 

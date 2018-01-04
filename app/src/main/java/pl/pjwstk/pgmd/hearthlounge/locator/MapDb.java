@@ -99,7 +99,7 @@ public class MapDb {
                                 LatLng tempLtLng = tempMarker.getPosition();
                                 Log.d("readLocalizations","lat: " + tempLtLng.latitude + " lng: " + tempLtLng.longitude);
                                 waiter++;
-                                if(waiter >= checker) reminder.setTimer(20);
+                                if(waiter >= checker) reminder.setTimer(40);
                             }
                         } else {
                             Log.d("GET ALL LOCAL", "FAIL FAIL FAIL FAIL ", task.getException());
