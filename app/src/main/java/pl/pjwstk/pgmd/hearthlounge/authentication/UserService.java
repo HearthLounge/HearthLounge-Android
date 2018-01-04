@@ -150,53 +150,6 @@ public class UserService extends Service {
         super.onDestroy();
     }
 
-    public ChildEventListener UserChildListener(String uid){
-
-        Toast.makeText(getApplicationContext(), "DZIECI!!!!", Toast.LENGTH_SHORT).show();
-        ChildEventListener temp_fbChildListener = new ChildEventListener(){
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                Toast.makeText(getApplicationContext(), "Added user ChildEventListener", Toast.LENGTH_SHORT).show();
-                User userDb = dataSnapshot.getValue(User.class);
-                userPref.setUserPref(userDb);
-                Toast.makeText(getApplicationContext(), "Read " + userDb.getUsername() + " data", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                Toast.makeText(getApplicationContext(), "Changed user ChildEventListener", Toast.LENGTH_SHORT).show();
-                User userDb = dataSnapshot.getValue(User.class);
-                userPref.setUserPref(userDb);
-                Toast.makeText(getApplicationContext(), "" + userDb.getUsername() + " data", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                //TODO
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                //Ignore that for a while
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-                Toast.makeText(getApplicationContext(), "Cancelled user ChildEventListener", Toast.LENGTH_SHORT).show();
-            }
-        };
-
-        //fbUserRef.orderByChild("users").equalTo("uid").addChildEventListener(temp_fbChildListener);
-        fbChildListener = temp_fbChildListener;
-
-        return temp_fbChildListener;
-    }
-
     public ValueEventListener UserValueListener(){
 
         ValueEventListener uValueListener = new ValueEventListener() {

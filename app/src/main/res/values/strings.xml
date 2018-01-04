@@ -62,6 +62,9 @@
     <string name="keyAvatar">avatar</string>
     <string name="keyRegion">region</string>
 
+    <string name="keyLatitude">latitude</string>
+    <string name="keyLongitude">longitude</string>
+
     <!--NAGŁÓWKI KLAS-->
     <string name="title_decks">Decks</string>
     <string name="title_cards_filter_menu">Cards Menu</string>
@@ -102,5 +105,8 @@
     <string name="blackrock_mountain">Blackrock Mountain is Hearthstone\'s second adventure, with each wing representing a raid or dungeon instance from the World of Warcraft Blackrock Mountain zone, a high-level area inhabited by fire elementals, Blackrock orcs, Dark Iron dwarves and the black dragonflight.</string>
     <string name="the_league_of_explorers">The League of Explorers is the third adventure for Hearthstone, with a strong theme of exploration.</string>
     <string name="one_night_in_karazhan">One Night in Karazhan is the fourth adventure for Hearthstone. The adventure is set in the reimagined glory days of the mystical tower of Karazhan, when a young Medivh was not only the Guardian of Azeroth, but also its most eligible bachelor.</string>
+
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCvRyXnKWGLAm93ZVVYchSN2HXL3xBNisY</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

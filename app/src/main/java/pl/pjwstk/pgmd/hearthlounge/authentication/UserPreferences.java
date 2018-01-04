@@ -34,6 +34,9 @@ public class UserPreferences {
     public static String keyAvatar;
     public static String keyRegion;
 
+    public static String keyLatitude;
+    public static String keyLongitude;
+
     private SharedPreferences sharedPrefs;
     private SharedPreferences.Editor prefsEditor;
 
@@ -58,6 +61,8 @@ public class UserPreferences {
         keyYoutube = context.getString(R.string.keyYoutube);
         keyAvatar = context.getString(R.string.keyAvatar);
         keyRegion = context.getString(R.string.keyRegion);
+        keyLatitude = context.getString(R.string.keyLatitude);
+        keyLongitude = context.getString(R.string.keyLongitude);
     }
 
     public void setUserPref(User user){
@@ -119,6 +124,7 @@ public class UserPreferences {
         return sharedPrefs.getInt("role",0);
     }
 
+
     public void setValuePref(String key,String text) {
         prefsEditor.putString(key, text);
         prefsEditor.commit();
@@ -131,4 +137,20 @@ public class UserPreferences {
         return user;
     }
 
+    public void setLanOrLng(String key ,double value){
+
+        prefsEditor.putString(key, Double.toString(value));
+        prefsEditor.commit();
+
+    }
+
+    public double getLanOrLng(String key){
+
+        if(key.equals(this.keyLatitude) || key.equals(this.keyLongitude)) {
+
+            String temp = this.getSingleStringPref(key);
+            return Double.parseDouble(temp);
+        }
+        return 0;
+    }
 }

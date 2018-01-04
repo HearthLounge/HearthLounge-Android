@@ -28,34 +28,6 @@ import static android.content.ContentValues.TAG;
 
 public class DeckListCache {
 
-//    static class MyDeckThread implements Runnable {
-//        String action;
-//        CountDownLatch latch;
-
-//        MyDeckThread(CountDownLatch c, String n) {
-//            latch = c;
-//            action = n;
-//            new Thread(this).start();
-//        }
-//
-//        public void run() {
-//                synchronized (latch) { // wypisanie aktualnego stany licznika
-//
-//                    if(action == "db") {
-//                        GetAllDocs();
-//                    }
-//                    if(action == "decks") {
-//                        MakeDeckList(listOfMaps);
-//                    }
-//                    latch.countDown();
-//                }
-//                try {
-//                    Thread.sleep(10);
-//                } catch (Exception e) {
-//                }
-//            }
-//        }
-
     private static FirebaseFirestore fbCloud = FirebaseFirestore.getInstance();
 
     private CollectionReference fbColDecksRef = fbCloud.collection("decks");

@@ -20,13 +20,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 import pl.pjwstk.pgmd.hearthlounge.authentication.UserService;
+import pl.pjwstk.pgmd.hearthlounge.locator.MapsActivity;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 import pl.pjwstk.pgmd.hearthlounge.model.DeckListCache;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
 public class MainActivity extends DrawerMenu {
 
-    private ImageButton buttonCards, buttonDecks, buttonExpansions, buttonAdventures;
+    private ImageButton buttonCards, buttonDecks, buttonExpansions, buttonAdventures, buttonMap;
     //private FirebaseDatabase fbDb;
     private FirebaseAuth fbAuth;
     private FirebaseDatabase fbDb = FirebaseDatabase.getInstance();
@@ -208,6 +209,37 @@ public class MainActivity extends DrawerMenu {
                 return false;
             }
         });
+
+        buttonMap = (ImageButton) findViewById(R.id.button_position);
+        buttonMap.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent motionEvent) {
+                int action = motionEvent.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    v.animate().scaleXBy(0.2f).setDuration(5000).start();
+                    v.animate().scaleYBy(0.2f).setDuration(5000).start();
+                    v.setBackgroundResource(R.color.rogue);
+                    return true;
+                } else if (action == MotionEvent.ACTION_UP) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    if(fbAuth.getCurrentUser() != null){
+                    Intent startIntent = new Intent(getApplicationContext(), MapsActivity.class);
+                    startActivity(startIntent);}
+                    else { Toast.makeText(MainActivity.this, "Log in to use this!", Toast.LENGTH_SHORT).show(); }
+                    return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     public void checkUserLog(){
@@ -226,4 +258,9 @@ public class MainActivity extends DrawerMenu {
         startActivity(startMain);
 
     }
+
+
+
+
+
 }
