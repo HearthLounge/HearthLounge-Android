@@ -98,7 +98,7 @@
                         android:scaleType="fitCenter"
                         android:padding="40dp"
                         android:background="?attr/colorPrimaryDark"
-                        android:src="@drawable/icon_mage" />
+                        android:src="@drawable/mage" />
 
                     <TextView
                         android:id="@+id/text_mage"
@@ -126,7 +126,7 @@
                         android:scaleType="fitCenter"
                         android:padding="40dp"
                         android:background="?attr/colorPrimaryDark"
-                        android:src="@drawable/icon_paladin" />
+                        android:src="@drawable/paladin" />
 
                     <TextView
                         android:id="@+id/text_paladin"
@@ -154,7 +154,7 @@
                         android:scaleType="fitCenter"
                         android:padding="40dp"
                         android:background="?attr/colorPrimaryDark"
-                        android:src="@drawable/icon_shaman" />
+                        android:src="@drawable/shaman" />
 
                     <TextView
                         android:id="@+id/text_shaman"
@@ -182,7 +182,7 @@
                         android:scaleType="fitCenter"
                         android:padding="40dp"
                         android:background="?attr/colorPrimaryDark"
-                        android:src="@drawable/icon_priest" />
+                        android:src="@drawable/priest" />
 
                     <TextView
                         android:id="@+id/text_priest"
@@ -210,7 +210,7 @@
                         android:scaleType="fitCenter"
                         android:padding="40dp"
                         android:background="?attr/colorPrimaryDark"
-                        android:src="@drawable/icon_hunter" />
+                        android:src="@drawable/hunter" />
 
                     <TextView
                         android:id="@+id/text_hunter"
@@ -238,7 +238,7 @@
                         android:scaleType="fitCenter"
                         android:padding="40dp"
                         android:background="?attr/colorPrimaryDark"
-                        android:src="@drawable/icon_rogue" />
+                        android:src="@drawable/rogue" />
 
                     <TextView
                         android:id="@+id/text_rogue"
@@ -266,7 +266,7 @@
                         android:scaleType="fitCenter"
                         android:padding="40dp"
                         android:background="?attr/colorPrimaryDark"
-                        android:src="@drawable/icon_druid" />
+                        android:src="@drawable/druid" />
 
                     <TextView
                         android:id="@+id/text_druid"
@@ -294,7 +294,7 @@
                         android:scaleType="fitCenter"
                         android:padding="40dp"
                         android:background="?attr/colorPrimaryDark"
-                        android:src="@drawable/icon_warlock" />
+                        android:src="@drawable/warlock" />
 
                     <TextView
                         android:id="@+id/text_warlock"
@@ -322,7 +322,7 @@
                         android:scaleType="fitCenter"
                         android:padding="40dp"
                         android:background="?attr/colorPrimaryDark"
-                        android:src="@drawable/icon_warrior" />
+                        android:src="@drawable/warrior" />
 
                     <TextView
                         android:id="@+id/text_warrior"

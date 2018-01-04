@@ -27,7 +27,7 @@ import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
 public class MainActivity extends DrawerMenu {
 
-    private ImageButton buttonCards, buttonDecks, buttonExpansions, buttonAdventures, buttonMap;
+    private ImageButton buttonCards, buttonDecks, buttonExpansions, buttonAdventures, buttonReddit, buttonMap;
     //private FirebaseDatabase fbDb;
     private FirebaseAuth fbAuth;
     private FirebaseDatabase fbDb = FirebaseDatabase.getInstance();
@@ -46,7 +46,6 @@ public class MainActivity extends DrawerMenu {
             checkUserLog();
         }
 
-        //final Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
         buttonDecks = (ImageButton) findViewById(R.id.button_decks);
         buttonDecks.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -55,14 +54,14 @@ public class MainActivity extends DrawerMenu {
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.color.rogue);
+                    v.setBackgroundResource(R.drawable.pressed);
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.animate().scaleX(1f).setDuration(1000).start();
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                    Intent startIntent = new Intent(getApplicationContext(), Decks.class);
                     startActivity(startIntent);
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -177,7 +176,6 @@ public class MainActivity extends DrawerMenu {
             }
         });
 
-        // TODO intent to zmiany
         buttonAdventures = (ImageButton)findViewById(R.id.button_adventures);
         buttonAdventures.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -207,6 +205,35 @@ public class MainActivity extends DrawerMenu {
             }
         });
 
+        buttonReddit = (ImageButton)findViewById(R.id.button_reddit);
+        buttonReddit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent motionEvent) {
+                int action = motionEvent.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    v.animate().scaleXBy(0.2f).setDuration(5000).start();
+                    v.animate().scaleYBy(0.2f).setDuration(5000).start();
+                    v.setBackgroundResource(R.drawable.pressed);
+                    return true;
+                } else if (action == MotionEvent.ACTION_UP) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    Intent startIntent = new Intent(getApplicationContext(), Reddit.class); //Do którego ma iść
+                    startActivity(startIntent);
+                    return true;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    v.animate().cancel();
+                    v.animate().scaleX(1f).setDuration(1000).start();
+                    v.animate().scaleY(1f).setDuration(1000).start();
+                    v.setBackgroundResource(R.drawable.normal);
+                    return true;
+                }
+                return false;
+            }
+        });
+
         buttonMap = (ImageButton) findViewById(R.id.button_position);
         buttonMap.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -215,7 +242,7 @@ public class MainActivity extends DrawerMenu {
                 if (action == MotionEvent.ACTION_DOWN) {
                     v.animate().scaleXBy(0.2f).setDuration(5000).start();
                     v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                    v.setBackgroundResource(R.color.rogue);
+                    v.setBackgroundResource(R.drawable.pressed);
                     return true;
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
@@ -223,8 +250,8 @@ public class MainActivity extends DrawerMenu {
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
                     if(fbAuth.getCurrentUser() != null){
-                    Intent startIntent = new Intent(getApplicationContext(), MapsActivity.class);
-                    startActivity(startIntent);}
+                        Intent startIntent = new Intent(getApplicationContext(), MapsActivity.class);
+                        startActivity(startIntent);}
                     else { Toast.makeText(MainActivity.this, "Log in to use this!", Toast.LENGTH_SHORT).show(); }
                     return true;
                 } else if (action == MotionEvent.ACTION_CANCEL) {
@@ -255,9 +282,4 @@ public class MainActivity extends DrawerMenu {
         startActivity(startMain);
 
     }
-
-
-
-
-
 }

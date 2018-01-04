@@ -67,10 +67,13 @@
 
     <!--NAGŁÓWKI KLAS-->
     <string name="title_decks">Decks</string>
+    <string name="title_selected_deck">Selected Deck</string>
     <string name="title_cards_filter_menu">Cards Menu</string>
+    <string name="title_deck_selected">Selected Deck</string>
     <string name="title_card_selected">Selected Card</string>
     <string name="title_expansions">Expansions</string>
     <string name="title_adventures">Adventures</string>
+    <string name="title_reddit">Reddit</string>
 
     <string name="action_refresh">Refresh</string>
 

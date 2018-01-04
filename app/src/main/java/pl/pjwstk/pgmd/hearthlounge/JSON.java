@@ -113,7 +113,7 @@ public class JSON extends AppCompatActivity {
             super.onPostExecute(result);
 //            dialog.dismiss();
 //            alertDialog.dismiss();
-            Intent turboIntent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent turboIntent = new Intent(getApplicationContext(), MainActivity.class); // DownloadDecks
             startActivity(turboIntent);
         }
     }

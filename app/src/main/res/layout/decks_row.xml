@@ -20,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="16dp"
             android:background="@drawable/frame_dark">
 
             <ImageView
@@ -29,6 +28,13 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:src="@drawable/neutral" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/folding_cube"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

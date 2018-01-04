@@ -23,6 +23,8 @@ public class Start extends AppCompatActivity {
                 try {
                     super.run();
                     sleep(1);  //Delay of 10000 = 10 seconds
+                    DeckListCache.getInstance();
+                    RedditCache.getInstance().getRedditList();
                     Intent startApp = new Intent(getApplicationContext(), JSON.class);
                     startActivity(startApp);
                     finish();

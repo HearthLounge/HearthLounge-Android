@@ -61,6 +61,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -235,7 +236,7 @@ public class CardsJSON extends DrawerMenu {
 
             JSONTask chosenMana = new JSONTask();
 
-            List<Card> temp = new ArrayList<>();
+            List<Card> temp = new LinkedList<>();
             final List<Card> unmodifiable = Collections.unmodifiableList(cardList);
 
             if (!CardListCache.getInstance().getCardList(getStringValue()).containsAll(unmodifiable)) {

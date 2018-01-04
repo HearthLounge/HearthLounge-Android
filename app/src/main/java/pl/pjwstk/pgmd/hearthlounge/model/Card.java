@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Maciek Dembowski on 17.10.2017.
@@ -39,6 +40,7 @@ public class Card {
     private List<Mechanics> mechanicsList;
 
     private long amount;
+    private String title;
 
 //    public Card(){}
 //
@@ -75,9 +77,15 @@ public class Card {
         this.cardSet = (String) tempCard.get("cardSet");
         this.type = (String) tempCard.get("type");
         this.amount = (long) tempCard.get("amount");
+        this.title = (String) tempCard.get("");
         Log.d("CARD MAKER", this.getCardId());
 
     }
+
+//    public void getTitle () {
+//        Set<String> tempList = fbDeck.keySet();
+//        for(String value: tempList){
+//    }
 
 
     public String getCardId() {

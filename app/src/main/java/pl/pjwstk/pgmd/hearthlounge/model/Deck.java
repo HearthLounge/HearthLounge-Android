@@ -2,10 +2,12 @@ package pl.pjwstk.pgmd.hearthlounge.model;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by Froozy on 26.12.2017.
@@ -19,16 +21,21 @@ public class Deck {
     Map<String,Integer> manaCurve;
     long max;
     Map<String,Integer> types;
+    private List<String> cardsId;
 
-    Deck(Object deckObject){
+    public Deck(){}
+
+    public Deck(Object deckObject){
 
         Map<String, Object> temp = (Map<String,Object>) deckObject;
         this.lenght = (long) temp.get("length");
         MakeCards((Map<String, Object>) temp.get("cards"));
         this.setManaCurve((Map<String, Integer>) temp.get("manaCurve"));
         this.max = (long) temp.get("max");
+        this.setTypes((Map<String, Integer>) temp.get("types"));
         Log.d("SIZE OF TEMP ",Integer.toString(temp.size()));
 
+//        setCardsId();
 
 
 //        for(int i=0;i<temp.getCards().size();i++){
@@ -36,6 +43,34 @@ public class Deck {
 //            this.cards.add(temp.getCards().get(i));
 //        }
     }
+
+    public void setCardsId(List<String> cardsId) {
+        this.cardsId = cardsId;
+    }
+
+    public void setCardsId() {
+
+        Set<String> titles = cards.keySet();
+        for(String title: titles){
+
+            this.cardsId.add(title);
+
+        }
+
+    }
+
+    public List<String> getCardsId() {
+        return cardsId;
+    }
+
+//    public Map<String, Card> getFuckinCardId(Map<String, Object> fb) {
+//        List<String> titles = new ArrayList<>();
+//        Set<String> titleKey = fb.keySet();
+//        for (String title : titleKey) {
+//            titles.add(title);
+//        }
+//        return titles;
+//    }
 
     public Map<String, Card> getCards() {
         return cards;
@@ -76,6 +111,7 @@ public class Deck {
     public void setTypes(Map<String, Integer> types) {
         this.types = types;
     }
+
 
 
     public Map<String, Card> MakeCards(Map<String, Object> fbDeck){

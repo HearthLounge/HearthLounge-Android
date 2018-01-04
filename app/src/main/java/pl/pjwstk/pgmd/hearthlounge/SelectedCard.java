@@ -55,8 +55,6 @@ public class SelectedCard extends DrawerMenu {
 
     private ProgressBar progressBar;
 
-    private int position;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -233,15 +231,6 @@ public class SelectedCard extends DrawerMenu {
         if (id == android.R.id.home) {
             finish();
         }
-
         return super.onOptionsItemSelected(item);
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
     }
 }

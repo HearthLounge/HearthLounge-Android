@@ -2,8 +2,10 @@ package pl.pjwstk.pgmd.hearthlounge.model;
 
 import android.util.Log;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Froozy on 26.12.2017.
@@ -73,7 +75,6 @@ public class DeckFull {
         Log.d("DECKFULL NAME ->", this.getTitle());
 
     }
-
 
     public String getTitle() {
         return title;

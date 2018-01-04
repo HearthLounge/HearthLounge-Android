@@ -46,7 +46,4 @@ dependencies {
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }
 
-
-
-
 apply plugin: 'com.google.gms.google-services'
