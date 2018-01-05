@@ -4,14 +4,10 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
-
-/**
- * Created by Froozy on 26.12.2017.
- */
 
 public class Deck {
 
@@ -23,25 +19,22 @@ public class Deck {
     Map<String,Integer> types;
     private List<String> cardsId;
 
+    Map<String,Long> cardsAmount;
+
     public Deck(){}
 
     public Deck(Object deckObject){
 
+        cardsAmount = new LinkedHashMap<>();
         Map<String, Object> temp = (Map<String,Object>) deckObject;
         this.lenght = (long) temp.get("length");
-        MakeCards((Map<String, Object>) temp.get("cards"));
+        cards = MakeCards((Map<String, Object>) temp.get("cards"));
         this.setManaCurve((Map<String, Integer>) temp.get("manaCurve"));
         this.max = (long) temp.get("max");
         this.setTypes((Map<String, Integer>) temp.get("types"));
         Log.d("SIZE OF TEMP ",Integer.toString(temp.size()));
-
-//        setCardsId();
-
-
-//        for(int i=0;i<temp.getCards().size();i++){
-//
-//            this.cards.add(temp.getCards().get(i));
-//        }
+        cardsId = new ArrayList<>();
+        setCardsId();
     }
 
     public void setCardsId(List<String> cardsId) {
@@ -50,27 +43,20 @@ public class Deck {
 
     public void setCardsId() {
 
-        Set<String> titles = cards.keySet();
-        for(String title: titles){
+        cards.size();
+        Log.d("CARDS SIZE", "size of list: "+ cards.size());
+        List<String> list = new ArrayList<>(cards.keySet());
+        Log.d("CARDS KEY SIZE", "size of list of keys: "+ list.size());
+        for(String title: list){
 
-            this.cardsId.add(title);
+            cardsId.add(title);
 
         }
-
     }
 
     public List<String> getCardsId() {
         return cardsId;
     }
-
-//    public Map<String, Card> getFuckinCardId(Map<String, Object> fb) {
-//        List<String> titles = new ArrayList<>();
-//        Set<String> titleKey = fb.keySet();
-//        for (String title : titleKey) {
-//            titles.add(title);
-//        }
-//        return titles;
-//    }
 
     public Map<String, Card> getCards() {
         return cards;
@@ -112,37 +98,30 @@ public class Deck {
         this.types = types;
     }
 
+    public Map<String, Long> getCardsAmount() {
+        return cardsAmount;
+    }
 
+    public void setCardsAmount(Map<String, Long> cardsAmount) {
+        this.cardsAmount = cardsAmount;
+    }
 
     public Map<String, Card> MakeCards(Map<String, Object> fbDeck){
 
         Map<String, Card> tempMap = new HashMap<>();
         Set<String> tempList = fbDeck.keySet();
+        Log.d("MAKE CARDS", "Set<String> tempList: "+ tempList.size());
         Card tempCard;
         for(String value: tempList){
 
-             tempCard = new Card(fbDeck.get(value));
-
+            tempCard = new Card(fbDeck.get(value));
+            Log.d("MAKE CARDS", "adding card: "+ value);
+            tempMap.put(value,tempCard);
+            cardsAmount.put(value,tempCard.getAmount());    //NEW ONE!!!!
+            Log.d("MAKE CARDS", "amount of card: "+ tempCard.getAmount());
         }
         return tempMap;
     }
 
 
 }
-
-//    Deck(List<Card> cardList){
-//
-//        lenght = cardList.size();
-//        for(int i = 0;i<=7;i++){
-//            manaCurve.put(Integer.toString(i),0);
-//        }
-//        int newValue;
-//        for(int i = 0;i<lenght;i++){
-//
-//            newValue = cardList.get(i).getCost();
-//            manaCurve.get(newValue);
-//
-//        }
-//
-//
-//    }

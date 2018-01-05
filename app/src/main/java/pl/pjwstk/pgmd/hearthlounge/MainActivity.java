@@ -25,8 +25,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import pl.pjwstk.pgmd.hearthlounge.authentication.UserService;
 import pl.pjwstk.pgmd.hearthlounge.locator.MapsActivity;
-import pl.pjwstk.pgmd.hearthlounge.model.Card;
-import pl.pjwstk.pgmd.hearthlounge.model.DeckListCache;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
 public class MainActivity extends DrawerMenu {
@@ -44,7 +42,6 @@ public class MainActivity extends DrawerMenu {
         getLayoutInflater().inflate(R.layout.main_menu, frameLayout);
         navigationView.getMenu().getItem(5).setChecked(true);
 
-        DeckListCache.getInstance();
         fbAuth = FirebaseAuth.getInstance();
         if(fbAuth.getCurrentUser() != null) {
             checkUserLog();

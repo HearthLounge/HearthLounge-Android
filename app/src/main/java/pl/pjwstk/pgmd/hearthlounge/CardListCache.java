@@ -89,19 +89,32 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
 //                return temp;
 //            }
 
-//            else if (value != null && (value.contains(""))){ //
-//                DeckFull deckFull = new DeckFull();
-//                List<String> chuj = deckFull.getDeck().getCardsId();
-//                for (String title : chuj) {
-//
-//                    for(Card cards: primaryCardList){
-//                        if (cards.getName().equals(title)) {
-//                            temp.add(cards);
-//                        }
-//                    }
-//                }
-//                return temp;
-//            }
+            else if (value != null && (value.contains(""))){ //
+                List<DeckFull> decksFull = DeckListCache.getInstance().getListOfDeckFull();
+                DeckFull tempDeckFull = new DeckFull();
+                for(DeckFull full :decksFull){
+                    if(full.getDeckId().equals(value)){
+                        tempDeckFull = full;
+                    }
+                }
+                Deck deckToShow = tempDeckFull.getDeck();
+                for (String title : deckToShow.getCardsId()) {
+                    for(Card cards: primaryCardList){
+                        if (cards.getName().equals(title)) {
+                            if(deckToShow.getCardsAmount().get(title) == 2){
+                                temp.add(cards);
+                            }
+                            temp.add(cards);
+                        }
+                    }
+                }
+                Collections.sort(temp, new Comparator<Card>() {
+                    public int compare(Card a, Card b) {
+                        return Long.compare(a.getCost(), b.getCost()); // return a.cos - b.cos
+                    }
+                });
+                return temp;
+            }
             else
                 return this.primaryCardList;
         }

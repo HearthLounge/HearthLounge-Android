@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Maciek Dembowski on 17.10.2017.
@@ -42,30 +41,7 @@ public class Card {
     private long amount;
     private String title;
 
-//    public Card(){}
-//
-//    public Card(String cardId, String dbfId, String name, String cardSet, String type, String faction, String rarity, String cost, String attack, String health, String text, String flavor, String artist, Boolean collectible, String elite, String playerClass, String img, String imgGold, String locale, List<Mechanics> mechanicsList) {
-//        this.cardId = cardId;
-//        this.dbfId = dbfId;
-//        this.name = name;
-//        this.cardSet = cardSet;
-//        this.type = type;
-//        this.faction = faction;
-//        this.rarity = rarity;
-//        this.cost = cost;
-//        this.attack = attack;
-//        this.health = health;
-//        this.text = text;
-//        this.flavor = flavor;
-//        this.artist = artist;
-//        this.collectible = collectible;
-//        this.elite = elite;
-//        this.playerClass = playerClass;
-//        this.img = img;
-//        this.imgGold = imgGold;
-//        this.locale = locale;
-//        this.mechanicsList = mechanicsList;
-//    }
+    public Card(){}
 
     public Card(Object obj){
 
@@ -78,15 +54,9 @@ public class Card {
         this.type = (String) tempCard.get("type");
         this.amount = (long) tempCard.get("amount");
         this.title = (String) tempCard.get("");
-        Log.d("CARD MAKER", this.getCardId());
+        Log.d("CARD MAKER", this.getCardId() + " in number of "+ this.getAmount());
 
     }
-
-//    public void getTitle () {
-//        Set<String> tempList = fbDeck.keySet();
-//        for(String value: tempList){
-//    }
-
 
     public String getCardId() {
         return cardId;

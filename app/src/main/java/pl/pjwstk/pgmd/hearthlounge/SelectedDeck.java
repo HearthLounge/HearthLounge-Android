@@ -244,7 +244,7 @@ public class SelectedDeck extends DrawerMenu {
             } else { text_weapon.setVisibility(View.GONE); }
 
 
-//            setStringValue(deckModel.getDeck().getCards().get().getCardId());
+            setStringValue(deckModel.getDeckId());
         }
     }
 

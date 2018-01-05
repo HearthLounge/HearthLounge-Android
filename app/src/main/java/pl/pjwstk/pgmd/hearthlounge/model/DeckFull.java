@@ -2,44 +2,37 @@ package pl.pjwstk.pgmd.hearthlounge.model;
 
 import android.util.Log;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-/**
- * Created by Froozy on 26.12.2017.
- */
 
 public class DeckFull {
 
-    String title;
-    String deckId;
-    String playerClass;
-    String archetype;
+    private String title;
+    private String deckId;
+    private String playerClass;
+    private String archetype;
 
-    String created;
-    String updated;
+    private String created;
+    private String updated;
 
-    String deckstring;
+    private String deckstring;
 
-    String author;
-    String authorId;
+    private String author;
+    private String authorId;
 
-    String description;
-    String patch;
+    private String description;
+    private String patch;
 
-    Deck deck;
+    private Deck deck;
 
-    long views;
-    long votes;
-    long upvotes;
-    long downvotes;
-    long comments;
+    private long views;
+    private long votes;
+    private long upvotes;
+    private long downvotes;
+    private long comments;
 
-    String adventure;
-    String boss;
-    String mode;
+    private String adventure;
+    private String boss;
+    private String mode;
 
 
     public DeckFull(){
