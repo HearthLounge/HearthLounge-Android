@@ -28,6 +28,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
@@ -40,6 +44,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import pl.pjwstk.pgmd.hearthlounge.R;
+import pl.pjwstk.pgmd.hearthlounge.authentication.UserPreferences;
 import pl.pjwstk.pgmd.hearthlounge.model.Localization;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -48,25 +53,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Timer timer;
 
-        public Waiter(int seconds) {
+        public Waiter() {
             timer = new Timer();
-            timer.schedule(new WaiterTask(), seconds * 1000);
         }
 
         public void setTimer(int seconds){
 
             this.timer.schedule(new WaiterTask(), seconds * 1000);
-            Log.d("REMINDER", "reminder start waiting -> "+ seconds);
+            Log.d("WAITER", "waiter start waiting -> "+ seconds);
         }
 
         class WaiterTask extends TimerTask {
             public void run() {
-                List<MarkerOptions> listReminder = MapsActivity.markerList;
-                Log.d("WAITER", "reminder starting!");
-                MyThread xThread = new MyThread(MapsActivity.this, listReminder);
+                Log.d("WAITER", "waiter starting!");
+                MyThread xThread = new MyThread(MapsActivity.this, MapsActivity.markerList, timer);
                 xThread.run();
 //              }
-                timer.cancel(); //Terminate the timer thread
+                 //Terminate the timer thread
             }
         }
 
@@ -76,11 +79,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     class MyThread implements Runnable
     {
         Activity activity;
-        List<MarkerOptions> tempList;
-        public MyThread(Activity activity, List<MarkerOptions> list)
+        Timer timer;
+        public MyThread(Activity activity, List<MarkerOptions> list, Timer timer)
         {
             this.activity = activity;
-            tempList = list;
+            this.timer = timer;
         }
         @Override
         public void run()
@@ -90,48 +93,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 @Override
                 public void run()
                 {
-                    MapsActivity.mMap.clear();
-                    for(MarkerOptions markerOptions: tempList){
-
-                        MapsActivity.mMap.addMarker(markerOptions);
-
-                    }
-            markerList = tempList;
+                    doItAll();
+                    Log.d("SUUUPER", "launch another!");
+//                    mMap.clear();
+//                    currentLocation();
+//                    readLocalizations();
+//                    MapsActivity.mMap.clear();
+//                    for(MarkerOptions markerOptions: tempList){
+//
+//                        MapsActivity.mMap.addMarker(markerOptions);
+//
+//                    }
+//            markerList = tempList;
                 }
+
             });
+            Log.d("SUUUPER", "leaving!");
+            timer.cancel();
 
-            Log.d("MyThread", ""+tempList.size());
             //Reminder rmd  = new Reminder(20);
-            doItAll(10);
+//            doItAll(10);
         }
     }
 
 
-    public class Reminder {
-        Timer timer;
-
-        public Reminder(int seconds) {
-            timer = new Timer();
-            //timer.schedule(new RemindTask(), seconds * 1000);
-        }
-
-        public void setTimer(int seconds){
-
-            this.timer.schedule(new RemindTask(), seconds * 1000);
-            Log.d("REMINDER", "reminder start waiting -> "+ seconds);
-        }
-
-        class RemindTask extends TimerTask {
-            public void run() {
-                    List<MarkerOptions> listReminder = MapsActivity.markerList;
-                    Log.d("REMINDER", "reminder starting!");
-                    MyThread xThread = new MyThread(MapsActivity.this, listReminder);
-                    xThread.run();
-//              }
-                timer.cancel(); //Terminate the timer thread
-            }
-        }
-    }
+//
 
 //    runOnUiThread(new Runnable() {
 //
@@ -146,15 +132,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     FusedLocationProviderClient mFusedLocationProviderClient;
     BitmapDescriptor usersIcon;
     public static List<MarkerOptions> markerList;
-    Reminder rmd;
+    //Reminder rmd;
+    Waiter waiter;
 
     MapDb mapDb;
+
+    private static FirebaseFirestore fbCloud = FirebaseFirestore.getInstance();
+    private CollectionReference fbLocRef = fbCloud.collection("localization");
+    private UserPreferences userPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        userPref = new UserPreferences(getApplicationContext());
         mapOfMarkers = new HashMap<>();
         mapDb = new MapDb(getApplicationContext());
         markerList = new ArrayList<>();
@@ -163,6 +155,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        waiter = new Waiter();
 
     }
 
@@ -177,10 +170,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //          mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
             mMap.setMinZoomPreference(14);
 //            rmd = new Reminder(7);
+            doItAll();
 //            currentLocation();
+//            readLocalizations();
 //            mapDb.readLocalizations(markerList);
             //getUsersLocation(mapDb.markerOptionsList);
-            doItAll(120);
+
 
         } else {
             Toast.makeText(MapsActivity.this, "You have to accept to enjoy all app's services!", Toast.LENGTH_LONG).show();
@@ -249,21 +244,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public void doItAll(int seconds){
+    public void doItAll(){
 
-        try {
-
-            rmd = new Reminder(seconds);
-            currentLocation();
-            mapDb.readLocalizations(markerList, rmd);
-            //markerList.clear();
-
-        }
-        catch(ConcurrentModificationException e){
-
-            Log.d("Concurrent exception", "Error");
-        }
-
+        mMap.clear();
+        currentLocation();
+        readLocalizations();
+        new Waiter().setTimer(10);
     }
 
     public void onStop(){
@@ -272,6 +258,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapDb.deleteLocalization();
 
     }
+
+    public void readLocalizations(){
+
+        fbCloud.collection("/localization").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Localization tempLoc;
+                            for (DocumentSnapshot document : task.getResult()) {
+
+                                Log.d("GET ALL LOCAL", document.getId() + " => " + document.getData());
+                                tempLoc = new Localization(document.getData());
+//                                if(Math.abs(tempLoc.getLat() - userPref.getLanOrLng(userPref.keyLatitude)) != 0 &&
+//                                Math.abs(tempLoc.getLng() - userPref.getLanOrLng(userPref.keyLongitude)) != 0){
+//
+//                                    tempList.add(tempLoc);
+//                                }
+                                Double x = Double.valueOf(String.valueOf(tempLoc.getRank()));
+                                MarkerOptions tempMarker = new MarkerOptions().position(tempLoc.getLatLng()).title(tempLoc.getUsername() + " rank:" + x.intValue());
+                                addNewMarker(tempMarker);
+                            }
+                        } else {
+                            Log.d("GET ALL LOCAL", "FAIL FAIL FAIL FAIL ", task.getException());
+                        }
+                    }
+                });
+        Log.d("GET ALL LOCAL","Wychodze z pobierania listy" );
+    }
+
+
+
+    public void addNewMarker(MarkerOptions temp){
+
+        temp.icon(usersIcon);
+        temp.visible(true);
+        mMap.addMarker(temp);
+    }
+
+
 
 }
 
@@ -302,3 +328,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        });
 //
 //        }
+
+//public class Reminder {
+//        Timer timer;
+//
+//        public Reminder(int seconds) {
+//            timer = new Timer();
+//            //timer.schedule(new RemindTask(), seconds * 1000);
+//        }
+//
+//        public void setTimer(int seconds){
+//
+//            this.timer.schedule(new RemindTask(), seconds * 1000);
+//            Log.d("REMINDER", "reminder start waiting -> "+ seconds);
+//        }
+//
+//        class RemindTask extends TimerTask {
+//            public void run() {
+//                    List<MarkerOptions> listReminder = MapsActivity.markerList;
+//                    Log.d("REMINDER", "reminder starting!");
+//                    MyThread xThread = new MyThread(MapsActivity.this, listReminder);
+//                    xThread.run();
+////              }
+//                //timer.cancel(); //Terminate the timer thread
+//            }
+//        }
+//    }

@@ -73,42 +73,42 @@ public class MapDb {
 
     }
 
-    public void readLocalizations(final List<MarkerOptions> myMarkers, final MapsActivity.Reminder reminder){
-
-        fbCloud.collection("/localization").get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            int checker = task.getResult().size();
-                            int waiter = 0;
-                            Localization tempLoc;
-                            for (DocumentSnapshot document : task.getResult()) {
-
-                                Log.d("GET ALL LOCAL", document.getId() + " => " + document.getData());
-                                tempLoc = new Localization(document.getData());
-//                                if(Math.abs(tempLoc.getLat() - userPref.getLanOrLng(userPref.keyLatitude)) != 0 &&
-//                                Math.abs(tempLoc.getLng() - userPref.getLanOrLng(userPref.keyLongitude)) != 0){
+//    public void readLocalizations(final List<MarkerOptions> myMarkers, final MapsActivity.Reminder reminder){
 //
-//                                    tempList.add(tempLoc);
-//                                }
-                                MarkerOptions tempMarker = new MarkerOptions().position(tempLoc.getLatLng()).title(tempLoc.getUsername() + " rank:" + Double.toString(tempLoc.getRank()));
-                                tempMarker.icon(usersIcon);
-                                tempMarker.visible(true);
-                                myMarkers.add(tempMarker);
-                                LatLng tempLtLng = tempMarker.getPosition();
-                                Log.d("readLocalizations","lat: " + tempLtLng.latitude + " lng: " + tempLtLng.longitude);
-                                waiter++;
-                                if(waiter >= checker) reminder.setTimer(40);
-                            }
-                        } else {
-                            Log.d("GET ALL LOCAL", "FAIL FAIL FAIL FAIL ", task.getException());
-                        }
-                    }
-                });
-
-        Log.d("PIPA PIPA PIPA","Wychodze z pobierania listy" );
-    }
+//        fbCloud.collection("/localization").get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            int checker = task.getResult().size();
+//                            int waiter = 0;
+//                            Localization tempLoc;
+//                            for (DocumentSnapshot document : task.getResult()) {
+//
+//                                Log.d("GET ALL LOCAL", document.getId() + " => " + document.getData());
+//                                tempLoc = new Localization(document.getData());
+////                                if(Math.abs(tempLoc.getLat() - userPref.getLanOrLng(userPref.keyLatitude)) != 0 &&
+////                                Math.abs(tempLoc.getLng() - userPref.getLanOrLng(userPref.keyLongitude)) != 0){
+////
+////                                    tempList.add(tempLoc);
+////                                }
+//                                MarkerOptions tempMarker = new MarkerOptions().position(tempLoc.getLatLng()).title(tempLoc.getUsername() + " rank:" + Double.toString(tempLoc.getRank()));
+//                                tempMarker.icon(usersIcon);
+//                                tempMarker.visible(true);
+//                                myMarkers.add(tempMarker);
+//                                LatLng tempLtLng = tempMarker.getPosition();
+//                                Log.d("readLocalizations","lat: " + tempLtLng.latitude + " lng: " + tempLtLng.longitude);
+//                                waiter++;
+//                                if(waiter >= checker) reminder.setTimer(40);
+//                            }
+//                        } else {
+//                            Log.d("GET ALL LOCAL", "FAIL FAIL FAIL FAIL ", task.getException());
+//                        }
+//                    }
+//                });
+//
+//        Log.d("PIPA PIPA PIPA","Wychodze z pobierania listy" );
+//    }
 
     public void deleteLocalization(){
 
