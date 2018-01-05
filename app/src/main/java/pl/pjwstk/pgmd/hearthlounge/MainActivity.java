@@ -7,6 +7,10 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v7.widget.CardView;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -264,6 +268,19 @@ public class MainActivity extends DrawerMenu {
                 return false;
             }
         });
+
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int densityDpi = (int)(metrics.density * 160f);
+        if (densityDpi < 560) { // SG4 = 480
+            int width = 468, height = 468;
+            CardView.LayoutParams params = new CardView.LayoutParams(width,height);
+            buttonDecks.setLayoutParams(params);
+            buttonCards.setLayoutParams(params);
+            buttonExpansions.setLayoutParams(params);
+            buttonAdventures.setLayoutParams(params);
+            buttonReddit.setLayoutParams(params);
+            buttonMap.setLayoutParams(params);
+        }
     }
 
     public void checkUserLog(){

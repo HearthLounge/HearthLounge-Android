@@ -14,6 +14,7 @@ import android.support.design.widget.NavigationView;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;

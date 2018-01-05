@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -461,6 +463,23 @@ public class CardsFilterMenu extends DrawerMenu {
                 return false;
             }
         });
+
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int densityDpi = (int)(metrics.density * 160f);
+        if (densityDpi < 560) { // SG4 = 480
+            int width = 462, height = 462;
+            CardView.LayoutParams params = new CardView.LayoutParams(width,height);
+            buttonMage.setLayoutParams(params);
+            buttonRogue.setLayoutParams(params);
+            buttonPaladin.setLayoutParams(params);
+            buttonDruid.setLayoutParams(params);
+            buttonShaman.setLayoutParams(params);
+            buttonWarlock.setLayoutParams(params);
+            buttonPriest.setLayoutParams(params);
+            buttonWarrior.setLayoutParams(params);
+            buttonHunter.setLayoutParams(params);
+            buttonNeutral.setLayoutParams(params);
+        }
     }
 
     private PopupWindow initiatePopupWindow() {
