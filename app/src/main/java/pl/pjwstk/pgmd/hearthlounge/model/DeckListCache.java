@@ -116,7 +116,7 @@ public class DeckListCache {
 
         List<DeckFull> tempDeckFullList = new ArrayList<>();
         DeckFull toTestDeckFull = new DeckFull();
-        Log.d("TITLE OF DECK!!!! ->","Start this shit!!!");
+        Log.d("TITLE OF DECK!!!! ->","InitiateApp this shit!!!");
         for(Map map: xListOfMaps){
 
                 listOfDeckFull.add(new DeckFull(map));

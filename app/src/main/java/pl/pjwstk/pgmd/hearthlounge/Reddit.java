@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,37 +20,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.TimeZone;
 
-import pl.pjwstk.pgmd.hearthlounge.model.Card;
 import pl.pjwstk.pgmd.hearthlounge.model.RedditModel;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 import pl.pjwstk.pgmd.hearthlounge.view.TypefaceSpan;
-
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * Created by Maciek Dembowski on 02.01.2018.
@@ -157,8 +136,6 @@ public class Reddit extends DrawerMenu {
                 holder = (Reddit.RedditAdapter.ViewHolder) convertView.getTag();
             }
 
-            final ProgressBar progressBar = (ProgressBar)convertView.findViewById(R.id.progressBar);
-
             final Reddit.RedditAdapter.ViewHolder finalHolder = holder;
 
             holder.text_up_vote.setText(""+redditList.get(position).getScore());
@@ -211,7 +188,7 @@ public class Reddit extends DrawerMenu {
         int id = item.getItemId();
 
         if (id == R.id.action_refresh) {
-            new JSONTask().execute(URL); // JSON.
+            new JSONTask().execute(URL);
 
             return true;
         }

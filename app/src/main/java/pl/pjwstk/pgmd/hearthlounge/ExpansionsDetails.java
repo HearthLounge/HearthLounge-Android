@@ -3,7 +3,6 @@ package pl.pjwstk.pgmd.hearthlounge;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.MotionEvent;
@@ -68,7 +67,7 @@ public class ExpansionsDetails extends YouTubeBaseActivity {
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.setBackgroundResource(R.drawable.normal);
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class); //Do którego ma iść
                     startIntent.putExtra("StringValue", stringValue);
                     startIntent.putExtra("Title", title);
                     startIntent.putExtra("IconID", iconId);

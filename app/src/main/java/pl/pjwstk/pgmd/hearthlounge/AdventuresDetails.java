@@ -67,7 +67,7 @@ public class AdventuresDetails extends YouTubeBaseActivity {
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.setBackgroundResource(R.drawable.normal);
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class); //Do którego ma iść
                     startIntent.putExtra("StringValue", stringValue);
                     startIntent.putExtra("Title", title);
                     startIntent.putExtra("IconID", iconId);

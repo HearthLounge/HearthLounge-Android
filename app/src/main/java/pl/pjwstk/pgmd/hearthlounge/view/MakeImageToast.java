@@ -2,9 +2,6 @@ package pl.pjwstk.pgmd.hearthlounge.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import pl.pjwstk.pgmd.hearthlounge.CardsJSON;
 import pl.pjwstk.pgmd.hearthlounge.R;
 
 /**
@@ -21,8 +17,6 @@ import pl.pjwstk.pgmd.hearthlounge.R;
  */
 
 public class MakeImageToast {
-
-
 
     @SuppressLint("ResourceAsColor")
     public static Toast makeImageToast(Context context, CharSequence text, int imageResId, int imageColor, int length) {

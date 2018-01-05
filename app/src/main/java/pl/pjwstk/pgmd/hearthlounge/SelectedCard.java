@@ -2,15 +2,12 @@ package pl.pjwstk.pgmd.hearthlounge;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.text.Html;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -157,7 +154,7 @@ public class SelectedCard extends DrawerMenu {
             if (cardModel.getFlavor() != null) {
                 text_view_flavor.setText(Html.fromHtml("FLAVOR: " + cardModel.getFlavor()));
             } else text_view_flavor.setVisibility(View.GONE);
-            // INNY SPOSOB :D
+            // INNY SPOSOB
 //            String flavor = "<body>" + cardModel.getFlavor() + "</body>" + "<style type=\"text/css\">body{color: #00a99c; margin: -5dp;}</style>";
 //            text_view_flavor.setBackgroundColor(Color.TRANSPARENT);
 //            text_view_flavor.loadData("FLAVOR: " + flavor, "text/html", "UTF-8");
@@ -194,6 +191,8 @@ public class SelectedCard extends DrawerMenu {
     }
 
     private void setUpUIViews() {
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+
         image_view_card = (ImageView)findViewById(R.id.image_viewCard);
         image_view_cardGold = (ImageView) findViewById(R.id.image_viewCardGold);
         //text_view_cardId = (TextView)findViewById(R.id.text_view_cardId);
@@ -217,8 +216,6 @@ public class SelectedCard extends DrawerMenu {
         text_view_howToGetGold = (TextView)findViewById(R.id.text_view_howToGetGold);
         //text_view_locale = (TextView)findViewById(R.id.text_view_locale);
         text_view_mechanics = (TextView)findViewById(R.id.text_view_mechanics);
-
-        progressBar = (ProgressBar)findViewById(R.id.progressBar);
     }
 
     @Override

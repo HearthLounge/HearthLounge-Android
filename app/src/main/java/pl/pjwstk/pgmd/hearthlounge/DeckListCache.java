@@ -50,7 +50,7 @@ public class DeckListCache {
 
     public List<DeckFull> MakeDeckList(List<Map<String,Object>> xListOfMaps){
 
-        Log.d("TITLE OF DECK!!!! ->","Start this shit!!!");
+        Log.d("TITLE OF DECK!!!! ->","InitiateApp this shit!!!");
         for(Map map: xListOfMaps){
                 listOfDeckFull.add(new DeckFull(map));
         }
