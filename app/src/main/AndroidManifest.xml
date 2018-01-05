@@ -139,8 +139,6 @@
 
         <service
             android:name=".locator.ClosingAppService"
-            android:enabled="true"
-            android:exported="true"
             android:stopWithTask="false"></service>
 
 

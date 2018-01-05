@@ -3,6 +3,8 @@ package pl.pjwstk.pgmd.hearthlounge.view;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -57,6 +59,7 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
     private ImageView imgProfile;
     private TextView userName, userEmail;
     private UserPreferences userPref;
+    private FirebaseAuth fbAuth = FirebaseAuth.getInstance();
 
     private static final String urlProfileImg = "https://cdn.pixabay.com/photo/2016/12/13/16/17/dancer-1904467_1280.png";
     public static int navItemIndex = 0;
@@ -70,9 +73,6 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
 
         frameLayout = (FrameLayout)findViewById(R.id.content_frame);
         userPref = new UserPreferences(this.getApplicationContext());
-
-//        fbAuth = FirebaseAuth.getInstance();
-//        checkUserLog();
 
         // ZMIANA CZCIONKI DLA PASKA "TOOLBAR"
         SpannableString s = new SpannableString(getTitle());
@@ -100,7 +100,7 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         //dodane
         navigationView.getMenu().getItem(navItemIndex).setChecked(true);
-        navigationView.getMenu().getItem(4).setActionView(R.layout.menu_dot); // ustawia kropke koło notifications
+        //navigationView.getMenu().getItem(4).setActionView(R.layout.menu_dot); // ustawia kropke koło notifications
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -120,7 +120,35 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
 //        drawerMenu = navigationView.getMenu();
 //        for(int i = 0; i < drawerMenu.size(); i++) {
 //            drawerMenu.getItem(i).setOnMenuItemClickListener(this);
+
+        navigationView.getMenu().getItem(4).setVisible(false);  //Chowa notifications
+        modifyNav(navigationView);
 //        }
+    }
+
+    public void modifyNav(NavigationView navView){
+
+        if(fbAuth.getCurrentUser() == null){
+
+            navView.getMenu().getItem(1).setVisible(true);
+            navView.getMenu().getItem(2).setVisible(true);
+
+            navView.getMenu().getItem(0).setVisible(false);
+            navView.getMenu().getItem(3).setVisible(false);
+        }
+        else{
+            navView.getMenu().getItem(1).setVisible(false);
+            navView.getMenu().getItem(2).setVisible(false);
+
+            navView.getMenu().getItem(0).setVisible(true);
+            navView.getMenu().getItem(3).setVisible(true);
+
+//            findViewById(R.id.nav_account).setVisibility(View.VISIBLE);
+//            findViewById(R.id.nav_log_out).setVisibility(View.VISIBLE);
+//            findViewById(R.id.nav_log_in).setVisibility(View.GONE);
+//            findViewById(R.id.nav_sign_up).setVisibility(View.GONE);
+        }
+
     }
 
     @Override
@@ -240,6 +268,7 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
 
         } else if (id == R.id.nav_settings) {
             Toast.makeText(this, "Setting", Toast.LENGTH_SHORT).show();
+            //item.getIcon().setColorFilter(Color.TRANSPARENT, PorterDuff.Mode.DST_ATOP);
             navItemIndex = 5;
 
             Intent main = new Intent(getApplicationContext(), MainActivity.class);

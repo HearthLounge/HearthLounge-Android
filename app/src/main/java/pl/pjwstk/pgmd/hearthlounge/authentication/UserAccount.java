@@ -32,10 +32,6 @@ import pl.pjwstk.pgmd.hearthlounge.view.CircleTransform;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 import pl.pjwstk.pgmd.hearthlounge.view.MakeImageToast;
 
-/**
- * Created by Maciek Dembowski/Froozy on 25.11.2017.
- */
-
 public class UserAccount extends DrawerMenu{
 
     private UserPreferences userPref;
@@ -51,7 +47,6 @@ public class UserAccount extends DrawerMenu{
     EditText tvEmail; //Change it!!!
     EditText tvAvatar;
     EditText tvBattleTag;
-    TextView region;
     Spinner regionSpinner;
     ArrayAdapter<CharSequence> adapter;
 

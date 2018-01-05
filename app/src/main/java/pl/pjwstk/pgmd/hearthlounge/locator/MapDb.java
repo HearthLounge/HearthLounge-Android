@@ -50,29 +50,6 @@ public class MapDb {
 
     }
 
-
-    public void updateLocalization(final LatLng latLng){
-
-        Localization temp = new Localization(userPref.getSingleStringPref(userPref.keyUid),
-                userPref.getSingleStringPref(userPref.keyUsername),userPref.getRankPref(),latLng);
-
-        fbLocRef.document(temp.getUid()).set(temp).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d("UPDATED localization1!!", "update your localization success");
-                userPref.setLanOrLng(userPref.keyLatitude ,latLng.latitude);
-                userPref.setLanOrLng(userPref.keyLongitude,latLng.longitude);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w("Error with Localization", "Error writing document", e);
-            }
-        });
-
-
-    }
-
 //    public void readLocalizations(final List<MarkerOptions> myMarkers, final MapsActivity.Reminder reminder){
 //
 //        fbCloud.collection("/localization").get()
@@ -109,22 +86,4 @@ public class MapDb {
 //
 //        Log.d("PIPA PIPA PIPA","Wychodze z pobierania listy" );
 //    }
-
-    public void deleteLocalization(){
-
-        fbLocRef.document(userPref.getSingleStringPref(userPref.keyUid))
-                .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("Delete my position!!!", "DocumentSnapshot successfully deleted!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Delete my position!!!", "Error deleting document", e);
-                    }
-                });
-    }
 }

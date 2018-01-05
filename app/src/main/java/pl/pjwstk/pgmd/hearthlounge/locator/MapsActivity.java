@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
 import android.location.Location;
@@ -30,6 +31,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -71,15 +74,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void run() {
                 Log.d("WAITER", "waiter starting!");
                 MyThread xThread = new MyThread(MapsActivity.this, MapsActivity.markerList, timer);
-                xThread.run();
+                xThread.run(timer);
 //              }
                  //Terminate the timer thread
             }
         }
 
     }
-
-
     class MyThread implements Runnable
     {
         Activity activity;
@@ -90,7 +91,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             this.timer = timer;
         }
         @Override
-        public void run()
+        public void run(){}
+        public void run(Timer timer)
         {
             activity.runOnUiThread(new Runnable()
             {
@@ -99,47 +101,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 {
                     doItAll();
                     Log.d("SUUUPER", "launch another!");
-//                    mMap.clear();
-//                    currentLocation();
-//                    readLocalizations();
-//                    MapsActivity.mMap.clear();
-//                    for(MarkerOptions markerOptions: tempList){
-//
-//                        MapsActivity.mMap.addMarker(markerOptions);
-//
-//                    }
-//            markerList = tempList;
                 }
 
             });
             Log.d("SUUUPER", "leaving!");
             timer.cancel();
-
-            //Reminder rmd  = new Reminder(20);
-//            doItAll(10);
         }
     }
-
-
-//
-
-//    runOnUiThread(new Runnable() {
-//
-//        public void run(){
-//
-//        }
-//    });
-
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private static GoogleMap mMap;
-    SupportMapFragment mapFragment;
-    HashMap<String,MarkerOptions> mapOfMarkers;
-    FusedLocationProviderClient mFusedLocationProviderClient;
-    BitmapDescriptor usersIcon;
+    private SupportMapFragment mapFragment;
+    private HashMap<String,MarkerOptions> mapOfMarkers;
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private BitmapDescriptor usersIcon;
     public static List<MarkerOptions> markerList;
+    public LatLng userPosition;
     //Reminder rmd;
     Waiter waiter;
 
-    MapDb mapDb;
+
+    private ClosingAppService closingAppService;
+    private Boolean firstUpdate;
+    private Boolean addUser;
+    private MapDb mapDb;
 
     private static FirebaseFirestore fbCloud = FirebaseFirestore.getInstance();
     private CollectionReference fbLocRef = fbCloud.collection("localization");
@@ -148,10 +132,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        firstUpdate = true;
+        addUser = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        closingAppService = new ClosingAppService(this);
         checkLocationPermission();
-
         userPref = new UserPreferences(getApplicationContext());
         mapOfMarkers = new HashMap<>();
         mapDb = new MapDb(getApplicationContext());
@@ -162,27 +148,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         waiter = new Waiter();
+        startService(new Intent(getApplicationContext(), ClosingAppService.class));
+    }
+    public void onPause(){
+        super.onPause();
+        addUser = false;
+        deleteLocalization();
+    }
+    public void onResume(){
+        super.onResume();
+        if(mMap != null){
+            addUser = true;
+            doItAll();
+        }
 
     }
+    public void onStop(){
+        super.onStop();
+        addUser = false;
+        deleteLocalization();
+        waiter.timer.cancel();
+    }
+    public void OnDestroy(){
+        super.onDestroy();
 
+    }
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-//            LatLng sydney = new LatLng(54.31, 18.59675);
-//            Marker marker01 = mMap.addMarker(new MarkerOptions().position(sydney).title("Marker01"));
-//            marker01.setIcon(usersIcon);
 //          mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
             mMap.setMinZoomPreference(14);
-//            rmd = new Reminder(7);
             doItAll();
-//            currentLocation();
-//            readLocalizations();
-//            mapDb.readLocalizations(markerList);
-            //getUsersLocation(mapDb.markerOptionsList);
-
-
         } else {
             Toast.makeText(MapsActivity.this, "You have to accept to enjoy all app's services!", Toast.LENGTH_LONG).show();
             if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -194,7 +192,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     }
-
     public void currentLocation(){
 
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -206,10 +203,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (task.isSuccessful()) {
                         // Set the map's camera position to the current location of the device.
                         Location mLastKnownLocation = (Location) task.getResult();
-                        LatLng myPosition = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(
-                                new LatLng(myPosition.latitude,myPosition.longitude)));
-                        mapDb.updateLocalization(myPosition);
+                        userPosition = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
+                        if(firstUpdate){
+                        firstUpdate = false;
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(
+                                new LatLng(userPosition.latitude,userPosition.longitude)));
+                        }
+                        updateLocalization(userPosition);
                         Log.d("currentLocation", "Current location WORKING");
                         //mapDb.readLocalizations();
                     } else {
@@ -222,49 +222,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
     }
-
-
-    public void getUsersLocation(List<MarkerOptions> tempList){
-        Log.d("getUserLocations", "Starting..." + tempList.size());
-
-        for(MarkerOptions markerOptions: tempList){
-
-            mMap.addMarker(markerOptions);
-
-        }
-
-
-//        for(Marker marker: tempList){
-//
-//            tempMarker = new MarkerOptions().position(localization.getLatLng()).title(localization.getUsername()).snippet("\n" + "rank: " + Double.toString(localization.getRank()));
-//            mapOfMarkers.put(localization.getUsername(),tempMarker);
-//            tempMarker.icon(usersIcon);
-//            tempMarker.visible(true);
-//            LatLng tempLtLng = tempMarker.getPosition();
-//            Log.d("getUsersLocation","lat: " + tempLtLng.latitude + " lng: " + tempLtLng.longitude);
-//            mMap.addMarker(tempMarker);
-//
-//        }
-
-
-
-    }
-
     public void doItAll(){
 
         mMap.clear();
         currentLocation();
         readLocalizations();
-        new Waiter().setTimer(10);
+        new Waiter().setTimer(15);
     }
-
-    public void onStop(){
-        super.onStop();
-
-        mapDb.deleteLocalization();
-
-    }
-
     public void readLocalizations(){
 
         fbCloud.collection("/localization").get()
@@ -275,16 +239,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             Localization tempLoc;
                             for (DocumentSnapshot document : task.getResult()) {
 
-                                Log.d("GET ALL LOCAL", document.getId() + " => " + document.getData());
-                                tempLoc = new Localization(document.getData());
+                                if(!userPref.getSingleStringPref(userPref.keyUid).equals(document.getId())) {
+                                    Log.d("GET ALL LOCAL", document.getId() + " => " + document.getData());
+                                    tempLoc = new Localization(document.getData());
 //                                if(Math.abs(tempLoc.getLat() - userPref.getLanOrLng(userPref.keyLatitude)) != 0 &&
 //                                Math.abs(tempLoc.getLng() - userPref.getLanOrLng(userPref.keyLongitude)) != 0){
 //
 //                                    tempList.add(tempLoc);
 //                                }
-                                Double x = Double.valueOf(String.valueOf(tempLoc.getRank()));
-                                MarkerOptions tempMarker = new MarkerOptions().position(tempLoc.getLatLng()).title(tempLoc.getUsername() + " rank:" + x.intValue());
-                                addNewMarker(tempMarker);
+                                    Double x = Double.valueOf(String.valueOf(tempLoc.getRank()));
+                                    MarkerOptions tempMarker = new MarkerOptions().position(tempLoc.getLatLng()).title(tempLoc.getUsername() + " rank:" + x.intValue());
+                                    addNewMarker(tempMarker);
+                                }
                             }
                         } else {
                             Log.d("GET ALL LOCAL", "FAIL FAIL FAIL FAIL ", task.getException());
@@ -293,19 +259,49 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 });
         Log.d("GET ALL LOCAL","Wychodze z pobierania listy" );
     }
+    public void updateLocalization(final LatLng latLng){
 
+        Localization temp = new Localization(userPref.getSingleStringPref(userPref.keyUid),
+                userPref.getSingleStringPref(userPref.keyUsername),userPref.getRankPref(),latLng);
+        if(addUser) {
+            fbLocRef.document(temp.getUid()).set(temp).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d("UPDATED localization1!!", "update your localization success");
+                    userPref.setLanOrLng(userPref.keyLatitude, latLng.latitude);
+                    userPref.setLanOrLng(userPref.keyLongitude, latLng.longitude);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w("Error with Localization", "Error writing document", e);
+                }
+            });
+        }
+    }
+    public void deleteLocalization(){
 
-
+        fbLocRef.document(userPref.getSingleStringPref(userPref.keyUid))
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Delete my position!!!", "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Delete my position!!!", "Error deleting document", e);
+                    }
+                });
+    }
     public void addNewMarker(MarkerOptions temp){
 
         temp.icon(usersIcon);
         temp.visible(true);
         mMap.addMarker(temp);
     }
-
-
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-
     public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -332,8 +328,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         })
                         .create()
                         .show();
-
-
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
@@ -345,7 +339,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return true;
         }
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -379,61 +372,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-
-
-
 }
-
-/**
- * Manipulates the map once available.
- * This callback is triggered when the map is ready to be used.
- * This is where we can add markers or lines, add listeners or move the camera. In this case,
- * we just add a marker near Sydney, Australia.
- * If Google Play services is not installed on the device, the user will be prompted to install
- * it inside the SupportMapFragment. This method will only be triggered once the user has
- * installed Google Play services and returned to the app.
- */
-
-//    if (mMap != null) {
-//
-//            mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-//
-//@Override
-//public void onMyLocationChange(Location arg0) {
-//        // TODO Auto-generated method stub
-//
-//        CameraUpdate center= CameraUpdateFactory.newLatLng(new LatLng(arg0.getLatitude(), arg0.getLongitude()));
-//        CameraUpdate zoom=CameraUpdateFactory.zoomTo(12);
-//
-//        mMap.moveCamera(center);
-//        mMap.animateCamera(zoom);
-//        }
-//        });
-//
-//        }
-
-//public class Reminder {
-//        Timer timer;
-//
-//        public Reminder(int seconds) {
-//            timer = new Timer();
-//            //timer.schedule(new RemindTask(), seconds * 1000);
-//        }
-//
-//        public void setTimer(int seconds){
-//
-//            this.timer.schedule(new RemindTask(), seconds * 1000);
-//            Log.d("REMINDER", "reminder start waiting -> "+ seconds);
-//        }
-//
-//        class RemindTask extends TimerTask {
-//            public void run() {
-//                    List<MarkerOptions> listReminder = MapsActivity.markerList;
-//                    Log.d("REMINDER", "reminder starting!");
-//                    MyThread xThread = new MyThread(MapsActivity.this, listReminder);
-//                    xThread.run();
-////              }
-//                //timer.cancel(); //Terminate the timer thread
-//            }
-//        }
-//    }

@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -12,10 +13,20 @@ public class ClosingAppService extends Service {
 
     private static FirebaseFirestore fbCloud = FirebaseFirestore.getInstance();
     private CollectionReference fbLocRef = fbCloud.collection("Localization");
-    MapDb mapDb;
+    MapsActivity mapsActivity;
 
-    public ClosingAppService() {
+    public ClosingAppService(){
 
+    }
+
+    public ClosingAppService(MapsActivity mapsActivity) {
+
+        this.mapsActivity = mapsActivity;
+
+    }
+
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_NOT_STICKY;
     }
 
     @Nullable
@@ -29,8 +40,18 @@ public class ClosingAppService extends Service {
         super.onTaskRemoved(rootIntent);
 
         // Burn your allies
-        mapDb.deleteLocalization();
+        mapsActivity.deleteLocalization();
+        mapsActivity.waiter.timer.cancel();
+        Log.d("ClosingAppService", "CLEANING OTR");
+        // Destroy the service
+        stopSelf();
+    }
 
+    @Override
+    public void onDestroy() {
+        mapsActivity.deleteLocalization();
+        mapsActivity.waiter.timer.cancel();
+        Log.d("ClosingAppService", "CLEANING OD");
         // Destroy the service
         stopSelf();
     }
