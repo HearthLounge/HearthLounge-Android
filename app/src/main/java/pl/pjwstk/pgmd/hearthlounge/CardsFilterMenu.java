@@ -3,10 +3,7 @@ package pl.pjwstk.pgmd.hearthlounge;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -16,11 +13,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
@@ -73,7 +68,7 @@ public class CardsFilterMenu extends DrawerMenu {
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.setBackgroundResource(R.drawable.normal);
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class); //Do którego ma iść
                     startIntent.putExtra("Title", "All");
                     startIntent.putExtra("IconID", "All");
                     startIntent.putExtra("drawable", R.drawable.all_cards);
@@ -87,7 +82,6 @@ public class CardsFilterMenu extends DrawerMenu {
                 return false;
             }
         });
-
 
 
         buttonMage = (ImageButton) findViewById(R.id.button_mage);
@@ -107,7 +101,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
                     buttonMage.setColorFilter(getResources().getColor(R.color.mage));
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class);
                     startIntent.putExtra("StringValue", "Mage");
                     startIntent.putExtra("Title", "Mage");
                     startIntent.putExtra("IconID", "Mage");
@@ -144,7 +138,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
                     buttonRogue.setColorFilter(getResources().getColor(R.color.rogue));
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class);
                     startIntent.putExtra("StringValue", "Rogue");
                     startIntent.putExtra("Title", "Rogue");
                     startIntent.putExtra("IconID", "Rogue");
@@ -181,7 +175,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
                     buttonPaladin.setColorFilter(getResources().getColor(R.color.paladin));
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class);
                     startIntent.putExtra("StringValue", "Paladin");
                     startIntent.putExtra("Title", "Paladin");
                     startIntent.putExtra("IconID", "Paladin");
@@ -218,7 +212,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
                     buttonDruid.setColorFilter(getResources().getColor(R.color.druid));
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class);
                     startIntent.putExtra("StringValue", "Druid");
                     startIntent.putExtra("Title", "Druid");
                     startIntent.putExtra("IconID", "Druid");
@@ -255,7 +249,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
                     buttonShaman.setColorFilter(getResources().getColor(R.color.shaman));
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class);
                     startIntent.putExtra("StringValue", "Shaman");
                     startIntent.putExtra("Title", "Shaman");
                     startIntent.putExtra("IconID", "Shaman");
@@ -292,7 +286,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
                     buttonWarlock.setColorFilter(getResources().getColor(R.color.warlock));
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class);
                     startIntent.putExtra("StringValue", "Warlock");
                     startIntent.putExtra("Title", "Warlock");
                     startIntent.putExtra("IconID", "Warlock");
@@ -329,7 +323,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
                     buttonPriest.setColorFilter(getResources().getColor(R.color.priest));
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class);
                     startIntent.putExtra("StringValue", "Priest");
                     startIntent.putExtra("Title", "Priest");
                     startIntent.putExtra("IconID", "Priest");
@@ -366,7 +360,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
                     buttonWarrior.setColorFilter(getResources().getColor(R.color.warrior));
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class);
                     startIntent.putExtra("StringValue", "Warrior");
                     startIntent.putExtra("Title", "Warrior");
                     startIntent.putExtra("IconID", "Warrior");
@@ -403,7 +397,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().scaleY(1f).setDuration(1000).start();
                     v.setBackgroundResource(R.drawable.normal);
                     buttonHunter.setColorFilter(getResources().getColor(R.color.hunter));
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class);
                     startIntent.putExtra("StringValue", "Hunter");
                     startIntent.putExtra("Title", "Hunter");
                     startIntent.putExtra("IconID", "Hunter");
@@ -443,7 +437,7 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.setBackgroundResource(R.drawable.normal);
                     buttonNeutral.setColorFilter(getResources().getColor(R.color.primary_font_color));
                     textNeutral.setTextColor(getResources().getColor(R.color.primary_font_color));
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class);
                     startIntent.putExtra("StringValue", "Neutral");
                     startIntent.putExtra("Title", "Neutral");
                     startIntent.putExtra("IconID", "Neutral");
@@ -524,7 +518,7 @@ public class CardsFilterMenu extends DrawerMenu {
 
                         card_name = edit_card_name.getText().toString();
 
-                        Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class);
+                        Intent startIntent = new Intent(getApplicationContext(), Cards.class);
                         startIntent.putExtra("StringValue", card_name);
                         startIntent.putExtra("Title", card_name);
                         startIntent.putExtra("IconID", card_name);
@@ -551,5 +545,4 @@ public class CardsFilterMenu extends DrawerMenu {
         }
         return mDropdown;
     }
-//    JSON.JSONTask json = new JSON.JSONTask();
 }

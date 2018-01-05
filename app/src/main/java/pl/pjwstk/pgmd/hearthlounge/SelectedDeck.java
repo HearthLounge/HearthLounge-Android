@@ -16,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import pl.pjwstk.pgmd.hearthlounge.model.Deck;
 import pl.pjwstk.pgmd.hearthlounge.model.DeckFull;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
@@ -110,7 +109,7 @@ public class SelectedDeck extends DrawerMenu {
                 } else if (action == MotionEvent.ACTION_UP) {
                     v.animate().cancel();
                     v.setBackgroundResource(R.drawable.normal);
-                    Intent startIntent = new Intent(getApplicationContext(), CardsJSON.class); //Do którego ma iść
+                    Intent startIntent = new Intent(getApplicationContext(), Cards.class); //Do którego ma iść
                     startIntent.putExtra("StringValue", getStringValue());// String.valueOf(getStringValue())
                     startIntent.putExtra("Title", getDeckTitle());
                     startIntent.putExtra("IconID", getIconId());
@@ -284,11 +283,7 @@ public class SelectedDeck extends DrawerMenu {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         if (id == android.R.id.home) {
             finish();
         }

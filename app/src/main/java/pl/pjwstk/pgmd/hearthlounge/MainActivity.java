@@ -30,7 +30,7 @@ import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 public class MainActivity extends DrawerMenu {
 
     private ImageButton buttonCards, buttonDecks, buttonExpansions, buttonAdventures, buttonReddit, buttonMap;
-    //private FirebaseDatabase fbDb;
+
     private FirebaseAuth fbAuth;
     private FirebaseDatabase fbDb = FirebaseDatabase.getInstance();
 
@@ -281,7 +281,6 @@ public class MainActivity extends DrawerMenu {
     }
 
     public void checkUserLog(){
-
         Intent i = new Intent(getApplicationContext(), UserService.class);
         String uid = fbAuth.getUid();
         i.putExtra("action", "login");

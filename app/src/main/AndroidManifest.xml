@@ -23,7 +23,7 @@
 
         <!--ODPALANE NA STARCIE APLIKACJI-->
         <activity
-            android:name=".Start"
+            android:name=".InitiateApp"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -82,7 +82,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
             <activity
-                android:name=".CardsJSON"
+                android:name=".Cards"
                 android:label="@string/title_cards"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
@@ -118,35 +118,22 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
-
-        <!--SERVICE-->
-        <service
-            android:name=".authentication.UserService"
-            android:label="UserService"
-            android:stopWithTask="false" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
-        <!-- <meta-data -->
-        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
-        <!-- android:value="@string/google_maps_key"/> -->
-
         <activity
             android:name=".locator.MapsActivity"
             android:label="@string/title_activity_maps" />
 
+        <!--SERVICE-->
+        <service
+        android:name=".authentication.UserService"
+        android:label="UserService"
+        android:stopWithTask="false" />
         <service
             android:name=".locator.ClosingAppService"
             android:stopWithTask="false"></service>
 
-
-        <!--INNE-->
-        <activity
-            android:name=".InitiateApp"
-            android:label="InitiateApp"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="@string/google_maps_key" />
 
 
 

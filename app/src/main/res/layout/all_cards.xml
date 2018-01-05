@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/pearl"
     android:orientation="vertical"
-    tools:context=".CardsJSON">
+    tools:context=".Cards">
 
     <LinearLayout
         android:layout_width="match_parent"

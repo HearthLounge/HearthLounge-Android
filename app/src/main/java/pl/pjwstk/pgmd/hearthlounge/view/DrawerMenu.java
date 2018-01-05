@@ -37,7 +37,6 @@ import pl.pjwstk.pgmd.hearthlounge.authentication.SignUp;
 import pl.pjwstk.pgmd.hearthlounge.authentication.UserAccount;
 
 import pl.pjwstk.pgmd.hearthlounge.authentication.UserPreferences;
-import pl.pjwstk.pgmd.hearthlounge.model.User;
 
 /**
  * Created by Maciek Dembowski on 16.11.2017.
