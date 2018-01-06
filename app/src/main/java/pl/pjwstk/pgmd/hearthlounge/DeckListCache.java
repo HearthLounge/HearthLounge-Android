@@ -5,8 +5,6 @@ import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -14,7 +12,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
 import pl.pjwstk.pgmd.hearthlounge.model.DeckFull;
 
@@ -37,7 +34,7 @@ public class DeckListCache {
     public static DeckListCache getInstance() {
         synchronized (DeckListCache.class) {
             if (instance == null)
-                    instance = new DeckListCache();
+                instance = new DeckListCache();
             return instance;
         }
     }
@@ -52,9 +49,8 @@ public class DeckListCache {
     }
 
     public List<DeckFull> MakeDeckList(List<Map<String,Object>> xListOfMaps){
-
         for(Map map: xListOfMaps){
-                listOfDeckFull.add(new DeckFull(map));
+            listOfDeckFull.add(new DeckFull(map));
         }
         return listOfDeckFull;
     }

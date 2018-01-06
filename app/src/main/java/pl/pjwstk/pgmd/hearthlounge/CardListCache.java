@@ -5,7 +5,6 @@ package pl.pjwstk.pgmd.hearthlounge;
  */
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -59,63 +58,8 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
         }
     }
 
-    public String[] getPlayerClass() {
-        String[] playerClass = {"Mage", "Rogue", "Paladin", "Druid", "Shaman"
-                , "Warlock", "Priest", "Warrior", "Hunter", "Neutral"};
-        return playerClass;
-    }
-
-    public String[] getCardSet() {
-        String[] expansionsAndAdventures = {"Goblins vs Gnomes", "The Grand Tournament", "Whispers of the Old Gods"
-                , "Mean Streets of Gadgetzan", "Journey to Un'Goro", "Knights of the Frozen Throne", "Kobolds & Catacombs"
-                , "Naxxramas", "Blackrock Mountain", "The League of Explorers", "One Night in Karazhan"
-                , "Basic", "Classic", "Hall of Fame", "Promo"};
-        return expansionsAndAdventures;
-    }
-
-    public String[] getType() {
-        String[] type = {"Hero", "Minion", "Spell", "Weapon", "Enchantment", "Hero Power"};
-        return type;
-    }
-
-    public String[] getRarity() {
-        String[] rarity = {"Free", "Common", "Rare", "Epic", "Legendary"};
-        return rarity;
-    }
-
-    public String[] getMechanics() {
-        String[] mechanics = {"Adapt", "Battlecry", "Charge", "Choose One", "Combo", "Counter", "Deathrattle", "Discover"
-                , "Divine Shield", "Enrage", "Freeze", "Immune", "Inspire", "Lifesteal", "Mega-Windfury", "Overload"
-                , "Poisonous", "Quest", "Secret", "Silence", "Stealth", "Spell Damage", "Taunt", "Windfury"
-                , "Adjacent Buff", "Affected By Spell Power", "Aura", "Immune To Spellpower", "Invisible Deathrattle"
-                , "Jade Golem", "Mega-Windfury", "Recruit"};
-        return mechanics;
-    }
-
-    public String[] getFaction() {
-        String[] faction = {"Horde", "Alliance", "Neutral"};
-        return faction;
-    }
-
-    public String[] getRace() {
-        String[] race = {"Demon", "Dragon", "Elemental", "Mech", "Murloc", "Beast", "Pirate", "Totem"};
-        return race;
-    }
-
-    public String[] getName() {
-        String[] name = {"Junkbot"};
-        return name;
-    }
-
-//    public List<Card.Mechanics> getCardList(){
-//        return null;
-//    }
-
     public List<Card> getCardList(String value) {
         synchronized (this) {
-            Log.d("XXX", "DECKID: "+DeckListCache.getInstance().getListOfDecksId());
-            Log.d("XXX", "VALUE: "+ value);
-
             List<Card> temp = new LinkedList<>();
             if (value != null && (Arrays.asList(getPlayerClass()).contains(value))) { //
                 for(Card cards : primaryCardList){
@@ -145,20 +89,17 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
                     }
                 }
                 return temp;
-            }
-
-            else if (value != null && (Arrays.asList(getMechanics()).contains(value))) {
-                List<Card.Mechanics> mechanicsList = new LinkedList<>();
+            } else if (value != null && (Arrays.asList(getMechanics()).contains(value))) {
                 for(Card cards : primaryCardList){
-                    if (cards.getMechanicsList() != null && cards.getMechanicsList().equals(value)) {
-                        for (Card.Mechanics mechanics : cards.getMechanicsList()) {
-//                            temp.add(cards);
-                            mechanicsList.add(mechanics);
-//                            mechanicsList.
+                    if (cards.getMechanicsList() != null) {
+                        for (String s : cards.getMechanicsText()) {
+                            if(s.equals(value)) {
+                                temp.add(cards);
+                            }
                         }
                     }
                 }
-                return temp; // mechanicsList powinno być
+                return temp;
             } else if (value != null && (Arrays.asList(getFaction()).contains(value))) {
                 for(Card cards : primaryCardList){
                     if (cards.getFaction() !=null && cards.getFaction().equals(value)) {
@@ -173,9 +114,7 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
                     }
                 }
                 return temp;
-            }
-
-            else if (value != null && (DeckListCache.getInstance().getListOfDecksId().contains(value))){ // (value.contains("")) inny nie sprawdzony value.contains("-KzoPq5TFuKq2Q7KuMGV")
+            } else if (value != null && (DeckListCache.getInstance().getListOfDecksId().contains(value))){ // (value.contains("")) inny nie sprawdzony value.contains("-KzoPq5TFuKq2Q7KuMGV")
                 List<DeckFull> decksFull = DeckListCache.getInstance().getListOfDeckFull();
                 DeckFull tempDeckFull = new DeckFull();
                 for(DeckFull full : decksFull){
@@ -201,12 +140,9 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
                 });
                 return temp;
             } else if (value != null && (value.equals(value))) {
-//                Log.d("XXX PRZESZEDŁEM IF-a", "WARTOŚĆ = "+value);
                 for(Card cards : primaryCardList){
-//                    Log.d("XXX JESTEM W PĘTLI", "POBIERAM: "+cards.getName());
                     if (cards.getName().equals(value)) {
                         temp.add(cards);
-//                        Log.d("XXX KOLEJNY IF", "ZWRACAM: "+temp);
                     }
                 }
                 return temp;
@@ -219,7 +155,6 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
     protected List<Card> doInBackground(String... strings) {
         HttpURLConnection connection = null;
         BufferedReader reader = null;
-        String result = "";
 
         try {
             URL url = new URL("https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1");
@@ -418,63 +353,54 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
         return null;
     }
 
-    // Reszte można usunąć później
+    public String[] getPlayerClass() {
+        String[] playerClass = {"Mage", "Rogue", "Paladin", "Druid", "Shaman"
+                , "Warlock", "Priest", "Warrior", "Hunter", "Neutral"};
+        return playerClass;
+    }
 
-    //    public List<Card> getCardList() {
-//        synchronized (this) {
-//            return this.primaryCardList;
-//        }
-//    }
+    public String[] getCardSet() {
+        String[] expansionsAndAdventures = {"Goblins vs Gnomes", "The Grand Tournament", "Whispers of the Old Gods"
+                , "Mean Streets of Gadgetzan", "Journey to Un'Goro", "Knights of the Frozen Throne", "Kobolds & Catacombs"
+                , "Naxxramas", "Blackrock Mountain", "The League of Explorers", "One Night in Karazhan"
+                , "Basic", "Classic", "Hall of Fame", "Promo"};
+        return expansionsAndAdventures;
+    }
 
-//    public void add(Card card) {
-//        synchronized (this) {
-//            if (!this.primaryCardList.contains(card)) {
-//                Card newCardList = new Card();
-//                this.primaryCardList.add(newCardList);
-//            }
-//            this.primaryCardList.add(card);
-//        }
-//    }
-//
-//    public Card search(int manaValue) {
-//        synchronized (this) {
-//            List<Card> list = instance.primaryCardList;
-//            for (Card card : list) {
-//                if (card.getCost() == manaValue)
-//                    return card;
-//            }
-//            return null;
-//        }
-//    }
-//
-//    public void addToCache(List<Card> addedElements) {
-//        synchronized (this) {
-//            for (Card card : addedElements) {
-//                List<Card> newElements = addedElements;
-//                if (this.primaryCardList.contains(card)) {
-//                    List<Card> targetList = this.primaryCardList;
-//                    targetList.addAll(newElements);
-//                } else {
-////                    Card newList = new Card();
-////                    this.primaryCardList.add(newList);
-//                    this.primaryCardList.addAll(new ArrayList<Card>());
-//                    this.primaryCardList.addAll(newElements);
-//                }
-//            }
-//        }
-//    }
-//
-//    public Card get(int manaValue) {
-//        synchronized (this) {
-//            return this.primaryCardList.get(manaValue);
-//        }
-//    }
-//
-//    public void clear() {
-//        synchronized (this) {
-//            this.primaryCardList.clear();
-//        }
-//    }
+    public String[] getType() {
+        String[] type = {"Hero", "Minion", "Spell", "Weapon", "Enchantment", "Hero Power"};
+        return type;
+    }
+
+    public String[] getRarity() {
+        String[] rarity = {"Free", "Common", "Rare", "Epic", "Legendary"};
+        return rarity;
+    }
+
+    public String[] getMechanics() {
+        String[] mechanics = {"Adapt", "Battlecry", "Charge", "Choose One", "Combo", "Counter", "Deathrattle", "Discover"
+                , "Divine Shield", "Enrage", "Freeze", "Immune", "Inspire", "Lifesteal", "Mega-Windfury", "Overload"
+                , "Poisonous", "Quest", "Secret", "Silence", "Stealth", "Spell Damage", "Taunt", "Windfury"
+                , "Adjacent Buff", "Affected By Spell Power", "Aura", "Immune To Spellpower", "Invisible Deathrattle"
+                , "Jade Golem", "Mega-Windfury", "Recruit"};
+        return mechanics;
+    }
+
+    public String[] getFaction() {
+        String[] faction = {"Horde", "Alliance", "Neutral"};
+        return faction;
+    }
+
+    public String[] getRace() {
+        String[] race = {"Demon", "Dragon", "Elemental", "Mech", "Murloc", "Beast", "Pirate", "Totem"};
+        return race;
+    }
+
+    public void clear() {
+        synchronized (this) {
+            this.primaryCardList.clear();
+        }
+    }
 }
 
 

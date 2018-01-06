@@ -270,11 +270,8 @@ public class Card {
     public List<String> getMechanicsText(){
         List<String> tempList = new ArrayList<>();
         for(Mechanics mechanics: mechanicsList){
-
             tempList.add(mechanics.getMechanics());
         }
-
         return tempList;
     }
-
 }

@@ -179,26 +179,26 @@
 
         <!--BY MECHANICS-->
         <item>Adapt</item>
-        <item>Adjacent Buff</item>
-        <item>Affected By Spell Power</item>
+        <!--<item>Adjacent Buff</item>-->
+        <!--<item>Affected By Spell Power</item>-->
         <item>Aura</item>
         <item>Battlecry</item>
         <item>Charge</item>
-        <item>Choose One</item>
+        <!--<item>Choose One</item>-->
         <item>Combo</item>
-        <item>Counter</item>
+        <!--<item>Counter</item>-->
         <item>Deathrattle</item>
         <item>Discover</item>
         <item>Divine Shield</item>
         <item>Enrage</item>
         <item>Freeze</item>
-        <item>Immune</item>
-        <item>Immune To Spellpower</item>
+        <!--<item>Immune</item>-->
+        <!--<item>Immune To Spellpower</item>-->
         <item>Inspire</item>
-        <item>Invisible Deathrattle</item>
+        <!--<item>Invisible Deathrattle</item>-->
         <item>Jade Golem</item>
         <item>Lifesteal</item>
-        <item>Mega-Windfury</item>
+        <!--<item>Mega-Windfury</item>-->
         <item>Overload</item>
         <item>Poisonous</item>
         <item>Recruit</item>
@@ -209,7 +209,6 @@
         <item>Spell Damage</item>
         <item>Taunt</item>
         <item>Windfury</item>
-        <item></item>
 
         <!--BY NAME-->
         <item>AnduinWrynn</item>
