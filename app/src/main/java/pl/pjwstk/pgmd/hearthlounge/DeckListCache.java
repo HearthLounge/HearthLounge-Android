@@ -32,6 +32,8 @@ public class DeckListCache {
     private List<Map<String,Object>> listOfMaps;
     private List<DeckFull> listOfDeckFull;
 
+    private List<String> listOfDecksId;
+
     public static DeckListCache getInstance() {
         synchronized (DeckListCache.class) {
             if (instance == null)
@@ -66,6 +68,7 @@ public class DeckListCache {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot document : task.getResult()) {
                                 Log.d("GET_ALL_DECKS", document.getId() + " => " + document.getData());
+                                listOfDecksId.add(document.getId());
                                 listOfMaps.add(document.getData());
                                 listOfDeckFull.add(new DeckFull(listOfMaps.get(listOfMaps.size()-1)));
                             }
