@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -254,6 +255,7 @@ public class Card {
     }
 
     public static class Mechanics {
+
         private String name;
 
         public String getMechanics() {
@@ -265,6 +267,14 @@ public class Card {
         }
     }
 
+    public List<String> getMechanicsText(){
+        List<String> tempList = new ArrayList<>();
+        for(Mechanics mechanics: mechanicsList){
 
+            tempList.add(mechanics.getMechanics());
+        }
+
+        return tempList;
+    }
 
 }

@@ -21,7 +21,15 @@ public class Deck {
 
     Map<String,Long> cardsAmount;
 
-    public Deck(){}
+    public Deck(){
+
+        cards = new LinkedHashMap<>();
+        cardsAmount = new LinkedHashMap<>();
+        cardsId = new ArrayList<>();
+        types = new LinkedHashMap<>();
+
+
+    }
 
     public Deck(Object deckObject){
 
@@ -98,11 +106,11 @@ public class Deck {
 
     public void setCardsId() {
 
-        cardsId.clear();
+        if(!cardsId.isEmpty()) cardsId.clear();
         cards.size();
-        Log.d("CARDS SIZE", "size of list: "+ cards.size());
+//        Log.d("CARDS SIZE", "size of list: "+ cards.size());
         List<String> list = new ArrayList<>(cards.keySet());
-        Log.d("CARDS KEY SIZE", "size of list of keys: "+ list.size());
+//        Log.d("CARDS KEY SIZE", "size of list of keys: "+ list.size());
         for(String title: list){
 
             cardsId.add(title);
@@ -114,15 +122,15 @@ public class Deck {
 
         Map<String, Card> tempMap = new HashMap<>();
         Set<String> tempList = fbDeck.keySet();
-        Log.d("MAKE CARDS", "Set<String> tempList: "+ tempList.size());
+        //Log.d("MAKE CARDS", "Set<String> tempList: "+ tempList.size());
         Card tempCard;
         for(String value: tempList){
 
             tempCard = new Card(fbDeck.get(value));
-            Log.d("MAKE CARDS", "adding card: "+ value);
+            //Log.d("MAKE CARDS", "adding card: "+ value);
             tempMap.put(value,tempCard);
             cardsAmount.put(value,tempCard.getAmount());    //NEW ONE!!!!
-            Log.d("MAKE CARDS", "amount of card: "+ tempCard.getAmount());
+            //Log.d("MAKE CARDS", "amount of card: "+ tempCard.getAmount());
         }
         return tempMap;
     }
