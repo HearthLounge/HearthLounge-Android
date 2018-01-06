@@ -46,6 +46,7 @@ public class DeckListCache {
         if(deckFullList == null) {
             listOfMaps = new ArrayList<>();
             listOfDeckFull = new ArrayList<>();
+            listOfDecksId = new ArrayList<>();
             GetAllDocs();
         }
     }
@@ -85,12 +86,20 @@ public class DeckListCache {
         return listOfDeckFull;
     }
 
+    public void setListOfDeckFull(List<DeckFull> listOfDeckFull) {
+        this.listOfDeckFull = listOfDeckFull;
+    }
+
     public List<Map<String,Object>> getListOfMaps() {
         return listOfMaps;
     }
 
-    public void setListOfDeckFull(List<DeckFull> listOfDeckFull) {
-        this.listOfDeckFull = listOfDeckFull;
+    public List<String> getListOfDecksId() {
+        return listOfDecksId;
+    }
+
+    public void setListOfDecksId(List<String> listOfDecksId) {
+        this.listOfDecksId = listOfDecksId;
     }
 
     public void clear() {

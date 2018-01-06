@@ -1,20 +1,14 @@
 package pl.pjwstk.pgmd.hearthlounge;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
@@ -47,7 +41,9 @@ public class CardsFilterMenu extends DrawerMenu {
                     v.animate().cancel();
                     v.setBackgroundResource(R.drawable.normal);
 
-                    initiatePopupWindow();
+                    Intent startIntent = new Intent(getApplicationContext(), SearchCards.class); //Do którego ma iść
+                    startActivity(startIntent);
+//                    initiatePopupWindow();
 
                 } else if (action == MotionEvent.ACTION_CANCEL) {
                     v.setBackgroundResource(R.drawable.normal);
@@ -476,73 +472,75 @@ public class CardsFilterMenu extends DrawerMenu {
         }
     }
 
-    private PopupWindow initiatePopupWindow() {
-        PopupWindow mDropdown = null;
-        LayoutInflater mInflater;
-        LinearLayout pop_up_search = null;
-
-        try {
-            mInflater = (LayoutInflater) getApplicationContext()
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View layout = mInflater.inflate(R.layout.popup_search_menu, null);
-
-            //If you want to add any listeners to your textviews, these are two //textviews.
-            pop_up_search = (LinearLayout) findViewById(R.id.search);
-
-            layout.measure(View.MeasureSpec.UNSPECIFIED,
-                    View.MeasureSpec.UNSPECIFIED);
-            mDropdown = new PopupWindow(layout,FrameLayout.LayoutParams.MATCH_PARENT,
-                    FrameLayout.LayoutParams.WRAP_CONTENT,true);
-            mDropdown.showAtLocation(pop_up_search, Gravity.NO_GRAVITY, 0,pop_up_search.getHeight()*3-70);
-
-            final PopupWindow finalMDropdown = mDropdown;
-
-            final TextView edit_card_name = (EditText) findViewById(R.id.edit_card_name);
-
-            final ImageButton search = (ImageButton) layout.findViewById(R.id.button_search);
-            search.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    String card_name;
-                    int action = event.getAction();
-                    if (action == MotionEvent.ACTION_DOWN) {
-                        v.animate().scaleXBy(0.2f).setDuration(5000).start();
-                        v.animate().scaleYBy(0.2f).setDuration(5000).start();
-                        v.setBackgroundResource(R.drawable.pressed);
-                        return true;
-                    } else if (action == MotionEvent.ACTION_UP) {
-                        v.animate().cancel();
-                        v.animate().scaleX(1f).setDuration(1000).start();
-                        v.animate().scaleY(1f).setDuration(1000).start();
-                        v.setBackgroundResource(R.drawable.normal);
-
-                        card_name = edit_card_name.getText().toString();
-
-                        Intent startIntent = new Intent(getApplicationContext(), Cards.class);
-                        startIntent.putExtra("StringValue", card_name);
-                        startIntent.putExtra("Title", card_name);
-                        startIntent.putExtra("IconID", card_name);
-                        startIntent.putExtra("drawable", R.drawable.all_cards);
-                        startIntent.putExtra("color", R.color.primary_font_color);
-                        startActivity(startIntent);
-
-//                        manaFilter(0);
-
-                        finalMDropdown.dismiss();
-                        return true;
-                    } else if (action == MotionEvent.ACTION_CANCEL) {
-                        v.animate().cancel();
-                        v.animate().scaleX(1f).setDuration(1000).start();
-                        v.animate().scaleY(1f).setDuration(1000).start();
-                        v.setBackgroundResource(R.drawable.normal);
-                        return true;
-                    }
-                    return false;
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return mDropdown;
-    }
+//    private PopupWindow initiatePopupWindow() {
+//        PopupWindow mDropdown = null;
+//        LayoutInflater mInflater;
+//        LinearLayout pop_up_search = null;
+//
+//        try {
+//            mInflater = (LayoutInflater) getApplicationContext()
+//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            View layout = mInflater.inflate(R.layout.search_menu, null);
+//
+//            //If you want to add any listeners to your textviews, these are two //textviews.
+//            pop_up_search = (LinearLayout) findViewById(R.id.search);
+//
+//            layout.measure(View.MeasureSpec.UNSPECIFIED,
+//                    View.MeasureSpec.UNSPECIFIED);
+//            mDropdown = new PopupWindow(layout,FrameLayout.LayoutParams.MATCH_PARENT,
+//                    FrameLayout.LayoutParams.WRAP_CONTENT,true);
+//            mDropdown.showAtLocation(pop_up_search, Gravity.NO_GRAVITY, 0,pop_up_search.getHeight()*3-70);
+//
+//            final PopupWindow finalMDropdown = mDropdown;
+//
+//            String[] Cards = getResources().getStringArray(R.array.cards);
+//            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Cards);
+//            final AutoCompleteTextView edit_card_name = (AutoCompleteTextView) layout.findViewById(R.id.edit_card_name);
+//
+//
+//            final ImageButton search = (ImageButton) layout.findViewById(R.id.button_search);
+//            search.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View v, MotionEvent event) {
+//
+//                    int action = event.getAction();
+//                    if (action == MotionEvent.ACTION_DOWN) {
+//                        v.animate().scaleXBy(0.2f).setDuration(5000).start();
+//                        v.animate().scaleYBy(0.2f).setDuration(5000).start();
+//                        v.setBackgroundResource(R.drawable.pressed);
+//                        return true;
+//                    } else if (action == MotionEvent.ACTION_UP) {
+//                        v.animate().cancel();
+//                        v.animate().scaleX(1f).setDuration(1000).start();
+//                        v.animate().scaleY(1f).setDuration(1000).start();
+//                        v.setBackgroundResource(R.drawable.normal);
+//
+//                        edit_card_name.setAdapter(adapter);
+//                        String data = edit_card_name.toString();
+//
+//
+//                        Intent startIntent = new Intent(getApplicationContext(), Cards.class);
+//                        startIntent.putExtra("StringValue", data);
+//                        startIntent.putExtra("Title", data);
+//                        startIntent.putExtra("IconID", data);
+//                        startIntent.putExtra("drawable", R.drawable.all_cards);
+//                        startIntent.putExtra("color", R.color.primary_font_color);
+//                        startActivity(startIntent);
+//                        finalMDropdown.dismiss();
+//                        return true;
+//                    } else if (action == MotionEvent.ACTION_CANCEL) {
+//                        v.animate().cancel();
+//                        v.animate().scaleX(1f).setDuration(1000).start();
+//                        v.animate().scaleY(1f).setDuration(1000).start();
+//                        v.setBackgroundResource(R.drawable.normal);
+//                        return true;
+//                    }
+//                    return false;
+//                }
+//            });
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return mDropdown;
+//    }
 }

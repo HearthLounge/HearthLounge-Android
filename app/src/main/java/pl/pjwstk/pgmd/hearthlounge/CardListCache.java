@@ -4,11 +4,8 @@ package pl.pjwstk.pgmd.hearthlounge;
  * Created by Maciek Dembowski on 16.12.2017.
  */
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -25,7 +22,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
-import pl.pjwstk.pgmd.hearthlounge.authentication.SignUp;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 import pl.pjwstk.pgmd.hearthlounge.model.Deck;
 import pl.pjwstk.pgmd.hearthlounge.model.DeckFull;
@@ -46,8 +42,9 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
 
     public static CardListCache getInstance() {
         synchronized (CardListCache.class) {
-            if (instance == null)
+            if (instance == null) {
                 instance = new CardListCache();
+            }
             return instance;
         }
     }
@@ -62,44 +59,133 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
         }
     }
 
+    public String[] getPlayerClass() {
+        String[] playerClass = {"Mage", "Rogue", "Paladin", "Druid", "Shaman"
+                , "Warlock", "Priest", "Warrior", "Hunter", "Neutral"};
+        return playerClass;
+    }
+
+    public String[] getCardSet() {
+        String[] expansionsAndAdventures = {"Goblins vs Gnomes", "The Grand Tournament", "Whispers of the Old Gods"
+                , "Mean Streets of Gadgetzan", "Journey to Un'Goro", "Knights of the Frozen Throne", "Kobolds & Catacombs"
+                , "Naxxramas", "Blackrock Mountain", "The League of Explorers", "One Night in Karazhan"
+                , "Basic", "Classic", "Hall of Fame", "Promo"};
+        return expansionsAndAdventures;
+    }
+
+    public String[] getType() {
+        String[] type = {"Hero", "Minion", "Spell", "Weapon", "Enchantment", "Hero Power"};
+        return type;
+    }
+
+    public String[] getRarity() {
+        String[] rarity = {"Free", "Common", "Rare", "Epic", "Legendary"};
+        return rarity;
+    }
+
+    public String[] getMechanics() {
+        String[] mechanics = {"Adapt", "Battlecry", "Charge", "Choose One", "Combo", "Counter", "Deathrattle", "Discover"
+                , "Divine Shield", "Enrage", "Freeze", "Immune", "Inspire", "Lifesteal", "Mega-Windfury", "Overload"
+                , "Poisonous", "Quest", "Secret", "Silence", "Stealth", "Spell Damage", "Taunt", "Windfury"
+                , "Adjacent Buff", "Affected By Spell Power", "Aura", "Immune To Spellpower", "Invisible Deathrattle"
+                , "Jade Golem", "Mega-Windfury", "Recruit"};
+        return mechanics;
+    }
+
+    public String[] getFaction() {
+        String[] faction = {"Horde", "Alliance", "Neutral"};
+        return faction;
+    }
+
+    public String[] getRace() {
+        String[] race = {"Demon", "Dragon", "Elemental", "Mech", "Murloc", "Beast", "Pirate", "Totem"};
+        return race;
+    }
+
+    public String[] getName() {
+        String[] name = {"Junkbot"};
+        return name;
+    }
+
+//    public List<Card.Mechanics> getCardList(){
+//        return null;
+//    }
+
     public List<Card> getCardList(String value) {
         synchronized (this) {
+            Log.d("XXX", "DECKID: "+DeckListCache.getInstance().getListOfDecksId());
+            Log.d("XXX", "VALUE: "+ value);
+
             List<Card> temp = new LinkedList<>();
-            if (value != null && (value.contains("Mage") || value.contains("Rogue") || value.contains("Paladin") || value.contains("Druid") || value.contains("Shaman") || value.contains("Warlock") || value.contains("Priest") || value.contains("Warrior") || value.contains("Hunter") || value.contains("Neutral"))){
-                for(Card cards: primaryCardList){
+            if (value != null && (Arrays.asList(getPlayerClass()).contains(value))) { //
+                for(Card cards : primaryCardList){
                     if (cards.getPlayerClass().equals(value) && !(cards.getType().equals("Hero") && cards.getCost() == 0)) {
                         temp.add(cards);
                     }
                 }
                 return temp;
-            } else if (value != null && (value.contains("Goblins vs Gnomes") || value.contains("The Grand Tournament") || value.contains("Whispers of the Old Gods") || value.contains("Mean Streets of Gadgetzan") || value.contains("Journey to Un'Goro") || value.contains("Knights of the Frozen Throne") ||  value.contains("Kobolds & Catacombs") ||  value.contains("Naxxramas") ||  value.contains("Blackrock Mountain") ||  value.contains("The League of Explorers") ||  value.contains("One Night in Karazhan"))){ //
-                for(Card cards: primaryCardList){
+            } else if (value != null && (Arrays.asList(getCardSet()).contains(value))) {
+                for(Card cards : primaryCardList){
                     if (cards.getCardSet().equals(value) && !(cards.getType().equals("Hero") && cards.getCost() == 0)) {
                         temp.add(cards);
                     }
                 }
                 return temp;
+            } else if (value != null && (Arrays.asList(getType()).contains(value))) {
+                for(Card cards : primaryCardList){
+                    if (cards.getType().equals(value)) {
+                        temp.add(cards);
+                    }
+                }
+                return temp;
+            } else if (value != null && (Arrays.asList(getRarity()).contains(value))) {
+                for(Card cards : primaryCardList){
+                    if (cards.getRarity().equals(value)) {
+                        temp.add(cards);
+                    }
+                }
+                return temp;
             }
-//            else if (value != null && (value.contains(""))){ //
-//                for(Card cards: primaryCardList){
-//                    if (cards.getCardId().equals()) {
-//                        temp.add(cards);
-//                    }
-//                }
-//                return temp;
-//            }
 
-            else if (value != null && (value.contains(""))){ //
+            else if (value != null && (Arrays.asList(getMechanics()).contains(value))) {
+                List<Card.Mechanics> mechanicsList = new LinkedList<>();
+                for(Card cards : primaryCardList){
+                    if (cards.getMechanicsList() != null && cards.getMechanicsList().equals(value)) {
+                        for (Card.Mechanics mechanics : cards.getMechanicsList()) {
+//                            temp.add(cards);
+                            mechanicsList.add(mechanics);
+//                            mechanicsList.
+                        }
+                    }
+                }
+                return temp; // mechanicsList powinno być
+            } else if (value != null && (Arrays.asList(getFaction()).contains(value))) {
+                for(Card cards : primaryCardList){
+                    if (cards.getFaction() !=null && cards.getFaction().equals(value)) {
+                        temp.add(cards);
+                    }
+                }
+                return temp;
+            } else if (value != null && (Arrays.asList(getRace()).contains(value))) {
+                for(Card cards : primaryCardList){
+                    if (cards.getRace() != null && cards.getRace().equals(value)) {
+                        temp.add(cards);
+                    }
+                }
+                return temp;
+            }
+
+            else if (value != null && (DeckListCache.getInstance().getListOfDecksId().contains(value))){ // (value.contains("")) inny nie sprawdzony value.contains("-KzoPq5TFuKq2Q7KuMGV")
                 List<DeckFull> decksFull = DeckListCache.getInstance().getListOfDeckFull();
                 DeckFull tempDeckFull = new DeckFull();
-                for(DeckFull full :decksFull){
+                for(DeckFull full : decksFull){
                     if(full.getDeckId().equals(value)){
                         tempDeckFull = full;
                     }
                 }
                 Deck deckToShow = tempDeckFull.getDeck();
                 for (String title : deckToShow.getCardsId()) {
-                    for(Card cards: primaryCardList){
+                    for(Card cards : primaryCardList){
                         if (cards.getName().equals(title)) {
                             if(deckToShow.getCardsAmount().get(title) == 2){
                                 temp.add(cards);
@@ -114,8 +200,17 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
                     }
                 });
                 return temp;
-            }
-            else
+            } else if (value != null && (value.equals(value))) {
+//                Log.d("XXX PRZESZEDŁEM IF-a", "WARTOŚĆ = "+value);
+                for(Card cards : primaryCardList){
+//                    Log.d("XXX JESTEM W PĘTLI", "POBIERAM: "+cards.getName());
+                    if (cards.getName().equals(value)) {
+                        temp.add(cards);
+//                        Log.d("XXX KOLEJNY IF", "ZWRACAM: "+temp);
+                    }
+                }
+                return temp;
+            } else
                 return this.primaryCardList;
         }
     }
@@ -322,7 +417,6 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
         }
         return null;
     }
-
 
     // Reszte można usunąć później
 

@@ -136,6 +136,7 @@ public class SelectedCard extends DrawerMenu {
             //text_view_dbfId.setText("DBF ID: " + cardModel.getDbfId());
             text_view_name.setText("NAME: " + cardModel.getName());
             text_view_cardSet.setText("CARD SET: " + cardModel.getCardSet());
+
             text_view_type.setText("TYPE: " + cardModel.getType());
 
             if (cardModel.getFaction() != null) {
@@ -144,8 +145,13 @@ public class SelectedCard extends DrawerMenu {
 
             text_view_rarity.setText("RARITY: " + cardModel.getRarity());
             text_view_cost.setText("COST: " + cardModel.getCost()); //tu
+
             text_view_attack.setText("ATTACK: " + cardModel.getAttack()); //tu
             text_view_health.setText("HEALTH: " + cardModel.getHealth()); //tu
+            if (cardModel.getType().equals("Spell")) {
+                text_view_attack.setVisibility(View.GONE);
+                text_view_health.setVisibility(View.GONE);
+            }
 
 //            if (cardModel.getText() != null) {
 //                text_view_text.setText(Html.fromHtml("TEXT: " + cardModel.getText()));

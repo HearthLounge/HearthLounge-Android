@@ -152,7 +152,7 @@ public class Cards extends DrawerMenu {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.show();
+//            dialog.show();
         }
 
         @Override
