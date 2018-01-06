@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -129,65 +131,51 @@ public class UserAccount extends DrawerMenu{
             }
         });
 
-
         final ImageView favouriteClassIcon = (ImageView) findViewById(R.id.image_view_playerclass);
 
         if(userPref.getSingleStringPref(userPref.keyFavouriteClass) != null){
-
             switch (userPref.getSingleStringPref(userPref.keyFavouriteClass)){
 
                 case "druid": {
                     favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.druid));
                     break;
                 }
-
                 case "hunter": {
                     favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.hunter));
                     break;
                 }
-
                 case "mage": {
                     favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.mage));
                     break;
                 }
-
                 case "paladin": {
                     favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.paladin));
                     break;
                 }
-
                 case "priest": {
                     favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.priest));
                     break;
                 }
-
                 case "rogue": {
                     favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.rogue));
                     break;
                 }
-
-
                 case "shaman": {
                     favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.shaman));
                     break;
                 }
-
                 case "warlock": {
                     favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.warlock));
                     break;
                 }
-
                 case "warrior": {
                     favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.warrior));
                     break;
                 }
-
                 default: {
                     break;
                 }
-
             }
-
         }
 
         favouriteClassIcon.setOnTouchListener(new View.OnTouchListener() {
@@ -223,22 +211,18 @@ public class UserAccount extends DrawerMenu{
 
         Button deleteAccount = (Button) findViewById(R.id.button_delete_account);
         deleteAccount.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), UserService.class);
-                i.putExtra("action", "delete");
-                i.putExtra("uid", userPref.getSingleStringPref("uid"));
-                startService(i);
+                initiatePopupConfirmWindow();
             }
         });
         Button saveAccount = (Button) findViewById(R.id.button_save_account);
         saveAccount.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View view) {
                 updateUserData(getUserFromText());
             }
         });
     }
+
     private void updateUserData(User user){
         Toast.makeText(UserAccount.this,"Updating", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(getApplicationContext(), UserService.class);
@@ -247,6 +231,7 @@ public class UserAccount extends DrawerMenu{
         i.putExtra("updated_user", user);
         startService(i);
     }
+
     private User getUserFromText(){
         User tempUser = new User();
         if(tvUsername.getText() != null){tempUser.setUsername(tvUsername.getText().toString()); }
@@ -261,10 +246,10 @@ public class UserAccount extends DrawerMenu{
         if(tvAvatar.getText() != null){tempUser.setAvatar(tvAvatar.getText().toString()); }
         return tempUser;
     }
+
     private PopupWindow initiatePopupWindow() {
         PopupWindow mDropdown = null;
         LayoutInflater mInflater;
-
         ImageView favouriteClass= null;
 
         try {
@@ -442,6 +427,116 @@ public class UserAccount extends DrawerMenu{
                         toast.makeImageToast(UserAccount.this, "You selected ", R.drawable.hunter, Color.rgb(171, 212, 115), Toast.LENGTH_SHORT).show(); // + item.getTitle()
                         finalMDropdown.dismiss();
                         userPref.setValuePref("newFavClass","hunter");
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        } catch (Exception e) { e.printStackTrace(); }
+        return mDropdown;
+    }
+
+    private PopupWindow initiatePopupConfirmWindow() {
+        PopupWindow mDropdown = null;
+        LayoutInflater mInflater;
+        AppCompatButton confirmButton = null;
+
+        try {
+
+            mInflater = (LayoutInflater) getApplicationContext()
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            final View layout = mInflater.inflate(R.layout.confirm_delete_account, null);
+
+            //If you want to add any listeners to your textviews, these are two //textviews.
+            confirmButton = (AppCompatButton) findViewById(R.id.button_delete_account);
+
+            layout.measure(View.MeasureSpec.UNSPECIFIED,
+                    View.MeasureSpec.UNSPECIFIED);
+            mDropdown = new PopupWindow(layout,FrameLayout.LayoutParams.WRAP_CONTENT,
+                    FrameLayout.LayoutParams.WRAP_CONTENT,true);
+            mDropdown.showAtLocation(confirmButton, Gravity.CENTER, 0,0);
+
+            final PopupWindow finalMDropdown = mDropdown;
+            finalMDropdown.setOutsideTouchable(false);
+
+            final TextView textYes = (TextView) layout.findViewById(R.id.text_yes);
+            LinearLayout yesButton = (LinearLayout) layout.findViewById(R.id.button_yes);
+            yesButton.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    int action = event.getAction();
+                    if (action == MotionEvent.ACTION_DOWN) {
+                        v.animate().scaleXBy(0.1f).setDuration(5000).start();
+                        v.animate().scaleYBy(0.1f).setDuration(5000).start();
+                        v.setBackgroundResource(R.drawable.pressed);
+                        textYes.animate().scaleXBy(0.1f).setDuration(5000).start();
+                        textYes.animate().scaleYBy(0.1f).setDuration(5000).start();
+                        textYes.setTextColor(getBaseContext().getResources().getColor(R.color.dark_grey));
+                        return true;
+                    } else if (action == MotionEvent.ACTION_UP) {
+                        v.animate().cancel();
+                        v.animate().scaleX(1f).setDuration(1000).start();
+                        v.animate().scaleY(1f).setDuration(1000).start();
+                        v.setBackgroundResource(R.drawable.normal);
+                        textYes.animate().scaleX(1f).setDuration(1000).start();
+                        textYes.animate().scaleY(1f).setDuration(1000).start();
+                        textYes.setTextColor(getBaseContext().getResources().getColor(R.color.sea_color));
+
+                        Toast.makeText(getApplicationContext(), "Your account has been removed", Toast.LENGTH_SHORT).show();
+
+//                        Intent i = new Intent(getApplicationContext(), UserService.class);
+//                        i.putExtra("action", "delete");
+//                        i.putExtra("uid", userPref.getSingleStringPref("uid"));
+//                        startService(i);
+
+                        finalMDropdown.dismiss();
+                        return true;
+                    } else if (action == MotionEvent.ACTION_CANCEL) {
+                        v.animate().cancel();
+                        v.animate().scaleX(1f).setDuration(1000).start();
+                        v.animate().scaleY(1f).setDuration(1000).start();
+                        v.setBackgroundResource(R.drawable.normal);
+                        textYes.animate().scaleX(1f).setDuration(1000).start();
+                        textYes.animate().scaleY(1f).setDuration(1000).start();
+                        textYes.setTextColor(getBaseContext().getResources().getColor(R.color.sea_color));
+                        return true;
+                    }
+                    return false;
+                }
+            });
+
+            final TextView textNo = (TextView) layout.findViewById(R.id.text_no);
+            LinearLayout noButton = (LinearLayout) layout.findViewById(R.id.button_no);
+            noButton.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    int action = event.getAction();
+                    if (action == MotionEvent.ACTION_DOWN) {
+                        v.animate().scaleXBy(0.1f).setDuration(5000).start();
+                        v.animate().scaleYBy(0.1f).setDuration(5000).start();
+                        v.setBackgroundResource(R.drawable.pressed);
+                        textNo.animate().scaleXBy(0.1f).setDuration(5000).start();
+                        textNo.animate().scaleYBy(0.1f).setDuration(5000).start();
+                        textNo.setTextColor(getBaseContext().getResources().getColor(R.color.dark_grey));
+                        return true;
+                    } else if (action == MotionEvent.ACTION_UP) {
+                        v.animate().cancel();
+                        v.animate().scaleX(1f).setDuration(1000).start();
+                        v.animate().scaleY(1f).setDuration(1000).start();
+                        v.setBackgroundResource(R.drawable.normal);
+                        textNo.animate().scaleX(1f).setDuration(1000).start();
+                        textNo.animate().scaleY(1f).setDuration(1000).start();
+                        textNo.setTextColor(getBaseContext().getResources().getColor(R.color.sea_color));
+                        finalMDropdown.dismiss();
+                        return true;
+                    } else if (action == MotionEvent.ACTION_CANCEL) {
+                        v.animate().cancel();
+                        v.animate().scaleX(1f).setDuration(1000).start();
+                        v.animate().scaleY(1f).setDuration(1000).start();
+                        v.setBackgroundResource(R.drawable.normal);
+                        textNo.animate().scaleX(1f).setDuration(1000).start();
+                        textNo.animate().scaleY(1f).setDuration(1000).start();
+                        textNo.setTextColor(getBaseContext().getResources().getColor(R.color.sea_color));
                         return true;
                     }
                     return false;
