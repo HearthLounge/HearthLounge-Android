@@ -20,10 +20,6 @@ import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 import pl.pjwstk.pgmd.hearthlounge.MainActivity;
 import pl.pjwstk.pgmd.hearthlounge.R;
 
-/**
- * Created by Froozy on 25.10.2017.
- */
-
 public class LogIn extends DrawerMenu {
 
     private Button buttonLogin;

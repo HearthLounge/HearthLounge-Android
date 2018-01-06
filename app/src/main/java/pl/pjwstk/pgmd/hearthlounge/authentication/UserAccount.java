@@ -55,9 +55,6 @@ public class UserAccount extends DrawerMenu{
     EditText tvTwitch;
     EditText tvYoutube;
 
-
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.user_account, frameLayout);
@@ -65,9 +62,6 @@ public class UserAccount extends DrawerMenu{
 
         userPref = new UserPreferences(this.getApplicationContext());
         user = new User(userPref.getUserFromUserPref());
-
-
-        // NAZEWNICTWO JAK userAvatar I INNE ZMIEN JAK CHCESZ :D
 
         ImageView userAvatar = (ImageView)findViewById(R.id.user_avatar);
         // Loading profile image /*"user.getAvatar czy cos"*/
@@ -131,7 +125,6 @@ public class UserAccount extends DrawerMenu{
                 userPref.setValuePref("newRegion", value);}
             }
 
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -140,7 +133,6 @@ public class UserAccount extends DrawerMenu{
 
 
         final ImageView favouriteClassIcon = (ImageView) findViewById(R.id.image_view_playerclass);
-        //TODO brać z FavClass
 
         if(userPref.getSingleStringPref(userPref.keyFavouriteClass) != null){
 
@@ -235,34 +227,21 @@ public class UserAccount extends DrawerMenu{
         deleteAccount.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-
                 Intent i = new Intent(getApplicationContext(), UserService.class);
                 i.putExtra("action", "delete");
                 i.putExtra("uid", userPref.getSingleStringPref("uid"));
                 startService(i);
-
             }
         });
-
         Button saveAccount = (Button) findViewById(R.id.button_save_account);
         saveAccount.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-
                 updateUserData(getUserFromText());
             }
         });
-
-        // TODO RESZTA
-
     }
-
-
-
-
-
     private void updateUserData(User user){
-
         Toast.makeText(UserAccount.this,"Updating", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(getApplicationContext(), UserService.class);
         i.putExtra("action", "update");
@@ -270,11 +249,8 @@ public class UserAccount extends DrawerMenu{
         i.putExtra("updated_user", user);
         startService(i);
     }
-
-    //Add avatar edit
     private User getUserFromText(){
         User tempUser = new User();
-
         if(tvUsername.getText() != null){tempUser.setUsername(tvUsername.getText().toString()); }
         if(tvEmail.getText() != null){tempUser.setEmail(tvEmail.getText().toString()); }
         if(userPref.getSingleStringPref("newFavClass") != null){tempUser.setFavouriteClass(userPref.getSingleStringPref("newFavClass")); }
@@ -287,13 +263,11 @@ public class UserAccount extends DrawerMenu{
         if(tvAvatar.getText() != null){tempUser.setAvatar(tvAvatar.getText().toString()); }
         return tempUser;
     }
-
-
     private PopupWindow initiatePopupWindow() {
         PopupWindow mDropdown = null;
         LayoutInflater mInflater;
 
-        ImageView favouriteClass=null;
+        ImageView favouriteClass= null;
 
         try {
 
@@ -310,10 +284,8 @@ public class UserAccount extends DrawerMenu{
                     FrameLayout.LayoutParams.WRAP_CONTENT,true);
             mDropdown.showAtLocation(favouriteClass, Gravity.CENTER, 0,0);
 
-            final PopupWindow finalMDropdown = mDropdown; // Potrzebne, żeby popup menu się zamknęło po wybraniu opcji
-//            final ImageView favouriteClassIcon = (ImageView) findViewById(R.id.image_view_playerclass);
+            final PopupWindow finalMDropdown = mDropdown;
             final ImageView favouriteClassIcon = (ImageView) findViewById(R.id.image_view_playerclass);
-//            favouriteClassIcon.setImageDrawable(getResources().getDrawable(R.drawable.mage));
             final ImageView mage = (ImageView)layout.findViewById(R.id.mage);
             mage.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -480,131 +452,4 @@ public class UserAccount extends DrawerMenu{
         } catch (Exception e) { e.printStackTrace(); }
         return mDropdown;
     }
-
-
-    // JAKIEŚ GÓWNA ZE STRONY FIRE BASE JAK WRZUCIĆ Z GALERII ZDJĘCIE CHYBA
-//
-//    // Create a storage reference from our app
-//    StorageReference storageRef = storage.getReference();
-//
-//    // Create a reference to "mountains.jpg"
-//    StorageReference mountainsRef = storageRef.child("mountains.jpg");
-//
-//    // Create a reference to 'images/mountains.jpg'
-//    StorageReference mountainImagesRef = storageRef.child("images/mountains.jpg");
-//
-//// While the file names are the same, the references point to different files
-//        mountainsRef.getName().equals(mountainImagesRef.getName());    // true
-//        mountainsRef.getPath().equals(mountainImagesRef.getPath());    // false
-//
-//    Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
-//    StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
-//    uploadTask = riversRef.putFile(file);
-//
-//// Register observers to listen for when the download is done or if it fails
-//        uploadTask.addOnFailureListener(new OnFailureListener() {
-//        @Override
-//        public void onFailure(@NonNull Exception exception) {
-//            // Handle unsuccessful uploads
-//        }
-//    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//        @Override
-//        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-//            Uri downloadUrl = taskSnapshot.getDownloadUrl();
-//        }
-//    });
-//
-//    // Create file metadata including the content type
-//    StorageMetadata metadata = new StorageMetadata.Builder()
-//            .setContentType("image/jpg")
-//            .build();
-//
-//// Upload the file and metadata
-//    uploadTask = storageRef.child("images/mountains.jpg").putFile(file, metadata);
-//
-//    uploadTask = storageRef.child("images/mountains.jpg").putFile(file);
-//
-//// Pause the upload
-//        uploadTask.pause();
-//
-//// Resume the upload
-//        uploadTask.resume();
-//
-//// Cancel the upload
-//        uploadTask.cancel();
-//
-//
-//    // Observe state change events such as progress, pause, and resume
-//        uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-//        @Override
-//        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-//            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-//            System.out.println("Upload is " + progress + "% done");
-//        }
-//    }).addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
-//        @Override
-//        public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
-//            System.out.println("Upload is paused");
-//        }
-//    });
-//
-//
-//    StorageReference mStorageRef;  //mStorageRef was previously used to transfer data.
-//
-//    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//
-//        // If there's an upload in progress, save the reference so you can query it later
-//        if (mStorageRef != null) {
-//            outState.putString("reference", mStorageRef.toString());
-//        }
-//    }
-//
-//    @Override
-//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//
-//        // If there was an upload in progress, get its reference and create a new StorageReference
-//        final String stringRef = savedInstanceState.getString("reference");
-//        if (stringRef == null) {
-//            return;
-//        }
-//        mStorageRef = FirebaseStorage.getInstance().getReferenceFromUrl(stringRef);
-//
-//        // Find all UploadTasks under this StorageReference (in this example, there should be one)
-//        List<UploadTask> tasks = mStorageRef.getActiveUploadTasks();
-//        if (tasks.size() > 0) {
-//            // Get the task monitoring the upload
-//            UploadTask task = tasks.get(0);
-//
-//            // Add new listeners to the task using an Activity scope
-//            task.addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onSuccess(UploadTask.TaskSnapshot state) {
-//                    handleSuccess(state); //call a user defined function to handle the event.
-//                }
-//            });
-//        }
-//    }
-//
-//    uploadTask = mStorageRef.putFile(localFile);
-//        uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-//        @Override
-//        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-//            Uri sessionUri = taskSnapshot.getUploadSessionUri();
-//            if (sessionUri != null && !saved) {
-//                saved = true;
-//                // A persisted session has begun with the server.
-//                // Save this to persistent storage in case the process dies.
-//            }
-//        }
-//    });
-//
-//
-//    //resume the upload task from where it left off when the process died.
-//    //to do this, pass the sessionUri as the last parameter
-//    uploadTask = mStorageRef.putFile(localFile,
-//            new StorageMetadata.Builder().build(), sessionUri);
 }
