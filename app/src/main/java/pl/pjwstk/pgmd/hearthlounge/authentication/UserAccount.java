@@ -106,8 +106,6 @@ public class UserAccount extends DrawerMenu{
         tvBattleTag = (EditText)findViewById(R.id.edit_battletag);
         tvBattleTag.setText(userPref.getSingleStringPref("battletag"));
 
-        // TextView Region to się nie zmienia, więc nie wiem czy muszę coś do tego dopisywać
-
         regionSpinner = (Spinner)findViewById(R.id.region_spinner);
         adapter = ArrayAdapter.createFromResource(this,
                 R.array.region_array, android.R.layout.simple_spinner_item);

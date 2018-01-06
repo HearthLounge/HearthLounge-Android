@@ -188,8 +188,6 @@ public class User implements Parcelable {
         this.uid = uid;
     }
 
-    //public String getUpdatedProfileS() { return updatedProfile.toString();}
-
     public Boolean getUpdatedProfile() {
         return updatedProfile;
     }
@@ -207,7 +205,6 @@ public class User implements Parcelable {
     }
 
     public String getFavouriteClass() {
-        //if(favouriteClass == null){ favouriteClass = "";}
         return favouriteClass;
     }
 
@@ -216,7 +213,6 @@ public class User implements Parcelable {
     }
 
     public String getFacebook() {
-//        if(facebook == null){ facebook = "";}
         return facebook;
     }
 
@@ -225,7 +221,6 @@ public class User implements Parcelable {
     }
 
     public String getTwitter() {
-//        if(twitter == null){ twitter = "";}
         return twitter;
     }
 
@@ -234,7 +229,6 @@ public class User implements Parcelable {
     }
 
     public String getTwitch() {
-//        if(twitch == null){ twitch = "";}
         return twitch;
     }
 
@@ -243,7 +237,6 @@ public class User implements Parcelable {
     }
 
     public String getYoutube() {
-//        if(youtube == null){ youtube = "";}
         return youtube;
     }
 

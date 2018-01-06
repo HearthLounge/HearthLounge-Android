@@ -41,19 +41,6 @@ public class Deck {
         this.cardsId = cardsId;
     }
 
-    public void setCardsId() {
-
-        cards.size();
-        Log.d("CARDS SIZE", "size of list: "+ cards.size());
-        List<String> list = new ArrayList<>(cards.keySet());
-        Log.d("CARDS KEY SIZE", "size of list of keys: "+ list.size());
-        for(String title: list){
-
-            cardsId.add(title);
-
-        }
-    }
-
     public List<String> getCardsId() {
         return cardsId;
     }
@@ -104,6 +91,23 @@ public class Deck {
 
     public void setCardsAmount(Map<String, Long> cardsAmount) {
         this.cardsAmount = cardsAmount;
+    }
+
+
+
+
+    public void setCardsId() {
+
+        cardsId.clear();
+        cards.size();
+        Log.d("CARDS SIZE", "size of list: "+ cards.size());
+        List<String> list = new ArrayList<>(cards.keySet());
+        Log.d("CARDS KEY SIZE", "size of list of keys: "+ list.size());
+        for(String title: list){
+
+            cardsId.add(title);
+
+        }
     }
 
     public Map<String, Card> MakeCards(Map<String, Object> fbDeck){
