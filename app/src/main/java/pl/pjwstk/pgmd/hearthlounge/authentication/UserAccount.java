@@ -128,19 +128,7 @@ public class UserAccount extends DrawerMenu{
                 Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " selected", Toast.LENGTH_LONG).show();
                 String value = String.valueOf(parent.getItemAtPosition(position));
                 if(value != null){
-                //user.setRegion(parent.getItemAtPosition(position).toString());
                 userPref.setValuePref("newRegion", value);}
-                Toast.makeText(getBaseContext(), userPref.getSingleStringPref("newRegion") + " selected 2", Toast.LENGTH_LONG).show();
-
-//                // chyba nawet if-y nie są potrzebne
-//                if (parent.getItemIdAtPosition(position) == 0) {
-//                     //user.setRegion(parent.getItemAtPosition(position).toString()); // us lub americas
-//                } else if (parent.getItemIdAtPosition(position) == 1) {
-////                    user.setRegion(parent.getItemAtPosition(position).toString());
-//                } else if (parent.getItemIdAtPosition(position) == 2) {
-//                    // user.setRegion(parent.getItemAtPosition(position).toString());
-//                }
-
             }
 
 

@@ -59,21 +59,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public class Waiter {
 
         Timer timer;
+        MyThread xThread;
 
         public Waiter() {
             timer = new Timer();
         }
 
-        public void setTimer(int seconds){
+        public void setTimer(boolean xActive, int seconds){
 
-            this.timer.schedule(new WaiterTask(), seconds * 1000);
-            Log.d("WAITER", "waiter start waiting -> "+ seconds);
+            if(xActive) {
+                this.timer.schedule(new WaiterTask(), seconds * 1000);
+                Log.d("WAITER", "waiter start waiting -> " + seconds);
+                xThread = new MyThread(MapsActivity.this, MapsActivity.markerList, timer);
+            }
+        }
+
+        public void closeMyThread(){
+
+            Thread.interrupted();
         }
 
         class WaiterTask extends TimerTask {
             public void run() {
                 Log.d("WAITER", "waiter starting!");
-                MyThread xThread = new MyThread(MapsActivity.this, MapsActivity.markerList, timer);
+
                 xThread.run(timer);
 //              }
                  //Terminate the timer thread
@@ -90,6 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             this.activity = activity;
             this.timer = timer;
         }
+
         @Override
         public void run(){}
         public void run(Timer timer)
@@ -102,10 +112,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     doItAll();
                     Log.d("SUUUPER", "launch another!");
                 }
-
             });
             Log.d("SUUUPER", "leaving!");
-            timer.cancel();
+
         }
     }
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -123,7 +132,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ClosingAppService closingAppService;
     private Boolean firstUpdate;
     private Boolean addUser;
-    private MapDb mapDb;
+    private Boolean active;
 
     private static FirebaseFirestore fbCloud = FirebaseFirestore.getInstance();
     private CollectionReference fbLocRef = fbCloud.collection("localization");
@@ -134,15 +143,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         firstUpdate = true;
         addUser = true;
+        active = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         closingAppService = new ClosingAppService(this);
         checkLocationPermission();
         userPref = new UserPreferences(getApplicationContext());
         mapOfMarkers = new HashMap<>();
-        mapDb = new MapDb(getApplicationContext());
         markerList = new ArrayList<>();
-        //mapDb.readLocalizations(markerList);
         usersIcon = BitmapDescriptorFactory.fromResource(R.drawable.position_icon);
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -168,6 +176,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         addUser = false;
         deleteLocalization();
         waiter.timer.cancel();
+
     }
     public void OnDestroy(){
         super.onDestroy();
@@ -227,7 +236,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.clear();
         currentLocation();
         readLocalizations();
-        new Waiter().setTimer(15);
+        new Waiter().setTimer(addUser,15);
     }
     public void readLocalizations(){
 

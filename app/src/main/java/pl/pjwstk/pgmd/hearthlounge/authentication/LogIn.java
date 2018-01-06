@@ -50,7 +50,6 @@ public class LogIn extends DrawerMenu {
         buttonLogin = (Button) findViewById(R.id.button_login);
         textToSignUp = (TextView) findViewById(R.id.text_to_sign_up);
 
-        //Log in mechanics
         buttonLogin.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View view) {
@@ -60,13 +59,10 @@ public class LogIn extends DrawerMenu {
                     password = editPasswordLogin.getText().toString();
                     Toast.makeText(LogIn.this, "E:" + email + " H:" + password, Toast.LENGTH_SHORT).show();
                     log_user(email, password);
-                    //log_user("admin@ad.min","Roottoor1");
                 }
                 else{ Toast.makeText(getApplicationContext(),"Something went wrong :|", Toast.LENGTH_SHORT).show();}
             }
         });
-
-
         textToSignUp.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
@@ -75,12 +71,7 @@ public class LogIn extends DrawerMenu {
             }
         });
     }
-
-//TODO take user data from firebase
-
-
     public void log_user(String email,String password){
-
         fbAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -89,30 +80,20 @@ public class LogIn extends DrawerMenu {
                             Toast.makeText(getApplicationContext(), "Hello user!", Toast.LENGTH_SHORT).show();
                             toUserService(fbAuth.getCurrentUser().getUid());
                             go_to_main_menu();
-
-                            //updateUI(user);
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(LogIn.this, "Something goes wrong with log in", Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+                            Toast.makeText(LogIn.this, "Something goes wrong..."+"\n"+"Check your internet connection", Toast.LENGTH_LONG).show();
                         }
-
-
                     }
                 });
     }
-
     public void go_to_main_menu(){
         Intent menu_intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(menu_intent);
     }
-
     public void toUserService(String uid){    //User Data Service
         Intent i = new Intent(getApplicationContext(), UserService.class);
-        // potentially add data to the intent
         i.putExtra("action", "login");
         i.putExtra("uid", uid);
         startService(i);
     }
-
 }
