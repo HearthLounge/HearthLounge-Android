@@ -37,6 +37,11 @@ public class SignUp extends DrawerMenu {
     private FirebaseDatabase fb_database = FirebaseDatabase.getInstance();
     private DatabaseReference fbDataRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://hearthlounge-32197.firebaseio.com");
 
+    private String nickname;
+    private String email;
+    private String password;
+    private String confirmPassword;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.sign_up, frameLayout);
@@ -54,7 +59,6 @@ public class SignUp extends DrawerMenu {
         editPassword = (EditText) findViewById(R.id.edit_password);
         editConfirmPassword = (EditText) findViewById(R.id.edit_confirm_password);
 
-
         buttonRegister = (Button) findViewById(R.id.button_signup);
         textLogin = (TextView) findViewById(R.id.text_login);
 
@@ -63,24 +67,21 @@ public class SignUp extends DrawerMenu {
         }
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View view) {
+                nickname = editName.getEditableText().toString();
+                email = editEmail.getEditableText().toString();
+                password = editPassword.getEditableText().toString();
+                confirmPassword = editConfirmPassword.getEditableText().toString();
 
-                if(TextUtils.isEmpty(editName.getEditableText().toString())){
+                if (TextUtils.isEmpty(nickname)) {
                     Toast.makeText(SignUp.this, "Please enter nickname", Toast.LENGTH_SHORT).show();
-                }
-                else if(TextUtils.isEmpty(editEmail.getEditableText().toString())){
-                    Toast.makeText(SignUp.this, "Please enter email", Toast.LENGTH_SHORT).show();
-                }
-                else if(TextUtils.isEmpty(editPassword.getEditableText().toString())){
-                    Toast.makeText(SignUp.this, "Please enter password", Toast.LENGTH_SHORT).show();
-                }
-                else if(!editPassword.getEditableText().toString().equals(editConfirmPassword.getEditableText().toString())){
-                    Toast.makeText(SignUp.this, "Passwords are not matching",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(SignUp.this, "Give me a second...", Toast.LENGTH_SHORT).show();
-                    create_user(editName.getText().toString(), editEmail.getText().toString(), editPassword.getText().toString());
+                } else if (isValidEmail(email)) {
+                    if (isValidPassword(password)) {
+                        if (isValidConfirmPassword(password, confirmPassword)) {
+                            Toast.makeText(SignUp.this, "Give me a second...", Toast.LENGTH_SHORT).show();
+                            create_user(nickname, email, password);
+                        }
+                    }
                 }
             }
         });
@@ -117,13 +118,11 @@ public class SignUp extends DrawerMenu {
                         FirebaseUser user = fbAuth.getCurrentUser();
 
                         if(task.isSuccessful()){
-
                             Toast.makeText(SignUp.this,"registration is successful!", Toast.LENGTH_SHORT).show();
                             add_new_user(nickname,email, fbAuth.getCurrentUser().getUid());
                             fbAuth.signOut();
                             go_to_log_in();
-                        }
-                        else {
+                        } else {
                             Toast.makeText(SignUp.this, "Something goes wrong :(", Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
@@ -161,6 +160,51 @@ public class SignUp extends DrawerMenu {
         findViewById(R.id.edit_password).setVisibility(View.GONE);
         findViewById(R.id.button_signup).setVisibility(View.GONE);
         findViewById(R.id.text_to_sign_up).setVisibility(View.GONE);
+    }
+
+    public final boolean isValidEmail(CharSequence target) {
+        if (TextUtils.isEmpty(target)) {
+            Toast.makeText(SignUp.this, "Please enter email", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches()) {
+            Toast.makeText(SignUp.this, "Your email is incorrect", Toast.LENGTH_SHORT).show();
+            return false;
+        } else
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+//        else {
+//            Toast.makeText(SignUp.this, "Correct email", Toast.LENGTH_SHORT).show();
+//        }
+    }
+
+    public final boolean isValidPassword(CharSequence password) {
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(SignUp.this, "Please enter password", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (password.length() < 8) {
+            Toast.makeText(SignUp.this, "Your password is too short, minimum 8 characters", Toast.LENGTH_SHORT).show();
+            return false;
+        } else
+            return true;
+//            {
+//            Toast.makeText(SignUp.this, "Correct password", Toast.LENGTH_SHORT).show();
+//        }
+    }
+
+    public final boolean isValidConfirmPassword(CharSequence password, CharSequence confirmPassword) {
+        if (TextUtils.isEmpty(confirmPassword)) {
+            Toast.makeText(SignUp.this, "Confirm your password", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (confirmPassword.length() < 8) {
+            Toast.makeText(SignUp.this, "Your password is too short, minimum 8 characters", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!password.equals(confirmPassword)) {
+            Toast.makeText(SignUp.this, "Passwords are not matching",Toast.LENGTH_SHORT).show();
+            return false;
+        } else
+            return true;
+//            {
+//            Toast.makeText(SignUp.this, "Correct password", Toast.LENGTH_SHORT).show();
+//        }
     }
 
 }

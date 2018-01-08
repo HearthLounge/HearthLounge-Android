@@ -8,7 +8,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import pl.pjwstk.pgmd.hearthlounge.cache.DeckListCache;
+import pl.pjwstk.pgmd.hearthlounge.decks.DeckListCache;
 import pl.pjwstk.pgmd.hearthlounge.cards.JSON;
 import pl.pjwstk.pgmd.hearthlounge.reddit.RedditCache;
 

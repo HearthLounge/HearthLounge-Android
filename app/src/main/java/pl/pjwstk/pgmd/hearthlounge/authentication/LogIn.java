@@ -3,6 +3,8 @@ package pl.pjwstk.pgmd.hearthlounge.authentication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +24,7 @@ import pl.pjwstk.pgmd.hearthlounge.R;
 
 public class LogIn extends DrawerMenu {
 
+    public static final String EMAIL_REGEX = "^([^@])+@(.*)\\.com";
     private Button buttonLogin;
     private EditText editEmailLogin;
     private EditText editPasswordLogin;
@@ -42,6 +45,11 @@ public class LogIn extends DrawerMenu {
         fbAuth = FirebaseAuth.getInstance();
 
         editEmailLogin = (EditText) findViewById(R.id.edit_email);
+
+//        if (editEmailLogin != null) {
+//            editEmailLogin.setText(EMAIL_REGEX);
+//        }
+
         editPasswordLogin = (EditText) findViewById(R.id.edit_password);
         buttonLogin = (Button) findViewById(R.id.button_login);
         textToSignUp = (TextView) findViewById(R.id.text_to_sign_up);
@@ -52,9 +60,16 @@ public class LogIn extends DrawerMenu {
                 if(fbAuth.getCurrentUser() == null) {
                     //log_user(editEmailLogin.getText().toString(),editPasswordLogin.getText().toString());
                     email = editEmailLogin.getText().toString();
+                    isValidEmail(email);
+
                     password = editPasswordLogin.getText().toString();
-                    Toast.makeText(LogIn.this, "E:" + email + " H:" + password, Toast.LENGTH_SHORT).show();
-                    log_user(email, password);
+
+                    if (email.isEmpty() || password.isEmpty()) {
+                        Toast.makeText(LogIn.this, "Enter email and password", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LogIn.this, "E:" + email + " H:" + password, Toast.LENGTH_SHORT).show();
+                        log_user(email, password);
+                    }
                 }
                 else{ Toast.makeText(getApplicationContext(),"Something went wrong :|", Toast.LENGTH_SHORT).show();}
             }
@@ -91,5 +106,17 @@ public class LogIn extends DrawerMenu {
         i.putExtra("action", "login");
         i.putExtra("uid", uid);
         startService(i);
+    }
+
+    public final boolean isValidEmail(CharSequence target) {
+        if (TextUtils.isEmpty(target)) {
+            return false;
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches()) {
+            Toast.makeText(LogIn.this, "Your email is incorrect", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            Toast.makeText(LogIn.this, "Correct email", Toast.LENGTH_SHORT).show();
+        }
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 }

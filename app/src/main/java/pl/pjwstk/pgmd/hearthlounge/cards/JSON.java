@@ -14,7 +14,6 @@ import java.util.List;
 
 import pl.pjwstk.pgmd.hearthlounge.MainActivity;
 import pl.pjwstk.pgmd.hearthlounge.R;
-import pl.pjwstk.pgmd.hearthlounge.cache.CardListCache;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 
 /**

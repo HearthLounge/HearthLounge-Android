@@ -42,7 +42,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import pl.pjwstk.pgmd.hearthlounge.R;
-import pl.pjwstk.pgmd.hearthlounge.cache.CardListCache;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 import pl.pjwstk.pgmd.hearthlounge.view.MakeImageToast;

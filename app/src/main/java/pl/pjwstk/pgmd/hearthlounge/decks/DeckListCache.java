@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge.cache;
+package pl.pjwstk.pgmd.hearthlounge.decks;
 
 import android.support.annotation.NonNull;
 import android.util.Log;

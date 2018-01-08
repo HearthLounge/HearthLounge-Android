@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
 import pl.pjwstk.pgmd.hearthlounge.MainActivity;
@@ -69,6 +70,7 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_main);
+        FirebaseApp.initializeApp(getBaseContext());
 
         frameLayout = (FrameLayout)findViewById(R.id.content_frame);
         userPref = new UserPreferences(this.getApplicationContext());

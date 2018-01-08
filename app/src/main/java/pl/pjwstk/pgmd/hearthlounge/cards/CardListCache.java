@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge.cache;
+package pl.pjwstk.pgmd.hearthlounge.cards;
 
 /**
  * Created by Maciek Dembowski on 16.12.2017.
@@ -21,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
+import pl.pjwstk.pgmd.hearthlounge.decks.DeckListCache;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 import pl.pjwstk.pgmd.hearthlounge.model.Deck;
 import pl.pjwstk.pgmd.hearthlounge.model.DeckFull;

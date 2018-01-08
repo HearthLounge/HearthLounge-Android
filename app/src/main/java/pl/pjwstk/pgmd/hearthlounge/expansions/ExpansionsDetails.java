@@ -20,7 +20,7 @@ import com.google.android.youtube.player.YouTubePlayerView;
 
 import pl.pjwstk.pgmd.hearthlounge.cards.Cards;
 import pl.pjwstk.pgmd.hearthlounge.R;
-import pl.pjwstk.pgmd.hearthlounge.cache.CardListCache;
+import pl.pjwstk.pgmd.hearthlounge.cards.CardListCache;
 import pl.pjwstk.pgmd.hearthlounge.view.TypefaceSpan;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 

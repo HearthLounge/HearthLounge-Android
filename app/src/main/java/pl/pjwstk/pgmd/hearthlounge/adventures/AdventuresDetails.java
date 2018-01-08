@@ -18,7 +18,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
-import pl.pjwstk.pgmd.hearthlounge.cache.CardListCache;
+import pl.pjwstk.pgmd.hearthlounge.cards.CardListCache;
 import pl.pjwstk.pgmd.hearthlounge.cards.Cards;
 import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.view.TypefaceSpan;
