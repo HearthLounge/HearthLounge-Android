@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.decks;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -29,6 +29,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
 
+import pl.pjwstk.pgmd.hearthlounge.R;
+import pl.pjwstk.pgmd.hearthlounge.cache.DeckListCache;
 import pl.pjwstk.pgmd.hearthlounge.model.DeckFull;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 import pl.pjwstk.pgmd.hearthlounge.view.TypefaceSpan;

@@ -1,30 +1,25 @@
 package pl.pjwstk.pgmd.hearthlounge;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.design.widget.NavigationView;
 import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import pl.pjwstk.pgmd.hearthlounge.adventures.Adventures;
 import pl.pjwstk.pgmd.hearthlounge.authentication.UserService;
+import pl.pjwstk.pgmd.hearthlounge.cards.CardsFilterMenu;
+import pl.pjwstk.pgmd.hearthlounge.decks.Decks;
+import pl.pjwstk.pgmd.hearthlounge.expansions.Expansions;
 import pl.pjwstk.pgmd.hearthlounge.locator.MapsActivity;
+import pl.pjwstk.pgmd.hearthlounge.reddit.Reddit;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
 public class MainActivity extends DrawerMenu {

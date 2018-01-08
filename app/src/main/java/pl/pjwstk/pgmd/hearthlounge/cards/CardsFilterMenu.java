@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.cards;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -11,6 +11,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import pl.pjwstk.pgmd.hearthlounge.R;
+import pl.pjwstk.pgmd.hearthlounge.cards.Cards;
+import pl.pjwstk.pgmd.hearthlounge.cards.SearchCards;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
 /**

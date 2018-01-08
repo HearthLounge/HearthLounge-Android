@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.adventures;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
 /**

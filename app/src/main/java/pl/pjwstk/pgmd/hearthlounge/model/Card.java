@@ -48,14 +48,14 @@ public class Card {
 
         //amount
         Map<String, Object> tempCard = (Map<String, Object>) obj;
-        this.cardId = (String) tempCard.get("cardId");
-        this.cost = (long) tempCard.get("cost");
-        this.rarity = (String) tempCard.get("rarity");
-        this.cardSet = (String) tempCard.get("cardSet");
-        this.type = (String) tempCard.get("type");
-        this.amount = (long) tempCard.get("amount");
-        this.title = (String) tempCard.get("");
-        Log.d("CARD MAKER", this.getCardId() + " in number of "+ this.getAmount());
+        if(tempCard.containsKey("cardId")) this.cardId = (String) tempCard.get("cardId");
+        if(tempCard.containsKey("cost")) this.cost = (long) tempCard.get("cost");
+        if(tempCard.containsKey("rarity")) this.rarity = (String) tempCard.get("rarity");
+        if(tempCard.containsKey("cardSet")) this.cardSet = (String) tempCard.get("cardSet");
+        if(tempCard.containsKey("type")) this.type = (String) tempCard.get("type");
+        if(tempCard.containsKey("amount")) this.amount = (long) tempCard.get("amount");
+        if(tempCard.containsKey("title")) this.title = (String) tempCard.get("");
+//        Log.d("CARD MAKER", this.getCardId() + " in number of "+ this.getAmount());
 
     }
 

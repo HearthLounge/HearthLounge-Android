@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.reddit;
 
 import android.os.AsyncTask;
 

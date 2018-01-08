@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/pearl"
     android:orientation="vertical"
-    tools:context=".Decks">
+    tools:context=".decks.Decks">
 
     <ListView
         android:id="@+id/list_view_reddit_posts"

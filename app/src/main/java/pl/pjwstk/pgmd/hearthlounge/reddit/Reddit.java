@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.reddit;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.model.RedditModel;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 import pl.pjwstk.pgmd.hearthlounge.view.TypefaceSpan;

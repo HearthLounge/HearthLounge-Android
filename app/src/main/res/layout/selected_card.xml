@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:clipToPadding="false"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".SelectedCard">
+    tools:context=".cards.SelectedCard">
 
     <LinearLayout
         android:layout_width="match_parent"

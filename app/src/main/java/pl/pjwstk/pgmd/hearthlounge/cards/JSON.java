@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.cards;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import pl.pjwstk.pgmd.hearthlounge.MainActivity;
+import pl.pjwstk.pgmd.hearthlounge.R;
+import pl.pjwstk.pgmd.hearthlounge.cache.CardListCache;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 
 /**

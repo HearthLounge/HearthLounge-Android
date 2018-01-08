@@ -20,6 +20,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import pl.pjwstk.pgmd.hearthlounge.MainActivity;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 
 import static android.content.ContentValues.TAG;
@@ -84,17 +88,13 @@ public class UserService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-
-
         Toast.makeText(getApplicationContext(), "action: " + intent.getStringExtra("action"), Toast.LENGTH_SHORT).show();
         switch (intent.getStringExtra("action")) {
 
             case "login": {
                 Toast.makeText(getApplicationContext(), "ACTION LOGIN", Toast.LENGTH_SHORT).show();
                 sUserUid = intent.getStringExtra("uid");
-                //sUserEmail = fbUser.getEmail();
-                //fbUserRef.orderByChild("users").equalTo(sUserUid).addChildEventListener(UserChildListener(sUserUid));
-                fbUserRef.child(sUserUid).addValueEventListener(UserValueListener());
+                fbValueListener = fbUserRef.child(sUserUid).addValueEventListener(UserValueListener());
                 break;
             }
             case "logout": {
@@ -113,10 +113,7 @@ public class UserService extends Service {
             case "update": {
                 Toast.makeText(getApplicationContext(), "ACTION UPDATE", Toast.LENGTH_SHORT).show();
                 sUserUid = intent.getStringExtra("uid");
-                //sUserEmail = fbUser.getEmail();
                 User user = new User((User) intent.getParcelableExtra("updated_user"));
-                Toast.makeText(getApplicationContext(),"battletag " + user.getBattletag(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),"region " + user.getRegion(), Toast.LENGTH_SHORT).show();
                 updateUserData(user);
                 break;
             }
@@ -124,20 +121,25 @@ public class UserService extends Service {
 
                 Toast.makeText(getApplicationContext(), "Password changing in progress!", Toast.LENGTH_SHORT).show();
                 UpdateUserPassword(intent.getStringExtra("password"));
+                break;
             }
             case "delete":{
-
-                fbUser = FirebaseAuth.getInstance().getCurrentUser();
-                DeleteUser(fbUser);
-
+                Toast.makeText(getApplicationContext(), "ACTION DELETE", Toast.LENGTH_SHORT).show();
+                //fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).removeEventListener(fbValueListener);
+                //DeleteUser(fbUser);
+                DeleteFromDb();
+                //fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).removeEventListener(fbValueListener);
+                userPref.clearUserPref();
+//                Thread thread = new Thread(new MyThreadUserService(startId));
+//                thread.start();
+                break;
             }
 
             default: {
-                if(fbUser !=null){
-
-                    fbUserRef.child(userPref.getSingleStringPref("uid")).addValueEventListener(UserValueListener());
-
-                }
+//                if(fbUser !=null){
+//                    fbValueListener = fbUserRef.child(userPref.getSingleStringPref("uid")).addValueEventListener(UserValueListener());
+//                }
+                break;
             }
 
         }
@@ -157,9 +159,13 @@ public class UserService extends Service {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 User user = dataSnapshot.getValue(User.class);
-                Toast.makeText(getApplicationContext(), "From Database " + user.getUsername() + " data", Toast.LENGTH_SHORT).show();
-                userPref.setUserPref(user);
-                Toast.makeText(getApplicationContext(), "From userPref " + userPref.getSingleStringPref(userPref.keyUsername) + " data", Toast.LENGTH_SHORT).show();
+                if(user != null){
+                    userPref.setUserPref(user);
+                }
+                else{
+                    userPref.clearUserPref();
+                }
+
             }
 
             @Override
@@ -167,14 +173,8 @@ public class UserService extends Service {
 
             }
         };
-        // Keep copy of post listener so we can remove it when app stops
         fbValueListener = uValueListener;
-
         return uValueListener;
-        // Listen for comments
-//        mAdapter = new CommentAdapter(this, mCommentsReference);
-//        mCommentsRecycler.setAdapter(mAdapter);
-
     }
 
     private void updateUserData(User user){
@@ -188,7 +188,6 @@ public class UserService extends Service {
         DataComparator(user.getYoutube(),userPref.keyYoutube);
         DataComparator(user.getRegion(),userPref.keyRegion);
         DataComparator(user.getAvatar(),userPref.keyAvatar);
-
 
     }
 
@@ -220,42 +219,17 @@ public class UserService extends Service {
 
     }
 
-    private void DeleteUser(FirebaseUser deleteUser){
+    private boolean DeleteUser(FirebaseUser deleteUser){
         Toast.makeText(getApplicationContext(), "Deleting in progress...", Toast.LENGTH_SHORT).show();
-        deleteUser.delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "User deleted?", Toast.LENGTH_SHORT).show();
-                            fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).removeValue();
-                        }
-                    }
-                });
 
+        return false;
     }
 
-    public void UserDataConnector(String email,final String action){
+    public void DeleteFromDb(){
 
-        Query userQuery = fbUserRef.orderByChild("email").equalTo(email);
-        userQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
-                    user = singleSnapshot.getValue(User.class);
-                    Toast.makeText(getApplicationContext(), "Success download " + user.getUsername() + " data", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), "Your battletag is " + user.getBattletag(), Toast.LENGTH_SHORT).show();
-                    userPref.setUserPref(user);
-                    Toast.makeText(getApplicationContext(), "Your userPref username is " + userPref.getUsernamePref(), Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "onCancelled", databaseError.toException());
-            }
-        });
-
-
+        String link = "https://hearthlounge-32197.firebaseio.com/users/"+userPref.getSingleStringPref(userPref.keyUid);
+        DatabaseReference RefToDelete = fbDb.getReferenceFromUrl(link);
+        fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).setValue(null);
     }
 
     private void DataComparator(String userValue, String key) {
@@ -270,210 +244,4 @@ public class UserService extends Service {
         }
         //if(userPref.getSingleStringPref(key) == "" && userValue == null){ fbUserRef.child(userPref.getSingleStringPref(userPref.keyUid)).child(key).setValue(null); }
     }
-
 }
-
-//    @Override
-//    public int onStartCommand(final Intent intent, int flags, int startId) {
-//
-//        String action = intent.getStringExtra("action");
-//        Toast.makeText(getApplicationContext(), "start service -> action = "+ action, Toast.LENGTH_SHORT).show();
-//        ValueEventListener UserListener = new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                    User userDB = dataSnapshot.getValue(User.class);
-//                    userPref.setUserPref(userDB);
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError databaseError) {
-//                    Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-//                    Toast.makeText(getApplicationContext(), "Failed to load User", Toast.LENGTH_SHORT).show();
-//                }
-//
-//
-//        };
-//        //fbUserRef.orderByChild("uid").equalTo(userPref.getSingleStringPref("uid")).addValueEventListener(UserListener);
-//        fbUserRef.child(userPref.getSingleStringPref("uid")).addValueEventListener(UserListener);
-//
-////        else {
-//////            Thread thread = new Thread(new MyThreadUserService(startId));
-//////            thread.start();
-////        }
-//
-//
-//        return START_STICKY;
-//    }
-//
-//
-//
-//    @Override
-//    public void onDestroy() {
-//        Toast.makeText(getApplicationContext(),"closing service!", Toast.LENGTH_SHORT).show();
-//        super.onDestroy();
-//    }
-//
-//}
-
-
-
-
-//        mPostReference.addValueEventListener(postListener);
-//
-//        mPostListener = postListener;
-//        // Listen for comments
-//        mAdapter = new CommentAdapter(this, mCommentsReference);
-//        mCommentsRecycler.setAdapter(mAdapter);
-
-//        Query userQuery = fbUserRef.orderByChild("email").equalTo(email);
-//        userQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
-//                    user = singleSnapshot.getValue(User.class);
-//                    if(user != null) {
-//
-////                        if(action == "login") {
-////                            //TODO userPref.setUserPref(user);
-////                            Toast.makeText(getApplicationContext(), "Success download " + user.getUsername() + " data", Toast.LENGTH_SHORT).show();
-////                            Toast.makeText(getApplicationContext(), "Your battletag is " + user.getBattletag(), Toast.LENGTH_SHORT).show();
-////                            userPref.setUserPref(user);
-////                            Toast.makeText(getApplicationContext(), "Your userPref username is " + userPref.getUsernamePref(), Toast.LENGTH_SHORT).show();
-////                        }
-////                        else if(action == "update"){
-////
-////
-////
-////
-////                        }
-//                    }
-//                }
-//            }
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.e(TAG, "onCancelled", databaseError.toException());
-//            }
-//        });
-
-
-
-
-
-
-//        fbUserRef = fbUserRef.child(uid);
-//        ValueEventListener postListener = new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                            // Get Post object and use the values to update the UI
-//                            //User user = dataSnapshot.getValue(User.class);
-//                            // [START_EXCLUDE]
-////                            TextView.setText(user.getEmail());
-////                            mTitleView.setText(user.getRank());
-////                            .setText(user.getUsername());
-//                            // [END_EXCLUDE]
-//
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(DatabaseError databaseError) {
-//                            Toast.makeText(getApplicationContext(), "Failed to load user.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    };
-//                    fbUserRef.addValueEventListener(postListener);
-//                    // Keep copy of post listener so we can remove it when app stops
-//                    mPostListener = postListener;
-//        Toast.makeText(getApplicationContext(),/* Hmmm */ , Toast.LENGTH_SHORT).show();
-
-//        fbUserRef.orderByChild(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-//        @Override
-//        public void onDataChange(DataSnapshot dataSnapshot) {
-//            // Get user information
-//            User user = dataSnapshot.getValue(User.class);
-//            String Xusername = user.getUsername();
-//
-//            // Create new comment object
-////            String commentText = mCommentField.getText().toString();
-////            Comment comment = new Comment(uid, authorName, commentText);
-//
-//            // Push the comment, it will appear in the list
-//            //mCommentsReference.push().setValue(comment);
-//
-//            Toast.makeText(getApplicationContext(), Xusername , Toast.LENGTH_SHORT).show();
-//
-//            // Clear the field
-//            //mCommentField.setText(null);
-//        }
-//
-//        @Override
-//        public void onCancelled(DatabaseError databaseError) {
-//
-//            Toast.makeText(getApplicationContext(), "Cancel that!" , Toast.LENGTH_SHORT).show();
-//
-//        }
-//    });
-
-
-//    public UserService(FirebaseUser user){
-//
-//        this.user = user;
-////        Query query = mFirebaseDatabaseReference.child("/user").orderByChild("title").equalTo(user.getUid());
-////        query.addValueEventListener(valueEventListener);
-////        queryUser = fbUserRef.orderByChild("/users").equalTo(user.getUid());
-////        queryUser.addListenerForSingleValueEvent(vel);
-//
-//    }
-
-//    public void elo() {
-//
-//        fbUserRef.child("/users").addValueEventListener(vel);
-//        vel = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        };
-//
-//    }
-
-
-// Toast.makeText(getApplicationContext(),"action: " + intent.getStringExtra("action"), Toast.LENGTH_SHORT).show();
-//fbUserRef = fbUserRef intent.getStringArrayExtra("uid");
-//        switch (intent.getStringExtra("action")){
-//
-//            case "login":
-//            {
-//                Toast.makeText(getApplicationContext(),"ACTION LOGIN", Toast.LENGTH_SHORT).show();
-//                sUserUid = intent.getStringExtra("uid");
-//                sUserEmail = fbUser.getEmail();
-//                UserDataConnector(sUserEmail,intent.getStringExtra("action"));
-//                break;
-//            }
-//            case "logout":
-//            {
-//                Toast.makeText(getApplicationContext(),"ACTION LOGOUT", Toast.LENGTH_SHORT).show();
-//                userPref.clearUserPref();
-//                break;
-//            }
-//            case "start":
-//            {
-//                Toast.makeText(getApplicationContext(),"ACTION START", Toast.LENGTH_SHORT).show();
-//                break;
-//            }
-//            //TODO add it to UserAccount
-//            case "update":
-//            {
-//                Toast.makeText(getApplicationContext(),"ACTION UPDATE", Toast.LENGTH_SHORT).show();
-//                sUserUid = intent.getStringExtra("uid");
-//                sUserEmail = fbUser.getEmail();
-//                UserDataConnector(sUserEmail,intent.getStringExtra("action"));
-//                break;
-//            }
-//
-//        }

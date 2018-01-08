@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
             <activity
-                android:name=".JSON"
+                android:name=".cards.JSON"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
                 <activity
@@ -66,59 +66,59 @@
 
         <!--MAIN MENU-->
         <activity
-            android:name=".Decks"
+            android:name=".decks.Decks"
             android:label="@string/title_decks"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
             <activity
-                android:name=".SelectedDeck"
+                android:name=".decks.SelectedDeck"
                 android:label="@string/title_selected_deck"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".CardsFilterMenu"
+            android:name=".cards.CardsFilterMenu"
             android:label="@string/title_cards_filter_menu"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
             <activity
-                android:name=".SearchCards"
+                android:name=".cards.SearchCards"
                 android:label="@string/title_search_cards"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
             <activity
-                android:name=".Cards"
+                android:name=".cards.Cards"
                 android:label="@string/title_cards"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
                 <activity
-                    android:name=".SelectedCard"
+                    android:name=".cards.SelectedCard"
                     android:label="@string/title_card_selected"
                     android:screenOrientation="portrait"
                     android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".Expansions"
+            android:name=".expansions.Expansions"
             android:label="@string/title_expansions"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
             <activity
-                android:name=".ExpansionsDetails"
+                android:name=".expansions.ExpansionsDetails"
                 android:label="@string/title_expansions"
                 android:screenOrientation="portrait" />
 
         <activity
-            android:name=".Adventures"
+            android:name=".adventures.Adventures"
             android:label="@string/title_adventures"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
             <activity
-                android:name=".AdventuresDetails"
+                android:name=".adventures.AdventuresDetails"
                 android:label="@string/title_adventures"
                 android:screenOrientation="portrait" />
 
         <activity
-            android:name=".Reddit"
+            android:name=".reddit.Reddit"
             android:label="@string/title_reddit"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

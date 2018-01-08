@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.cache;
 
 /**
  * Created by Maciek Dembowski on 16.12.2017.

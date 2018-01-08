@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.expansions;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +18,9 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+import pl.pjwstk.pgmd.hearthlounge.cards.Cards;
+import pl.pjwstk.pgmd.hearthlounge.R;
+import pl.pjwstk.pgmd.hearthlounge.cache.CardListCache;
 import pl.pjwstk.pgmd.hearthlounge.view.TypefaceSpan;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 

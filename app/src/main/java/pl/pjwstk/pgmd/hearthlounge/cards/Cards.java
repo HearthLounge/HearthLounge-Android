@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.cards;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -41,6 +41,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import pl.pjwstk.pgmd.hearthlounge.R;
+import pl.pjwstk.pgmd.hearthlounge.cache.CardListCache;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 import pl.pjwstk.pgmd.hearthlounge.view.MakeImageToast;

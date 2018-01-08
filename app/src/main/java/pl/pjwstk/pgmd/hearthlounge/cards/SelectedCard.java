@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.cards;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
+import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 

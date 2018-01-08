@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
@@ -27,7 +28,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import pl.pjwstk.pgmd.hearthlounge.MainActivity;
 import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 import pl.pjwstk.pgmd.hearthlounge.view.CircleTransform;
@@ -482,13 +489,24 @@ public class UserAccount extends DrawerMenu{
                         textYes.animate().scaleY(1f).setDuration(1000).start();
                         textYes.setTextColor(getBaseContext().getResources().getColor(R.color.sea_color));
 
-                        Toast.makeText(getApplicationContext(), "Your account has been removed", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Your account has been removed", Toast.LENGTH_SHORT).show();
 
-//                        Intent i = new Intent(getApplicationContext(), UserService.class);
-//                        i.putExtra("action", "delete");
-//                        i.putExtra("uid", userPref.getSingleStringPref("uid"));
-//                        startService(i);
-
+                        Intent i = new Intent(getApplicationContext(), UserService.class);
+                        i.putExtra("action", "delete");
+                        i.putExtra("uid", userPref.getSingleStringPref("uid"));
+                        startService(i);
+                        FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
+                        fbUser.delete()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(getApplicationContext(), "User deleted", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+//                        Intent goBackToMenu = new Intent(getApplicationContext(), MainActivity.class);
+//                        startActivity(goBackToMenu);
                         finalMDropdown.dismiss();
                         return true;
                     } else if (action == MotionEvent.ACTION_CANCEL) {

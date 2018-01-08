@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.decks;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
+import pl.pjwstk.pgmd.hearthlounge.R;
+import pl.pjwstk.pgmd.hearthlounge.cards.Cards;
 import pl.pjwstk.pgmd.hearthlounge.model.DeckFull;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 

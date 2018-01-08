@@ -36,7 +36,8 @@ public class Deck {
         cardsAmount = new LinkedHashMap<>();
         Map<String, Object> temp = (Map<String,Object>) deckObject;
         this.lenght = (long) temp.get("length");
-        cards = MakeCards((Map<String, Object>) temp.get("cards"));
+        cards = new HashMap<>();
+        MakeCards((Map<String, Object>) temp.get("cards"));
         this.setManaCurve((Map<String, Integer>) temp.get("manaCurve"));
         this.max = (long) temp.get("max");
         this.setTypes((Map<String, Integer>) temp.get("types"));
@@ -53,7 +54,7 @@ public class Deck {
         return cardsId;
     }
 
-    public Map<String, Card> getCards() {
+    public Map<String,Card> getCards() {
         return cards;
     }
 
@@ -118,9 +119,8 @@ public class Deck {
         }
     }
 
-    public Map<String, Card> MakeCards(Map<String, Object> fbDeck){
+    public void MakeCards(Map<String, Object> fbDeck){
 
-        Map<String, Card> tempMap = new HashMap<>();
         Set<String> tempList = fbDeck.keySet();
         //Log.d("MAKE CARDS", "Set<String> tempList: "+ tempList.size());
         Card tempCard;
@@ -128,11 +128,10 @@ public class Deck {
 
             tempCard = new Card(fbDeck.get(value));
             //Log.d("MAKE CARDS", "adding card: "+ value);
-            tempMap.put(value,tempCard);
+            cards.put(value,tempCard);
             cardsAmount.put(value,tempCard.getAmount());    //NEW ONE!!!!
             //Log.d("MAKE CARDS", "amount of card: "+ tempCard.getAmount());
         }
-        return tempMap;
     }
 
 

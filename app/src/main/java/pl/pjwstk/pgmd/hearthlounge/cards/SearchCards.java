@@ -1,8 +1,7 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.cards;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,8 +10,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
+import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
 
 import static android.view.View.*;
@@ -340,7 +339,7 @@ public class SearchCards extends DrawerMenu {
                     v.setBackgroundResource(R.drawable.frame);
 
                     if (getString() != null) {
-                        Intent startIntent = new Intent(getApplicationContext(), Cards.class); //Do którego ma iść
+                        Intent startIntent = new Intent(getApplicationContext(), pl.pjwstk.pgmd.hearthlounge.cards.Cards.class); //Do którego ma iść
                         startIntent.putExtra("StringValue", getString());
                         startIntent.putExtra("Title", getString());
                         startIntent.putExtra("IconID", "All");

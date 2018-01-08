@@ -67,22 +67,26 @@ public class UserPreferences {
 
     public void setUserPref(User user){
 
-        prefsEditor.putString(keyUsername, user.getUsername());
-        prefsEditor.putString(keyEmail, user.getEmail());
-        prefsEditor.putLong(keyRank, user.getRank());
-        prefsEditor.putInt(keyRole, user.getRole());
-        prefsEditor.putString(keyUid, user.getUid());
-        prefsEditor.putBoolean(keyUpdatedProfile, user.getUpdatedProfile());
-        prefsEditor.putString(keyBattletag, user.getBattletag());
-        prefsEditor.putString(keyFavouriteClass, user.getFavouriteClass());
-        prefsEditor.putString(keyFacebook, user.getFacebook());
-        prefsEditor.putString(keyTwitter, user.getTwitter());
-        prefsEditor.putString(keyTwitch, user.getTwitch());
-        prefsEditor.putString(keyYoutube, user.getYoutube());
-        prefsEditor.putString(keyAvatar, user.getAvatar());
-        prefsEditor.putString(keyRegion, user.getRegion());
+        if(user.getUid() != null){
+            prefsEditor.putString(keyUsername, user.getUsername());
+            prefsEditor.putString(keyEmail, user.getEmail());
+            prefsEditor.putLong(keyRank, user.getRank());
+            prefsEditor.putInt(keyRole, user.getRole());
+            prefsEditor.putString(keyUid, user.getUid());
+            prefsEditor.putBoolean(keyUpdatedProfile, user.getUpdatedProfile());
+            prefsEditor.putString(keyBattletag, user.getBattletag());
+            prefsEditor.putString(keyFavouriteClass, user.getFavouriteClass());
+            prefsEditor.putString(keyFacebook, user.getFacebook());
+            prefsEditor.putString(keyTwitter, user.getTwitter());
+            prefsEditor.putString(keyTwitch, user.getTwitch());
+            prefsEditor.putString(keyYoutube, user.getYoutube());
+            prefsEditor.putString(keyAvatar, user.getAvatar());
+            prefsEditor.putString(keyRegion, user.getRegion());
 
-        prefsEditor.commit();
+            prefsEditor.commit();
+
+        }
+
     }
 
     public void clearUserPref(){
