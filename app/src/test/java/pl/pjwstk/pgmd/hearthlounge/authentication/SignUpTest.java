@@ -8,11 +8,14 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Created by Maciek Dembowski on 08.01.2018.
  */
 class SignUpTest {
+
+//    private FirebaseAuth fbAuth = FirebaseAuth.getInstance();
 
 //    @Test
 //    void onStart() {
@@ -45,7 +48,7 @@ class SignUpTest {
     SignUp signUp = new SignUp();
     @Test
     void isValidEmail() throws Exception {
-
+        FirebaseAuth.getInstance();
         assertThat(signUp.isValidEmail("test@test.com"), is(true));
 
     }

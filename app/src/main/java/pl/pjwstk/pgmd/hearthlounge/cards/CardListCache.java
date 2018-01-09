@@ -5,6 +5,7 @@ package pl.pjwstk.pgmd.hearthlounge.cards;
  */
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 

@@ -73,7 +73,7 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:id="@+id/icon_expansions"
+                        android:id="@+id/icon_adventures"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_margin="10dp"

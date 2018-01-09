@@ -189,7 +189,7 @@ public class AdventuresDetails extends YouTubeBaseActivity {
     }
 
     public void changeIcon() {
-        ImageView iconExpansions = (ImageView)findViewById(R.id.icon_expansions);
+        ImageView iconExpansions = (ImageView)findViewById(R.id.icon_adventures);
         if (iconId.equals("Curse of Naxxramas")) {
             iconExpansions.setImageResource(R.drawable.naxxramas);
         } else if (iconId.equals("Blackrock Mountain")) {

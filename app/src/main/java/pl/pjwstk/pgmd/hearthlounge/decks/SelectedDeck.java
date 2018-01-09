@@ -142,10 +142,6 @@ public class SelectedDeck extends DrawerMenu {
             String json = bundle.getString("deckModel"); // getting the model from MainActivity send via extras
             DeckFull deckModel = new Gson().fromJson(json, DeckFull.class);
 
-//            String json2 = bundle.getString("deck"); // getting the model from MainActivity send via extras
-//            Deck deck = new Gson().fromJson(json, Deck.class);
-//            Deck deck = new Deck();
-
             String mDrawableName = deckModel.getPlayerClass();
             String playerClassName = mDrawableName.substring(0,1).toUpperCase() + mDrawableName.substring(1).toLowerCase();
             setIconId(playerClassName);
@@ -243,7 +239,6 @@ public class SelectedDeck extends DrawerMenu {
             if (deckModel.getDeck().getTypes().containsKey("Weapon")) {
                 text_weapon.setText("Weapon: " + deckModel.getDeck().getTypes().get("Weapon"));
             } else { text_weapon.setVisibility(View.GONE); }
-
 
             setStringValue(deckModel.getDeckId());
         }

@@ -1,6 +1,7 @@
 package pl.pjwstk.pgmd.hearthlounge.cards;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -61,11 +62,13 @@ public class SearchCards extends DrawerMenu {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, Cards);
         edit_card_name = (AutoCompleteTextView)findViewById(R.id.edit_card_name);
         edit_card_name.setAdapter(adapter);
+        edit_card_name.setTextColor(Color.BLACK);
         edit_card_name.setThreshold(1);
         edit_card_name.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long rowId) {
                 String selection = (String)parent.getItemAtPosition(position);
-                setString(selection);
+                edit_card_name.setText(selection);
+                setString(edit_card_name.getText().toString());
             }
         });
 

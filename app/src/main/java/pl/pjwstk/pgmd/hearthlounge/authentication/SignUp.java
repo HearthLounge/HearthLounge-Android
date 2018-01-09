@@ -162,7 +162,7 @@ public class SignUp extends DrawerMenu {
         findViewById(R.id.text_to_sign_up).setVisibility(View.GONE);
     }
 
-    public final boolean isValidEmail(CharSequence target) {
+    public boolean isValidEmail(CharSequence target) {
         if (TextUtils.isEmpty(target)) {
             Toast.makeText(SignUp.this, "Please enter email", Toast.LENGTH_SHORT).show();
             return false;

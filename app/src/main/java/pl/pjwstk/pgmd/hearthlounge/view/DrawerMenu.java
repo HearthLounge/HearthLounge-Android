@@ -64,13 +64,10 @@ public class DrawerMenu extends AppCompatActivity implements NavigationView.OnNa
     private static final String urlProfileImg = "https://cdn.pixabay.com/photo/2016/12/13/16/17/dancer-1904467_1280.png";
     public static int navItemIndex = 0;
 
-    //private FirebaseAuth fbAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_main);
-        FirebaseApp.initializeApp(getBaseContext());
 
         frameLayout = (FrameLayout)findViewById(R.id.content_frame);
         userPref = new UserPreferences(this.getApplicationContext());
