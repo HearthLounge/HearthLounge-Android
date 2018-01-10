@@ -1,8 +1,9 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.espresso;
 
 
 import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -18,6 +19,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import pl.pjwstk.pgmd.hearthlounge.InitiateApp;
+import pl.pjwstk.pgmd.hearthlounge.R;
+
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -29,6 +33,10 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
+
+/**
+ * Created by Maciek Dembowski on 08.01.2018.
+ */
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -47,7 +55,7 @@ public class DeckTest {
         }
 
         ViewInteraction imageButton = onView(
-                allOf(withId(R.id.button_decks),
+                allOf(ViewMatchers.withId(R.id.button_decks),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.grid_layout),

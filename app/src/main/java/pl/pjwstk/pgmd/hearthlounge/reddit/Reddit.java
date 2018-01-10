@@ -180,7 +180,7 @@ public class Reddit extends DrawerMenu {
     // MENU U GÓRY NA PASKU TE TRZY KROPKI :D
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.refresh, menu);
         return true;
     }
 

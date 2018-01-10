@@ -1,7 +1,8 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.espresso;
+
 
 import android.support.test.espresso.ViewInteraction;
-import android.support.test.espresso.action.ViewActions;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.Toolbar;
@@ -19,30 +20,33 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import pl.pjwstk.pgmd.hearthlounge.InitiateApp;
+import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.cards.CardListCache;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
-import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.allOf;
+
+/**
+ * Created by Maciek Dembowski on 08.01.2018.
+ */
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SearchByRadioButtonTest {
+public class SearchByPlayerClassTest {
 
     @Rule
     public ActivityTestRule<InitiateApp> mActivityTestRule = new ActivityTestRule<>(InitiateApp.class);
 
     @Test
-    public void searchByRadioButton() {
+    public void searchByPlayerClassTest() {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -50,7 +54,7 @@ public class SearchByRadioButtonTest {
         }
 
         ViewInteraction imageButton = onView(
-                allOf(withId(R.id.button_cards), isDisplayed()));
+                allOf(ViewMatchers.withId(R.id.button_cards), isDisplayed()));
         imageButton.perform(click());
 
         try {
@@ -59,49 +63,17 @@ public class SearchByRadioButtonTest {
             e.printStackTrace();
         }
 
-        ViewInteraction linearLayout = onView(
-                allOf(withId(R.id.search),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0),
-                                0),
-                        isDisplayed()));
-        linearLayout.perform(click());
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        onView(isRoot()).perform(ViewActions.pressBack());
-
-        onView(withId(R.id.minion)).check(matches(not(isChecked()))).check(matches(withText("Minion"))).perform(click());
-
         ViewInteraction imageButton2 = onView(
-                allOf(withId(R.id.button_search),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        1),
-                                0),
-                        isDisplayed()));
-        imageButton2.check(matches(isDisplayed())).perform(click());
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+                allOf(withId(R.id.button_druid), isDisplayed()));
+        imageButton2.perform(click());
 
         onView(allOf(isAssignableFrom(TextView.class),
                 withParent(isAssignableFrom(Toolbar.class))))
-                .check(matches(withText("Minion Cards")));
+                .check(matches(withText("Druid Cards")));
 
-        int count = CardListCache.getInstance().getCardList("Minion").size();
+        int count = CardListCache.getInstance().getCardList("Druid").size();
 
-        ViewInteraction textView3 = onView(
+        ViewInteraction textView = onView(
                 allOf(withId(R.id.text_view_count_cards), withText(count + " results"),
                         childAtPosition(
                                 childAtPosition(
@@ -109,7 +81,18 @@ public class SearchByRadioButtonTest {
                                         0),
                                 0),
                         isDisplayed()));
-        textView3.check(matches(withText(count + " results")));
+        textView.check(matches(withText(count + " results")));
+
+        ViewInteraction imageView = onView(
+                allOf(withId(R.id.image_view_mana_icon),
+                        childAtPosition(
+                                allOf(withId(R.id.mana_value),
+                                        childAtPosition(
+                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                2)),
+                                0),
+                        isDisplayed()));
+        imageView.check(matches(isDisplayed()));
 
     }
 

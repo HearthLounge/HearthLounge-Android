@@ -30,7 +30,6 @@
                 android:src="@drawable/neutral" />
             <ProgressBar
                 android:id="@+id/progressBar"
-                style="@style/folding_cube"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

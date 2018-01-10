@@ -10,9 +10,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 
     <string name="title_account">Account</string>
     <string name="title_log_in">Log In</string>
@@ -43,8 +41,7 @@
     <string name="action_logout">Logout</string>
     <string name="action_mark_all_read">Mark All as Read</string>
 
-
-    <!--// Nasze-->
+    <!-- Nasze -->
     <string name="keyUsername">username</string>
     <string name="keyEmail">email</string>
     <string name="keyPassword">password</string>
@@ -80,13 +77,6 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="tab_text_1">ALL CARDS</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
-    <string name="action_settings">Settings</string>
 
     <string-array name="region_array">
         <item></item>

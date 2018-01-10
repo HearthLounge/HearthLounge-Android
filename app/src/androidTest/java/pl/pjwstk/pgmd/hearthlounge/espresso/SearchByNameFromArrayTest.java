@@ -1,7 +1,8 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.espresso;
 
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.matcher.RootMatchers;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +20,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import pl.pjwstk.pgmd.hearthlounge.InitiateApp;
+import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.cards.CardListCache;
 
 import static android.support.test.espresso.Espresso.onData;
@@ -38,6 +41,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Created by Maciek Dembowski on 08.01.2018.
+ */
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class SearchByNameFromArrayTest {
@@ -54,7 +61,7 @@ public class SearchByNameFromArrayTest {
         }
 
         ViewInteraction imageButton = onView(
-                allOf(withId(R.id.button_cards), isDisplayed()));
+                allOf(ViewMatchers.withId(R.id.button_cards), isDisplayed()));
         imageButton.perform(click());
 
         try {

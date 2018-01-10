@@ -1,12 +1,13 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.espresso;
 
 
+import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.Toolbar;
 import android.test.suitebuilder.annotation.LargeTest;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -20,28 +21,38 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import pl.pjwstk.pgmd.hearthlounge.InitiateApp;
+import pl.pjwstk.pgmd.hearthlounge.R;
+import pl.pjwstk.pgmd.hearthlounge.cards.CardListCache;
+
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.is;
 
-import pl.pjwstk.pgmd.hearthlounge.cards.CardListCache;
+/**
+ * Created by Maciek Dembowski on 09.01.2018.
+ */
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class ExpansionsTest {
+public class AllCardsTest {
 
     @Rule
     public ActivityTestRule<InitiateApp> mActivityTestRule = new ActivityTestRule<>(InitiateApp.class);
 
     @Test
-    public void expansionsTest() {
+    public void allCardsTest() {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -49,7 +60,7 @@ public class ExpansionsTest {
         }
 
         ViewInteraction imageButton = onView(
-                allOf(withId(R.id.button_expansions), isDisplayed()));
+                allOf(ViewMatchers.withId(R.id.button_cards), isDisplayed()));
         imageButton.perform(click());
 
         try {
@@ -58,15 +69,15 @@ public class ExpansionsTest {
             e.printStackTrace();
         }
 
-        onView(allOf(isAssignableFrom(TextView.class),
-                withParent(isAssignableFrom(Toolbar.class))))
-                .check(matches(withText("Expansions")));
-
-        onView(withId(R.id.expansions_scrollView)).perform(swipeUp());
-
         ViewInteraction linearLayout = onView(
-                allOf(withId(R.id.knights_of_the_frozen_throne), isDisplayed()));
-        linearLayout.check(matches(isDisplayed())).perform(click());
+                allOf(withId(R.id.all_cards),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0),
+                                2),
+                        isDisplayed()));
+        linearLayout.perform(click());
 
         try {
             Thread.sleep(1000);
@@ -76,12 +87,24 @@ public class ExpansionsTest {
 
         onView(allOf(isAssignableFrom(TextView.class),
                 withParent(isAssignableFrom(Toolbar.class))))
-                .check(matches(withText("Knights of the Frozen Throne")));
+                .check(matches(withText("All Cards")));
+
+        int count = CardListCache.getInstance().getCardList(null).size();
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.text_view_count_cards), withText(count + " results"),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText(count + " results")));
 
         ViewInteraction imageView = onView(
-                allOf(withId(R.id.icon_expansions),
+                allOf(withId(R.id.image_view_mana_icon),
                         childAtPosition(
-                                allOf(withId(R.id.all_cards),
+                                allOf(withId(R.id.mana_value),
                                         childAtPosition(
                                                 IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                                 2)),
@@ -89,31 +112,14 @@ public class ExpansionsTest {
                         isDisplayed()));
         imageView.check(matches(isDisplayed()));
 
-//        ViewInteraction imageView3 = onView(
-//                allOf(withId(com.google.android.youtube.R.id.player_control_play_pause_replay_button), withContentDescription("Odtwórz film"),
-//                        childAtPosition(
-//                                allOf(withId(com.google.android.youtube.R.id.controls_layout),
-//                                        childAtPosition(
-//                                                IsInstanceOf.<View>instanceOf(android.widget.FrameLayout.class),
-//                                                0)),
-//                                5),
-//                        isDisplayed()));
-//        imageView3.check(matches(isDisplayed()));
-//
-//
-//        ViewInteraction imageView4 = onView(
-//                allOf(withId(com.google.android.youtube.R.id.fullscreen_button), withContentDescription("Otwórz pełny ekran"),
-//                        childAtPosition(
-//                                allOf(withId(com.google.android.youtube.R.id.bottom_end_container),
-//                                        childAtPosition(
-//                                                withId(com.google.android.youtube.R.id.bottom_bar_container),
-//                                                1)),
-//                                1),
-//                        isDisplayed()));
-//        imageView4.check(matches(isDisplayed()));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         ViewInteraction linearLayout2 = onView(
-                allOf(withId(R.id.all_cards),
+                allOf(withId(R.id.mana_value),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
@@ -122,25 +128,35 @@ public class ExpansionsTest {
                         isDisplayed()));
         linearLayout2.check(matches(isDisplayed())).perform(click());
 
+        ViewInteraction imageView2 = onView(
+                allOf(withId(R.id.seven_plus),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0),
+                                8),
+                        isDisplayed()));
+        imageView2.check(matches(isDisplayed())).perform(click());
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        int count = CardListCache.getInstance().getCardList("Knights of the Frozen Throne").size();
+//        int count2 = CardListCache.getInstance().getCardList("8").size();
+//
+//        ViewInteraction textView2 = onView(
+//                allOf(withId(R.id.text_view_count_cards), withText(count2 + " results"),
+//                        childAtPosition(
+//                                childAtPosition(
+//                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+//                                        0),
+//                                0),
+//                        isDisplayed()));
+//        textView2.check(matches(withText(count + " results")));
 
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.text_view_count_cards), withText(count + " results"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView3.check(matches(withText(count + " results")));
-
-        ViewInteraction imageView2 = onView(
+        ViewInteraction imageView3 = onView(
                 allOf(withId(R.id.image_view_mana_icon),
                         childAtPosition(
                                 allOf(withId(R.id.mana_value),
@@ -149,7 +165,7 @@ public class ExpansionsTest {
                                                 2)),
                                 0),
                         isDisplayed()));
-        imageView2.check(matches(isDisplayed()));
+        imageView3.check(matches(isDisplayed()));
 
         try {
             Thread.sleep(1000);
@@ -157,47 +173,61 @@ public class ExpansionsTest {
             e.printStackTrace();
         }
 
-        ViewInteraction linearLayout3 = onView(
-                allOf(withId(R.id.mana_value),
+        onView(withId(R.id.list_view_cards)).perform(swipeUp());
+
+        DataInteraction linearLayout3 = onData(anything())
+                .inAdapterView(allOf(withId(R.id.list_view_cards),
                         childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0),
-                                2),
-                        isDisplayed()));
-        linearLayout3.check(matches(isDisplayed())).perform(click());
+                                withClassName(is("android.widget.LinearLayout")),
+                                1)))
+                .atPosition(19);
+        linearLayout3.perform(click());
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        onView(allOf(isAssignableFrom(TextView.class),
+                withParent(isAssignableFrom(Toolbar.class))))
+                .check(matches(withText("Selected Card")));
 
         ViewInteraction imageView5 = onView(
-                allOf(withId(R.id.five),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0),
-                                5),
-                        isDisplayed()));
-        imageView5.check(matches(isDisplayed())).perform(click());
-
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.text_view_count_cards), withText("18 results"),
+                allOf(withId(R.id.image_viewCard),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
                                         0),
                                 0),
                         isDisplayed()));
-        textView4.check(matches(withText("18 results")));
+        imageView5.check(matches(isDisplayed()));
 
         ViewInteraction imageView6 = onView(
-                allOf(withId(R.id.image_view_mana_icon),
+                allOf(withId(R.id.image_viewCardGold),
                         childAtPosition(
-                                allOf(withId(R.id.mana_value),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                                2)),
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0),
                                 0),
                         isDisplayed()));
         imageView6.check(matches(isDisplayed()));
 
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.text_view_name), withText("NAME: Neptulon"),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0),
+                                0),
+                        isDisplayed()));
+        textView3.check(matches(withText("NAME: Neptulon")));
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private static Matcher<View> childAtPosition(
