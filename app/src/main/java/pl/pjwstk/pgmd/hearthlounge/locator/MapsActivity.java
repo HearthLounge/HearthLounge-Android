@@ -6,21 +6,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Icon;
 import android.location.Location;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.util.Xml;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,7 +24,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,16 +35,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import pl.pjwstk.pgmd.hearthlounge.MainActivity;
 import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.authentication.UserPreferences;
 import pl.pjwstk.pgmd.hearthlounge.model.Localization;
@@ -184,15 +174,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-//          mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
             mMap.setMinZoomPreference(14);
             doItAll();
         } else {
-            Toast.makeText(MapsActivity.this, "You have to accept to enjoy all app's services!", Toast.LENGTH_LONG).show();
-            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+            Toast.makeText(MapsActivity.this,
+                    "You have to accept this to enjoy all app's functions!",
+                    Toast.LENGTH_LONG).show();
+            if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 mMap.setMyLocationEnabled(false);
             }
@@ -203,16 +196,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
     public void currentLocation(){
 
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             Task locationResult = mFusedLocationProviderClient.getLastLocation();
             locationResult.addOnCompleteListener(this, new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful()) {
-                        // Set the map's camera position to the current location of the device.
                         Location mLastKnownLocation = (Location) task.getResult();
-                        userPosition = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
+                        userPosition = new LatLng(mLastKnownLocation.getLatitude(),
+                                mLastKnownLocation.getLongitude());
                         if(firstUpdate){
                         firstUpdate = false;
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(
@@ -220,11 +214,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                         updateLocalization(userPosition);
                         Log.d("currentLocation", "Current location WORKING");
-                        //mapDb.readLocalizations();
-                    } else {
-                        Log.d("Hello there...", "Current location is null. Using defaults.");
-                        Log.e("Hello there...", "Exception: %s", task.getException());
-//                    mMap.getUiSettings().setMyLocationButtonEnabled(false);
                     }
                 }
             });
@@ -247,26 +236,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         if (task.isSuccessful()) {
                             Localization tempLoc;
                             for (DocumentSnapshot document : task.getResult()) {
-
-                                if(!userPref.getSingleStringPref(userPref.keyUid).equals(document.getId())) {
-                                    Log.d("GET ALL LOCAL", document.getId() + " => " + document.getData());
+                                if(!userPref.getSingleStringPref(userPref.keyUid).
+                                        equals(document.getId())) {
                                     tempLoc = new Localization(document.getData());
-//                                if(Math.abs(tempLoc.getLat() - userPref.getLanOrLng(userPref.keyLatitude)) != 0 &&
-//                                Math.abs(tempLoc.getLng() - userPref.getLanOrLng(userPref.keyLongitude)) != 0){
-//
-//                                    tempList.add(tempLoc);
-//                                }
                                     Double x = Double.valueOf(String.valueOf(tempLoc.getRank()));
-                                    MarkerOptions tempMarker = new MarkerOptions().position(tempLoc.getLatLng()).title(tempLoc.getUsername() + " rank:" + x.intValue());
+                                    MarkerOptions tempMarker = new MarkerOptions().
+                                            position(tempLoc.getLatLng()).title(tempLoc.getUsername()
+                                            + " rank:" + x.intValue());
                                     addNewMarker(tempMarker);
                                 }
                             }
                         } else {
-                            Log.d("GET ALL LOCAL", "FAIL FAIL FAIL FAIL ", task.getException());
                         }
                     }
                 });
-        Log.d("GET ALL LOCAL","Wychodze z pobierania listy" );
     }
     public void updateLocalization(final LatLng latLng){
 
@@ -295,13 +278,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("Delete my position!!!", "DocumentSnapshot successfully deleted!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w("Delete my position!!!", "Error deleting document", e);
                     }
                 });
     }
@@ -316,20 +297,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
                 new AlertDialog.Builder(this)
-                        .setTitle("tytul")
-                        .setMessage("message")
-                        .setPositiveButton("button", new DialogInterface.OnClickListener() {
+                        .setTitle("Hi!")
+                        .setMessage("If you want to user this fuctionality, you have to accept" +
+                                "this permission.")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
                                 ActivityCompat.requestPermissions(MapsActivity.this,
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                         MY_PERMISSIONS_REQUEST_LOCATION);
@@ -338,7 +315,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         .create()
                         .show();
             } else {
-                // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);

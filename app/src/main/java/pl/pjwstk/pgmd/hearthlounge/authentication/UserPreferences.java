@@ -40,10 +40,6 @@ public class UserPreferences {
     private SharedPreferences sharedPrefs;
     private SharedPreferences.Editor prefsEditor;
 
-//    public UserPreferences(){
-//
-//    }
-
     public UserPreferences(Context context) {
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         this.prefsEditor = sharedPrefs.edit();
@@ -86,7 +82,6 @@ public class UserPreferences {
             prefsEditor.commit();
 
         }
-
     }
 
     public void clearUserPref(){

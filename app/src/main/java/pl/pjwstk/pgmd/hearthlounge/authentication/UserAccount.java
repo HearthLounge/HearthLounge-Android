@@ -7,9 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.v7.widget.AppCompatButton;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -32,9 +30,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import pl.pjwstk.pgmd.hearthlounge.MainActivity;
+import pl.pjwstk.pgmd.hearthlounge.initiateApp.MainActivity;
 import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.model.User;
 import pl.pjwstk.pgmd.hearthlounge.view.CircleTransform;
@@ -505,8 +502,9 @@ public class UserAccount extends DrawerMenu{
                                         }
                                     }
                                 });
-//                        Intent goBackToMenu = new Intent(getApplicationContext(), MainActivity.class);
-//                        startActivity(goBackToMenu);
+                        Intent goBackToMenu = new Intent(getApplicationContext(), MainActivity.class);
+                        goBackToMenu.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(goBackToMenu);
                         finalMDropdown.dismiss();
                         return true;
                     } else if (action == MotionEvent.ACTION_CANCEL) {

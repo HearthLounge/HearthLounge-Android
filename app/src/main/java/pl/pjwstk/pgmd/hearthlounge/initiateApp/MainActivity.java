@@ -1,4 +1,4 @@
-package pl.pjwstk.pgmd.hearthlounge;
+package pl.pjwstk.pgmd.hearthlounge.initiateApp;
 
 import android.content.Intent;
 import android.graphics.Point;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.adventures.Adventures;
 import pl.pjwstk.pgmd.hearthlounge.authentication.UserService;
 import pl.pjwstk.pgmd.hearthlounge.cards.CardsFilterMenu;

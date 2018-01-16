@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
-import pl.pjwstk.pgmd.hearthlounge.MainActivity;
+import pl.pjwstk.pgmd.hearthlounge.initiateApp.MainActivity;
 import pl.pjwstk.pgmd.hearthlounge.R;
 
 public class LogIn extends DrawerMenu {

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import pl.pjwstk.pgmd.hearthlounge.MainActivity;
+import pl.pjwstk.pgmd.hearthlounge.initiateApp.MainActivity;
 import pl.pjwstk.pgmd.hearthlounge.R;
 import pl.pjwstk.pgmd.hearthlounge.model.Card;
 

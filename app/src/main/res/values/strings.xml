@@ -10,7 +10,9 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
 
     <string name="title_account">Account</string>
     <string name="title_log_in">Log In</string>
@@ -41,7 +43,8 @@
     <string name="action_logout">Logout</string>
     <string name="action_mark_all_read">Mark All as Read</string>
 
-    <!-- Nasze -->
+
+    <!--// Nasze-->
     <string name="keyUsername">username</string>
     <string name="keyEmail">email</string>
     <string name="keyPassword">password</string>
@@ -77,6 +80,13 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="tab_text_1">ALL CARDS</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
 
     <string-array name="region_array">
         <item></item>
@@ -217,12 +227,12 @@
         <item>Sacrificial Pact</item>
         <item>Totemic Might</item>
         <item>Circle of Healing</item>
-        <item>Inner Rage</item>
+        <item>InnerRage</item>
         <item>Preparation</item>
-        <item>Shadowstep</item>
+        <item>Shadow step</item>
         <item>Silence</item>
         <item>Wisp</item>
-        <item>Target Dummy</item>
+        <item>TargetDummy</item>
         <item>Murloc Tinyfin</item>
         <item>Forbidden Flame</item>
         <item>Forbidden Healing</item>
@@ -232,1445 +242,1416 @@
         <item>Freezing Potion</item>
         <item>Snowflipper Penguin</item>
         <item>Shifting Scroll</item>
-        <item>Alleria Windrunner</item>
+        <item>AlleriaWindrunner</item>
         <item>Khadgar</item>
-        <item>Lady Liadrin</item>
-        <item>Magni Bronzebeard</item>
-        <item>Maiev Shadowsong</item>
+        <item>LadyLiadrin</item>
+        <item>MagniBronzebeard</item>
+        <item>MaievShadowsong</item>
         <item>Medivh</item>
-        <item>Morgl the Oracle</item>
-        <item>Nemsy Necrofizzle</item>
-        <item>Prince Arthas</item>
-        <item>Tyrande Whisperwind</item>
-        <item>Arcane Missiles</item>
-        <item>Arcane Shot</item>
-        <item>Blessing of Might</item>
+        <item>MorgltheOracle</item>
+        <item>NemsyNecrofizzle</item>
+        <item>PrinceArthas</item>
+        <item>TyrandeWhisperwind</item>
+        <item>ArcaneMissiles</item>
+        <item>ArcaneShot</item>
+        <item>BlessingofMight</item>
         <item>Charge</item>
         <item>Claw</item>
         <item>Corruption</item>
-        <item>Deadly Poison</item>
-        <item>Elven Archer</item>
-        <item>Frost Shock</item>
-        <item>Goldshire Footman</item>
-        <item>Grimscale Oracle</item>
-        <item>Hand of Protection</item>
-        <item>Holy Smite</item>
+        <item>DeadlyPoison</item>
+        <item>ElvenArcher</item>
+        <item>FrostShock</item>
+        <item>GoldshireFootman</item>
+        <item>GrimscaleOracle</item>
+        <item>HandofProtection</item>
+        <item>HolySmite</item>
         <item>Humility</item>
-        <item>Hunter\'s Mark</item>
-        <item>Light\'s Justice</item>
-        <item>Mind Vision</item>
-        <item>Mirror Image</item>
-        <item>Mortal Coil</item>
-        <item>Murloc Raider</item>
-        <item>Northshire Cleric</item>
-        <item>Power WorShield</item>
-        <item>Sinister Strike</item>
+        <item>Hunter\'sMark</item>
+        <item>Light\'sJustice</item>
+        <item>MindVision</item>
+        <item>MirrorImage</item>
+        <item>MortalCoil</item>
+        <item>MurlocRaider</item>
+        <item>NorthshireCleric</item>
+        <item>PowerWord:Shield</item>
+        <item>SinisterStrike</item>
         <item>Soulfire</item>
-        <item>Stonetusk Boar</item>
-        <item>Timber Wolf</item>
+        <item>StonetuskBoar</item>
+        <item>TimberWolf</item>
         <item>Tracking</item>
         <item>Voidwalker</item>
-        <item>Voodoo Doctor</item>
+        <item>VoodooDoctor</item>
         <item>Whirlwind</item>
-        <item>Abusive Sergeant</item>
-        <item>Angry Chicken</item>
-        <item>Argent Squire</item>
-        <item>Bestial Wrath</item>
-        <item>Blessing of Wisdom</item>
-        <item>Blood Imp</item>
-        <item>Bloodsail Corsair</item>
-        <item>Cold Blood</item>
-        <item>Dust Devil</item>
-        <item>Earth Shock</item>
-        <item>Eye for an Eye</item>
-        <item>Flame Imp</item>
-        <item>Forked Lightning</item>
-        <item>Hungry Crab</item>
-        <item>Inner Fire</item>
-        <item>Leper Gnome</item>
-        <item>Lightning Bolt</item>
+        <item>AbusiveSergeant</item>
+        <item>AngryChicken</item>
+        <item>ArgentSquire</item>
+        <item>BestialWrath</item>
+        <item>BlessingofWisdom</item>
+        <item>BloodImp</item>
+        <item>BloodsailCorsair</item>
+        <item>ColdBlood</item>
+        <item>DustDevil</item>
+        <item>EarthShock</item>
+        <item>EyeforanEye</item>
+        <item>FlameImp</item>
+        <item>ForkedLightning</item>
+        <item>HungryCrab</item>
+        <item>InnerFire</item>
+        <item>LeperGnome</item>
+        <item>LightningBolt</item>
         <item>Lightwarden</item>
-        <item>Mana Wyrm</item>
-        <item>Murloc Tidecaller</item>
+        <item>ManaWyrm</item>
+        <item>MurlocTidecaller</item>
         <item>Naturalize</item>
-        <item>Noble Sacrifice</item>
+        <item>NobleSacrifice</item>
         <item>Redemption</item>
         <item>Repentance</item>
         <item>Savagery</item>
         <item>Secretkeeper</item>
-        <item>Shield Slam</item>
+        <item>ShieldSlam</item>
         <item>Shieldbearer</item>
-        <item>Southsea Deckhand</item>
+        <item>SouthseaDeckhand</item>
         <item>Upgrade!</item>
-        <item>Worgen Infiltrator</item>
-        <item>Young Dragonhawk</item>
-        <item>Young Priestess</item>
+        <item>WorgenInfiltrator</item>
+        <item>YoungDragonhawk</item>
+        <item>YoungPriestess</item>
         <item>Conceal</item>
-        <item>Ice Lance</item>
-        <item>Power Overwhelming</item>
+        <item>IceLance</item>
+        <item>PowerOverwhelming</item>
         <item>Avenge</item>
         <item>Undertaker</item>
         <item>Webspinner</item>
-        <item>Zombie Chow</item>
-        <item>Clockwork Gnome</item>
+        <item>ZombieChow</item>
+        <item>ClockworkGnome</item>
         <item>Cogmaster</item>
-        <item>Light of the Naaru</item>
+        <item>LightoftheNaaru</item>
         <item>Shadowbomber</item>
         <item>Warbot</item>
-        <item>Dragon Egg</item>
-        <item>Twilight Whelp</item>
-        <item>Arcane Blast</item>
-        <item>Brave Archer</item>
+        <item>DragonEgg</item>
+        <item>TwilightWhelp</item>
+        <item>ArcaneBlast</item>
+        <item>BraveArcher</item>
         <item>Buccaneer</item>
-        <item>Competitive Spirit</item>
-        <item>Flash Heal</item>
-        <item>Gadgetzan Jouster</item>
-        <item>Injured Kvaldir</item>
-        <item>Living Roots</item>
-        <item>Lowly Squire</item>
-        <item>Power WorGlory</item>
-        <item>Tournament Attendee</item>
-        <item>Cursed Blade</item>
-        <item>Pit Snake</item>
-        <item>Raven Idol</item>
-        <item>Reliquary Seeker</item>
-        <item>Sacred Trial</item>
-        <item>Sir Finley Mrrgglton</item>
-        <item>Tunnel Trogg</item>
-        <item>Bladed Cultist</item>
-        <item>Blood To Ichor</item>
-        <item>Divine Strength</item>
+        <item>CompetitiveSpirit</item>
+        <item>FlashHeal</item>
+        <item>GadgetzanJouster</item>
+        <item>InjuredKvaldir</item>
+        <item>LivingRoots</item>
+        <item>LowlySquire</item>
+        <item>PowerWord:Glory</item>
+        <item>TournamentAttendee</item>
+        <item>CursedBlade</item>
+        <item>PitSnake</item>
+        <item>RavenIdol</item>
+        <item>ReliquarySeeker</item>
+        <item>SacredTrial</item>
+        <item>SirFinleyMrrgglton</item>
+        <item>TunnelTrogg</item>
+        <item>BladedCultist</item>
+        <item>BloodToIchor</item>
+        <item>DivineStrength</item>
         <item>Evolve</item>
-        <item>Fiery Bat</item>
-        <item>Forbidden Ancient</item>
-        <item>Journey Below</item>
-        <item>N\'Zoth\'s First Mate</item>
-        <item>On the Hunt</item>
-        <item>Possessed Villager</item>
-        <item>Primal Fusion</item>
-        <item>Selfless Hero</item>
-        <item>Shifter Zerus</item>
-        <item>Tentacle of N\'Zoth</item>
-        <item>Vilefin Inquisitor</item>
-        <item>Zealous Initiate</item>
-        <item>Arcane Anomaly</item>
-        <item>Babbling Book</item>
-        <item>Enchanted Raven</item>
-        <item>Malchezaar\'s Imp</item>
-        <item>Runic Egg</item>
+        <item>FieryBat</item>
+        <item>ForbiddenAncient</item>
+        <item>JourneyBelow</item>
+        <item>N\'Zoth\'sFirstMate</item>
+        <item>OntheHunt</item>
+        <item>PossessedVillager</item>
+        <item>PrimalFusion</item>
+        <item>SelflessHero</item>
+        <item>ShifterZerus</item>
+        <item>TentacleofN\'Zoth</item>
+        <item>VilefinInquisitor</item>
+        <item>ZealousInitiate</item>
+        <item>ArcaneAnomaly</item>
+        <item>BabblingBook</item>
+        <item>EnchantedRaven</item>
+        <item>Malchezaar\'sImp</item>
+        <item>RunicEgg</item>
         <item>Swashburglar</item>
         <item>Alleycat</item>
-        <item>Finders Keepers</item>
-        <item>Getaway Kodo</item>
-        <item>Grimscale Chum</item>
-        <item>I Know a Guy</item>
-        <item>Jade Idol</item>
-        <item>Kabal Lackey</item>
-        <item>Mark of the Lotus</item>
-        <item>Meanstreet Marshal</item>
-        <item>Mistress of Mixtures</item>
-        <item>Patches the Pirate</item>
-        <item>Pint-Size Potion</item>
-        <item>Potion of Madness</item>
-        <item>Small-Time Buccaneer</item>
-        <item>Smuggler\'s Crate</item>
-        <item>Smuggler\'s Run</item>
-        <item>Weasel Tunneler</item>
+        <item>FindersKeepers</item>
+        <item>GetawayKodo</item>
+        <item>GrimscaleChum</item>
+        <item>IKnowaGuy</item>
+        <item>JadeIdol</item>
+        <item>KabalLackey</item>
+        <item>MarkoftheLotus</item>
+        <item>MeanstreetMarshal</item>
+        <item>MistressofMixtures</item>
+        <item>PatchesthePirate</item>
+        <item>Pint-SizePotion</item>
+        <item>PotionofMadness</item>
+        <item>Small-TimeBuccaneer</item>
+        <item>Smuggler\'sCrate</item>
+        <item>Smuggler\'sRun</item>
+        <item>WeaselTunneler</item>
         <item>Adaptation</item>
-        <item>Air Elemental</item>
-        <item>Awaken the Makers</item>
-        <item>Binding Heal</item>
-        <item>Crystalline Oracle</item>
-        <item>Earthen Scales</item>
-        <item>Emerald Hive Queen</item>
-        <item>Emerald Reaver</item>
-        <item>Fire Fly</item>
-        <item>Fire Plume\'s Heart</item>
-        <item>Glacial Shard</item>
+        <item>AirElemental</item>
+        <item>AwakentheMakers</item>
+        <item>BindingHeal</item>
+        <item>CrystallineOracle</item>
+        <item>EarthenScales</item>
+        <item>EmeraldHiveQueen</item>
+        <item>EmeraldReaver</item>
+        <item>FireFly</item>
+        <item>FirePlume\'sHeart</item>
+        <item>GlacialShard</item>
         <item>Hallucination</item>
-        <item>Iron Hide</item>
-        <item>Jeweled Macaw</item>
-        <item>Jungle Giants</item>
-        <item>Lakkari Sacrifice</item>
-        <item>Lost in the Jungle</item>
-        <item>Molten Blade</item>
-        <item>Open the Waygate</item>
-        <item>Raptor Hatchling</item>
+        <item>IronHide</item>
+        <item>JeweledMacaw</item>
+        <item>JungleGiants</item>
+        <item>LakkariSacrifice</item>
+        <item>LostintheJungle</item>
+        <item>MoltenBlade</item>
+        <item>OpentheWaygate</item>
+        <item>RaptorHatchling</item>
         <item>Stampede</item>
-        <item>The Caverns Below</item>
-        <item>The Last Kaleidosaur</item>
-        <item>The Marsh Queen</item>
-        <item>Unite the Murlocs</item>
-        <item>Acherus Veteran</item>
-        <item>Animated Berserker</item>
-        <item>Breath of Sindragosa</item>
-        <item>Deadscale Knight</item>
+        <item>TheCavernsBelow</item>
+        <item>TheLastKaleidosaur</item>
+        <item>TheMarshQueen</item>
+        <item>UnitetheMurlocs</item>
+        <item>AcherusVeteran</item>
+        <item>AnimatedBerserker</item>
+        <item>BreathofSindragosa</item>
+        <item>DeadscaleKnight</item>
         <item>Doomerang</item>
-        <item>Play Dead</item>
-        <item>Righteous Protector</item>
-        <item>Sanguine Reveler</item>
-        <item>Wretched Tiller</item>
-        <item>Arcane Artificer</item>
+        <item>PlayDead</item>
+        <item>RighteousProtector</item>
+        <item>SanguineReveler</item>
+        <item>WretchedTiller</item>
+        <item>ArcaneArtificer</item>
         <item>Barkskin</item>
         <item>Candleshot</item>
-        <item>Dark Pact</item>
-        <item>Dire Mole</item>
-        <item>Feral Gibberer</item>
-        <item>Gravelsnout Knight</item>
+        <item>DarkPact</item>
+        <item>DireMole</item>
+        <item>FeralGibberer</item>
+        <item>GravelsnoutKnight</item>
         <item>Kingsbane</item>
-        <item>Kobold Librarian</item>
-        <item>Lesser Jasper Spellstone</item>
-        <item>Psionic Probe</item>
-        <item>Unstable Evolution</item>
-        <item>Wax Elemental</item>
-        <item>Acidic Swamp Ooze</item>
-        <item>Arcane Explosion</item>
-        <item>Bloodfen Raptor</item>
-        <item>Bluegill Warrior</item>
+        <item>KoboldLibrarian</item>
+        <item>LesserJasperSpellstone</item>
+        <item>PsionicProbe</item>
+        <item>UnstableEvolution</item>
+        <item>WaxElemental</item>
+        <item>AcidicSwampOoze</item>
+        <item>ArcaneExplosion</item>
+        <item>BloodfenRaptor</item>
+        <item>BluegillWarrior</item>
         <item>Cleave</item>
-        <item>Divine Spirit</item>
+        <item>DivineSpirit</item>
         <item>Execute</item>
-        <item>Flametongue Totem</item>
+        <item>FlametongueTotem</item>
         <item>Frostbolt</item>
-        <item>Frostwolf Grunt</item>
-        <item>Heroic Strike</item>
-        <item>Holy Light</item>
-        <item>Kobold Geomancer</item>
-        <item>Mark of the Wild</item>
-        <item>Mind Blast</item>
-        <item>Murloc Tidehunter</item>
-        <item>Novice Engineer</item>
-        <item>River Crocolisk</item>
-        <item>Rockbiter Weapon</item>
+        <item>FrostwolfGrunt</item>
+        <item>HeroicStrike</item>
+        <item>HolyLight</item>
+        <item>KoboldGeomancer</item>
+        <item>MarkoftheWild</item>
+        <item>MindBlast</item>
+        <item>MurlocTidehunter</item>
+        <item>NoviceEngineer</item>
+        <item>RiverCrocolisk</item>
+        <item>RockbiterWeapon</item>
         <item>Sap</item>
-        <item>Shadow WorPain</item>
+        <item>ShadowWord:Pain</item>
         <item>Shiv</item>
         <item>Succubus</item>
-        <item>Wild Growth</item>
+        <item>WildGrowth</item>
         <item>Windfury</item>
-        <item>Amani Berserker</item>
-        <item>Ancestral Spirit</item>
-        <item>Ancient Watcher</item>
-        <item>Argent Protector</item>
+        <item>AmaniBerserker</item>
+        <item>AncestralSpirit</item>
+        <item>AncientWatcher</item>
+        <item>ArgentProtector</item>
         <item>Armorsmith</item>
-        <item>Battle Rage</item>
+        <item>BattleRage</item>
         <item>Betrayal</item>
-        <item>Bloodmage Thalnos</item>
-        <item>Bloodsail Raider</item>
-        <item>Commanding Shout</item>
-        <item>Crazed Alchemist</item>
-        <item>Cruel Taskmaster</item>
-        <item>Defias Ringleader</item>
+        <item>BloodmageThalnos</item>
+        <item>BloodsailRaider</item>
+        <item>CommandingShout</item>
+        <item>CrazedAlchemist</item>
+        <item>CruelTaskmaster</item>
+        <item>DefiasRingleader</item>
         <item>Demonfire</item>
-        <item>Dire Wolf Alpha</item>
+        <item>DireWolfAlpha</item>
         <item>Doomsayer</item>
         <item>Equality</item>
         <item>Eviscerate</item>
-        <item>Explosive Trap</item>
-        <item>Faerie Dragon</item>
+        <item>ExplosiveTrap</item>
+        <item>FaerieDragon</item>
         <item>Flare</item>
-        <item>Freezing Trap</item>
-        <item>Knife Juggler</item>
+        <item>FreezingTrap</item>
+        <item>KnifeJuggler</item>
         <item>Lightwell</item>
-        <item>Loot Hoarder</item>
-        <item>Lorewalker Cho</item>
-        <item>Mad Bomber</item>
-        <item>Mana Addict</item>
-        <item>Mana Wraith</item>
-        <item>Master Swordsmith</item>
-        <item>Millhouse Manastorm</item>
+        <item>LootHoarder</item>
+        <item>LorewalkerCho</item>
+        <item>MadBomber</item>
+        <item>ManaAddict</item>
+        <item>ManaWraith</item>
+        <item>MasterSwordsmith</item>
+        <item>MillhouseManastorm</item>
         <item>Misdirection</item>
-        <item>Nat Pagle</item>
-        <item>Patient Assassin</item>
-        <item>Pint-Sized Summoner</item>
-        <item>Power of the Wild</item>
+        <item>NatPagle</item>
+        <item>PatientAssassin</item>
+        <item>Pint-SizedSummoner</item>
+        <item>PoweroftheWild</item>
         <item>Rampage</item>
-        <item>Scavenging Hyena</item>
+        <item>ScavengingHyena</item>
         <item>Slam</item>
-        <item>Snake Trap</item>
+        <item>SnakeTrap</item>
         <item>Snipe</item>
-        <item>Sorcerer\'s Apprentice</item>
-        <item>Stormforged Axe</item>
-        <item>Sunfury Protector</item>
-        <item>Wild Pyromancer</item>
+        <item>Sorcerer\'sApprentice</item>
+        <item>StormforgedAxe</item>
+        <item>SunfuryProtector</item>
+        <item>WildPyromancer</item>
         <item>Wrath</item>
-        <item>Youthful Brewmaster</item>
-        <item>Captain\'s Parrot</item>
-        <item>Echoing Ooze</item>
-        <item>Haunted Creeper</item>
-        <item>Mad Scientist</item>
-        <item>Nerub\'ar Weblord</item>
-        <item>Nerubian Egg</item>
+        <item>YouthfulBrewmaster</item>
+        <item>Captain\'sParrot</item>
+        <item>EchoingOoze</item>
+        <item>HauntedCreeper</item>
+        <item>MadScientist</item>
+        <item>Nerub\'arWeblord</item>
+        <item>NerubianEgg</item>
         <item>Reincarnate</item>
-        <item>Unstable Ghoul</item>
+        <item>UnstableGhoul</item>
         <item>Annoy-o-Tron</item>
-        <item>Anodized Robo Cub</item>
-        <item>Call Pet</item>
+        <item>AnodizedRoboCub</item>
+        <item>CallPet</item>
         <item>Crackle</item>
         <item>Darkbomb</item>
-        <item>Explosive Sheep</item>
-        <item>Feign Death</item>
+        <item>ExplosiveSheep</item>
+        <item>FeignDeath</item>
         <item>Flamecannon</item>
-        <item>Gilblin Stalker</item>
+        <item>GilblinStalker</item>
         <item>Glaivezooka</item>
-        <item>Goblin Auto-Barber</item>
+        <item>GoblinAuto-Barber</item>
         <item>Mechwarper</item>
-        <item>Micro Machine</item>
-        <item>Mistress of Pain</item>
-        <item>One-eyed Cheat</item>
+        <item>MicroMachine</item>
+        <item>MistressofPain</item>
+        <item>One-eyedCheat</item>
         <item>Puddlestomper</item>
         <item>Recombobulator</item>
-        <item>Seal of Light</item>
+        <item>SealofLight</item>
         <item>Shadowboxer</item>
-        <item>Shielded Minibot</item>
-        <item>Ship\'s Cannon</item>
+        <item>ShieldedMinibot</item>
+        <item>Ship\'sCannon</item>
         <item>Shrinkmeister</item>
         <item>Snowchugger</item>
-        <item>Steamwheedle Sniper</item>
-        <item>Stonesplinter Trogg</item>
-        <item>Unstable Portal</item>
-        <item>Vitality Totem</item>
-        <item>Whirling Zap-o-matic</item>
-        <item>Gang Up</item>
-        <item>Lava Shock</item>
-        <item>Quick Shot</item>
+        <item>SteamwheedleSniper</item>
+        <item>StonesplinterTrogg</item>
+        <item>UnstablePortal</item>
+        <item>VitalityTotem</item>
+        <item>WhirlingZap-o-matic</item>
+        <item>GangUp</item>
+        <item>LavaShock</item>
+        <item>QuickShot</item>
         <item>Resurrect</item>
         <item>Revenge</item>
-        <item>Alexstrasza\'s Champion</item>
-        <item>Ancestral Knowledge</item>
-        <item>Argent Lance</item>
-        <item>Argent Watchman</item>
-        <item>Bear Trap</item>
+        <item>Alexstrasza\'sChampion</item>
+        <item>AncestralKnowledge</item>
+        <item>ArgentLance</item>
+        <item>ArgentWatchman</item>
+        <item>BearTrap</item>
         <item>Bolster</item>
-        <item>Boneguard Lieutenant</item>
+        <item>BoneguardLieutenant</item>
         <item>Confuse</item>
         <item>Convert</item>
         <item>Cutpurse</item>
-        <item>Darnassus Aspirant</item>
+        <item>DarnassusAspirant</item>
         <item>Demonfuse</item>
-        <item>Druid of the Saber</item>
-        <item>Fallen Hero</item>
-        <item>Flame Juggler</item>
-        <item>Garrison Commander</item>
-        <item>King\'s Elekk</item>
-        <item>Lance Carrier</item>
-        <item>Lock and Load</item>
-        <item>Sparring Partner</item>
-        <item>Tiny Knight of Evil</item>
-        <item>Totem Golem</item>
-        <item>Undercity Valiant</item>
+        <item>DruidoftheSaber</item>
+        <item>FallenHero</item>
+        <item>FlameJuggler</item>
+        <item>GarrisonCommander</item>
+        <item>King\'sElekk</item>
+        <item>LanceCarrier</item>
+        <item>LockandLoad</item>
+        <item>SparringPartner</item>
+        <item>TinyKnightofEvil</item>
+        <item>TotemGolem</item>
+        <item>UndercityValiant</item>
         <item>Wrathguard</item>
-        <item>Wyrmrest Agent</item>
-        <item>Curse of Rafaam</item>
-        <item>Dark Peddler</item>
-        <item>Dart Trap</item>
-        <item>Explorer\'s Hat</item>
-        <item>Huge Toad</item>
-        <item>Jeweled Scarab</item>
-        <item>Museum Curator</item>
-        <item>A Light in the Darkness</item>
-        <item>Beckoner of Evil</item>
-        <item>Bilefin Tidehunter</item>
-        <item>Cult Sorcerer</item>
-        <item>Darkshire Librarian</item>
+        <item>WyrmrestAgent</item>
+        <item>CurseofRafaam</item>
+        <item>DarkPeddler</item>
+        <item>DartTrap</item>
+        <item>Explorer\'sHat</item>
+        <item>HugeToad</item>
+        <item>JeweledScarab</item>
+        <item>MuseumCurator</item>
+        <item>ALightintheDarkness</item>
+        <item>BeckonerofEvil</item>
+        <item>BilefinTidehunter</item>
+        <item>CultSorcerer</item>
+        <item>DarkshireLibrarian</item>
         <item>Duskboar</item>
-        <item>Embrace the Shadow</item>
-        <item>Eternal Sentinel</item>
-        <item>Mark of Y\'Shaarj</item>
-        <item>Nat, the Darkfisher</item>
-        <item>Renounce Darkness</item>
+        <item>EmbracetheShadow</item>
+        <item>EternalSentinel</item>
+        <item>MarkofY\'Shaarj</item>
+        <item>Nat,theDarkfisher</item>
+        <item>RenounceDarkness</item>
         <item>Shatter</item>
         <item>Stormcrack</item>
-        <item>Twilight Geomancer</item>
-        <item>Twisted Worgen</item>
-        <item>Undercity Huckster</item>
-        <item>Cat Trick</item>
-        <item>Kindly Grandmother</item>
-        <item>Maelstrom Portal</item>
-        <item>Medivh\'s Valet</item>
-        <item>Netherspite Historian</item>
-        <item>Pompous Thespian</item>
+        <item>TwilightGeomancer</item>
+        <item>TwistedWorgen</item>
+        <item>UndercityHuckster</item>
+        <item>CatTrick</item>
+        <item>KindlyGrandmother</item>
+        <item>MaelstromPortal</item>
+        <item>Medivh\'sValet</item>
+        <item>NetherspiteHistorian</item>
+        <item>PompousThespian</item>
         <item>Purify</item>
-        <item>Spirit Claws</item>
-        <item>Blowgill Sniper</item>
+        <item>SpiritClaws</item>
+        <item>BlowgillSniper</item>
         <item>Devolve</item>
-        <item>Dirty Rat</item>
-        <item>Friendly Bartender</item>
-        <item>Gadgetzan Ferryman</item>
-        <item>Gadgetzan Socialite</item>
-        <item>Grimestreet Informant</item>
-        <item>Grimestreet Outfitter</item>
-        <item>Hidden Cache</item>
-        <item>Hobart Grapplehammer</item>
-        <item>Jade Claws</item>
-        <item>Jade Shuriken</item>
-        <item>Jade Swarmer</item>
-        <item>Mana Geode</item>
-        <item>Public Defender</item>
-        <item>Sleep with the Fishes</item>
-        <item>Stolen Goods</item>
-        <item>Trogg Beastrager</item>
+        <item>DirtyRat</item>
+        <item>FriendlyBartender</item>
+        <item>GadgetzanFerryman</item>
+        <item>GadgetzanSocialite</item>
+        <item>GrimestreetInformant</item>
+        <item>GrimestreetOutfitter</item>
+        <item>HiddenCache</item>
+        <item>HobartGrapplehammer</item>
+        <item>JadeClaws</item>
+        <item>JadeShuriken</item>
+        <item>JadeSwarmer</item>
+        <item>ManaGeode</item>
+        <item>PublicDefender</item>
+        <item>SleepwiththeFishes</item>
+        <item>StolenGoods</item>
+        <item>TroggBeastrager</item>
         <item>Arcanologist</item>
         <item>Biteweed</item>
         <item>Bloodbloom</item>
-        <item>Clutchmother Zavas</item>
-        <item>Cornered Sentry</item>
-        <item>Corrupting Mist</item>
-        <item>Crackling Razormaw</item>
+        <item>ClutchmotherZavas</item>
+        <item>CorneredSentry</item>
+        <item>CorruptingMist</item>
+        <item>CracklingRazormaw</item>
         <item>Dinomancy</item>
-        <item>Explore Un\'Goro</item>
-        <item>Fire Plume Harbinger</item>
-        <item>Flame Geyser</item>
-        <item>Golakka Crawler</item>
-        <item>Grievous Bite</item>
+        <item>ExploreUn\'Goro</item>
+        <item>FirePlumeHarbinger</item>
+        <item>FlameGeyser</item>
+        <item>GolakkaCrawler</item>
+        <item>GrievousBite</item>
         <item>Hydrologist</item>
-        <item>Primalfin Champion</item>
-        <item>Primalfin Totem</item>
-        <item>Primordial Glyph</item>
+        <item>PrimalfinChampion</item>
+        <item>PrimalfinTotem</item>
+        <item>PrimordialGlyph</item>
         <item>Pyros</item>
-        <item>Radiant Elemental</item>
-        <item>Ravasaur Runt</item>
-        <item>Razorpetal Lasher</item>
-        <item>Razorpetal Volley</item>
-        <item>Rockpool Hunter</item>
-        <item>Shadow Visions</item>
-        <item>Shimmering Tempest</item>
-        <item>Stubborn Gastropod</item>
-        <item>Tortollan Forager</item>
-        <item>Volatile Elemental</item>
-        <item>Bring It On!</item>
+        <item>RadiantElemental</item>
+        <item>RavasaurRunt</item>
+        <item>RazorpetalLasher</item>
+        <item>RazorpetalVolley</item>
+        <item>RockpoolHunter</item>
+        <item>ShadowVisions</item>
+        <item>ShimmeringTempest</item>
+        <item>StubbornGastropod</item>
+        <item>TortollanForager</item>
+        <item>VolatileElemental</item>
+        <item>BringItOn!</item>
         <item>Brrrloc</item>
         <item>Cryostasis</item>
-        <item>Dark Conviction</item>
-        <item>Dead Man\'s Hand</item>
+        <item>DarkConviction</item>
+        <item>DeadMan\'sHand</item>
         <item>Defile</item>
-        <item>Desperate Stand</item>
-        <item>Drain Soul</item>
-        <item>Druid of the Swarm</item>
-        <item>Fallen Sun Cleric</item>
-        <item>Forge of Souls</item>
+        <item>DesperateStand</item>
+        <item>DrainSoul</item>
+        <item>DruidoftheSwarm</item>
+        <item>FallenSunCleric</item>
+        <item>ForgeofSouls</item>
         <item>Gnomeferatu</item>
-        <item>Ice Fishing</item>
-        <item>Ice Walker</item>
-        <item>Leeching Poison</item>
-        <item>Prince Keleseth</item>
-        <item>Roll the Bones</item>
-        <item>Shadow Ascendant</item>
-        <item>Spirit Lash</item>
-        <item>Tainted Zealot</item>
-        <item>Toxic Arrow</item>
-        <item>Tuskarr Fisherman</item>
-        <item>Venomstrike Trap</item>
-        <item>Bladed Gauntlet</item>
-        <item>Cavern Shinyfinder</item>
-        <item>Cheat Death</item>
-        <item>Crushing Hand</item>
-        <item>Drygulch Jailor</item>
-        <item>Drywhisker Armorer</item>
+        <item>IceFishing</item>
+        <item>IceWalker</item>
+        <item>LeechingPoison</item>
+        <item>PrinceKeleseth</item>
+        <item>RolltheBones</item>
+        <item>ShadowAscendant</item>
+        <item>SpiritLash</item>
+        <item>TaintedZealot</item>
+        <item>ToxicArrow</item>
+        <item>TuskarrFisherman</item>
+        <item>VenomstrikeTrap</item>
+        <item>BladedGauntlet</item>
+        <item>CavernShinyfinder</item>
+        <item>CheatDeath</item>
+        <item>CrushingHand</item>
+        <item>DrygulchJailor</item>
+        <item>DrywhiskerArmorer</item>
         <item>Evasion</item>
-        <item>Kobold Hermit</item>
-        <item>Lesser Pearl Spellstone</item>
-        <item>Lesser Ruby Spellstone</item>
-        <item>Murmuring Elemental</item>
-        <item>Plated Beetle</item>
-        <item>Potion of Heroism</item>
-        <item>Raven Familiar</item>
+        <item>KoboldHermit</item>
+        <item>LesserPearlSpellstone</item>
+        <item>LesserRubySpellstone</item>
+        <item>MurmuringElemental</item>
+        <item>PlatedBeetle</item>
+        <item>PotionofHeroism</item>
+        <item>RavenFamiliar</item>
         <item>Scorp-o-matic</item>
-        <item>Sudden Betrayal</item>
-        <item>Vulgar Homunculus</item>
-        <item>Wandering Monster</item>
-        <item>Animal Companion</item>
-        <item>Arcane Intellect</item>
-        <item>Dalaran Mage</item>
-        <item>Drain Life</item>
-        <item>Fan of Knives</item>
-        <item>Fiery War Axe</item>
-        <item>Frost Nova</item>
-        <item>Healing Touch</item>
-        <item>Ironforge Rifleman</item>
-        <item>Ironfur Grizzly</item>
-        <item>Kill Command</item>
-        <item>Magma Rager</item>
-        <item>Raid Leader</item>
-        <item>Razorfen Hunter</item>
-        <item>Savage Roar</item>
-        <item>Shadow Bolt</item>
-        <item>Shadow WorDeath</item>
-        <item>Shattered Sun Cleric</item>
-        <item>Shield Block</item>
-        <item>Silverback Patriarch</item>
-        <item>Warsong Commander</item>
+        <item>SuddenBetrayal</item>
+        <item>VulgarHomunculus</item>
+        <item>WanderingMonster</item>
+        <item>AnimalCompanion</item>
+        <item>ArcaneIntellect</item>
+        <item>DalaranMage</item>
+        <item>DrainLife</item>
+        <item>FanofKnives</item>
+        <item>FieryWarAxe</item>
+        <item>FrostNova</item>
+        <item>HealingTouch</item>
+        <item>IronforgeRifleman</item>
+        <item>IronfurGrizzly</item>
+        <item>KillCommand</item>
+        <item>MagmaRager</item>
+        <item>RaidLeader</item>
+        <item>RazorfenHunter</item>
+        <item>SavageRoar</item>
+        <item>ShadowBolt</item>
+        <item>ShadowWord:Death</item>
+        <item>ShatteredSunCleric</item>
+        <item>ShieldBlock</item>
+        <item>SilverbackPatriarch</item>
+        <item>WarsongCommander</item>
         <item>Wolfrider</item>
-        <item>Acolyte of Pain</item>
+        <item>AcolyteofPain</item>
         <item>Alarm-o-Bot</item>
-        <item>Aldor Peacekeeper</item>
-        <item>Arcane Golem</item>
-        <item>Blood Knight</item>
-        <item>Coldlight Oracle</item>
-        <item>Coldlight Seer</item>
+        <item>AldorPeacekeeper</item>
+        <item>ArcaneGolem</item>
+        <item>BloodKnight</item>
+        <item>ColdlightOracle</item>
+        <item>ColdlightSeer</item>
         <item>Counterspell</item>
-        <item>Deadly Shot</item>
+        <item>DeadlyShot</item>
         <item>Demolisher</item>
-        <item>Divine Favor</item>
-        <item>Eaglehorn Bow</item>
-        <item>Earthen Ring Farseer</item>
-        <item>Edwin VanCleef</item>
-        <item>Emperor Cobra</item>
-        <item>Far Sight</item>
+        <item>DivineFavor</item>
+        <item>EaglehornBow</item>
+        <item>EarthenRingFarseer</item>
+        <item>EdwinVanCleef</item>
+        <item>EmperorCobra</item>
+        <item>FarSight</item>
         <item>Felguard</item>
-        <item>Feral Spirit</item>
-        <item>Flesheating Ghoul</item>
-        <item>Frothing Berserker</item>
-        <item>Harvest Golem</item>
+        <item>FeralSpirit</item>
+        <item>FlesheatingGhoul</item>
+        <item>FrothingBerserker</item>
+        <item>HarvestGolem</item>
         <item>Headcrack</item>
-        <item>Ice Barrier</item>
-        <item>Ice Block</item>
-        <item>Imp Master</item>
-        <item>Injured Blademaster</item>
-        <item>Ironbeak Owl</item>
-        <item>Jungle Panther</item>
-        <item>King Mukla</item>
-        <item>Kirin Tor Mage</item>
-        <item>Lava Burst</item>
-        <item>Lightning Storm</item>
-        <item>Mana Tide Totem</item>
-        <item>Mark of Nature</item>
-        <item>Mind Control Tech</item>
-        <item>Mirror Entity</item>
-        <item>Murloc Warleader</item>
-        <item>Perdition\'s Blade</item>
-        <item>Questing Adventurer</item>
-        <item>Raging Worgen</item>
-        <item>Scarlet Crusader</item>
-        <item>Sense Demons</item>
+        <item>IceBarrier</item>
+        <item>IceBlock</item>
+        <item>ImpMaster</item>
+        <item>InjuredBlademaster</item>
+        <item>IronbeakOwl</item>
+        <item>JunglePanther</item>
+        <item>KingMukla</item>
+        <item>KirinTorMage</item>
+        <item>LavaBurst</item>
+        <item>LightningStorm</item>
+        <item>ManaTideTotem</item>
+        <item>MarkofNature</item>
+        <item>MindControlTech</item>
+        <item>MirrorEntity</item>
+        <item>MurlocWarleader</item>
+        <item>Perdition\'sBlade</item>
+        <item>QuestingAdventurer</item>
+        <item>RagingWorgen</item>
+        <item>ScarletCrusader</item>
+        <item>SenseDemons</item>
         <item>Shadowform</item>
-        <item>SI:7 Agent</item>
-        <item>Southsea Captain</item>
+        <item>SI:7Agent</item>
+        <item>SouthseaCaptain</item>
         <item>Spellbender</item>
-        <item>Sword of Justice</item>
-        <item>Tauren Warrior</item>
+        <item>SwordofJustice</item>
+        <item>TaurenWarrior</item>
         <item>Thoughtsteal</item>
-        <item>Thrallmar Farseer</item>
-        <item>Tinkmaster Overspark</item>
-        <item>Unbound Elemental</item>
-        <item>Unleash the Hounds</item>
+        <item>ThrallmarFarseer</item>
+        <item>TinkmasterOverspark</item>
+        <item>UnboundElemental</item>
+        <item>UnleashtheHounds</item>
         <item>Vaporize</item>
-        <item>Void Terror</item>
-        <item>Dancing Swords</item>
-        <item>Dark Cultist</item>
+        <item>VoidTerror</item>
+        <item>DancingSwords</item>
+        <item>DarkCultist</item>
         <item>Deathlord</item>
         <item>Duplicate</item>
-        <item>Shade of Naxxramas</item>
-        <item>Stoneskin Gargoyle</item>
-        <item>Bouncing Blade</item>
+        <item>ShadeofNaxxramas</item>
+        <item>StoneskinGargoyle</item>
+        <item>BouncingBlade</item>
         <item>Coghammer</item>
-        <item>Cogmaster\'s Wrench</item>
-        <item>Flying Machine</item>
-        <item>Gnomeregan Infantry</item>
-        <item>Gnomish Experimenter</item>
-        <item>Goblin Sapper</item>
-        <item>Grove Tender</item>
+        <item>Cogmaster\'sWrench</item>
+        <item>FlyingMachine</item>
+        <item>GnomereganInfantry</item>
+        <item>GnomishExperimenter</item>
+        <item>GoblinSapper</item>
+        <item>GroveTender</item>
         <item>Hobgoblin</item>
         <item>Illuminator</item>
-        <item>Iron Sensei</item>
-        <item>Lil\' Exorcist</item>
-        <item>Metaltooth Leaper</item>
-        <item>Muster for Battle</item>
-        <item>Ogre Brute</item>
-        <item>Ogre Warmaul</item>
+        <item>IronSensei</item>
+        <item>Lil\'Exorcist</item>
+        <item>MetaltoothLeaper</item>
+        <item>MusterforBattle</item>
+        <item>OgreBrute</item>
+        <item>OgreWarmaul</item>
         <item>Powermace</item>
-        <item>Scarlet Purifier</item>
-        <item>Soot Spewer</item>
-        <item>Spider Tank</item>
-        <item>Tinkertown Technician</item>
-        <item>Velen\'s Chosen</item>
-        <item>Blackwing Technician</item>
+        <item>ScarletPurifier</item>
+        <item>SootSpewer</item>
+        <item>SpiderTank</item>
+        <item>TinkertownTechnician</item>
+        <item>Velen\'sChosen</item>
+        <item>BlackwingTechnician</item>
         <item>Demonwrath</item>
-        <item>Druid of the Flame</item>
+        <item>DruidoftheFlame</item>
         <item>Flamewaker</item>
-        <item>Imp Gang Boss</item>
-        <item>Argent Horserider</item>
+        <item>ImpGangBoss</item>
+        <item>ArgentHorserider</item>
         <item>Bash</item>
-        <item>Beneath the Grounds</item>
+        <item>BeneaththeGrounds</item>
         <item>Burgle</item>
-        <item>Coliseum Manager</item>
-        <item>Dragonhawk Rider</item>
+        <item>ColiseumManager</item>
+        <item>DragonhawkRider</item>
         <item>Dreadscale</item>
         <item>Effigy</item>
-        <item>Elemental Destruction</item>
-        <item>Eydis Darkbane</item>
-        <item>Fencing Coach</item>
-        <item>Fjola Lightbane</item>
-        <item>Healing Wave</item>
-        <item>Ice Rager</item>
-        <item>King\'s Defender</item>
-        <item>Light\'s Champion</item>
-        <item>Master of Ceremonies</item>
+        <item>ElementalDestruction</item>
+        <item>EydisDarkbane</item>
+        <item>FencingCoach</item>
+        <item>FjolaLightbane</item>
+        <item>HealingWave</item>
+        <item>IceRager</item>
+        <item>King\'sDefender</item>
+        <item>Light\'sChampion</item>
+        <item>MasterofCeremonies</item>
         <item>Mulch</item>
-        <item>Orgrimmar Aspirant</item>
-        <item>Polymorph: Boar</item>
+        <item>OrgrimmarAspirant</item>
+        <item>Polymorph:Boar</item>
         <item>Powershot</item>
         <item>Saboteur</item>
-        <item>Seal of Champions</item>
+        <item>SealofChampions</item>
         <item>Shadowfiend</item>
-        <item>Shady Dealer</item>
-        <item>Silent Knight</item>
-        <item>Silver Hand Regent</item>
+        <item>ShadyDealer</item>
+        <item>SilentKnight</item>
+        <item>SilverHandRegent</item>
         <item>Spellslinger</item>
         <item>Stablemaster</item>
-        <item>Tuskarr Totemic</item>
-        <item>Warhorse Trainer</item>
-        <item>Brann Bronzebeard</item>
-        <item>Desert Camel</item>
-        <item>Fierce Monkey</item>
-        <item>Forgotten Torch</item>
-        <item>Mounted Raptor</item>
-        <item>Unearthed Raptor</item>
-        <item>Addled Grizzly</item>
-        <item>Am\'gam Rager</item>
-        <item>Blood Warriors</item>
-        <item>Bloodsail Cultist</item>
-        <item>Carrion Grub</item>
-        <item>Darkshire Councilman</item>
-        <item>Disciple of C\'Thun</item>
-        <item>Feral Rage</item>
-        <item>Forlorn Stalker</item>
+        <item>TuskarrTotemic</item>
+        <item>WarhorseTrainer</item>
+        <item>BrannBronzebeard</item>
+        <item>DesertCamel</item>
+        <item>FierceMonkey</item>
+        <item>ForgottenTorch</item>
+        <item>MountedRaptor</item>
+        <item>UnearthedRaptor</item>
+        <item>AddledGrizzly</item>
+        <item>Am\'gamRager</item>
+        <item>BloodWarriors</item>
+        <item>BloodsailCultist</item>
+        <item>CarrionGrub</item>
+        <item>DarkshireCouncilman</item>
+        <item>DiscipleofC\'Thun</item>
+        <item>FeralRage</item>
+        <item>ForlornStalker</item>
         <item>Infest</item>
-        <item>Rallying Blade</item>
-        <item>Ravaging Ghoul</item>
-        <item>Shadow Strike</item>
-        <item>Silithid Swarmer</item>
-        <item>Spawn of N\'Zoth</item>
-        <item>Spreading Madness</item>
-        <item>Squirming Tentacle</item>
-        <item>Steward of Darkshire</item>
-        <item>Twilight Elder</item>
-        <item>Twilight Flamecaller</item>
-        <item>Cloaked Huntress</item>
-        <item>Deadly Fork</item>
+        <item>RallyingBlade</item>
+        <item>RavagingGhoul</item>
+        <item>ShadowStrike</item>
+        <item>SilithidSwarmer</item>
+        <item>SpawnofN\'Zoth</item>
+        <item>SpreadingMadness</item>
+        <item>SquirmingTentacle</item>
+        <item>StewardofDarkshire</item>
+        <item>TwilightElder</item>
+        <item>TwilightFlamecaller</item>
+        <item>CloakedHuntress</item>
+        <item>DeadlyFork</item>
         <item>Moroes</item>
-        <item>Nightbane Templar</item>
-        <item>Pantry Spider</item>
-        <item>Protect the King!</item>
-        <item>Silverware Golem</item>
-        <item>Violet Illusionist</item>
+        <item>NightbaneTemplar</item>
+        <item>PantrySpider</item>
+        <item>ProtecttheKing!</item>
+        <item>SilverwareGolem</item>
+        <item>VioletIllusionist</item>
         <item>Zoobot</item>
-        <item>Auctionmaster Beardo</item>
-        <item>Backstreet Leper</item>
-        <item>Bloodfury Potion</item>
-        <item>Blubber Baron</item>
-        <item>Celestial Dreamer</item>
-        <item>Fel Orc Soulfiend</item>
-        <item>Grimestreet Pawnbroker</item>
-        <item>Grimestreet Smuggler</item>
-        <item>Hired Gun</item>
-        <item>Jade Blossom</item>
-        <item>Kabal Courier</item>
-        <item>Kabal Talonpriest</item>
-        <item>Manic Soulcaster</item>
-        <item>Pilfered Power</item>
-        <item>Potion of Polymorph</item>
-        <item>Rat Pack</item>
-        <item>Sergeant Sally</item>
-        <item>Shadow Rager</item>
-        <item>Shaku, the Collector</item>
-        <item>Shaky Zipgunner</item>
-        <item>Small-Time Recruits</item>
-        <item>Street Trickster</item>
-        <item>Toxic Sewer Ooze</item>
-        <item>Unlicensed Apothecary</item>
-        <item>Volcanic Potion</item>
-        <item>Wickerflame Burnbristle</item>
-        <item>Chittering Tunneler</item>
-        <item>Curious Glimmerroot</item>
-        <item>Devilsaur Egg</item>
+        <item>AuctionmasterBeardo</item>
+        <item>BackstreetLeper</item>
+        <item>BloodfuryPotion</item>
+        <item>BlubberBaron</item>
+        <item>CelestialDreamer</item>
+        <item>FelOrcSoulfiend</item>
+        <item>GrimestreetPawnbroker</item>
+        <item>GrimestreetSmuggler</item>
+        <item>HiredGun</item>
+        <item>JadeBlossom</item>
+        <item>KabalCourier</item>
+        <item>KabalTalonpriest</item>
+        <item>ManicSoulcaster</item>
+        <item>PilferedPower</item>
+        <item>PotionofPolymorph</item>
+        <item>RatPack</item>
+        <item>SergeantSally</item>
+        <item>ShadowRager</item>
+        <item>Shaku,theCollector</item>
+        <item>ShakyZipgunner</item>
+        <item>Small-TimeRecruits</item>
+        <item>StreetTrickster</item>
+        <item>ToxicSewerOoze</item>
+        <item>UnlicensedApothecary</item>
+        <item>VolcanicPotion</item>
+        <item>WickerflameBurnbristle</item>
+        <item>ChitteringTunneler</item>
+        <item>CuriousGlimmerroot</item>
+        <item>DevilsaurEgg</item>
         <item>Eggnapper</item>
-        <item>Elder Longneck</item>
-        <item>Envenom Weapon</item>
-        <item>Giant Wasp</item>
-        <item>Gluttonous Ooze</item>
-        <item>Hot Spring Guardian</item>
-        <item>Humongous Razorleaf</item>
-        <item>Igneous Elemental</item>
-        <item>Mana Bind</item>
-        <item>Mimic Pod</item>
-        <item>Mirage Caller</item>
-        <item>Primalfin Lookout</item>
-        <item>Pterrordax Hatchling</item>
-        <item>Spirit Echo</item>
-        <item>Stonehill Defender</item>
-        <item>Tar Creeper</item>
-        <item>Terrorscale Stalker</item>
-        <item>Thunder Lizard</item>
-        <item>Vicious Fledgling</item>
-        <item>Acolyte of Agony</item>
+        <item>ElderLongneck</item>
+        <item>EnvenomWeapon</item>
+        <item>GiantWasp</item>
+        <item>GluttonousOoze</item>
+        <item>HotSpringGuardian</item>
+        <item>HumongousRazorleaf</item>
+        <item>IgneousElemental</item>
+        <item>ManaBind</item>
+        <item>MimicPod</item>
+        <item>MirageCaller</item>
+        <item>PrimalfinLookout</item>
+        <item>PterrordaxHatchling</item>
+        <item>SpiritEcho</item>
+        <item>StonehillDefender</item>
+        <item>TarCreeper</item>
+        <item>TerrorscaleStalker</item>
+        <item>ThunderLizard</item>
+        <item>ViciousFledgling</item>
+        <item>AcolyteofAgony</item>
         <item>Bearshark</item>
         <item>Coldwraith</item>
-        <item>Crypt Lord</item>
+        <item>CryptLord</item>
         <item>Deathspeaker</item>
-        <item>Doomed Apprentice</item>
-        <item>Drakkari Defender</item>
-        <item>Drakkari Enchanter</item>
-        <item>Frozen Clone</item>
+        <item>DoomedApprentice</item>
+        <item>DrakkariDefender</item>
+        <item>DrakkariEnchanter</item>
+        <item>FrozenClone</item>
         <item>Gnash</item>
-        <item>Happy Ghoul</item>
+        <item>HappyGhoul</item>
         <item>Howlfiend</item>
-        <item>Howling Commander</item>
-        <item>Hyldnir Frostrider</item>
-        <item>Ice Breaker</item>
+        <item>HowlingCommander</item>
+        <item>HyldnirFrostrider</item>
+        <item>IceBreaker</item>
         <item>Mindbreaker</item>
-        <item>Mountainfire Armor</item>
-        <item>Plague Scientist</item>
-        <item>Prince Taldaram</item>
+        <item>MountainfireArmor</item>
+        <item>PlagueScientist</item>
+        <item>PrinceTaldaram</item>
         <item>Shadowblade</item>
-        <item>Shallow Gravedigger</item>
+        <item>ShallowGravedigger</item>
         <item>Simulacrum</item>
-        <item>Stitched Tracker</item>
+        <item>StitchedTracker</item>
         <item>Treachery</item>
-        <item>Unwilling Sacrifice</item>
-        <item>Val\'kyr Soulclaimer</item>
+        <item>UnwillingSacrifice</item>
+        <item>Val\'kyrSoulclaimer</item>
         <item>Vryghoul</item>
-        <item>Benevolent Djinn</item>
-        <item>Boisterous Bard</item>
-        <item>Cave Hydra</item>
-        <item>Dragon Soul</item>
+        <item>BenevolentDjinn</item>
+        <item>BoisterousBard</item>
+        <item>CaveHydra</item>
+        <item>DragonSoul</item>
         <item>Dragonslayer</item>
-        <item>Explosive Runes</item>
-        <item>Fungal Enchanter</item>
-        <item>Gilded Gargoyle</item>
-        <item>Greedy Sprite</item>
-        <item>Healing Rain</item>
-        <item>Kobold Apprentice</item>
-        <item>Kobold Barbarian</item>
-        <item>Lone Champion</item>
-        <item>Primal Talismans</item>
-        <item>Reckless Flurry</item>
-        <item>Rummaging Kobold</item>
-        <item>Sewer Crawler</item>
-        <item>Shrieking Shroom</item>
-        <item>Sonya Shadowdancer</item>
-        <item>Stoneskin Basilisk</item>
-        <item>Toothy Chest</item>
-        <item>Twilight Acolyte</item>
-        <item>Twilight\'s Call</item>
-        <item>Unidentified Elixir</item>
-        <item>Unidentified Maul</item>
-        <item>Void Ripper</item>
-        <item>Zola the Gorgon</item>
-        <item>Blessing of Kings</item>
-        <item>Chillwind Yeti</item>
+        <item>ExplosiveRunes</item>
+        <item>FungalEnchanter</item>
+        <item>GildedGargoyle</item>
+        <item>GreedySprite</item>
+        <item>HealingRain</item>
+        <item>KoboldApprentice</item>
+        <item>KoboldBarbarian</item>
+        <item>LoneChampion</item>
+        <item>PrimalTalismans</item>
+        <item>RecklessFlurry</item>
+        <item>RummagingKobold</item>
+        <item>SewerCrawler</item>
+        <item>ShriekingShroom</item>
+        <item>SonyaShadowdancer</item>
+        <item>StoneskinBasilisk</item>
+        <item>ToothyChest</item>
+        <item>TwilightAcolyte</item>
+        <item>Twilight\'sCall</item>
+        <item>UnidentifiedElixir</item>
+        <item>UnidentifiedMaul</item>
+        <item>VoidRipper</item>
+        <item>ZolatheGorgon</item>
+        <item>BlessingofKings</item>
+        <item>ChillwindYeti</item>
         <item>Consecration</item>
-        <item>Dragonling Mechanic</item>
+        <item>DragonlingMechanic</item>
         <item>Fireball</item>
-        <item>Gnomish Inventor</item>
-        <item>Hammer of Wrath</item>
+        <item>GnomishInventor</item>
+        <item>HammerofWrath</item>
         <item>Hellfire</item>
         <item>Hex</item>
         <item>Houndmaster</item>
-        <item>Kor\'kron Elite</item>
+        <item>Kor\'kronElite</item>
         <item>Multi-Shot</item>
-        <item>Oasis Snapjaw</item>
-        <item>Ogre Magi</item>
+        <item>OasisSnapjaw</item>
+        <item>OgreMagi</item>
         <item>Polymorph</item>
-        <item>Sen\'jin Shieldmasta</item>
-        <item>Stormwind Knight</item>
+        <item>Sen\'jinShieldmasta</item>
+        <item>StormwindKnight</item>
         <item>Swipe</item>
-        <item>Truesilver Champion</item>
-        <item>Water Elemental</item>
+        <item>TruesilverChampion</item>
+        <item>WaterElemental</item>
         <item>Windspeaker</item>
-        <item>Ancient Brewmaster</item>
-        <item>Ancient Mage</item>
-        <item>Arathi Weaponsmith</item>
-        <item>Auchenai Soulpriest</item>
+        <item>AncientBrewmaster</item>
+        <item>AncientMage</item>
+        <item>ArathiWeaponsmith</item>
+        <item>AuchenaiSoulpriest</item>
         <item>Bite</item>
-        <item>Blade Flurry</item>
-        <item>Cone of Cold</item>
-        <item>Cult Master</item>
-        <item>Dark Iron Dwarf</item>
-        <item>Defender of Argus</item>
-        <item>Dread Corsair</item>
-        <item>Ethereal Arcanist</item>
-        <item>Keeper of the Grove</item>
+        <item>BladeFlurry</item>
+        <item>ConeofCold</item>
+        <item>CultMaster</item>
+        <item>DarkIronDwarf</item>
+        <item>DefenderofArgus</item>
+        <item>DreadCorsair</item>
+        <item>EtherealArcanist</item>
+        <item>KeeperoftheGrove</item>
         <item>Lightspawn</item>
-        <item>Mass Dispel</item>
-        <item>Master of Disguise</item>
+        <item>MassDispel</item>
+        <item>MasterofDisguise</item>
         <item>Mindgames</item>
-        <item>Mogu\'shan Warden</item>
-        <item>Mortal Strike</item>
-        <item>Pit Lord</item>
-        <item>Shadow Madness</item>
+        <item>Mogu\'shanWarden</item>
+        <item>MortalStrike</item>
+        <item>PitLord</item>
+        <item>ShadowMadness</item>
         <item>Shadowflame</item>
-        <item>Silvermoon Guardian</item>
-        <item>Soul of the Forest</item>
+        <item>SilvermoonGuardian</item>
+        <item>SouloftheForest</item>
         <item>Spellbreaker</item>
-        <item>Summoning Portal</item>
-        <item>Twilight Drake</item>
-        <item>Violet Teacher</item>
-        <item>Old Murk-Eye</item>
-        <item>Anub\'ar Ambusher</item>
-        <item>Baron Rivendare</item>
-        <item>Death\'s Bite</item>
-        <item>Poison Seeds</item>
+        <item>SummoningPortal</item>
+        <item>TwilightDrake</item>
+        <item>VioletTeacher</item>
+        <item>OldMurk-Eye</item>
+        <item>Anub\'arAmbusher</item>
+        <item>BaronRivendare</item>
+        <item>Death\'sBite</item>
+        <item>PoisonSeeds</item>
         <item>Voidcaller</item>
-        <item>Wailing Soul</item>
-        <item>Ancestor\'s Call</item>
-        <item>Arcane Nullifier X-21</item>
-        <item>Burly Rockjaw Trogg</item>
-        <item>Dunemaul Shaman</item>
-        <item>Echo of Medivh</item>
-        <item>Enhance-o Mechano</item>
-        <item>Fel Cannon</item>
-        <item>Goblin Blastmage</item>
+        <item>WailingSoul</item>
+        <item>Ancestor\'sCall</item>
+        <item>ArcaneNullifierX-21</item>
+        <item>BurlyRockjawTrogg</item>
+        <item>DunemaulShaman</item>
+        <item>EchoofMedivh</item>
+        <item>Enhance-oMechano</item>
+        <item>FelCannon</item>
+        <item>GoblinBlastmage</item>
         <item>Imp-losion</item>
         <item>Jeeves</item>
-        <item>Kezan Mystic</item>
-        <item>Lost Tallstrider</item>
-        <item>Mechanical Yeti</item>
+        <item>KezanMystic</item>
+        <item>LostTallstrider</item>
+        <item>MechanicalYeti</item>
         <item>Mini-Mage</item>
-        <item>Piloted Shredder</item>
+        <item>PilotedShredder</item>
         <item>Sabotage</item>
-        <item>Screwjank Clunker</item>
-        <item>Siltfin Spiritwalker</item>
-        <item>Tinker\'s Sharpsword Oil</item>
-        <item>Wee Spellstopper</item>
-        <item>Axe Flinger</item>
-        <item>Core Rager</item>
-        <item>Dragonkin Sorcerer</item>
-        <item>Fireguard Destroyer</item>
-        <item>Hungry Dragon</item>
-        <item>Armored Warhorse</item>
-        <item>Astral Communion</item>
-        <item>Charged Hammer</item>
-        <item>Crowd Favorite</item>
-        <item>Dalaran Aspirant</item>
-        <item>Draenei Totemcarver</item>
+        <item>ScrewjankClunker</item>
+        <item>SiltfinSpiritwalker</item>
+        <item>Tinker\'sSharpswordOil</item>
+        <item>WeeSpellstopper</item>
+        <item>AxeFlinger</item>
+        <item>CoreRager</item>
+        <item>DragonkinSorcerer</item>
+        <item>FireguardDestroyer</item>
+        <item>HungryDragon</item>
+        <item>ArmoredWarhorse</item>
+        <item>AstralCommunion</item>
+        <item>ChargedHammer</item>
+        <item>CrowdFavorite</item>
+        <item>DalaranAspirant</item>
+        <item>DraeneiTotemcarver</item>
         <item>Dreadsteed</item>
-        <item>Evil Heckler</item>
-        <item>Fist of Jaraxxus</item>
-        <item>Frigid Snobold</item>
-        <item>Gormok the Impaler</item>
-        <item>Holy Champion</item>
-        <item>Magnataur Alpha</item>
-        <item>Maiden of the Lake</item>
-        <item>Murloc Knight</item>
-        <item>Poisoned Blade</item>
-        <item>Refreshment Vendor</item>
-        <item>Savage Combatant</item>
-        <item>Spawn of Shadows</item>
-        <item>Tournament Medic</item>
-        <item>Twilight Guardian</item>
+        <item>EvilHeckler</item>
+        <item>FistofJaraxxus</item>
+        <item>FrigidSnobold</item>
+        <item>GormoktheImpaler</item>
+        <item>HolyChampion</item>
+        <item>MagnataurAlpha</item>
+        <item>MaidenoftheLake</item>
+        <item>MurlocKnight</item>
+        <item>PoisonedBlade</item>
+        <item>RefreshmentVendor</item>
+        <item>SavageCombatant</item>
+        <item>SpawnofShadows</item>
+        <item>TournamentMedic</item>
+        <item>TwilightGuardian</item>
         <item>Wildwalker</item>
-        <item>Ancient Shade</item>
-        <item>Animated Armor</item>
-        <item>Eerie Statue</item>
-        <item>Elise Starseeker</item>
-        <item>Gorillabot A-3</item>
-        <item>Jungle Moonkin</item>
-        <item>Keeper of Uldaman</item>
-        <item>Rumbling Elemental</item>
-        <item>Tomb Pillager</item>
-        <item>Tomb Spider</item>
-        <item>Aberrant Berserker</item>
-        <item>Blackwater Pirate</item>
-        <item>Bloodhoof Brave</item>
-        <item>C\'Thun\'s Chosen</item>
-        <item>Cyclopian Horror</item>
-        <item>Demented Frostcaller</item>
-        <item>Eater of Secrets</item>
-        <item>Evolved Kobold</item>
-        <item>Faceless Shambler</item>
-        <item>Fandral Staghelm</item>
-        <item>Flamewreathed Faceless</item>
-        <item>Hooded Acolyte</item>
-        <item>Infested Tauren</item>
-        <item>Infested Wolf</item>
-        <item>Klaxxi Amber-Weaver</item>
-        <item>Master of Evolution</item>
-        <item>Midnight Drake</item>
-        <item>Mire Keeper</item>
-        <item>Polluted Hoarder</item>
-        <item>Shadow WorHorror</item>
-        <item>Shifting Shade</item>
-        <item>Southsea Squidface</item>
-        <item>Twilight Summoner</item>
-        <item>Xaril, Poisoned Mind</item>
+        <item>AncientShade</item>
+        <item>AnimatedArmor</item>
+        <item>EerieStatue</item>
+        <item>EliseStarseeker</item>
+        <item>GorillabotA-3</item>
+        <item>JungleMoonkin</item>
+        <item>KeeperofUldaman</item>
+        <item>RumblingElemental</item>
+        <item>TombPillager</item>
+        <item>TombSpider</item>
+        <item>AberrantBerserker</item>
+        <item>BlackwaterPirate</item>
+        <item>BloodhoofBrave</item>
+        <item>C\'Thun\'sChosen</item>
+        <item>CyclopianHorror</item>
+        <item>DementedFrostcaller</item>
+        <item>EaterofSecrets</item>
+        <item>EvolvedKobold</item>
+        <item>FacelessShambler</item>
+        <item>FandralStaghelm</item>
+        <item>FlamewreathedFaceless</item>
+        <item>HoodedAcolyte</item>
+        <item>InfestedTauren</item>
+        <item>InfestedWolf</item>
+        <item>KlaxxiAmber-Weaver</item>
+        <item>MasterofEvolution</item>
+        <item>MidnightDrake</item>
+        <item>MireKeeper</item>
+        <item>PollutedHoarder</item>
+        <item>ShadowWord:Horror</item>
+        <item>ShiftingShade</item>
+        <item>SouthseaSquidface</item>
+        <item>TwilightSummoner</item>
+        <item>Xaril,PoisonedMind</item>
         <item>Arcanosmith</item>
         <item>Barnes</item>
-        <item>Priest of the Feast</item>
-        <item>Silvermoon Portal</item>
-        <item>Wicked Witchdoctor</item>
-        <item>Backroom Bouncer</item>
-        <item>Blastcrystal Potion</item>
-        <item>Brass Knuckles</item>
-        <item>Call in the Finishers</item>
+        <item>PriestoftheFeast</item>
+        <item>SilvermoonPortal</item>
+        <item>WickedWitchdoctor</item>
+        <item>BackroomBouncer</item>
+        <item>BlastcrystalPotion</item>
+        <item>BrassKnuckles</item>
+        <item>CallintheFinishers</item>
         <item>Crystalweaver</item>
-        <item>Daring Reporter</item>
-        <item>Dispatch Kodo</item>
-        <item>Genzo, the Shark</item>
-        <item>Greater Healing Potion</item>
-        <item>Grimy Gadgeteer</item>
-        <item>Hozen Healer</item>
-        <item>Jade Lightning</item>
-        <item>Jade Spirit</item>
-        <item>Jinyu Waterspeaker</item>
-        <item>Kabal Chemist</item>
+        <item>DaringReporter</item>
+        <item>DispatchKodo</item>
+        <item>Genzo,theShark</item>
+        <item>GreaterHealingPotion</item>
+        <item>GrimyGadgeteer</item>
+        <item>HozenHealer</item>
+        <item>JadeLightning</item>
+        <item>JadeSpirit</item>
+        <item>JinyuWaterspeaker</item>
+        <item>KabalChemist</item>
         <item>Kazakus</item>
-        <item>Kooky Chemist</item>
-        <item>Lotus Illusionist</item>
-        <item>Naga Corsair</item>
-        <item>Seadevil Stinger</item>
-        <item>Shadow Sensei</item>
-        <item>Tanaris Hogchopper</item>
-        <item>Worgen Greaser</item>
-        <item>Bright-Eyed Scout</item>
-        <item>Evolving Spores</item>
-        <item>Fire Plume Phoenix</item>
-        <item>Gentle Megasaur</item>
-        <item>Lakkari Felhound</item>
-        <item>Lightfused Stegodon</item>
-        <item>Molten Reflection</item>
-        <item>Obsidian Shard</item>
-        <item>Ravenous Pterrordax</item>
+        <item>KookyChemist</item>
+        <item>LotusIllusionist</item>
+        <item>NagaCorsair</item>
+        <item>SeadevilStinger</item>
+        <item>ShadowSensei</item>
+        <item>TanarisHogchopper</item>
+        <item>WorgenGreaser</item>
+        <item>Bright-EyedScout</item>
+        <item>EvolvingSpores</item>
+        <item>FirePlumePhoenix</item>
+        <item>GentleMegasaur</item>
+        <item>LakkariFelhound</item>
+        <item>LightfusedStegodon</item>
+        <item>MoltenReflection</item>
+        <item>ObsidianShard</item>
+        <item>RavenousPterrordax</item>
         <item>Shellshifter</item>
-        <item>Sherazin, Corpse Flower</item>
-        <item>Spiritsinger Umbra</item>
-        <item>Steam Surger</item>
+        <item>Sherazin,CorpseFlower</item>
+        <item>SpiritsingerUmbra</item>
+        <item>SteamSurger</item>
         <item>Stegodon</item>
-        <item>The Voraxx</item>
-        <item>Tidal Surge</item>
-        <item>Tol\'vir Stoneshaper</item>
-        <item>Tortollan Shellraiser</item>
+        <item>TheVoraxx</item>
+        <item>TidalSurge</item>
+        <item>Tol\'virStoneshaper</item>
+        <item>TortollanShellraiser</item>
         <item>Arfus</item>
-        <item>Arrogant Crusader</item>
+        <item>ArrogantCrusader</item>
         <item>Avalanche</item>
-        <item>Blood Razor</item>
-        <item>Chillblade Champion</item>
+        <item>BloodRazor</item>
+        <item>ChillbladeChampion</item>
         <item>Corpsetaker</item>
-        <item>Deathaxe Punisher</item>
-        <item>Eternal Servitude</item>
-        <item>Exploding Bloatbat</item>
-        <item>Ghastly Conjurer</item>
-        <item>Grave Shambler</item>
-        <item>Grim Necromancer</item>
-        <item>Keening Banshee</item>
-        <item>Light\'s Sorrow</item>
-        <item>Lilian Voss</item>
-        <item>Meat Wagon</item>
-        <item>Night Howler</item>
-        <item>Phantom Freebooter</item>
-        <item>Prince Valanar</item>
-        <item>Professor Putricide</item>
-        <item>Rattling Rascal</item>
-        <item>Runeforge Haunter</item>
-        <item>Saronite Chain Gang</item>
-        <item>Strongshell Scavenger</item>
-        <item>Ticking Abomination</item>
-        <item>Wicked Skeleton</item>
-        <item>Astral Tiger</item>
-        <item>Branching Paths</item>
-        <item>Call to Arms</item>
+        <item>DeathaxePunisher</item>
+        <item>EternalServitude</item>
+        <item>ExplodingBloatbat</item>
+        <item>GhastlyConjurer</item>
+        <item>GraveShambler</item>
+        <item>GrimNecromancer</item>
+        <item>KeeningBanshee</item>
+        <item>Light\'sSorrow</item>
+        <item>LilianVoss</item>
+        <item>MeatWagon</item>
+        <item>NightHowler</item>
+        <item>PhantomFreebooter</item>
+        <item>PrinceValanar</item>
+        <item>ProfessorPutricide</item>
+        <item>RattlingRascal</item>
+        <item>RuneforgeHaunter</item>
+        <item>SaroniteChainGang</item>
+        <item>StrongshellScavenger</item>
+        <item>TickingAbomination</item>
+        <item>WickedSkeleton</item>
+        <item>AstralTiger</item>
+        <item>BranchingPaths</item>
+        <item>CalltoArms</item>
         <item>Cataclysm</item>
-        <item>Cursed Disciple</item>
+        <item>CursedDisciple</item>
         <item>Duskbreaker</item>
-        <item>Ebon Dragonsmith</item>
-        <item>Elven Minstrel</item>
-        <item>Fal\'dorei Strider</item>
-        <item>Flanking Strike</item>
-        <item>Hoarding Dragon</item>
-        <item>Hooked Reaver</item>
-        <item>Ironwood Golem</item>
-        <item>Kobold Illusionist</item>
-        <item>Kobold Monk</item>
-        <item>Lesser Amethyst Spellstone</item>
-        <item>Leyline Manipulator</item>
-        <item>Oaken Summons</item>
-        <item>Shimmering Courser</item>
-        <item>Shroom Brewer</item>
-        <item>Sneaky Devil</item>
-        <item>The Darkness</item>
-        <item>Twig of the World Tree</item>
-        <item>Arcanite Reaper</item>
-        <item>Assassin\'s Blade</item>
+        <item>EbonDragonsmith</item>
+        <item>ElvenMinstrel</item>
+        <item>Fal\'doreiStrider</item>
+        <item>FlankingStrike</item>
+        <item>HoardingDragon</item>
+        <item>HookedReaver</item>
+        <item>IronwoodGolem</item>
+        <item>KoboldIllusionist</item>
+        <item>KoboldMonk</item>
+        <item>LesserAmethystSpellstone</item>
+        <item>LeylineManipulator</item>
+        <item>OakenSummons</item>
+        <item>ShimmeringCourser</item>
+        <item>ShroomBrewer</item>
+        <item>SneakyDevil</item>
+        <item>TheDarkness</item>
+        <item>TwigoftheWorldTree</item>
+        <item>ArcaniteReaper</item>
+        <item>Assassin\'sBlade</item>
         <item>Assassinate</item>
         <item>Bloodlust</item>
-        <item>Booty Bay Bodyguard</item>
-        <item>Darkscale Healer</item>
-        <item>Frostwolf Warlord</item>
-        <item>Gurubashi Berserker</item>
-        <item>Holy Nova</item>
+        <item>BootyBayBodyguard</item>
+        <item>DarkscaleHealer</item>
+        <item>FrostwolfWarlord</item>
+        <item>GurubashiBerserker</item>
+        <item>HolyNova</item>
         <item>Nightblade</item>
-        <item>Starving Buzzard</item>
-        <item>Stormpike Commando</item>
-        <item>Tundra Rhino</item>
+        <item>StarvingBuzzard</item>
+        <item>StormpikeCommando</item>
+        <item>TundraRhino</item>
         <item>Abomination</item>
-        <item>Bane of Doom</item>
-        <item>Big Game Hunter</item>
-        <item>Blessed Champion</item>
+        <item>BaneofDoom</item>
+        <item>BigGameHunter</item>
+        <item>BlessedChampion</item>
         <item>Brawl</item>
-        <item>Captain Greenskin</item>
+        <item>CaptainGreenskin</item>
         <item>Doomguard</item>
         <item>Doomhammer</item>
-        <item>Druid of the Claw</item>
-        <item>Earth Elemental</item>
-        <item>Explosive Shot</item>
-        <item>Faceless Manipulator</item>
-        <item>Fen Creeper</item>
-        <item>Force of Nature</item>
-        <item>Harrison Jones</item>
-        <item>Holy Wrath</item>
-        <item>Leeroy Jenkins</item>
+        <item>DruidoftheClaw</item>
+        <item>EarthElemental</item>
+        <item>ExplosiveShot</item>
+        <item>FacelessManipulator</item>
+        <item>FenCreeper</item>
+        <item>ForceofNature</item>
+        <item>HarrisonJones</item>
+        <item>HolyWrath</item>
+        <item>LeeroyJenkins</item>
         <item>Nourish</item>
-        <item>Silver Hand Knight</item>
-        <item>Spiteful Smith</item>
-        <item>Stampeding Kodo</item>
+        <item>SilverHandKnight</item>
+        <item>SpitefulSmith</item>
+        <item>StampedingKodo</item>
         <item>Starfall</item>
-        <item>Stranglethorn Tiger</item>
-        <item>Venture Co. Mercenary</item>
-        <item>Azure Drake</item>
-        <item>Elite Tauren Chieftain</item>
+        <item>StranglethornTiger</item>
+        <item>VentureCo.Mercenary</item>
+        <item>AzureDrake</item>
+        <item>EliteTaurenChieftain</item>
         <item>Feugen</item>
         <item>Loatheb</item>
-        <item>Sludge Belcher</item>
-        <item>Spectral Knight</item>
+        <item>SludgeBelcher</item>
+        <item>SpectralKnight</item>
         <item>Stalagg</item>
-        <item>Antique Healbot</item>
-        <item>Blingtron 3000</item>
-        <item>Bolvar Fordragon</item>
-        <item>Bomb Lobber</item>
-        <item>Cobalt Guardian</item>
-        <item>Cobra Shot</item>
+        <item>AntiqueHealbot</item>
+        <item>Blingtron3000</item>
+        <item>BolvarFordragon</item>
+        <item>BombLobber</item>
+        <item>CobaltGuardian</item>
+        <item>CobraShot</item>
         <item>Demonheart</item>
-        <item>Druid of the Fang</item>
-        <item>Fel Reaver</item>
-        <item>Floating Watcher</item>
-        <item>Hemet Nesingwary</item>
+        <item>DruidoftheFang</item>
+        <item>FelReaver</item>
+        <item>FloatingWatcher</item>
+        <item>HemetNesingwary</item>
         <item>Junkbot</item>
-        <item>King of Beasts</item>
-        <item>Madder Bomber</item>
-        <item>Mimiron\'s Head</item>
-        <item>Ogre Ninja</item>
+        <item>KingofBeasts</item>
+        <item>MadderBomber</item>
+        <item>Mimiron\'sHead</item>
+        <item>OgreNinja</item>
         <item>Quartermaster</item>
-        <item>Salty Dog</item>
-        <item>Siege Engine</item>
-        <item>Upgraded Repair Bot</item>
+        <item>SaltyDog</item>
+        <item>SiegeEngine</item>
+        <item>UpgradedRepairBot</item>
         <item>Vol\'jin</item>
-        <item>Blackwing Corruptor</item>
-        <item>Dark Iron Skulker</item>
-        <item>Dragon Consort</item>
-        <item>Dragon\'s Breath</item>
-        <item>Grim Patron</item>
-        <item>Solemn Vigil</item>
-        <item>Clockwork Knight</item>
-        <item>Flame Lance</item>
-        <item>Kvaldir Raider</item>
-        <item>Mukla\'s Champion</item>
-        <item>Nexus-Champion Saraad</item>
-        <item>Pit Fighter</item>
-        <item>Ram Wrangler</item>
+        <item>BlackwingCorruptor</item>
+        <item>DarkIronSkulker</item>
+        <item>DragonConsort</item>
+        <item>Dragon\'sBreath</item>
+        <item>GrimPatron</item>
+        <item>SolemnVigil</item>
+        <item>ClockworkKnight</item>
+        <item>FlameLance</item>
+        <item>KvaldirRaider</item>
+        <item>Mukla\'sChampion</item>
+        <item>Nexus-ChampionSaraad</item>
+        <item>PitFighter</item>
+        <item>RamWrangler</item>
         <item>Recruiter</item>
-        <item>Shado-Pan Rider</item>
-        <item>Thunder Bluff Valiant</item>
-        <item>Tuskarr Jouster</item>
-        <item>Anubisath Sentinel</item>
-        <item>Djinni of Zephyrs</item>
-        <item>Ethereal Conjurer</item>
-        <item>Excavated Evil</item>
-        <item>Naga Sea Witch</item>
-        <item>Summoning Stone</item>
-        <item>Cabalist\'s Tome</item>
-        <item>Corrupted Healbot</item>
-        <item>Crazed Worshipper</item>
-        <item>Cult Apothecary</item>
-        <item>Darkshire Alchemist</item>
+        <item>Shado-PanRider</item>
+        <item>ThunderBluffValiant</item>
+        <item>TuskarrJouster</item>
+        <item>AnubisathSentinel</item>
+        <item>DjinniofZephyrs</item>
+        <item>EtherealConjurer</item>
+        <item>ExcavatedEvil</item>
+        <item>NagaSeaWitch</item>
+        <item>SummoningStone</item>
+        <item>Cabalist\'sTome</item>
+        <item>CorruptedHealbot</item>
+        <item>CrazedWorshipper</item>
+        <item>CultApothecary</item>
+        <item>DarkshireAlchemist</item>
         <item>Darkspeaker</item>
-        <item>Hallazeal the Ascended</item>
-        <item>Hammer of Twilight</item>
-        <item>Power WorTentacles</item>
-        <item>Princess Huhuran</item>
+        <item>HallazealtheAscended</item>
+        <item>HammerofTwilight</item>
+        <item>PowerWord:Tentacles</item>
+        <item>PrincessHuhuran</item>
         <item>Psych-o-Tron</item>
-        <item>Servant of Yogg-Saron</item>
+        <item>ServantofYogg-Saron</item>
         <item>Shadowcaster</item>
-        <item>Stand Against Darkness</item>
-        <item>Tentacles for Arms</item>
-        <item>Twilight Darkmender</item>
-        <item>Usher of Souls</item>
-        <item>Validated Doomsayer</item>
-        <item>Avian Watcher</item>
-        <item>Ethereal Peddler</item>
-        <item>Fool\'s Bane</item>
-        <item>Ironforge Portal</item>
-        <item>Kara Kazham!</item>
-        <item>Menagerie Magician</item>
-        <item>Onyx Bishop</item>
-        <item>Prince Malchezaar</item>
-        <item>Alley Armorsmith</item>
-        <item>Bomb Squad</item>
-        <item>Burgly Bully</item>
+        <item>StandAgainstDarkness</item>
+        <item>TentaclesforArms</item>
+        <item>TwilightDarkmender</item>
+        <item>UsherofSouls</item>
+        <item>ValidatedDoomsayer</item>
+        <item>AvianWatcher</item>
+        <item>EtherealPeddler</item>
+        <item>Fool\'sBane</item>
+        <item>IronforgePortal</item>
+        <item>KaraKazham!</item>
+        <item>MenagerieMagician</item>
+        <item>OnyxBishop</item>
+        <item>PrinceMalchezaar</item>
+        <item>AlleyArmorsmith</item>
+        <item>BombSquad</item>
+        <item>BurglyBully</item>
         <item>Cryomancer</item>
         <item>Doppelgangster</item>
-        <item>Drakonid Operative</item>
-        <item>Finja, the Flying Star</item>
-        <item>Grimestreet Enforcer</item>
-        <item>Grook Fu Master</item>
-        <item>Kabal Songstealer</item>
+        <item>DrakonidOperative</item>
+        <item>Finja,theFlyingStar</item>
+        <item>GrimestreetEnforcer</item>
+        <item>GrookFuMaster</item>
+        <item>KabalSongstealer</item>
         <item>Knuckles</item>
-        <item>Lotus Agents</item>
-        <item>Lotus Assassin</item>
-        <item>Lunar Visions</item>
-        <item>Piranha Launcher</item>
-        <item>Raza the Chained</item>
-        <item>Red Mana Wyrm</item>
-        <item>Second-Rate Bruiser</item>
-        <item>Spiked Hogrider</item>
-        <item>Streetwise Investigator</item>
-        <item>Virmen Sensei</item>
-        <item>White Eyes</item>
-        <item>Bittertide Hydra</item>
-        <item>Direhorn Hatchling</item>
-        <item>Elise the Trailblazer</item>
-        <item>Feeding Time</item>
-        <item>Living Mana</item>
-        <item>Lyra the Sunshard</item>
-        <item>Nesting Roc</item>
-        <item>Servant of Kalimos</item>
-        <item>Sudden Genesis</item>
-        <item>Tar Lurker</item>
-        <item>Tol\'vir Warden</item>
-        <item>Verdant Longneck</item>
-        <item>Vilespine Slayer</item>
+        <item>LotusAgents</item>
+        <item>LotusAssassin</item>
+        <item>LunarVisions</item>
+        <item>PiranhaLauncher</item>
+        <item>RazatheChained</item>
+        <item>RedManaWyrm</item>
+        <item>Second-RateBruiser</item>
+        <item>SpikedHogrider</item>
+        <item>StreetwiseInvestigator</item>
+        <item>VirmenSensei</item>
+        <item>WhiteEyes</item>
+        <item>BittertideHydra</item>
+        <item>DirehornHatchling</item>
+        <item>ElisetheTrailblazer</item>
+        <item>FeedingTime</item>
+        <item>LivingMana</item>
+        <item>LyratheSunshard</item>
+        <item>NestingRoc</item>
+        <item>ServantofKalimos</item>
+        <item>SuddenGenesis</item>
+        <item>TarLurker</item>
+        <item>Tol\'virWarden</item>
+        <item>VerdantLongneck</item>
+        <item>VilespineSlayer</item>
         <item>Volcano</item>
-        <item>Blood-Queen Lana\'thel</item>
+        <item>Blood-QueenLana\'thel</item>
         <item>Bloodworm</item>
-        <item>Bolvar, Fireblood</item>
-        <item>Bone Baron</item>
-        <item>Cobalt Scalebane</item>
-        <item>Corpse Raiser</item>
-        <item>Corpse Widow</item>
-        <item>Death Revenant</item>
-        <item>Despicable Dreadlord</item>
-        <item>Devour Mind</item>
+        <item>Bolvar,Fireblood</item>
+        <item>BoneBaron</item>
+        <item>CobaltScalebane</item>
+        <item>CorpseRaiser</item>
+        <item>CorpseWidow</item>
+        <item>DeathRevenant</item>
+        <item>DespicableDreadlord</item>
+        <item>DevourMind</item>
         <item>Fatespinner</item>
         <item>Skelemancer</item>
-        <item>Sunborne Val\'kyr</item>
-        <item>Thrall, Deathseer</item>
-        <item>Tomb Lurker</item>
+        <item>SunborneVal\'kyr</item>
+        <item>Thrall,Deathseer</item>
+        <item>TombLurker</item>
         <item>Venomancer</item>
-        <item>Voodoo Hexxer</item>
+        <item>VoodooHexxer</item>
         <item>Webweave</item>
-        <item>Arcane Tyrant</item>
-        <item>Carnivorous Cube</item>
-        <item>Corrosive Sludge</item>
-        <item>Deck of Wonders</item>
-        <item>Dragon\'s Fury</item>
+        <item>ArcaneTyrant</item>
+        <item>CarnivorousCube</item>
+        <item>CorrosiveSludge</item>
+        <item>DeckofWonders</item>
+        <item>Dragon\'sFury</item>
         <item>Fungalmancer</item>
-        <item>Furbolg Mossbinder</item>
-        <item>Green Jelly</item>
-        <item>Guild Recruiter</item>
-        <item>Ixlid, Fungal Lord</item>
-        <item>Lesser Emerald Spellstone</item>
-        <item>Lesser Onyx Spellstone</item>
-        <item>Level Up!</item>
-        <item>Possessed Lackey</item>
-        <item>Skull of the Man\'ari</item>
-        <item>Trogg Gloomeater</item>
-        <item>Windshear Stormcaller</item>
+        <item>FurbolgMossbinder</item>
+        <item>GreenJelly</item>
+        <item>GuildRecruiter</item>
+        <item>Ixlid,FungalLord</item>
+        <item>LesserEmeraldSpellstone</item>
+        <item>LesserOnyxSpellstone</item>
+        <item>LevelUp!</item>
+        <item>PossessedLackey</item>
+        <item>SkulloftheMan\'ari</item>
+        <item>TroggGloomeater</item>
+        <item>WindshearStormcaller</item>
         <item>Archmage</item>
-        <item>Boulderfist Ogre</item>
-        <item>Dread Infernal</item>
-        <item>Fire Elemental</item>
-        <item>Lord of the Arena</item>
-        <item>Reckless Rocketeer</item>
+        <item>BoulderfistOgre</item>
+        <item>DreadInfernal</item>
+        <item>FireElemental</item>
+        <item>LordoftheArena</item>
+        <item>RecklessRocketeer</item>
         <item>Starfire</item>
         <item>Vanish</item>
-        <item>Argent Commander</item>
-        <item>Avenging Wrath</item>
+        <item>ArgentCommander</item>
+        <item>AvengingWrath</item>
         <item>Blizzard</item>
-        <item>Cabal Shadow Priest</item>
-        <item>Cairne Bloodhoof</item>
-        <item>Frost Elemental</item>
-        <item>Gadgetzan Auctioneer</item>
+        <item>CabalShadowPriest</item>
+        <item>CairneBloodhoof</item>
+        <item>FrostElemental</item>
+        <item>GadgetzanAuctioneer</item>
         <item>Hogger</item>
-        <item>Holy Fire</item>
-        <item>Illidan Stormrage</item>
+        <item>HolyFire</item>
+        <item>IllidanStormrage</item>
         <item>Kidnapper</item>
-        <item>Priestess of Elune</item>
-        <item>Savannah Highmane</item>
-        <item>Siphon Soul</item>
+        <item>PriestessofElune</item>
+        <item>SavannahHighmane</item>
+        <item>SiphonSoul</item>
         <item>Sunwalker</item>
-        <item>Temple Enforcer</item>
-        <item>The Beast</item>
-        <item>The Black Knight</item>
-        <item>Windfury Harpy</item>
-        <item>Gelbin Mekkatorque</item>
-        <item>Sylvanas Windrunner</item>
+        <item>TempleEnforcer</item>
+        <item>TheBeast</item>
+        <item>TheBlackKnight</item>
+        <item>WindfuryHarpy</item>
+        <item>GelbinMekkatorque</item>
+        <item>SylvanasWindrunner</item>
         <item>Maexxna</item>
-        <item>Anima Golem</item>
-        <item>Dark Wispers</item>
+        <item>AnimaGolem</item>
+        <item>DarkWispers</item>
         <item>Gazlowe</item>
-        <item>Iron Juggernaut</item>
+        <item>IronJuggernaut</item>
         <item>Lightbomb</item>
         <item>Mech-Bear-Cat</item>
-        <item>Mogor the Ogre</item>
-        <item>Piloted Sky Golem</item>
+        <item>MogortheOgre</item>
+        <item>PilotedSkyGolem</item>
         <item>Recycle</item>
         <item>Shieldmaiden</item>
         <item>Toshley</item>
-        <item>Trade Prince Gallywix</item>
-        <item>Drakonid Crusher</item>
-        <item>Emperor Thaurissan</item>
-        <item>Volcanic Drake</item>
-        <item>Ball of Spiders</item>
-        <item>Bolf Ramshield</item>
-        <item>Coldarra Drake</item>
-        <item>Dark Bargain</item>
-        <item>Enter the Coliseum</item>
-        <item>Grand Crusader</item>
-        <item>Justicar Trueheart</item>
+        <item>TradePrinceGallywix</item>
+        <item>DrakonidCrusher</item>
+        <item>EmperorThaurissan</item>
+        <item>VolcanicDrake</item>
+        <item>BallofSpiders</item>
+        <item>BolfRamshield</item>
+        <item>ColdarraDrake</item>
+        <item>DarkBargain</item>
+        <item>EntertheColiseum</item>
+        <item>GrandCrusader</item>
+        <item>JusticarTrueheart</item>
         <item>Kodorider</item>
-        <item>Master Jouster</item>
-        <item>Mogor\'s Champion</item>
-        <item>Mysterious Challenger</item>
-        <item>Sea Reaver</item>
-        <item>Sideshow Spelleater</item>
-        <item>The Mistcaller</item>
-        <item>The Skeleton Knight</item>
-        <item>Void Crusher</item>
-        <item>Wilfred Fizzlebang</item>
+        <item>MasterJouster</item>
+        <item>Mogor\'sChampion</item>
+        <item>MysteriousChallenger</item>
+        <item>SeaReaver</item>
+        <item>SideshowSpelleater</item>
+        <item>TheMistcaller</item>
+        <item>TheSkeletonKnight</item>
+        <item>VoidCrusher</item>
+        <item>WilfredFizzlebang</item>
         <item>Entomb</item>
-        <item>Reno Jackson</item>
-        <item>Wobbling Runts</item>
-        <item>Ancient Harbinger</item>
-        <item>Corrupted Seer</item>
-        <item>Dark Arakkoa</item>
-        <item>Faceless Summoner</item>
-        <item>Herald Volazj</item>
-        <item>Mukla, Tyrant of the Vale</item>
-        <item>Nerubian Prophet</item>
-        <item>Scaled Nightmare</item>
-        <item>Skeram Cultist</item>
-        <item>Thing from Below</item>
-        <item>Thistle Tea</item>
-        <item>Book Wyrm</item>
-        <item>Ivory Knight</item>
-        <item>Menagerie Warden</item>
-        <item>Moat Lurker</item>
-        <item>Moonglade Portal</item>
-        <item>Ancient of Blossoms</item>
-        <item>Aya Blackpaw</item>
-        <item>Big-Time Racketeer</item>
-        <item>Defias Cleaner</item>
-        <item>Dragonfire Potion</item>
-        <item>Felfire Potion</item>
-        <item>Fight Promoter</item>
-        <item>Jade Behemoth</item>
-        <item>Kabal Crystal Runner</item>
-        <item>Kabal Trafficker</item>
-        <item>Leatherclad Hogleader</item>
-        <item>Luckydo Buccaneer</item>
-        <item>Madam Goya</item>
-        <item>Wind-up Burglebot</item>
+        <item>RenoJackson</item>
+        <item>WobblingRunts</item>
+        <item>AncientHarbinger</item>
+        <item>CorruptedSeer</item>
+        <item>DarkArakkoa</item>
+        <item>FacelessSummoner</item>
+        <item>HeraldVolazj</item>
+        <item>Mukla,TyrantoftheVale</item>
+        <item>NerubianProphet</item>
+        <item>ScaledNightmare</item>
+        <item>SkeramCultist</item>
+        <item>ThingfromBelow</item>
+        <item>ThistleTea</item>
+        <item>BookWyrm</item>
+        <item>IvoryKnight</item>
+        <item>MenagerieWarden</item>
+        <item>MoatLurker</item>
+        <item>MoongladePortal</item>
+        <item>AncientofBlossoms</item>
+        <item>AyaBlackpaw</item>
+        <item>Big-TimeRacketeer</item>
+        <item>DefiasCleaner</item>
+        <item>DragonfirePotion</item>
+        <item>FelfirePotion</item>
+        <item>FightPromoter</item>
+        <item>JadeBehemoth</item>
+        <item>KabalCrystalRunner</item>
+        <item>KabalTrafficker</item>
+        <item>LeathercladHogleader</item>
+        <item>LuckydoBuccaneer</item>
+        <item>MadamGoya</item>
+        <item>Wind-upBurglebot</item>
         <item>Wrathion</item>
-        <item>Cruel Dinomancer</item>
-        <item>Frozen Crusher</item>
-        <item>Hemet, Jungle Hunter</item>
+        <item>CruelDinomancer</item>
+        <item>FrozenCrusher</item>
+        <item>Hemet,JungleHunter</item>
         <item>Meteor</item>
-        <item>Ornery Direhorn</item>
-        <item>Sabretooth Stalker</item>
-        <item>Spikeridged Steed</item>
-        <item>Sunkeeper Tarim</item>
+        <item>OrneryDirehorn</item>
+        <item>SabretoothStalker</item>
+        <item>SpikeridgedSteed</item>
+        <item>SunkeeperTarim</item>
         <item>Blackguard</item>
-        <item>Bone Drake</item>
-        <item>Deathstalker Rexxar</item>
-        <item>Embrace Darkness</item>
-        <item>Furnacefire Colossus</item>
+        <item>BoneDrake</item>
+        <item>DeathstalkerRexxar</item>
+        <item>EmbraceDarkness</item>
+        <item>FurnacefireColossus</item>
         <item>Moorabi</item>
-        <item>Necrotic Geist</item>
-        <item>Nerubian Unraveler</item>
-        <item>Shadow Essence</item>
-        <item>Skulking Geist</item>
-        <item>Spectral Pillager</item>
+        <item>NecroticGeist</item>
+        <item>NerubianUnraveler</item>
+        <item>ShadowEssence</item>
+        <item>SkulkingGeist</item>
+        <item>SpectralPillager</item>
         <item>Spellweaver</item>
-        <item>Spreading Plague</item>
+        <item>SpreadingPlague</item>
         <item>Aluneth</item>
-        <item>Crystal Lion</item>
-        <item>Gather Your Party</item>
-        <item>Gemstudded Golem</item>
-        <item>Grumble, Worldshaker</item>
-        <item>Hungry Ettin</item>
-        <item>Rin, the First Disciple</item>
-        <item>Seeping Oozeling</item>
-        <item>Spiteful Summoner</item>
-        <item>To My Side!</item>
-        <item>Unidentified Shield</item>
+        <item>CrystalLion</item>
+        <item>GatherYourParty</item>
+        <item>GemstuddedGolem</item>
+        <item>Grumble,Worldshaker</item>
+        <item>HungryEttin</item>
+        <item>Rin,theFirstDisciple</item>
+        <item>SeepingOozeling</item>
+        <item>SpitefulSummoner</item>
+        <item>ToMySide!</item>
+        <item>UnidentifiedShield</item>
         <item>Val\'anyr</item>
-        <item>Core Hound</item>
+        <item>CoreHound</item>
         <item>Flamestrike</item>
-        <item>Guardian of Kings</item>
+        <item>GuardianofKings</item>
         <item>Sprint</item>
-        <item>Stormwind Champion</item>
-        <item>War Golem</item>
-        <item>Ancient of Lore</item>
-        <item>Ancient of War</item>
-        <item>Archmage Antonidas</item>
-        <item>Baron Geddon</item>
-        <item>Gladiator\'s Longbow</item>
+        <item>StormwindChampion</item>
+        <item>WarGolem</item>
+        <item>AncientofLore</item>
+        <item>AncientofWar</item>
+        <item>ArchmageAntonidas</item>
+        <item>BaronGeddon</item>
+        <item>Gladiator\'sLongbow</item>
         <item>Gorehowl</item>
-        <item>Prophet Velen</item>
-        <item>Ravenholdt Assassin</item>
+        <item>ProphetVelen</item>
+        <item>RavenholdtAssassin</item>
         <item>Crush</item>
-        <item>Dr. Boom</item>
-        <item>Flame Leviathan</item>
+        <item>Dr.Boom</item>
+        <item>FlameLeviathan</item>
         <item>Gahz\'rilla</item>
         <item>Malorne</item>
         <item>Neptulon</item>
-        <item>Troggzor the Earthinator</item>
-        <item>Rend Blackhand</item>
+        <item>TroggzortheEarthinator</item>
+        <item>RendBlackhand</item>
         <item>Acidmaw</item>
-        <item>Captured Jormungar</item>
+        <item>CapturedJormungar</item>
         <item>Chillmaw</item>
-        <item>Confessor Paletress</item>
-        <item>Eadric the Pure</item>
-        <item>Fearsome Doomguard</item>
-        <item>Knight of the Wild</item>
-        <item>Skycap\'n Kragg</item>
-        <item>Hogger, Doom of Elwynn</item>
-        <item>Twin Emperor Vek\'lor</item>
-        <item>Wisps of the Old Gods</item>
-        <item>Firelands Portal</item>
-        <item>The Curator</item>
-        <item>Abyssal Enforcer</item>
-        <item>Don Han\'Cho</item>
-        <item>Greater Arcane Missiles</item>
-        <item>Grimestreet Protector</item>
-        <item>Inkmaster Solia</item>
-        <item>Jade Chieftain</item>
+        <item>ConfessorPaletress</item>
+        <item>EadricthePure</item>
+        <item>FearsomeDoomguard</item>
+        <item>KnightoftheWild</item>
+        <item>Skycap\'nKragg</item>
+        <item>EveryfinisAwesome</item>
+        <item>ObsidianDestroyer</item>
+        <item>AncientShieldbearer</item>
+        <item>BogCreeper</item>
+        <item>Cho\'gall</item>
+        <item>GrotesqueDragonhawk</item>
+        <item>Hogger,DoomofElwynn</item>
+        <item>Malkorok</item>
+        <item>TwinEmperorVek\'lor</item>
+        <item>WispsoftheOldGods</item>
+        <item>FirelandsPortal</item>
+        <item>TheCurator</item>
+        <item>AbyssalEnforcer</item>
+        <item>DonHan\'Cho</item>
+        <item>GreaterArcaneMissiles</item>
+        <item>GrimestreetProtector</item>
+        <item>InkmasterSolia</item>
+        <item>JadeChieftain</item>
         <item>Blazecaller</item>
-        <item>Giant Anaconda</item>
-        <item>Sated Threshadon</item>
-        <item>Stone Sentinel</item>
+        <item>GiantAnaconda</item>
+        <item>SatedThreshadon</item>
+        <item>StoneSentinel</item>
         <item>Stormwatcher</item>
-        <item>Swamp King Dred</item>
-        <item>Tar Lord</item>
+        <item>SwampKingDred</item>
+        <item>TarLord</item>
         <item>Vinecleaver</item>
         <item>Volcanosaur</item>
-        <item>Abominable Bowman</item>
-        <item>Archbishop Benedictus</item>
+        <item>AbominableBowman</item>
+        <item>ArchbishopBenedictus</item>
         <item>Bonemare</item>
-        <item>Malfurion the Pestilent</item>
-        <item>Corridor Creeper</item>
-        <item>Crushing Walls</item>
-        <item>Lesser Diamond Spellstone</item>
-        <item>Lesser Mithril Spellstone</item>
-        <item>Lesser Sapphire Spellstone</item>
-        <item>Lynessa Sunsorrow</item>
-        <item>Psychic Scream</item>
+        <item>MalfurionthePestilent</item>
+        <item>CorridorCreeper</item>
+        <item>CrushingWalls</item>
+        <item>LesserDiamondSpellstone</item>
+        <item>LesserMithrilSpellstone</item>
+        <item>LesserSapphireSpellstone</item>
+        <item>LynessaSunsorrow</item>
+        <item>PsychicScream</item>
         <item>Rhok\'delar</item>
-        <item>Silver Vanguard</item>
-        <item>Temporus</item>
-        <item>Ironbark Protector</item>
-        <item>Al\'Akir the Windlord</item>
-        <item>Grommash Hellscream</item>
-        <item>Gruul</item>
-        <item>Lay on Hands</item>
-        <item>Tirion Fordring</item>
-        <item>Twisting Nether</item>
-        <item>Ragnaros the Firelord</item>
-        <item>Kel\'Thuzad</item>
-        <item>Foe Reaper 4000</item>
-        <item>Force-Tank MAX</item>
-        <item>Sneed\'s Old Shredder</item>
-        <item>Chromaggus</item>
-        <item>Rhonin</item>
-        <item>Fossilized Devilsaur</item>
-        <item>Anomalus</item>
-        <item>Doomcaller</item>
-        <item>Eldritch Horror</item>
-        <item>Giant Sand Worm</item>
-        <item>Ragnaros, Lightlord</item>
-        <item>The Boogeymonster</item>
-        <item>Charged Devilsaur</item>
-        <item>Dinosize</item>
-        <item>Free From Amber</item>
-        <item>Kalimos, Primal Lord</item>
-        <item>Primordial Drake</item>
-        <item>Tortollan Primalist</item>
-        <item>Glacial Mysteries</item>
-        <item>Rotface</item>
-        <item>Scourgelord Garrosh</item>
-        <item>Shadowreaper Anduin</item>
-        <item>Sindragosa</item>
-        <item>The Lich King</item>
-        <item>Geosculptor Yip</item>
-        <item>Grand Archivist</item>
-        <item>Grizzled Guardian</item>
-        <item>Kathrena Winterwisp</item>
-        <item>King Togwaggle</item>
-        <item>Marin the Fox</item>
-        <item>The Runespear</item>
-        <item>Violet Wurm</item>
+        <item>SilverVanguard</item>
+        <item>GrizzledGuardian</item>
+        <item>KathrenaWinterwisp</item>
+        <item>KingTogwaggle</item>
+        <item>MarintheFox</item>
+        <item>TheRunespear</item>
+        <item>VioletWurm</item>
         <item>Woecleaver</item>
         <item>Alexstrasza</item>
         <item>Cenarius</item>
-        <item>King Krush</item>
-        <item>Lord Jaraxxus</item>
+        <item>KingKrush</item>
+        <item>LordJaraxxus</item>
         <item>Malygos</item>
         <item>Nozdormu</item>
         <item>Onyxia</item>
         <item>Ysera</item>
         <item>Mal\'Ganis</item>
-        <item>Mekgineer Thermaplugg</item>
-        <item>Tree of Life</item>
-        <item>Majordomo Executus</item>
+        <item>MekgineerThermaplugg</item>
+        <item>TreeofLife</item>
+        <item>MajordomoExecutus</item>
         <item>Nefarian</item>
-        <item>Volcanic Lumberer</item>
+        <item>VolcanicLumberer</item>
         <item>Anub\'arak</item>
         <item>Aviana</item>
         <item>Icehowl</item>
-        <item>North Sea Kraken</item>
-        <item>Arch-Thief Rafaam</item>
-        <item>Blade of C\'Thun</item>
-        <item>Blood of The Ancient One</item>
-        <item>Call of the Wild</item>
-        <item>Soggoth the Slitherer</item>
-        <item>Krul the Unshackled</item>
-        <item>Mayor Noggenfogger</item>
-        <item>Giant Mastodon</item>
-        <item>King Mosh</item>
+        <item>NorthSeaKraken</item>
+        <item>Arch-ThiefRafaam</item>
+        <item>BladeofC\'Thun</item>
+        <item>BloodofTheAncientOne</item>
+        <item>CalloftheWild</item>
+        <item>SoggoththeSlitherer</item>
+        <item>KrultheUnshackled</item>
+        <item>MayorNoggenfogger</item>
+        <item>GiantMastodon</item>
+        <item>KingMosh</item>
         <item>Ozruk</item>
-        <item>Frost Lich Jaina</item>
+        <item>FrostLichJaina</item>
         <item>Hadronox</item>
-        <item>Obsidian Statue</item>
-        <item>Uther of the Ebon Blade</item>
-        <item>Valeera the Hollow</item>
-        <item>Dragoncaller Alanna</item>
+        <item>ObsidianStatue</item>
+        <item>UtheroftheEbonBlade</item>
+        <item>ValeeratheHollow</item>
+        <item>DragoncallerAlanna</item>
         <item>Dragonhatcher</item>
-        <item>Master Oakheart</item>
-        <item>Sleepy Dragon</item>
+        <item>MasterOakheart</item>
+        <item>SleepyDragon</item>
         <item>Voidlord</item>
-        <item>Mind Control</item>
+        <item>MindControl</item>
         <item>Deathwing</item>
         <item>Pyroblast</item>
-        <item>Sea Giant</item>
-        <item>Frost Giant</item>
-        <item>Varian Wrynn</item>
-        <item>Anyfin Can Happen</item>
+        <item>SeaGiant</item>
+        <item>FrostGiant</item>
+        <item>VarianWrynn</item>
+        <item>AnyfinCanHappen</item>
         <item>C\'Thun</item>
-        <item>Deathwing, Dragonlord</item>
+        <item>Deathwing,Dragonlord</item>
         <item>DOOM!</item>
-        <item>Faceless Behemoth</item>
-        <item>N\'Zoth, the Corruptor</item>
-        <item>Y\'Shaarj, Rage Unbound</item>
-        <item>Yogg-Saron, Hope\'s End</item>
-        <item>Kun the Forgotten King</item>
+        <item>FacelessBehemoth</item>
+        <item>N\'Zoth,theCorruptor</item>
+        <item>Y\'Shaarj,RageUnbound</item>
+        <item>Yogg-Saron,Hope\'sEnd</item>
+        <item>KuntheForgottenKing</item>
         <item>Tyrantus</item>
         <item>Ultrasaur</item>
-        <item>Bloodreaver Gul\'dan</item>
-        <item>Ultimate Infestation</item>
-        <item>Snowfury Giant</item>
-        <item>Mountain Giant</item>
-        <item>Clockwork Giant</item>
-        <item>Arcane Giant</item>
-        <item>Molten Giant</item>
+        <item>BloodreaverGul\'dan</item>
+        <item>UltimateInfestation</item>
+        <item>SnowfuryGiant</item>
+        <item>MountainGiant</item>
+        <item>ClockworkGiant</item>
+        <item>ArcaneGiant</item>
+        <item>MoltenGiant</item>
     </string-array>
 
 </resources>

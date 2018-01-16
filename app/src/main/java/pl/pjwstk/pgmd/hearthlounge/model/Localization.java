@@ -19,6 +19,8 @@ public class Localization {
     private LatLng latLng;
     private double lat, lng;
 
+    public Localization(){}
+
     public Localization(String uid, String username, long rank, LatLng latlng){
 
         this.uid = uid;
@@ -35,27 +37,14 @@ public class Localization {
         username = (String) map.get("username");
         rank = (long) map.get("rank");
 
-        //long tempLat = (long) map.get("lan");
-        //double tempLng = (double) map.get("lng");
-
         String tempLat2 = String.valueOf(map.get("lat"));
         Double tempLat = Double.valueOf(tempLat2);
-        Log.d("Localization const", Double.toString(tempLat));
         lat = tempLat;
 
         String tempLng2 = String.valueOf(map.get("lng"));
         Double tempLng = Double.valueOf(tempLng2);
-        Log.d("Localization const", Double.toString(tempLng));
+
         lng = tempLng;
-
-//        long tempLat = (long) map.get("lat");
-//        long tempLng = (long) map.get("lng");
-
-
-
-
-//        lat = Double.parseDouble(tempLat);
-//        lng = Double.parseDouble(tempLng);
         this.setLatLng(lat,lng);
 
     }

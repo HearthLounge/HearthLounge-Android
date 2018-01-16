@@ -33,7 +33,7 @@ public class SignUp extends DrawerMenu {
 
     private static final String TAG = "Sign_up";
 
-    private FirebaseAuth fbAuth;
+    public FirebaseAuth fbAuth;
     private FirebaseDatabase fb_database = FirebaseDatabase.getInstance();
     private DatabaseReference fbDataRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://hearthlounge-32197.firebaseio.com");
 
@@ -49,7 +49,8 @@ public class SignUp extends DrawerMenu {
 
         //Firebase configurate
         fb_database = FirebaseDatabase.getInstance();
-        fbAuth = FirebaseAuth.getInstance();
+        fbAuth = FbInit(fbAuth);
+        //fbAuth = FirebaseAuth.getInstance();
 
         //Temporary solve
         Toast.makeText(SignUp.this, "--->Loging out", Toast.LENGTH_SHORT).show();
@@ -176,6 +177,13 @@ public class SignUp extends DrawerMenu {
 //        }
     }
 
+    public boolean isValidEmail2(String string){
+
+        if(string.equals("elo")) return true;
+        else return false;
+
+    }
+
     public final boolean isValidPassword(CharSequence password) {
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(SignUp.this, "Please enter password", Toast.LENGTH_SHORT).show();
@@ -206,6 +214,14 @@ public class SignUp extends DrawerMenu {
 //            Toast.makeText(SignUp.this, "Correct password", Toast.LENGTH_SHORT).show();
 //        }
     }
+
+    public FirebaseAuth FbInit(FirebaseAuth fbAuthX){
+
+        fbAuthX = FirebaseAuth.getInstance();
+
+        return fbAuthX;
+    }
+
 
 }
 

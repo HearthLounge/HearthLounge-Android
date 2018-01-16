@@ -23,7 +23,7 @@
 
         <!--ODPALANE NA STARCIE APLIKACJI-->
         <activity
-            android:name=".InitiateApp"
+            android:name=".initiateApp.InitiateApp"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -37,7 +37,7 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
                 <activity
-                    android:name=".MainActivity"
+                    android:name=".initiateApp.MainActivity"
                     android:label="@string/app_name"
                     android:screenOrientation="portrait"
                     android:theme="@style/AppTheme.NoActionBar" />

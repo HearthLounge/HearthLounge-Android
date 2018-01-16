@@ -11,9 +11,6 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class User implements Parcelable {
 
-    private FirebaseDatabase fbDb = FirebaseDatabase.getInstance();
-    private FirebaseAuth fbAuth = FirebaseAuth.getInstance();
-
     private String username;
     private String email;
     private String avatar;
@@ -37,7 +34,7 @@ public class User implements Parcelable {
 
     }
 
-    public User(String username, String email, String uid){   //Uzupełnić o dodanie reszty ze zmiennych bo auth idzie oddzielnie
+    public User(String username, String email, String uid){
 
         this.username = username;
         this.email = email;
@@ -46,18 +43,6 @@ public class User implements Parcelable {
         this.updatedProfile = true;
         this.rank = 1;
     }
-
-//    public User(String username, String email, String role, String uid, long rank, Boolean updatedProfile/*, String battletag, String favouriteClass, String facebook, String twitter, String twitch, String youtube*/){
-//
-//        this.username = username;
-//        this.email = email;
-//        this.username = username;
-//        this.role = role;
-//        this.uid = uid;
-//        this.updatedProfile = updatedProfile;
-//        this.rank = rank;
-//
-//    }
 
     public User(String username, String email, int role, String uid, String rank, String updatedProfile){
 
@@ -142,7 +127,6 @@ public class User implements Parcelable {
     };
 
     public String getUsername() {
-//        if(username == null){ username = "";}
         return username;
     }
 
@@ -151,7 +135,6 @@ public class User implements Parcelable {
     }
 
     public String getEmail() {
-        //if(email == null){ email = "";}
         return email;
     }
 

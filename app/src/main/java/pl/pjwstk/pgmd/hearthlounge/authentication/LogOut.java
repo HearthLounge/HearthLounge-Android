@@ -2,14 +2,12 @@ package pl.pjwstk.pgmd.hearthlounge.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import pl.pjwstk.pgmd.hearthlounge.view.DrawerMenu;
-import pl.pjwstk.pgmd.hearthlounge.MainActivity;
+import pl.pjwstk.pgmd.hearthlounge.initiateApp.MainActivity;
 import pl.pjwstk.pgmd.hearthlounge.R;
 
 /**

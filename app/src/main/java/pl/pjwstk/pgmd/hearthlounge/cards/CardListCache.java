@@ -201,6 +201,7 @@ public class CardListCache extends AsyncTask<String, String, List<Card> > {
             Gson gson = new Gson();
 
             // BASIC
+
             for (int i = 0; i < basic.length(); i++) {
                 JSONObject finalObject = basic.getJSONObject(i);
                 Card cardModel = gson.fromJson(finalObject.toString(), Card.class);
