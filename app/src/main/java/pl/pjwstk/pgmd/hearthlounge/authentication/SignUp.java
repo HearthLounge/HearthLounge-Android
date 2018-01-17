@@ -48,9 +48,8 @@ public class SignUp extends DrawerMenu {
         navigationView.getMenu().getItem(2).setChecked(true);
 
         //Firebase configurate
-        fb_database = FirebaseDatabase.getInstance();
-        fbAuth = FbInit(fbAuth);
-        //fbAuth = FirebaseAuth.getInstance();
+//        fb_database = FirebaseDatabase.getInstance();
+        fbAuth = FirebaseAuth.getInstance();
 
         //Temporary solve
         Toast.makeText(SignUp.this, "--->Loging out", Toast.LENGTH_SHORT).show();
@@ -153,8 +152,6 @@ public class SignUp extends DrawerMenu {
         }
     }
 
-
-    //TODO
     public void updateUI(){
         findViewById(R.id.edit_name).setVisibility(View.GONE);
         findViewById(R.id.edit_email).setVisibility(View.GONE);
@@ -172,16 +169,6 @@ public class SignUp extends DrawerMenu {
             return false;
         } else
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
-//        else {
-//            Toast.makeText(SignUp.this, "Correct email", Toast.LENGTH_SHORT).show();
-//        }
-    }
-
-    public boolean isValidEmail2(String string){
-
-        if(string.equals("elo")) return true;
-        else return false;
-
     }
 
     public final boolean isValidPassword(CharSequence password) {
@@ -210,35 +197,6 @@ public class SignUp extends DrawerMenu {
             return false;
         } else
             return true;
-//            {
-//            Toast.makeText(SignUp.this, "Correct password", Toast.LENGTH_SHORT).show();
-//        }
     }
-
-    public FirebaseAuth FbInit(FirebaseAuth fbAuthX){
-
-        fbAuthX = FirebaseAuth.getInstance();
-
-        return fbAuthX;
-    }
-
 
 }
-
-
-/* private void updateUI(FirebaseUser user) {
-        hideProgressDialog();
-        if (user != null) {
-            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-        } else {
-            mStatusTextView.setText(R.string.signed_out);
-            mDetailTextView.setText(null);
-
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-        }
-    } */
