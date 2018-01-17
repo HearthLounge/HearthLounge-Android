@@ -34,7 +34,7 @@
     <color name="paladin"> #F58CBA</color>
     <color name="priest"> #FFFFFF</color>
     <color name="rogue"> #FFF569</color>
-    <color name="shaman"> #0070DE</color>
+    <color name="shaman"> #0070DE</color> <!-- new color 87D0B7 -->
     <color name="warlock"> #9482C9</color>
     <color name="warrior"> #C79C6E</color>
     <color name="death_knight"> #C41F3B</color>
@@ -42,9 +42,9 @@
     <color name="demon_hunter"> #A330C9</color>
 
     //Expansion colors
-    <color name="tgt"> #f00</color>
+    <color name="tgt"> #f00</color> <!-- new color C41F3B -->
     <color name="gvg"> #fae43f</color>
-    <color name="wotog"> #cc00ff</color>
+    <color name="wotog"> #cc00ff</color> <!-- new color 9482C9 -->
     <color name="msog"> #d2cac5</color>
     <color name="ungoro"> #3d9e2c</color>
     <color name="kotft"> #a5f2f3</color>

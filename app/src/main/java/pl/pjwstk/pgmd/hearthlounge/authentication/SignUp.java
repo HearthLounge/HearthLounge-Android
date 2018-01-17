@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -76,7 +77,7 @@ public class SignUp extends DrawerMenu {
                 if (TextUtils.isEmpty(nickname)) {
                     Toast.makeText(SignUp.this, "Please enter nickname", Toast.LENGTH_SHORT).show();
                 } else if (isValidEmail(email)) {
-                    if (isValidPassword(password)) {
+                    if (isValidPassword(password) && isValidEmailContainsPassword(email,password)) {
                         if (isValidConfirmPassword(password, confirmPassword)) {
                             Toast.makeText(SignUp.this, "Give me a second...", Toast.LENGTH_SHORT).show();
                             create_user(nickname, email, password);
@@ -183,6 +184,14 @@ public class SignUp extends DrawerMenu {
 //            {
 //            Toast.makeText(SignUp.this, "Correct password", Toast.LENGTH_SHORT).show();
 //        }
+    }
+
+    public final boolean isValidEmailContainsPassword(CharSequence email, CharSequence password) {
+        if (String.valueOf(email).contains(password)) {
+            Toast.makeText(SignUp.this, "Your password can not contain an email", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     public final boolean isValidConfirmPassword(CharSequence password, CharSequence confirmPassword) {
